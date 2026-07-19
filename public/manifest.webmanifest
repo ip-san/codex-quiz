@@ -1,0 +1,10 @@
+{
+  "name": "Codex Quiz",
+  "short_name": "Codex Quiz",
+  "description": "クイズで身につける Codex の基本と実践",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f3ef",
+  "theme_color": "#14161b",
+  "icons": [{ "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

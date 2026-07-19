@@ -1,0 +1,71 @@
+# Codex Quiz
+
+Codexの基本と実践を、短い4択クイズで学ぶPWAです。OpenAIの公式Codexマニュアルを事実確認の基準とし、Claude Code Quizと同等水準の学習体験と品質基盤を目指しています。外部APIやログインは必要ありません。
+
+**ブラウザ版:** https://ip-san.github.io/codex-quiz/
+
+## 現在の機能
+
+- 6カテゴリ・60問（継続拡充中）
+- ランダム10問とカテゴリ別学習
+- 回答直後の解説
+- ブラウザ内への問題別回答履歴・正答率の保存
+- 苦手問題だけを抽出した復習モード
+- カテゴリごとの達成状況
+- 学習データのリセット
+- クイズ中の問題ブックマーク
+- キーワード検索・カテゴリ絞り込み対応の解説リーダー
+- SRS（間隔反復）による問題別の次回復習スケジュール
+- 復習期限が来た問題を3問で確認する60秒チェック
+- 学習履歴・SRS・ブックマークのJSONエクスポート／検証付きインポート
+- 問題、カテゴリ、解説リーダー、進捗画面のURL共有
+- 回答位置・スコア・解説表示を保持する途中セッション再開
+- 数字キー、Enter、B、Escによるキーボード操作
+- 6チャプターの全体像学習パス
+- 解説を先に学ぶ「読んでから解く」モード
+- 全問題を途中採点なしで解く実力テスト
+- スマートフォン対応
+- インストール可能なPWAとオフラインキャッシュ
+
+## 開発
+
+```bash
+npm install
+npm run dev
+```
+
+本番ビルドは `npm run build`、型チェックは `npm run typecheck` で実行します。
+
+## 品質ゲート
+
+```bash
+npm run check
+```
+
+次の検査を順番に実行します。
+
+- TypeScript型チェック
+- Biome lint（警告も失敗扱い）
+- フォーマット検査
+- Vitestユニットテスト
+- TypeScript型カバレッジ95%以上
+- Vite本番ビルド
+
+`npm run quiz:check` では、問題ID、カテゴリ、4択、正解インデックス、問題・選択肢の重複、解説長、公式出典を検査します。GitHub Actionsでもpush・Pull Requestごとに同じ品質ゲートを実行します。
+
+## GitHub Pagesへのデプロイ
+
+`main`ブランチへpushすると、`.github/workflows/deploy-pages.yml` が品質ゲートと本番ビルドを実行し、成功した `dist/` をGitHub Pagesへ公開します。手動実行はGitHub Actionsの「Deploy GitHub Pages」から行えます。
+
+初回のみ、GitHubリポジトリの **Settings → Pages → Build and deployment → Source** を **GitHub Actions** に設定してください。
+
+## 出題カテゴリ
+
+- 基本操作
+- プロンプト
+- AGENTS.md
+- 権限と安全
+- 設定
+- Skills・MCP・Pluginによる拡張
+
+Codexは更新されるため、公開前および問題追加時には公式ドキュメントとの再照合が必要です。本アプリはOpenAIの公式製品ではありません。

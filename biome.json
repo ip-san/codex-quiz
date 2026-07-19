@@ -1,0 +1,31 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
+  "files": {
+    "includes": ["src/**/*.ts", "src/**/*.tsx", "!src/data.ts"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "useButtonType": "off"
+      },
+      "style": {
+        "useImportType": "error"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "semicolons": "always",
+      "trailingCommas": "all"
+    }
+  }
+}
