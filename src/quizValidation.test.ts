@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { quizzes, type Quiz } from "./data";
 import { assertValidQuizzes, validateQuizzes } from "./quizValidation";
 import wrongFeedback from "./wrongFeedback.json";
+import wrongFeedbackSource from "./wrongFeedback.json?raw";
 
 const quizzesWithFeedback = quizzes.map((quiz) => ({
   ...quiz,
@@ -69,8 +70,10 @@ describe("Codex quiz quality gate", () => {
   it("requires useful feedback for every wrong choice when feedback is provided", () => {
     const issues = validateQuizzes([{ ...validQuiz, wrongFeedback: { 1: "短い" } }]);
     expect(issues.filter((issue) => issue.field === "wrongFeedback")).toHaveLength(3);
-    expect(Object.keys(wrongFeedback)).toHaveLength(154);
+    expect(Object.keys(wrongFeedback)).toHaveLength(164);
     expect(Object.keys(wrongFeedback).filter((id) => !quizzes.some((quiz) => quiz.id === id))).toEqual([]);
+    const declaredFeedbackIds = [...wrongFeedbackSource.matchAll(/^ {2}"([^"]+)": \{$/gm)].map(([, id]) => id);
+    expect(new Set(declaredFeedbackIds).size).toBe(declaredFeedbackIds.length);
   });
 
   it("rejects feedback attached to the correct answer", () => {

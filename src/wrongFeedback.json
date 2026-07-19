@@ -514,16 +514,6 @@
     "2": "web_search設定は検索挙動を制御し、token storageとは関係しません。",
     "3": "approval_policyは確認promptの条件です。credentialはkeyringまたは適切に保護したfileへ保存します。"
   },
-  "extend-21": {
-    "1": "STDIOはlocal process起動向けです。remote OAuth flowにはStreamable HTTPを選びます。",
-    "2": "localStorageはbrowser storageであり、Codex MCP transportではありません。",
-    "3": "Git hookはrepository event用で、remote MCPの通信・OAuth認証を提供しません。"
-  },
-  "extend-22": {
-    "1": "Codex本体のlogin commandとMCP server別OAuth loginは別のcommand体系です。",
-    "2": "`/approve oauth`という操作はありません。登録名をcodex mcp loginへ渡します。",
-    "3": "Git credentialはGit remote用です。MCP OAuth credentialはCodexのMCP設定で管理します。"
-  },
   "extend-23": {
     "1": "CSSはUI表現で、MCP tool横断の動作制約をagentへ伝えません。",
     "2": "commit messageだけではserverを利用する全session・toolへ制約が届きません。",
@@ -763,6 +753,66 @@
     "1": "`codex delete`は保存sessionを削除するcommandで、環境横断のdiagnostic reportを作りません。",
     "2": "`codex apply`はCloud chatのdiff適用用です。認証やruntimeの診断にはdoctorを使います。",
     "3": "completionはshell補完生成用です。権限を広げる前に`codex doctor`のreportで故障layerを特定します。"
+  },
+  "extend-11": {
+    "1": "package-lock.jsonは依存versionの固定用で、Codex lifecycle Hookの探索場所ではありません。",
+    "2": "GitHub profileはlocal repositoryのHook定義を配布・実行しません。trustedなproject config layerへ置きます。",
+    "3": "browser localStorageはCodex CLI・appが読むHook設定ではありません。`.codex`のhooks.jsonまたはconfig.tomlを使います。"
+  },
+  "extend-12": {
+    "1": "model変更ではcommand Hookの内容を安全確認できません。変更されたdefinitionを再reviewします。",
+    "2": "Git管理を外すと変更履歴を失います。hashが変わったHookを`/hooks`で確認してtrustします。",
+    "3": "全Hookの自動承認はrepository変更によるcode execution riskを広げます。定義単位で確認します。"
+  },
+  "extend-13": {
+    "1": "PostCompactはcontext圧縮後のeventで、shell toolを実行前にblock・rewriteする時点ではありません。",
+    "2": "SubagentStopはsubagent終了時です。禁止commandやsecret混入はPreToolUseで実行前に検査します。",
+    "3": "SessionStartだけでは各shell callの引数を直前に検査できません。tool matcher付きPreToolUseを使います。"
+  },
+  "extend-14": {
+    "1": "UserPromptSubmitはuser message送信時で、commandのstdout・stderrを受けた後の品質検査ではありません。",
+    "2": "PreCompactは要約前のeventです。tool resultを評価する処理はPostToolUseへ置きます。",
+    "3": "SessionStartはthread開始時だけです。各command完了後の結果検査にはPostToolUseを使います。"
+  },
+  "extend-15": {
+    "1": "matching command Hookは記載順の直列実行ではありません。共有stateや順序依存を避けます。",
+    "2": "最後のHookだけでなく全一致Hookが並列に開始されます。重複した副作用がないか確認します。",
+    "3": "random選択ではありません。複数sourceを含むmatching Hookがすべて起動する前提で設計します。"
+  },
+  "extend-16": {
+    "1": "project Hookだけに置換されるとは限りません。user・project・plugin・managedの一致source全体を確認します。",
+    "2": "user Hookだけが残る単一値precedenceではありません。重複matcherによる二重実行に注意します。",
+    "3": "file名順に一つを選びません。Hookは複数layerから集約されるため`/hooks`でresolved setをreviewします。"
+  },
+  "extend-18": {
+    "1": "利用者のGit履歴はPlugin capabilityの標準配置ではありません。Plugin root配下へHook定義を同梱します。",
+    "2": "dist/index.htmlはWeb成果物で、Plugin lifecycle Hookとして読み込まれません。",
+    "3": "browser Cookieへcommand Hookを保存すると配布・reviewできません。`hooks/hooks.json`をmanifestと共に管理します。"
+  },
+  "extend-19": {
+    "1": "CSSはsurface表示用で、MCP transport・command・認証を共有しません。Codex config.tomlへ設定します。",
+    "2": "GitHub Issueは設定案の共有には使えてもCodex hostが自動読込みするMCP configではありません。",
+    "3": "browser CookieだけではCLIやIDE extensionへMCP server設定を渡せません。同じCodex homeのconfigを使います。"
+  },
+  "extend-21": {
+    "1": "STDIOはlocal processをcommandとenvで起動するtransportです。remote OAuth endpointにはStreamable HTTPが適します。",
+    "2": "localStorageはMCP transportではなく、OAuth callbackやauthorization headerを扱えません。",
+    "3": "Git Hookはrepository event用で、remote MCP serverへのprotocol transport・OAuth認証にはなりません。"
+  },
+  "extend-22": {
+    "1": "`codex login`はCodex本体の認証用です。登録済みMCP server名を`codex mcp login`へ渡します。",
+    "2": "`/approve oauth`はMCP OAuth開始commandではありません。CLIでlogin後、`/mcp`から状態を確認します。",
+    "3": "git credentialはGit remote認証用で、Codexが保存するMCP OAuth flowを開始しません。"
+  },
+  "basic-11": {
+    "1": "`--resume`は既存sessionの再開用で、rollout fileの保存を止めません。一回限りなら`--ephemeral`を使います。",
+    "2": "profileは設定一式の選択用です。session履歴をdiskへ残すかどうかは`--ephemeral`で指定します。",
+    "3": "`--remote`は一時session保存を制御するoptionではありません。非対話実行へ`--ephemeral`を付けます。"
+  },
+  "basic-12": {
+    "1": "screenshotでは途中のtool eventや失敗をpipelineが構造化して逐次処理できません。`--json`のJSONLを使います。",
+    "2": "TUIの色設定は人向けの表示だけを変えます。機械処理には一行一eventのJSONL streamが適します。",
+    "3": "AGENTS.mdはagentへの指示で、実行eventの出力形式ではありません。`codex exec --json`を選びます。"
   },
   "basic-15": {
     "1": "API key利用はPlatformの従量課金とorganization policyに従い、ChatGPT利用枠とは別です。",
