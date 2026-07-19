@@ -38,3 +38,7 @@ Codex QuizはUIの複製ではなく、OpenAI公式Codexマニュアルを事実
 3. 構造検査と重複検査をCIで必須にする。
 4. 更新されやすいコマンド、機能成熟度、モデル名、提供条件は定期監査する。
 5. Claude固有の知識を名称置換だけで流用しない。
+
+詳細は [CONTENT_QUALITY.md](CONTENT_QUALITY.md) を参照する。
+
+詳細な採用基準とClaude版から移植する品質検査は [CONTENT_QUALITY.md](CONTENT_QUALITY.md) を参照する。

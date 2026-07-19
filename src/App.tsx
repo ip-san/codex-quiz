@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { categories, categoryLearning, quizzes, type Category, type Quiz } from "./data";
+import { orderChoices } from "./domain/choiceOrder";
 import {
   emptyProgress,
   parseProgressExport,
@@ -125,6 +126,7 @@ function App() {
   }, [screen, sessionCategory]);
 
   const question = session[index];
+  const displayedChoices = useMemo(() => (question ? orderChoices(question.choices) : []), [question]);
   const accuracy = progress.answered ? Math.round((progress.correct / progress.answered) * 100) : 0;
   const categoryCounts = useMemo(
     () =>
@@ -416,8 +418,9 @@ function App() {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return;
       if (selected === null && ["1", "2", "3", "4"].includes(event.key)) {
-        const choice = Number(event.key) - 1;
-        if (choice < question.choices.length) answer(choice);
+        const displayedIndex = Number(event.key) - 1;
+        const originalIndex = displayedChoices[displayedIndex]?.originalIndex;
+        if (originalIndex !== undefined) answer(originalIndex);
       } else if (selected !== null && event.key === "Enter") {
         next();
       } else if (event.key.toLowerCase() === "b") {
@@ -510,21 +513,21 @@ function App() {
             <>
               <h1>{question.question}</h1>
               <div className="choices">
-                {question.choices.map((choice, choiceIndex) => {
+                {displayedChoices.map((choice, choiceIndex) => {
                   let state = "";
                   if (quizMode !== "exam") {
-                    if (selected !== null && choiceIndex === question.answer) state = "correct";
-                    else if (selected === choiceIndex) state = "wrong";
-                  } else if (selected === choiceIndex) state = "exam-selected";
+                    if (selected !== null && choice.originalIndex === question.answer) state = "correct";
+                    else if (selected === choice.originalIndex) state = "wrong";
+                  } else if (selected === choice.originalIndex) state = "exam-selected";
                   return (
                     <button
                       className={`choice ${state}`}
-                      key={choice}
-                      onClick={() => answer(choiceIndex)}
+                      key={choice.originalIndex}
+                      onClick={() => answer(choice.originalIndex)}
                       disabled={selected !== null}
                     >
                       <span className="choice-letter">{String.fromCharCode(65 + choiceIndex)}</span>
-                      <span>{choice}</span>
+                      <span>{choice.text}</span>
                       {state === "correct" && <b className="choice-result">✓</b>}
                       {state === "wrong" && <b className="choice-result">×</b>}
                     </button>
