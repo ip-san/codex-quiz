@@ -92,6 +92,38 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
       ],
     },
   ],
+  "safe-12": [
+    {
+      type: "comparison",
+      label: "ネットワーク制御は別々",
+      columns: [
+        { heading: "Web search", items: ["cached / live / disabled", "検索toolだけを制御"] },
+        { heading: "Shell", items: ["sandbox network_access", "commandの外部接続"] },
+      ],
+    },
+  ],
+  "extend-20": [
+    {
+      type: "comparison",
+      label: "MCPを使う場所",
+      columns: [
+        { heading: "Local host", items: ["App・CLI・IDE", "config.tomlを共有"] },
+        { heading: "ChatGPT web", items: ["Work mode", "Pluginのremote tools"] },
+      ],
+    },
+  ],
+  "workflow-15": [
+    {
+      type: "flow",
+      label: "Managed worktreeの整理",
+      steps: [
+        { text: "Archive chat", sub: "整理を開始" },
+        { text: "Snapshot", sub: "作業状態を保存" },
+        { text: "Delete worktree", sub: "diskを解放" },
+        { text: "Restore", sub: "chat再開時に復元可能" },
+      ],
+    },
+  ],
   "agents-02": [
     {
       type: "flow",
