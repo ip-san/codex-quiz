@@ -169,6 +169,56 @@ const initialWrongFeedback: Record<string, Record<number, string>> = {
     2: "CSS presetではmodelやapproval等をまとめたCodex設定layerを選択できません。",
     3: "Git branchとCodex config profileは別の概念です。名前付き設定は`--profile`で選択します。",
   },
+  "session-01": {
+    1: "repository削除はcontext整理ではなく作業dataの損失につながります。`/compact`で会話を要約してtokenを空けます。",
+    2: "同じraw logの再投入はcontext消費を増やします。重要な決定と結果をcompactした要約へ残します。",
+    3: "権限拡大はcontext windowを空けません。sandboxとapprovalは必要最小限のまま会話だけをcompactします。",
+  },
+  "session-02": {
+    1: "背景を省いた新規chatでは以前の判断や制約を失います。同じ作業なら保存済みsessionをresumeします。",
+    2: "branch削除は会話contextの再開に不要で、未統合の変更を失う危険があります。sessionとGit状態を別々に確認します。",
+    3: "model名だけでは昨日のconversation historyを復元できません。保存済みchatを選んでresumeします。",
+  },
+  "session-03": {
+    1: "元の会話を削除すると比較基準を失います。forkはoriginal transcriptを残したまま新しいchatへ分岐します。",
+    2: "全fileのrevertはcodeを戻す操作で、同じ履歴から別案を試す会話分岐ではありません。",
+    3: "Gitは同じbranchを複数worktreeへ同時checkoutできません。会話案の分岐にはsession forkを使います。",
+  },
+  "session-04": {
+    1: "長いlogを繰り返し貼ると主threadの要件と判断が埋もれます。独立解析を分離して結果だけ戻します。",
+    2: "完了条件を削ると解析結果の採否を判断できません。主threadには成功条件を保持します。",
+    3: "巨大promptへ全情報を集約すると探索noiseが増えます。独立したlog解析はsubagentへ委譲します。",
+  },
+  "session-05": {
+    1: "全commandのraw出力は必要箇所だけ要約し、主threadには意思決定へ影響する結果を残します。",
+    2: "無関係なstack traceは注意とcontextを消費します。原因に関係する抜粋と結論だけを共有します。",
+    3: "重複file一覧より、対象fileを選んだ理由や検証結果の方が後続判断に役立ちます。",
+  },
+  "workflow-03": {
+    1: "同じLocal checkoutで別taskを並行すると未commit差分が混ざります。独立checkoutのWorktreeへ分けます。",
+    2: "read-onlyの説明ページはbranchとworking treeを隔離した実装環境ではありません。",
+    3: "archive済みchatは並列作業用checkoutを提供しません。新しいWorktree chatを開始します。",
+  },
+  "workflow-04": {
+    1: "Git管理を解除すると履歴と差分reviewを失います。setup scriptと必要最小限のignored file指定で再現します。",
+    2: "毎回の手作業copyは漏れやsecret混入を招きます。依存準備をsetupへ、ignored fileを`.worktreeinclude`へ定義します。",
+    3: "Gitは同じbranchを二つのworktreeへ同時checkoutできません。Codex-managed worktreeとHandoffの制約に従います。",
+  },
+  "workflow-05": {
+    1: "同一branchの強制checkoutはGit制約と作業差分を壊す危険があります。Handoffに必要なGit操作を任せます。",
+    2: "先にworktreeを削除すると移動対象の変更を扱いにくくなります。chatとcodeをHandoffしてから整理します。",
+    3: "履歴の再入力ではcodeとchatを一体で移せず、判断contextも欠落します。既存chatをHandoffします。",
+  },
+  "surfaces-01": {
+    1: "Cloudだけでは手元の未commit working treeをそのまま直接扱えません。現在のcheckoutを使うLocalが適します。",
+    2: "Plugin Marketplaceは拡張機能を探す場所で、local差分を編集・検証する実行環境ではありません。",
+    3: "archive環境は現在のworking treeで短い修正を続ける場所ではありません。Local projectを開きます。",
+  },
+  "surfaces-02": {
+    1: "Localだけでは処理をPCから切り離せません。remote containerで実行するCloud environmentを選びます。",
+    2: "AGENTS.override.mdはinstructionを与えるfileで、hosted execution environmentそのものではありません。",
+    3: "shell補完はCLI入力を助ける機能で、repositoryを遠隔containerへcheckoutしてtaskを実行しません。",
+  },
   "basic-06": {
     1: "CSS検査ではGit差分のbugや回帰をreviewできません。対象を指定して`codex review`を使います。",
     2: "disk監査は未commit変更やbase branchとの差分reviewとは別の作業です。",
