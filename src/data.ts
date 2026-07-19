@@ -219,6 +219,56 @@ const initialWrongFeedback: Record<string, Record<number, string>> = {
     2: "AGENTS.override.mdはinstructionを与えるfileで、hosted execution environmentそのものではありません。",
     3: "shell補完はCLI入力を助ける機能で、repositoryを遠隔containerへcheckoutしてtaskを実行しません。",
   },
+  "surfaces-03": {
+    1: "secretをagent phaseへ平文で残すとrepository codeやtoolから漏れるriskがあります。Cloud secretはsetupだけで使います。",
+    2: "public repositoryでもsecretの扱いは緩和されません。setup終了時に除かれ、agent phaseへ渡りません。",
+    3: "model設定はCloud secretの公開範囲を変更しません。必要な認証処理はsetup phase内で完了させます。",
+  },
+  "surfaces-04": {
+    1: "agent phaseの無制限networkは既定ではありません。外部接続が必要な時だけ環境単位で最小範囲を許可します。",
+    2: "setup phaseは依存導入のためnetworkを利用できます。offlineが既定なのはその後のagent phaseです。",
+    3: "GitHubだけが常に許可される前提ではありません。agent networkは環境設定のallowlistまたはunrestrictedで決めます。",
+  },
+  "surfaces-05": {
+    1: "Cloud環境設定ページはremote runtimeを構成する場所で、編集中のselectionとdiffに密着した対話surfaceではありません。",
+    2: "MCP server modeはtool integration用で、editor内の選択codeを見ながら修正するUIではありません。",
+    3: "Plugin marketplace CLIは拡張を探す用途です。editor contextを直接渡す作業にはIDE extensionを使います。",
+  },
+  "safe-11": {
+    1: "danger-full-accessはfilesystem境界まで外すため、package取得だけという目的より権限が広すぎます。",
+    2: "approvalとsandboxの同時無効化は不要な書込みと外部操作まで許します。workspace-writeのnetworkだけを有効にします。",
+    3: "writable rootをOS全体へ広げてもnetwork許可の代わりにはならず、誤書込みの影響範囲だけが増えます。",
+  },
+  "safe-13": {
+    1: "read-only hintが併記されてもdestructive annotationは打ち消されません。副作用を確認する承認が必要です。",
+    2: "annotationはapp/MCP toolの副作用を判断する重要metadataです。Codexはdestructive callを承認対象にします。",
+    3: "MCP toolをshellへ変換して安全性を決めるわけではありません。宣言されたtool metadataとpolicyで承認します。",
+  },
+  "safe-14": {
+    1: "session全体の許可は同じ操作が繰り返し必要と確認できた場合に限り、まずone-time scopeを選びます。",
+    2: "承認を避けるためのfull accessは影響範囲を過度に広げます。必要な操作を狭いscopeで許可します。",
+    3: "無関係なprojectまで許可すると誤操作時の被害範囲が増えます。現在のtaskに必要な境界だけを選びます。",
+  },
+  "agents-11": {
+    1: "network_accessは外部接続の設定で、AGENTS.md instruction chainの読込byte上限を変えません。",
+    2: "review_modelはreview時のmodel選択であり、末尾のinstructionが切れる問題を解決しません。",
+    3: "起動時のsidebar表示はproject document discoveryと無関係です。上限を上げるかnested fileへ分割します。",
+  },
+  "agents-12": {
+    1: "`.worktreeinclude`はignored local fileをmanaged worktreeへcopyする指定で、instruction探索名は増やしません。",
+    2: "MCP server名は外部tool接続の識別子です。代替instruction file名はconfigのfallback listへ登録します。",
+    3: "Git remote名を変えてもAGENTS discovery候補は変わりません。`project_doc_fallback_filenames`を設定します。",
+  },
+  "agents-13": {
+    1: "package-lock.jsonは依存versionの固定用で、個人styleやteamのagent instructionを置く場所ではありません。",
+    2: "個人だけの回答styleをrepositoryへ強制するとteam全員へ不要な指示が適用されます。global scopeへ分離します。",
+    3: "browser履歴はversion管理も自動instruction読込もできません。共有build手順はrepositoryのAGENTS.mdへ置きます。",
+  },
+  "agents-14": {
+    1: "口頭だけでは新しいsessionや別のcontributorへ規則が残りません。近いAGENTS.mdへ再利用可能な形で記録します。",
+    2: "reviewを無効化すると同じ問題を検出する機会を失います。instructionと機械検査で発生自体を減らします。",
+    3: "問題fileを無視すると不具合が残ります。判断規則はAGENTS.md、判定可能な条件はlintやtestで強制します。",
+  },
   "basic-06": {
     1: "CSS検査ではGit差分のbugや回帰をreviewできません。対象を指定して`codex review`を使います。",
     2: "disk監査は未commit変更やbase branchとの差分reviewとは別の作業です。",
