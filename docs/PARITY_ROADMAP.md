@@ -2,6 +2,10 @@
 
 Codex QuizはUIの複製ではなく、OpenAI公式Codexマニュアルを事実確認の基準として、Claude Code Quizと同等の学習体験・保守性・品質ゲートを実現する。
 
+## 2026-07-19 比較監査からの導入
+
+Claude版の成熟したcontent quality gateを参考にし、Claude固有のカテゴリや用語は転用せず、Codex版へID prefixとcategoryの対応、空choice、正解へのwrongFeedback混入、topic命名、verifiedAt形式の検査を追加した。今後はE2E・a11y・bundle制限をCodex版の構成に合わせて段階導入する。
+
 ## 実装済み
 
 - レスポンシブPWA、オフラインキャッシュ
@@ -11,7 +15,7 @@ Codex QuizはUIの複製ではなく、OpenAI公式Codexマニュアルを事実
 - 進捗、カテゴリ習熟度、連続学習、セッション履歴
 - セッション再開、データのエクスポート／インポート
 - キーボード操作
-- 問題バリデーション、Vitest、Biome、型カバレッジ、CI
+- 問題バリデーション（ID・カテゴリ・choice・feedback・metadata）、Vitest、Biome、型カバレッジ、CI
 
 ## 開発中
 

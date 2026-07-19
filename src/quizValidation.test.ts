@@ -45,10 +45,40 @@ describe("Codex quiz quality gate", () => {
     );
   });
 
+  it("keeps ID prefixes aligned with categories and metadata normalized", () => {
+    const issues = validateQuizzes([
+      {
+        ...validQuiz,
+        id: "safe-99",
+        value: "practical",
+        difficulty: "beginner",
+        topic: "Invalid Topic",
+        referenceUrl: "https://learn.chatgpt.com/docs/quickstart",
+        verifiedAt: "2026/07/19",
+      },
+    ]);
+    expect(issues.map((issue) => issue.field)).toEqual(expect.arrayContaining(["category", "topic", "verifiedAt"]));
+  });
+
   it("requires useful feedback for every wrong choice when feedback is provided", () => {
     const issues = validateQuizzes([{ ...validQuiz, wrongFeedback: { 1: "短い" } }]);
     expect(issues.filter((issue) => issue.field === "wrongFeedback")).toHaveLength(3);
     expect(quizzes.filter((quiz) => quiz.wrongFeedback)).toHaveLength(114);
+  });
+
+  it("rejects feedback attached to the correct answer", () => {
+    const issues = validateQuizzes([
+      {
+        ...validQuiz,
+        wrongFeedback: {
+          0: "正解には不正解feedbackを設定しません。",
+          1: "十分な長さのfeedbackです。",
+          2: "十分な長さのfeedbackです。",
+          3: "十分な長さのfeedbackです。",
+        },
+      },
+    ]);
+    expect(issues.map((issue) => issue.message)).toContain("正解選択肢に不正解feedbackを設定できません");
   });
 
   it("detects duplicate IDs and questions", () => {
@@ -69,5 +99,10 @@ describe("Codex quiz quality gate", () => {
     };
     const fields = validateQuizzes([malformed]).map((issue) => issue.field);
     expect(fields).toEqual(expect.arrayContaining(["id", "question", "choices", "answer", "explanation", "source"]));
+  });
+
+  it("rejects blank choices even when four slots exist", () => {
+    const issues = validateQuizzes([{ ...validQuiz, choices: ["正解", "誤答", " ", "別の誤答"] }]);
+    expect(issues.map((issue) => issue.message)).toContain("空の選択肢は使用できません");
   });
 });
