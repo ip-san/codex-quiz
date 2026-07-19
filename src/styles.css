@@ -76,3 +76,36 @@ footer { border-top: 1px solid #dddad2; padding: 35px max(28px, calc((100vw - 11
 @media (max-width: 800px) { .hero { grid-template-columns: 1fr; padding-top: 50px; gap: 40px; }.terminal-card { display: none }.hero { min-height: 560px }.mode-grid { grid-template-columns: 1fr 1fr }.mode-card.featured { grid-column: 1 / -1 }.category-grid { grid-template-columns: 1fr 1fr }.stats { grid-template-columns: 1fr 1fr; gap: 24px }.stats div:nth-child(2) { border: 0 }.desktop { display: none }.review-banner, .due-banner { margin: 55px 28px 0; }.resume-banner { margin: 45px 28px 0 }.due-banner { grid-template-columns: 52px 1fr auto }.due-banner > strong { display: none }.reader-list { grid-template-columns: 1fr }.reader-controls { grid-template-columns: 1fr 1fr }.search-box { grid-column: 1 / -1 }.dashboard-grid { grid-template-columns: 1fr }.dashboard-stats { grid-template-columns: 1fr 1fr }.dashboard-stats > div:nth-child(2) { border-right: 0 }.dashboard-stats > div:nth-child(-n+2) { border-bottom: 1px solid #dfddd6 } }
 @media (max-width: 540px) { nav { height: 70px; padding: 0 18px }.nav-badge { display: none }.nav-actions { gap: 0 }.nav-actions > button { padding: 5px; font-size: 9px }.hero { padding: 45px 20px 58px }.hero h1 { font-size: 46px }.hero-actions { align-items: flex-start; flex-direction: column; gap: 18px }.mode-section { padding: 65px 18px 10px }.mode-grid { grid-template-columns: 1fr }.mode-card.featured { grid-column: auto }.mode-card { min-height: 175px }.stats { padding: 27px 20px }.stats div { padding-left: 12px }.stats div:nth-child(odd) { padding-left: 0 }.review-banner, .due-banner, .resume-banner { margin: 42px 18px 0; padding: 27px 23px; align-items: stretch }.review-banner, .resume-banner { flex-direction: column }.review-banner .primary { width: 100% }.resume-banner > div:last-child { justify-content: space-between }.due-banner { grid-template-columns: 1fr }.due-clock { width: 40px; height: 40px }.due-banner .primary { width: 100% }.category-section { padding: 70px 18px }.category-grid { grid-template-columns: 1fr }.section-heading { align-items: start; flex-direction: column }.section-heading > p { display: none }.category-card { min-height: 100px } footer { align-items: flex-start; gap: 20px; flex-direction: column }.footer-actions { align-items: flex-start; flex-direction: column; gap: 8px }.quiz-header { height: 70px; padding: 0 18px }.key-hint { display: none }.question-card { margin-top: 45px }.question-card h1 { font-size: 24px }.question-tools { align-items: flex-start }.question-actions { flex-direction: column }.choice { font-size: 13px }.feedback { padding: 19px }.next-button { float: none; width: 100% }.reader-header { height: 67px; padding: 0 18px }.reader-intro { padding: 45px 18px 25px }.reader-controls { padding: 0 18px 24px; grid-template-columns: 1fr }.search-box { grid-column: auto }.reader-controls select, .filter-button { height: 42px }.reader-results { padding: 0 18px 70px }.reader-card { min-height: auto; padding: 20px }.reader-card h2, .reader-card > p { min-height: auto }.dashboard-wrap { padding: 45px 18px 70px }.dashboard-title { align-items: stretch; flex-direction: column; gap: 20px }.streak-card { display: flex; align-items: center; justify-content: space-between }.streak-card strong { margin: 0 }.dashboard-stats > div { padding: 18px }.dashboard-grid > section { padding: 21px }.data-panel { grid-template-columns: 1fr }.data-actions { flex-wrap: wrap } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+
+/* WCAG AA contrast for supporting text on light and terminal surfaces. */
+.terminal-top small { color: #a5aaae; }
+.eyebrow,
+.mode-card:not(.featured) small,
+.reader-category { color: #9b3b18; }
+.section-heading > p,
+.mode-card:not(.featured) p,
+.mode-card:not(.featured) > span,
+.category-text small,
+.category-meta,
+.footer-actions p,
+.key-hint,
+.question-count,
+.reader-close,
+.reader-intro > p:last-child,
+.reader-count,
+.reader-source,
+.dashboard-title > div:first-child > p:last-child,
+.dashboard-stats span,
+.dashboard-stats small,
+.panel-title > small,
+.empty-history p,
+.data-panel p { color: #5d605b; }
+.question-actions > button,
+.bookmark-button { color: #5d605b; }
+.reader-answer small { color: #53682f; }
+.diagram figcaption,
+.diagram-flow small,
+.diagram-comparison span { color: #555a53; }
+.diagram.diagram-terminal > figcaption,
+.diagram.diagram-config > figcaption { color: #b8bdc0; }
+.diagram-terminal header span { color: #adb2b5; }

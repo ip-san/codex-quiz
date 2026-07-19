@@ -51,8 +51,11 @@ npm run check
 - Vitestユニットテスト
 - TypeScript型カバレッジ95%以上
 - Vite本番ビルド
+- 本番JavaScript bundleのサイズ上限検査
 
 `npm run quiz:check` では、問題ID、カテゴリ、4択、正解インデックス、問題・選択肢の重複、解説長、公式出典を検査します。GitHub Actionsでもpush・Pull Requestごとに同じ品質ゲートを実行します。
+
+`npm run test:e2e` ではChromium上の主要導線に加え、home・quiz・reader・progressをaxe-coreで検査し、WCAG 2.1 A/AA違反を検出します。
 
 ## GitHub Pagesへのデプロイ
 
