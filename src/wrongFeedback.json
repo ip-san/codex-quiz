@@ -864,6 +864,56 @@
     "2": "原因と検証なしのpushは誤修正を見逃します。失敗再現と同じcheckの成功を完了条件にします。",
     "3": "test削除によるgreen化は不具合を隠します。既存の期待を保った修正後にtestを通します。"
   },
+  "config-11": {
+    "1": "user configは個人既定ですが、一回の起動で明示したCLI flagより優先されません。",
+    "2": "system configはuser・profile・project・CLIより下位です。管理制約とは区別して考えます。",
+    "3": "built-in defaultは設定layerの最下位です。明示した`--model`が今回の値になります。"
+  },
+  "config-12": {
+    "1": "root configは共有の基準ですが、current directoryへ近いproject layerが同じkeyを上書きします。",
+    "2": "file sizeはprecedenceに影響しません。rootからcurrent directoryへの階層で決まります。",
+    "3": "更新日時はprecedence条件ではありません。trusted project内でdirectoryの近さを使います。"
+  },
+  "config-13": {
+    "1": "untrusted判定でuser configまで削除・無効化はされません。project scoped layerだけをskipします。",
+    "2": "untrusted projectが自動でfull accessになるのは安全設計と逆です。repository由来設定を読みません。",
+    "3": "`.codex/`をremote MCPへuploadする動作ではありません。localのconfig・hooks・rulesをskipします。"
+  },
+  "config-14": {
+    "1": "`/theme`は外観設定で、どのconfig layerやrequirementsが値を制約したか表示しません。",
+    "2": "`/fork`はconversationを分岐する操作です。設定precedenceの診断には`/debug-config`を使います。",
+    "3": "completionはshell補完生成の領域です。対話sessionの設定診断slash commandではありません。"
+  },
+  "config-15": {
+    "1": "danger-full-accessと`--yolo`は権限を広げるだけで、plaintext diagnostic logを有効にしません。",
+    "2": "削除やlogoutでは問題の詳細を保存できません。debug levelと明示したlog directoryを使います。",
+    "3": "MCP OAuthとworktreeは接続・作業分離の機能で、TUI内部logの取得設定ではありません。"
+  },
+  "safe-19": {
+    "1": "記述順でallowを勝たせると狭い禁止を迂回できます。複数一致時は最も制限的なdecisionが勝ちます。",
+    "2": "判定はrandomではありません。`forbidden`、`prompt`、`allow`の順に厳しい結果を採用します。",
+    "3": "常にpromptへ固定されるわけではなく、forbiddenが一致すれば確認なしでblockされます。"
+  },
+  "safe-20": {
+    "1": "answerとchoicesはクイズデータのfieldで、command prefix Ruleの検証例ではありません。",
+    "2": "setupとmaintenanceはenvironment lifecycle用語です。Ruleにはmatch・not_match例を置きます。",
+    "3": "Cookieはcommand判定を検証しません。許可listの意図はRule内の正例・負例で固定します。"
+  },
+  "safe-21": {
+    "1": "`codex apply`はRule判定のdry runではありません。session投入前はexecpolicy checkを使います。",
+    "2": "`/compact`はconversation contextを圧縮する操作で、command policyを評価しません。",
+    "3": "npm previewはCodex `.rules`の最終decisionや一致Ruleを検査するcommandではありません。"
+  },
+  "safe-22": {
+    "1": "先頭だけを見ると後続の危険commandを隠せます。安全に分割可能なchainは各commandを判定します。",
+    "2": "末尾も独立評価され、最も制限的な結果がinvocation全体へ適用されます。",
+    "3": "複合commandを無条件allowにはしません。高度なshell構文はinvocation全体として保守的に扱います。"
+  },
+  "safe-23": {
+    "1": "project Ruleがsystem Ruleより常に優先する仕様ではなく、未信頼projectのlayer自体を読みません。",
+    "2": "GitHubへのpush有無はload条件ではありません。local projectのtrustとactive config layerで決まります。",
+    "3": "Ruleをallowへ変換して読むことはありません。未信頼project由来のrulesはskipされます。"
+  },
   "basic-15": {
     "1": "API key利用はPlatformの従量課金とorganization policyに従い、ChatGPT利用枠とは別です。",
     "2": "GitHub deploy keyはrepository access用で、CodexのOpenAI認証には使用しません。",
