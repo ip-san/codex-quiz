@@ -72,3 +72,12 @@ npm run check
 - App・IDE・CLI・Cloudの使い分け
 
 Codexは更新されるため、公開前および問題追加時には公式ドキュメントとの再照合が必要です。本アプリはOpenAIの公式製品ではありません。
+
+## ドキュメント
+
+目的別の読書順と全資料は [docs/README.md](docs/README.md) にまとめています。
+
+- 問題を追加・改善する: [クイズ管理](docs/QUIZ_MANAGEMENT.md)
+- 品質基準と公式仕様の追跡: [品質運用](docs/QUALITY_OPERATIONS.md)
+- 実装の全体像: [アーキテクチャ](docs/ARCHITECTURE.md)
+- 開発環境とコマンド: [開発ガイド](docs/DEVELOPMENT.md)
