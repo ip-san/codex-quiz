@@ -68,3 +68,7 @@ AGENTS.mdの配置・階層・初期化・読込・override、承認mode、sandb
 ## 2026-07-19 不正解別feedback移行 第4回
 
 CLI surface、Plan、実装後の検証、非対話実行、session再開、user・project config、設定対象、one-off override、profileを扱う10問へfeedbackと追跡metadataを追加し、移行済みは35問になった。うち`codex exec`と`codex resume`の2問は名称暗記から、CI連携・前日のcontext継続を判断するscenario型へ書き換えた。
+
+## 2026-07-19 不正解別feedback移行 第5回
+
+CLI review・fork・Cloud差分適用・completion・doctorと、model override・strict config・working directory・feature override・local providerの10問をscenario型へ書き換え、feedbackと追跡metadataを追加した。移行済みは45問。公式領域の監査では主要topicに既存問題があるため問題数は210問を維持し、未移行50問の改善を優先する。
