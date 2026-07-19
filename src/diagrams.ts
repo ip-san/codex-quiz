@@ -124,6 +124,83 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
       ],
     },
   ],
+  "basic-12": [
+    {
+      type: "terminal",
+      label: "非対話runをevent streamで処理",
+      lines: [
+        { kind: "command", text: 'codex exec --json "run checks"' },
+        { kind: "output", text: '{"type":"thread.started", ...}' },
+        { kind: "output", text: '{"type":"turn.completed", ...}' },
+        { kind: "info", text: "stdoutは一行一eventのJSONL" },
+      ],
+    },
+  ],
+  "safe-15": [
+    {
+      type: "comparison",
+      label: "CI secretのscope",
+      columns: [
+        { heading: "Job全体", items: ["buildやhookから見える", "露出範囲が広い"] },
+        { heading: "単一command", items: ["codex execだけ", "必要時だけ渡す"] },
+      ],
+    },
+  ],
+  "surfaces-18": [
+    {
+      type: "flow",
+      label: "Cloud environmentのphase",
+      steps: [
+        { text: "Setup shell", sub: "依存導入・secret利用" },
+        { text: "Cache", sub: "準備済みcontainer" },
+        { text: "Agent shell", sub: "別sessionで変更・検証" },
+      ],
+    },
+  ],
+  "session-11": [
+    {
+      type: "flow",
+      label: "Main threadをノイズから守る",
+      steps: [
+        { text: "Main", sub: "要件・判断を保持" },
+        { text: "Subagents", sub: "探索・test・triage" },
+        { text: "Summaries", sub: "要点だけを集約" },
+      ],
+    },
+  ],
+  "safe-19": [
+    {
+      type: "comparison",
+      label: "Rule decisionの強さ",
+      columns: [
+        { heading: "allow", items: ["sandbox外で許可", "promptなし"] },
+        { heading: "prompt", items: ["実行前に確認", "毎回判断"] },
+        { heading: "forbidden", items: ["実行をblock", "最も強い"] },
+      ],
+    },
+  ],
+  "surfaces-25": [
+    {
+      type: "flow",
+      label: "Browserで視覚bugを直す",
+      steps: [
+        { text: "Open state", sub: "routeと状態を指定" },
+        { text: "Annotate", sub: "対象要素へ期待を書く" },
+        { text: "Fix", sub: "scopeを限定" },
+        { text: "Recheck", sub: "同じ状態で検証" },
+      ],
+    },
+  ],
+  "surfaces-28": [
+    {
+      type: "comparison",
+      label: "Remoteの役割分担",
+      columns: [
+        { heading: "Phone", items: ["prompt・follow-up", "approval・確認"] },
+        { heading: "Host", items: ["repo・shell", "MCP・Skills・browser"] },
+      ],
+    },
+  ],
   "agents-02": [
     {
       type: "flow",
