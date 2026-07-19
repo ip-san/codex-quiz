@@ -72,3 +72,7 @@ CLI surface、Plan、実装後の検証、非対話実行、session再開、user
 ## 2026-07-19 不正解別feedback移行 第5回
 
 CLI review・fork・Cloud差分適用・completion・doctorと、model override・strict config・working directory・feature override・local providerの10問をscenario型へ書き換え、feedbackと追跡metadataを追加した。移行済みは45問。公式領域の監査では主要topicに既存問題があるため問題数は210問を維持し、未移行50問の改善を優先する。
+
+## 2026-07-19 高価値カバレッジ追加 第1回
+
+公式マニュアルとの深度比較で不足していたCodex Security 6問、SDK・app-server 4問を追加し、210問から220問へ拡充した。threat model改善、validated finding、patchと人間review、scoped scan、SDK thread、app-server transport認証、experimental API、structured outputを扱う。全問をscenario型とし、不正解別feedbackと全追跡metadataを追加した。

@@ -219,6 +219,56 @@ const initialWrongFeedback: Record<string, Record<number, string>> = {
     2: "任意vendor名ではなく、文書化されたlocal providerから選びます。",
     3: "CSS設定ではlocal open-source model backendを選べません。",
   },
+  "safe-24": {
+    1: "severity表示だけを変えてもarchitectureやtrust boundaryの誤解は残ります。threat modelを修正します。",
+    2: "同じscanの反復より、entry pointやassetを正しく記述したcontext改善が先です。",
+    3: "sandboxを緩めてもsecurity scanの優先順位contextは改善せず、riskだけが増えます。",
+  },
+  "safe-25": {
+    1: "modelが疑った段階は候補であり、clean sandboxでの再現evidenceを持つvalidated findingとは異なります。",
+    2: "lint警告だけではexploitabilityを再現したことになりません。validation evidenceを確認します。",
+    3: "patch提案の存在だけでは問題の再現成功を示しません。findingのvalidation結果を確認します。",
+  },
+  "safe-26": {
+    1: "自動でmainへpushされる前提ではありません。patchとevidenceを人がreviewしてPRとして扱います。",
+    2: "validated findingでも無関係とは限りません。再現条件と対象codeをreviewします。",
+    3: "履歴削除はfindingを解決せず、調査evidenceを失います。最小patchと回帰testを検証します。",
+  },
+  "safe-27": {
+    1: "scannerへ任せきりにせず、repository固有のasset・entry point・trust boundaryを補います。",
+    2: "全file除外は検出範囲を失います。誤ったassumptionをthreat modelで訂正します。",
+    3: "severity固定ではbusiness contextに応じた優先順位を改善できません。",
+  },
+  "safe-28": {
+    1: "validated表示は有力なevidenceですが、business impactやpatch妥当性の人間reviewを不要にはしません。",
+    2: "全 findingの即時自動修正は回帰riskがあります。優先順位とpatchをreviewします。",
+    3: "security test削除は防御を弱めます。再現testと既存testで修正を確認します。",
+  },
+  "safe-29": {
+    1: "広い全面scanを先に回すとnoiseが増えます。変更範囲とsecurity観点を限定して調査します。",
+    2: "認証なし公開はapp-serverの操作面を外部へ露出します。local bindまたは認証・secure proxyを使います。",
+    3: "secretをrepositoryへ保存すると漏えいします。secret managerと最小scopeを使います。",
+  },
+  "extend-41": {
+    1: "shell text解析よりSDKのthread・turn APIを使う方が状態とeventを構造的に扱えます。",
+    2: "completion scriptはshell補完用で、製品内のmulti-turn integrationを提供しません。",
+    3: "Git hookはrepository lifecycle用で、Codex threadのprogrammatic制御には向きません。",
+  },
+  "extend-42": {
+    1: "public networkへ認証なしでlistenすると第三者に操作面を露出します。local transportか認証を使います。",
+    2: "GitHub tokenはapp-server client認証用のbearer tokenとは限りません。用途別credentialを分けます。",
+    3: "CORSだけではWebSocket clientの認証と通信保護を代替できません。",
+  },
+  "extend-43": {
+    1: "schema無視はupgrade時の破損を招きます。生成schemaとversion差分をreviewします。",
+    2: "experimental fieldの恒久依存は互換性riskがあります。capability opt-inとfallbackを設計します。",
+    3: "受信eventを文字列連結すると型と順序を失います。JSON-RPC eventとして処理します。",
+  },
+  "extend-44": {
+    1: "自由文の後処理はformat driftに弱いため、SDKまたはexecのschema付きstructured outputを使います。",
+    2: "screenshotではCIが安定してfieldを検証できません。machine-readable schemaを指定します。",
+    3: "model任せの任意formatでは後続jobが壊れます。必要fieldと型をschemaで固定します。",
+  },
   "safe-12": {
     1: "検索toolの許可はshellのsandbox設定を変更しません。二つは独立して制御されます。",
     2: "shellの接続先がGit repositoryだけに限定される規則ではなく、network policyで範囲を決めます。",
@@ -481,6 +531,16 @@ export const quizzes: Quiz[] = [
   { id: "extend-38", category: "extend", difficulty: "beginner", value: "practical", topic: "slack.delegate", question: "Slack threadの文脈からCodexへcoding taskを開始する方法は？", choices: ["threadで`@Codex`と依頼を書く", "secretをchannel topicへ置く", "browser Cookieを共有する", "repositoryをzipで毎回貼る"], answer: 0, explanation: "Slack App導入後、channelやthreadで@CodexをmentionするとCloud chatが開始します。直前threadのcontextを利用できます。", source: "Codex Slack integration", referenceUrl: "https://learn.chatgpt.com/docs/third-party/slack", verifiedAt: "2026-07-19" },
   { id: "extend-39", category: "extend", difficulty: "intermediate", value: "practical", topic: "slack.long-thread", question: "長いSlack threadから依頼する時に精度を上げる方法は？", choices: ["最新messageで要点・対象repo・完了条件をまとめ直す", "過去messageをすべて削除する", "曖昧な代名詞だけを使う", "全権限を許可する"], answer: 0, explanation: "Codexはthread historyを参照できますが、長い会話では重要contextが埋もれます。最新依頼で決定とscopeを要約します。", source: "Codex Slack integration", referenceUrl: "https://learn.chatgpt.com/docs/third-party/slack", verifiedAt: "2026-07-19" },
   { id: "extend-40", category: "extend", difficulty: "intermediate", value: "practical", topic: "slack.enterprise-posting", question: "EnterpriseでCodexの結果本文をSlack channelへ投稿させたくない。可能な制御は？", choices: ["adminがanswer投稿を無効化し、chat linkだけ返す", "全Slack historyを削除する", "repositoryをpublicにする", "MCPをSTDIOへ変える"], answer: 0, explanation: "Workspace adminはtask完了時のanswer投稿を無効化でき、その場合Slackにはchat linkだけが返ります。environment情報の露出を抑えられます。", source: "Codex Slack integration", referenceUrl: "https://learn.chatgpt.com/docs/third-party/slack", verifiedAt: "2026-07-19" },
+  { id: "safe-24", category: "security", difficulty: "intermediate", value: "practical", topic: "security.threat-model-tuning", question: "Codex Securityのfindingが重要でない領域へ偏り、認証境界のriskを見落としている。最初に改善するものは？", choices: ["project overviewのthreat modelへasset・entry point・trust boundaryを追記する", "severityの表示色だけ変える", "同じ設定でscanを連打する", "sandboxを常にfull accessにする"], answer: 0, explanation: "Codex Securityはthreat modelをscan context、優先順位、reviewに使います。architecture、asset、entry point、trust boundary、auth assumptionを実態に合わせるとfuture scanのfocusを改善できます。", source: "Codex Security threat model", referenceUrl: "https://learn.chatgpt.com/docs/security/threat-model", verifiedAt: "2026-07-19" },
+  { id: "safe-25", category: "security", difficulty: "intermediate", value: "practical", topic: "security.validated-finding", question: "Codex Securityでfindingにvalidatedと表示された。最も正確な意味は？", choices: ["clean sandboxで再現を試み、成功evidenceが得られた", "modelが一度疑っただけ", "lint warningが存在しただけ", "patch案が生成されたため必ず安全"], answer: 0, explanation: "Codex Securityは候補をrankした後、clean containerで再現を試みます。再現に成功したfindingはvalidatedとなり、false positive削減に役立つevidenceを持ちます。", source: "Codex Security FAQ", referenceUrl: "https://learn.chatgpt.com/docs/security", verifiedAt: "2026-07-19" },
+  { id: "safe-26", category: "security", difficulty: "beginner", value: "practical", topic: "security.patch-review", question: "Codex Securityがvalidated findingと修正patchを提案した。次の安全な進め方は？", choices: ["evidence・diff・testをreviewし、必要ならPRとして適用する", "自動でmainへ直接pushされたと考える", "validatedなので無関係として閉じる", "Git履歴を削除する"], answer: 0, explanation: "提案patchは推奨remediationであり自動適用ではありません。再現evidence、最小diff、回帰test、business impactをreviewしてPR workflowで扱います。", source: "Codex Security FAQ", referenceUrl: "https://learn.chatgpt.com/docs/security", verifiedAt: "2026-07-19" },
+  { id: "safe-27", category: "security", difficulty: "advanced", value: "practical", topic: "security.finding-priority", question: "security scanのcriticalityが事業上のriskと合わない。継続的な改善として最も有効なのは？", choices: ["threat modelへ重要asset・business context・security invariantを反映する", "scannerへ全判断を任せる", "全fileを除外する", "全findingを同じseverityへ固定する"], answer: 0, explanation: "threat modelはscan対象のarchitectureとbusiness contextを表し、future scanのprioritizationへ使われます。security invariantや重要assetを明示して結果を調整します。", source: "Codex Security threat model", referenceUrl: "https://learn.chatgpt.com/docs/security/threat-model", verifiedAt: "2026-07-19" },
+  { id: "safe-28", category: "security", difficulty: "intermediate", value: "practical", topic: "security.human-review", question: "Codex Securityのvalidated findingは人間のsecurity reviewを置き換える？", choices: ["置き換えない。exploitability・business impact・patchを人が確認する", "完全に置き換える", "全findingを即時自動修正する", "既存security testを削除できる"], answer: 0, explanation: "自動validationはfalse positiveを減らしますが、code-level validation、exploitability、business impact、threat assessment、人間によるpatch reviewは引き続き必要です。", source: "Codex Security FAQ", referenceUrl: "https://learn.chatgpt.com/docs/security", verifiedAt: "2026-07-19" },
+  { id: "safe-29", category: "security", difficulty: "advanced", value: "practical", topic: "security.scoped-scan", question: "認証moduleの小さな変更だけを深くsecurity reviewしたい。最も安全でreviewしやすい方針は？", choices: ["対象folder・変更範囲・security観点を限定し、evidence付きで検証する", "repository全体を目的なしに毎回scanする", "app-serverを認証なしで公開する", "secretをrepositoryへ保存する"], answer: 0, explanation: "scopeを変更範囲と関係するattack surfaceへ限定すると、noiseを抑えてreview可能なevidenceを得やすくなります。必要ならthreat modelで認証境界も補います。", source: "Codex Security plugin quickstart", referenceUrl: "https://learn.chatgpt.com/docs/security/quickstart", verifiedAt: "2026-07-19" },
+  { id: "extend-41", category: "extend", difficulty: "intermediate", value: "practical", topic: "sdk.thread-control", question: "独自serviceからCodexのthreadを複数turn継続し、eventをprogrammatically処理したい。適切なinterfaceは？", choices: ["Codex SDK", "shell出力の文字列解析だけ", "codex completion", "Git hookだけ"], answer: 0, explanation: "Codex SDKはcoding-focusedなthreadをapplicationから開始・継続し、structured eventを扱うinterfaceです。単発shell automationなら`codex exec`も選べます。", source: "Codex SDK", referenceUrl: "https://learn.chatgpt.com/docs/codex-sdk", verifiedAt: "2026-07-19" },
+  { id: "extend-42", category: "extend", difficulty: "advanced", value: "practical", topic: "app-server.transport-security", question: "別machineのrich clientからapp-serverへ接続する。避けるべき構成は？", choices: ["shared networkへ認証なしWebSocketを直接公開する", "loopbackへbindする", "bearer token認証を使う", "secure proxyでTLS終端する"], answer: 0, explanation: "app-server transportをshared/public networkへ直接公開しません。local・Unix socketを優先し、remote利用ではclient認証、secure tunnelまたはTLS proxyを組み合わせます。", source: "Codex app-server", referenceUrl: "https://learn.chatgpt.com/docs/app-server", verifiedAt: "2026-07-19" },
+  { id: "extend-43", category: "extend", difficulty: "advanced", value: "practical", topic: "app-server.experimental-api", question: "app-serverのexperimental methodをproduction clientで使う前に必要な設計は？", choices: ["experimentalApiへ明示opt-inし、schema version・fallbackを管理する", "schemaを無視する", "全experimental fieldへ恒久依存する", "eventを文字列連結だけで処理する"], answer: 0, explanation: "experimental method・fieldはcapability opt-inが必要で、非opt-in clientからは拒否されます。生成schemaをversion管理し、stable fallbackとupgrade testを用意します。", source: "Codex app-server", referenceUrl: "https://learn.chatgpt.com/docs/app-server", verifiedAt: "2026-07-19" },
+  { id: "extend-44", category: "extend", difficulty: "intermediate", value: "practical", topic: "sdk.structured-output", question: "CIの後続jobがCodex結果のrisk・file・summary fieldを安定して読みたい。適切な方法は？", choices: ["JSON Schemaでstructured outputを要求する", "自由文を正規表現だけで推測する", "screenshotを解析する", "出力formatを毎回modelへ任せる"], answer: 0, explanation: "Codex SDKや`codex exec`はschemaに基づくstructured outputを利用できます。後続処理が必要なfieldと型を固定し、validation failureも明示的に扱います。", source: "Codex non-interactive mode", referenceUrl: "https://learn.chatgpt.com/docs/non-interactive-mode#create-structured-outputs-with-a-schema", verifiedAt: "2026-07-19" },
 ];
 
 for (const quiz of quizzes) {
