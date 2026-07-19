@@ -69,6 +69,56 @@ const initialWrongFeedback: Record<string, Record<number, string>> = {
     2: "保存sessionの削除は差分reviewにならず、継続中のcontextを失う可能性があります。",
     3: "model catalogの確認ではstaged・unstaged・untrackedの変更内容を検査できません。",
   },
+  "agents-01": {
+    1: "package-lock.jsonは依存versionの固定用で、Codexへbuild規則や完了条件を伝える場所ではありません。",
+    2: ".gitignoreはGitの追跡対象を指定します。開発手順やreview規則はAGENTS.mdへ記述します。",
+    3: "画像では指示を自動適用・差分reviewしにくいため、version管理できるAGENTS.mdを使います。",
+  },
+  "agents-02": {
+    0: "rootの指示は広く適用されますが、作業場所に近いAGENTS.mdの具体的な指示が優先されます。",
+    2: "更新日時では優先順位を決めません。repository rootからcurrent directoryまでの階層で決まります。",
+    3: "file sizeは優先順位と無関係です。対象fileに近い階層のinstructionを確認します。",
+  },
+  "agents-03": {
+    1: "`/reset`はAGENTS.mdの雛形を作るquick-startではありません。current repositoryでは`/init`を使います。",
+    2: "deploy操作ではrepository固有のbuild・test・review規則を記したAGENTS.mdは生成されません。",
+    3: "exportは既存dataを外へ出す操作を示す名称で、repository instructionの初期化には使いません。",
+  },
+  "agents-04": {
+    1: "保存のたびに指示chainが再構築される前提ではありません。変更後は新しいsessionで確認します。",
+    2: "Git commitは指示を共有できますが、実行中sessionのinstructionを自動再読込する契機ではありません。",
+    3: "OS再起動まで待つ必要はありません。Codexの新しいrunまたはTUI sessionを開始します。",
+  },
+  "agents-05": {
+    1: "override fileは例外規則を適用するための正式な探索候補で、存在すれば無視されません。",
+    2: "同じ階層でrandom選択はされません。AGENTS.override.mdが通常のAGENTS.mdより先に選ばれます。",
+    3: "Markdown instructionとして読み込まれるため、画像へ変換する必要はありません。",
+  },
+  "safe-01": {
+    0: "model選択は推論能力や速度に関する設定です。承認modeは操作前に許可を求める条件を決めます。",
+    2: "文字encodingはfile処理の規則で、危険なcommandを実行してよいかの判断を制御しません。",
+    3: "Gitの作者名はcommit metadataです。shellや外部操作の承認条件とは別に設定します。",
+  },
+  "safe-02": {
+    1: "回答言語はpromptやlocaleの問題です。sandboxはfilesystemやnetworkへの技術的な境界を設けます。",
+    2: "editorの配色は表示設定であり、agentがread・writeできるpathやnetwork範囲を制限しません。",
+    3: "クイズ難易度は学習用metadataです。Codexの操作範囲はsandbox設定で制御します。",
+  },
+  "safe-03": {
+    0: "初回からfull accessにすると誤操作の影響範囲が広がります。既定制限で必要性を確認します。",
+    2: "承認をすべて無効にすると重要な外部操作を止められません。riskに応じたpolicyを保ちます。",
+    3: "system全体へのwriteは通常不要です。信頼できるworkspaceへ必要最小限の権限を与えます。",
+  },
+  "safe-04": {
+    1: "全pathへの無制限writeを意図するflagではありません。必要な追加directoryだけを明示します。",
+    2: "root全体のmountは範囲が広すぎます。`--add-dir`で対象directoryを限定します。",
+    3: "Gitを無効化しても追加directoryへの書込み許可にはなりません。sandboxのwritable rootを指定します。",
+  },
+  "workflow-02": {
+    1: "reviewは指摘を返す段階で、確認なしにpushしません。修正と公開は別の依頼・承認で進めます。",
+    2: "review対象を自動revertすると変更を失います。まず優先度付きの指摘を確認します。",
+    3: "repositoryの再作成は差分reviewに不要で、作業contextを失う危険があります。",
+  },
   "safe-12": {
     1: "検索toolの許可はshellのsandbox設定を変更しません。二つは独立して制御されます。",
     2: "shellの接続先がGit repositoryだけに限定される規則ではなく、network policyで範囲を決めます。",

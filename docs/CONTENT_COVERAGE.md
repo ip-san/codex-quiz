@@ -60,3 +60,7 @@
 ## 2026-07-19 不正解別feedback移行 第2回
 
 実務価値の高い10問へ不正解別feedbackを追加し、移行済みは15問になった。対象はpromptの4要素、context、境界、完了条件、AGENTS.mdの再読込、read-only・workspace-write、危険操作、未commit差分のreview。誤答ごとに「なぜ違うか」と「次に何を確認するか」を示し、名称暗記ではなく安全な実務判断の修正を優先した。
+
+## 2026-07-19 不正解別feedback移行 第3回
+
+AGENTS.mdの配置・階層・初期化・読込・override、承認mode、sandbox、最小権限、追加write directory、reviewの基本動作を扱う10問へfeedbackを追加し、移行済みは25問になった。誤答した設定名の訂正だけでなく、権限を広げすぎないこと、作業を失わないこと、指示を再読込する手順を説明する。
