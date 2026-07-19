@@ -49,6 +49,16 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
       ],
     },
   ],
+  "workflow-11": [
+    {
+      type: "comparison",
+      label: "Scheduled taskの文脈を選ぶ",
+      columns: [
+        { heading: "Chat内", items: ["既存の会話を継続", "追跡・再確認向き"] },
+        { heading: "Standalone", items: ["runごとに新規chat", "独立した定期監査向き"] },
+      ],
+    },
+  ],
   "surfaces-02": [
     {
       type: "flow",
@@ -58,6 +68,27 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
         { text: "Setup", sub: "依存関係を準備" },
         { text: "Agent", sub: "変更と検証" },
         { text: "Diff / PR", sub: "結果をレビュー" },
+      ],
+    },
+  ],
+  "surfaces-09": [
+    {
+      type: "comparison",
+      label: "IDE拡張の設定レイヤー",
+      columns: [
+        { heading: "config.toml", items: ["model・reasoning", "sandbox・MCP"] },
+        { heading: "chatgpt.*", items: ["sidebar・入力", "queue・review表示"] },
+      ],
+    },
+  ],
+  "extend-13": [
+    {
+      type: "flow",
+      label: "ツール実行を挟むHook",
+      steps: [
+        { text: "PreToolUse", sub: "実行前にポリシー検査" },
+        { text: "Tool", sub: "Bashなどを実行" },
+        { text: "PostToolUse", sub: "結果を品質検査" },
       ],
     },
   ],

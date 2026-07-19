@@ -15,13 +15,23 @@ const validQuiz: Quiz = {
 describe("Codex quiz quality gate", () => {
   it("ships only structurally valid quiz data", () => {
     expect(validateQuizzes(quizzes)).toEqual([]);
-    expect(quizzes).toHaveLength(75);
+    expect(quizzes).toHaveLength(105);
     const categoryCounts = quizzes.reduce<Record<string, number>>((counts, quiz) => {
       counts[quiz.category] = (counts[quiz.category] ?? 0) + 1;
       return counts;
     }, {});
     expect(Object.keys(categoryCounts)).toHaveLength(9);
-    expect(Object.entries(categoryCounts).filter(([, count]) => count < 5)).toEqual([]);
+    expect(categoryCounts).toEqual({
+      basics: 10,
+      prompting: 10,
+      agents: 10,
+      security: 10,
+      config: 10,
+      extend: 18,
+      session: 10,
+      workflow: 12,
+      surfaces: 15,
+    });
   });
 
   it("accepts a complete four-choice quiz", () => {
