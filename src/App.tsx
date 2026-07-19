@@ -120,13 +120,19 @@ function App() {
     }
   }, []);
 
+  const activeQuestionId = session[index]?.id;
+
   useEffect(() => {
     const params = new URLSearchParams();
     if (screen === "reader" || screen === "progress") params.set("view", screen);
-    if (screen === "quiz" && sessionCategory) params.set("category", sessionCategory);
+    if (screen === "quiz" && sessionLabel === "共有された問題" && activeQuestionId) {
+      params.set("q", activeQuestionId);
+    } else if (screen === "quiz" && sessionCategory) {
+      params.set("category", sessionCategory);
+    }
     const search = params.size ? `?${params.toString()}` : window.location.pathname;
     window.history.replaceState(null, "", search);
-  }, [screen, sessionCategory]);
+  }, [activeQuestionId, screen, sessionCategory, sessionLabel]);
 
   const question = session[index];
   const displayedChoices = useMemo(() => (question ? orderChoices(question.choices) : []), [question]);

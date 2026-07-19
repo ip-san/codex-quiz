@@ -18,6 +18,7 @@ Claude版の成熟したcontent quality gateを参考にし、Claude固有のカ
 - 問題バリデーション（ID・カテゴリ・choice・feedback・metadata）、Vitest、Biome、型カバレッジ、CI
 - 本番entry bundleのraw・gzip上限検査
 - server-renderによるlandmark・操作名検査、クイズ進捗・回答結果のARIA対応
+- Chromium E2Eによるhome・回答focus・URL共有・deep link検査
 
 ## 開発中
 
@@ -33,7 +34,7 @@ Claude版の成熟したcontent quality gateを参考にし、Claude固有のカ
 - 実践シナリオ
 - 日次目標、XP、習熟レベル、学習推奨
 - ダークモード、テーマ設定、通知、PWA更新UI
-- browser E2Eによるaxe検査、Visual Regression、Lighthouse
+- browser E2Eへのaxe統合、Visual Regression、Lighthouse
 - 問題の公式ドキュメント差分監査と自動品質ループ
 - Electron版とCodex利用履歴レコメンド
 
