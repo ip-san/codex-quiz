@@ -15,16 +15,24 @@ const validQuiz: Quiz = {
 describe("Codex quiz quality gate", () => {
   it("ships only structurally valid quiz data", () => {
     expect(validateQuizzes(quizzes)).toEqual([]);
-    expect(quizzes).toHaveLength(60);
+    expect(quizzes).toHaveLength(75);
     const categoryCounts = quizzes.reduce<Record<string, number>>((counts, quiz) => {
       counts[quiz.category] = (counts[quiz.category] ?? 0) + 1;
       return counts;
     }, {});
-    expect(Object.values(categoryCounts)).toEqual([10, 10, 10, 10, 10, 10]);
+    expect(Object.keys(categoryCounts)).toHaveLength(9);
+    expect(Object.entries(categoryCounts).filter(([, count]) => count < 5)).toEqual([]);
   });
 
   it("accepts a complete four-choice quiz", () => {
     expect(() => assertValidQuizzes([validQuiz])).not.toThrow();
+  });
+
+  it("requires traceable metadata for value-classified questions", () => {
+    const issues = validateQuizzes([{ ...validQuiz, value: "practical" }]);
+    expect(issues.map((issue) => issue.field)).toEqual(
+      expect.arrayContaining(["difficulty", "topic", "referenceUrl", "verifiedAt"]),
+    );
   });
 
   it("detects duplicate IDs and questions", () => {

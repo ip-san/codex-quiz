@@ -38,6 +38,17 @@ export function validateQuizzes(quizzes: Quiz[]): ValidationIssue[] {
       add("explanation", `解説は${MIN_EXPLANATION_LENGTH}文字以上必要です`);
     }
     if (!quiz.source.trim()) add("source", "OpenAI公式資料の出典が必要です");
+    if (quiz.referenceUrl && !/^https:\/\/(learn\.chatgpt\.com|developers\.openai\.com)\//.test(quiz.referenceUrl)) {
+      add("referenceUrl", "OpenAI公式ドメインのURLが必要です");
+    }
+    if (quiz.value) {
+      if (!quiz.difficulty) add("difficulty", "価値分類した問題には難易度が必要です");
+      if (!quiz.topic) add("topic", "価値分類した問題には公式カバレッジ用topicが必要です");
+      if (!quiz.referenceUrl) add("referenceUrl", "価値分類した問題には公式URLが必要です");
+      if (!quiz.verifiedAt || Number.isNaN(new Date(quiz.verifiedAt).getTime())) {
+        add("verifiedAt", "価値分類した問題には有効な事実確認日が必要です");
+      }
+    }
   }
 
   return issues;

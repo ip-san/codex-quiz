@@ -1,5 +1,6 @@
-export type Category = "basics" | "prompting" | "agents" | "security" | "config" | "extend";
+export type Category = "basics" | "prompting" | "agents" | "security" | "config" | "extend" | "session" | "workflow" | "surfaces";
 export type Difficulty = "beginner" | "intermediate" | "advanced";
+export type ContentValue = "practical" | "neutral" | "trivia";
 
 export type Quiz = {
   id: string;
@@ -9,6 +10,11 @@ export type Quiz = {
   answer: number;
   explanation: string;
   source: string;
+  difficulty?: Difficulty;
+  value?: ContentValue;
+  topic?: string;
+  referenceUrl?: string;
+  verifiedAt?: string;
 };
 
 export const categories: Record<Category, { label: string; icon: string; description: string }> = {
@@ -18,6 +24,9 @@ export const categories: Record<Category, { label: string; icon: string; descrip
   security: { label: "権限と安全", icon: "◇", description: "承認とサンドボックス" },
   config: { label: "設定", icon: "⚙", description: "config.tomlと動作の調整" },
   extend: { label: "拡張", icon: "+", description: "Skills・MCP・自動化" },
+  session: { label: "セッション", icon: "↻", description: "会話、コンテキスト、再開と分岐" },
+  workflow: { label: "実務フロー", icon: "W", description: "レビュー、worktree、並列作業" },
+  surfaces: { label: "利用環境", icon: "◫", description: "App・IDE・CLI・Cloudの使い分け" },
 };
 
 export const categoryLearning: Record<Category, { chapter: number; difficulty: Difficulty; goal: string }> = {
@@ -27,6 +36,9 @@ export const categoryLearning: Record<Category, { chapter: number; difficulty: D
   security: { chapter: 4, difficulty: "intermediate", goal: "承認とサンドボックスを適切に選べる" },
   config: { chapter: 5, difficulty: "intermediate", goal: "個人設定とプロジェクト設定を使い分ける" },
   extend: { chapter: 6, difficulty: "advanced", goal: "Skills、MCP、PluginでCodexを拡張する" },
+  session: { chapter: 7, difficulty: "intermediate", goal: "長い作業の会話とコンテキストを管理する" },
+  workflow: { chapter: 8, difficulty: "intermediate", goal: "レビューとworktreeで安全に並列作業する" },
+  surfaces: { chapter: 9, difficulty: "beginner", goal: "Local・Worktree・Cloudを目的で使い分ける" },
 };
 
 export const quizzes: Quiz[] = [
@@ -90,4 +102,19 @@ export const quizzes: Quiz[] = [
   { id: "extend-08", category: "extend", question: "Codex自身を別エージェント向けMCPサーバーとして動かすコマンドは？", choices: ["codex mcp-server", "codex mcp add-self", "codex server-html", "codex agent-port"], answer: 0, explanation: "codex mcp-serverはCodex自身をstdio上のMCPサーバーとして起動し、別のエージェントから利用できるようにします。", source: "Codex CLI command reference" },
   { id: "extend-09", category: "extend", question: "Skillに含められるものとして適切な組み合わせは？", choices: ["手順・テンプレート・例・スクリプト", "実行ファイルだけ", "画像一枚だけ", "モデル名だけ"], answer: 0, explanation: "Skillは作業手順に加え、テンプレート、例、スキーマ、スクリプトなどの支援リソースをまとめられます。", source: "Codex Skills & Plugins" },
   { id: "extend-10", category: "extend", question: "Hookが適している用途は？", choices: ["ツール実行などライフサイクル上の機械的な検査", "一度だけの文章要約", "クイズの配色選択", "GitHubの株価確認"], answer: 0, explanation: "Hookはツール呼び出しやコマンド、ファイル編集などのライフサイクルに検査や強制処理を組み込む用途に適しています。", source: "Codex hooks" },
+  { id: "session-01", category: "session", difficulty: "beginner", value: "practical", topic: "session.compact", question: "長い対話で重要な決定を残しつつコンテキストを空けたい。適切な操作は？", choices: ["`/compact`で現在の会話を要約する", "リポジトリを削除してやり直す", "同じログをもう一度すべて貼る", "権限を無制限に変更する"], answer: 0, explanation: "`/compact`は見えている会話を要約し、長時間の作業で重要事項を保ちながらコンテキスト消費を抑えるために使います。", source: "Codex app commands", referenceUrl: "https://learn.chatgpt.com/docs/app/commands", verifiedAt: "2026-07-19" },
+  { id: "session-02", category: "session", difficulty: "beginner", value: "practical", topic: "session.resume", question: "昨日中断した同じ修正作業を、会話履歴ごと続けたい。何を選ぶ？", choices: ["保存済みセッションをresumeする", "新規チャットで背景を省略する", "元のブランチを削除する", "別のモデル名だけを指定する"], answer: 0, explanation: "resumeは以前の会話と作業文脈を継続する用途です。別方向を試しつつ元を残す場合はforkを使い分けます。", source: "Codex CLI command reference", referenceUrl: "https://learn.chatgpt.com/docs/developer-commands", verifiedAt: "2026-07-19" },
+  { id: "session-03", category: "session", difficulty: "intermediate", value: "practical", topic: "session.fork", question: "現在の設計案を残したまま、別の実装方針を同じ履歴から試したい。適切なのは？", choices: ["セッションをforkする", "元の会話を永久削除する", "全ファイルをrevertする", "同じブランチ名を複数worktreeで使う"], answer: 0, explanation: "forkは元のトランスクリプトを保持した新しい会話へ分岐するため、代替案を比較しながら元の作業を残せます。", source: "Codex CLI command reference", referenceUrl: "https://learn.chatgpt.com/docs/developer-commands", verifiedAt: "2026-07-19" },
+  { id: "session-04", category: "session", difficulty: "intermediate", value: "practical", topic: "context.subagents", question: "大量のテストログで主要な要件が会話に埋もれそうだ。良い対処は？", choices: ["独立調査をsubagentへ分け、要約だけ戻す", "ログを何度も本文へ貼る", "完了条件を削除する", "すべてを一つの巨大プロンプトにする"], answer: 0, explanation: "独立した調査やログ解析をsubagentへ分けると、主スレッドを要件・判断・最終結果へ集中させられます。", source: "Codex subagents", referenceUrl: "https://learn.chatgpt.com/docs/agent-configuration/subagents", verifiedAt: "2026-07-19" },
+  { id: "session-05", category: "session", difficulty: "intermediate", value: "practical", topic: "context.hygiene", question: "長時間のCodex作業で主スレッドに残す価値が最も高い情報は？", choices: ["要件・制約・判断・検証結果", "全コマンドの生出力", "無関係なスタックトレース", "重複したファイル一覧"], answer: 0, explanation: "主スレッドには方向を変える情報を残し、探索ノイズや長いログは分離・要約するとコンテキスト劣化を抑えられます。", source: "Codex subagents", referenceUrl: "https://learn.chatgpt.com/docs/agent-configuration/subagents", verifiedAt: "2026-07-19" },
+  { id: "workflow-01", category: "workflow", difficulty: "beginner", value: "practical", topic: "review.scope", question: "コミット前に現在の作業ツリー全体を確認したい。`/review`で選ぶ範囲は？", choices: ["Review uncommitted changes", "Review a remote image", "Delete saved sessions", "Review model catalog"], answer: 0, explanation: "未コミット変更のレビューはstaged、unstaged、untrackedを含む作業ツリーを対象にし、変更前の不具合発見に役立ちます。", source: "Codex code review", referenceUrl: "https://learn.chatgpt.com/docs/code-review", verifiedAt: "2026-07-19" },
+  { id: "workflow-02", category: "workflow", difficulty: "intermediate", value: "practical", topic: "review.behavior", question: "`/review`を実行した直後、Codexの基本動作として期待すべきものは？", choices: ["優先度付きの指摘を報告し、作業ツリーは変更しない", "指摘を確認せず自動でpushする", "全変更を自動でrevertする", "Gitリポジトリを作り直す"], answer: 0, explanation: "専用reviewerは差分を読み、優先度付きで実行可能な指摘を返します。修正の適用は別途依頼し、通常の権限設定に従います。", source: "Codex code review", referenceUrl: "https://learn.chatgpt.com/docs/code-review", verifiedAt: "2026-07-19" },
+  { id: "workflow-03", category: "workflow", difficulty: "beginner", value: "practical", topic: "worktree.parallel", question: "進行中のローカル変更を乱さず、別機能を並列でCodexに任せたい。適切な環境は？", choices: ["Worktree", "同じLocal checkout", "read-onlyの説明ページ", "アーカイブ済みチャット"], answer: 0, explanation: "Worktreeは同じGitリポジトリの独立したcheckoutを作り、現在のLocal作業を乱さず別タスクを並列実行できます。", source: "Codex worktrees", referenceUrl: "https://learn.chatgpt.com/docs/environments/git-worktrees", verifiedAt: "2026-07-19" },
+  { id: "workflow-04", category: "workflow", difficulty: "intermediate", value: "practical", topic: "worktree.setup", question: "新しいworktreeで依存関係や無視された設定ファイルが不足する。改善方法は？", choices: ["local environmentのsetupと`.worktreeinclude`を使う", "Git管理を解除する", "全ファイルを手作業で毎回複製する", "同じブランチを二箇所でcheckoutする"], answer: 0, explanation: "setup scriptで依存関係を準備し、必要なignoredファイルだけを`.worktreeinclude`へ指定すると再現可能にできます。", source: "Codex worktrees", referenceUrl: "https://learn.chatgpt.com/docs/environments/git-worktrees", verifiedAt: "2026-07-19" },
+  { id: "workflow-05", category: "workflow", difficulty: "intermediate", value: "practical", topic: "worktree.handoff", question: "worktreeの変更をLocalへ移して同じチャットを続けたい。推奨される操作は？", choices: ["Handoffを使う", "同じブランチを両方で強制checkoutする", "worktreeを先に削除する", "会話履歴を手動で再入力する"], answer: 0, explanation: "HandoffはチャットとコードをLocal・Worktree間で安全に移し、Gitの一ブランチ一worktree制約も処理します。", source: "Codex worktrees", referenceUrl: "https://learn.chatgpt.com/docs/environments/git-worktrees", verifiedAt: "2026-07-19" },
+  { id: "surfaces-01", category: "surfaces", difficulty: "beginner", value: "practical", topic: "surface.local", question: "手元の未コミット変更を直接確認しながら小さな修正を行う。適した実行場所は？", choices: ["Local", "Cloudだけ", "Plugin Marketplace", "アーカイブ環境"], answer: 0, explanation: "Localは現在のプロジェクトディレクトリで直接作業するため、手元の状態を見ながら短い修正と検証を行う場面に適します。", source: "Codex environments", referenceUrl: "https://learn.chatgpt.com/docs/environments/modes", verifiedAt: "2026-07-19" },
+  { id: "surfaces-02", category: "surfaces", difficulty: "beginner", value: "practical", topic: "surface.cloud", question: "PCから処理を切り離し、設定済みの遠隔環境でタスクを実行したい。適切なのは？", choices: ["Cloud", "Localだけ", "AGENTS.override.mdだけ", "シェル補完"], answer: 0, explanation: "Cloudは設定したコンテナ環境でリポジトリをcheckoutし、セットアップ後にエージェントが変更と検証を進めます。", source: "Codex cloud environments", referenceUrl: "https://learn.chatgpt.com/docs/environments/cloud-environment", verifiedAt: "2026-07-19" },
+  { id: "surfaces-03", category: "surfaces", difficulty: "intermediate", value: "practical", topic: "cloud.secrets", question: "Cloud環境のsecretをエージェント実行中にも通常の環境変数として使える？", choices: ["使えない。secretはsetup時だけ利用され、agent phase前に除かれる", "常に平文で使える", "公開リポジトリなら使える", "モデル設定を変えれば使える"], answer: 0, explanation: "Cloudのsecretは実行時に復号されますがsetup scriptでのみ利用でき、安全のためagent phaseが始まる前に削除されます。", source: "Codex cloud environments", referenceUrl: "https://learn.chatgpt.com/docs/environments/cloud-environment", verifiedAt: "2026-07-19" },
+  { id: "surfaces-04", category: "surfaces", difficulty: "intermediate", value: "practical", topic: "cloud.network", question: "Codex Cloudのagent phaseにおけるインターネットアクセスの既定は？", choices: ["オフ。必要に応じて限定または無制限アクセスを設定する", "常に無制限", "setup phaseも常にオフ", "GitHubだけ必ず許可"], answer: 0, explanation: "setup scriptは依存導入のためネット利用できますが、agent phaseは既定でオフであり、環境設定で範囲を変更します。", source: "Codex cloud environments", referenceUrl: "https://learn.chatgpt.com/docs/environments/cloud-environment", verifiedAt: "2026-07-19" },
+  { id: "surfaces-05", category: "surfaces", difficulty: "beginner", value: "practical", topic: "surface.selection", question: "エディタ内の選択コードと差分を見ながら対話したい。最も自然なsurfaceは？", choices: ["Codex IDE extension", "Cloud環境設定ページ", "MCP server mode", "Plugin marketplace CLI"], answer: 0, explanation: "IDE extensionは編集中のコードや選択範囲に近い場所で対話し、差分を確認しながら修正するワークフローに適します。", source: "Codex quickstart", referenceUrl: "https://learn.chatgpt.com/docs/codex/ide", verifiedAt: "2026-07-19" },
 ];

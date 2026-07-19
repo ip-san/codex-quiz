@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { categories, categoryLearning, quizzes, type Category, type Quiz } from "./data";
 import { orderChoices } from "./domain/choiceOrder";
+import { DiagramRenderer } from "./components/DiagramRenderer";
+import { quizDiagrams } from "./diagrams";
 import {
   emptyProgress,
   parseProgressExport,
@@ -438,7 +440,7 @@ function App() {
     return (
       <main className="chapter-page">
         <div className="chapter-card">
-          <span className="chapter-number">CHAPTER {learning.chapter} / 6</span>
+          <span className="chapter-number">CHAPTER {learning.chapter} / 9</span>
           <div className="chapter-icon">{categories[question.category].icon}</div>
           <p className="eyebrow">{categories[question.category].label}</p>
           <h1>{learning.goal}</h1>
@@ -501,6 +503,7 @@ function App() {
             <div className="study-first">
               <span>READ FIRST</span>
               <h1>{question.explanation}</h1>
+              <DiagramRenderer diagrams={quizDiagrams[question.id] ?? []} />
               <div>
                 <small>この知識のポイント</small>
                 <strong>{question.choices[question.answer]}</strong>
@@ -548,6 +551,7 @@ function App() {
                   {quizMode !== "exam" && (
                     <>
                       <p>{question.explanation}</p>
+                      <DiagramRenderer diagrams={quizDiagrams[question.id] ?? []} />
                       <span className="review-schedule">↻ {getReviewLabel(progress.questions[question.id])}</span>
                       <small>出典: OpenAI公式 — {question.source}</small>
                     </>
@@ -667,6 +671,7 @@ function App() {
                   <strong>{quiz.choices[quiz.answer]}</strong>
                 </div>
                 <p>{quiz.explanation}</p>
+                <DiagramRenderer diagrams={quizDiagrams[quiz.id] ?? []} />
                 <div className="reader-source">OpenAI公式 — {quiz.source}</div>
               </article>
             ))}
@@ -938,7 +943,7 @@ function App() {
           <button className="mode-card featured" onClick={() => startMode("overview")}>
             <span>01</span>
             <div>
-              <small>6 CHAPTERS</small>
+              <small>9 CHAPTERS</small>
               <h3>全体像モード</h3>
               <p>基本から拡張まで、順番にCodexの全体像をつかむ。</p>
             </div>
