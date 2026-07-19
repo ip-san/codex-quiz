@@ -64,3 +64,7 @@
 ## 2026-07-19 不正解別feedback移行 第3回
 
 AGENTS.mdの配置・階層・初期化・読込・override、承認mode、sandbox、最小権限、追加write directory、reviewの基本動作を扱う10問へfeedbackを追加し、移行済みは25問になった。誤答した設定名の訂正だけでなく、権限を広げすぎないこと、作業を失わないこと、指示を再読込する手順を説明する。
+
+## 2026-07-19 不正解別feedback移行 第4回
+
+CLI surface、Plan、実装後の検証、非対話実行、session再開、user・project config、設定対象、one-off override、profileを扱う10問へfeedbackと追跡metadataを追加し、移行済みは35問になった。うち`codex exec`と`codex resume`の2問は名称暗記から、CI連携・前日のcontext継続を判断するscenario型へ書き換えた。
