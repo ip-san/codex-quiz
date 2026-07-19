@@ -201,6 +201,54 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
       ],
     },
   ],
+  "basic-15": [
+    {
+      type: "comparison",
+      label: "Codexの認証を選ぶ",
+      columns: [
+        { heading: "ChatGPT", items: ["subscription access", "workspace policy"] },
+        { heading: "API key", items: ["usage-based", "Platform org policy"] },
+      ],
+    },
+  ],
+  "extend-30": [
+    {
+      type: "flow",
+      label: "Workflowを育てて配布",
+      steps: [
+        { text: "Skill", sub: "手順・scriptを作る" },
+        { text: "Test", sub: "triggerと結果を改善" },
+        { text: "Plugin", sub: "Skill・MCPをbundle" },
+        { text: "Marketplace", sub: "teamへ配布" },
+      ],
+    },
+  ],
+  "extend-32": [
+    {
+      type: "config",
+      label: "Pluginのdirectory構造",
+      filepath: "my-plugin/",
+      lines: [
+        { text: ".codex-plugin/plugin.json", highlight: true },
+        { text: "skills/" },
+        { text: "hooks/" },
+        { text: ".mcp.json" },
+        { text: "assets/" },
+      ],
+    },
+  ],
+  "surfaces-33": [
+    {
+      type: "flow",
+      label: "Import後の仕上げ",
+      steps: [
+        { text: "Import", sub: "選択したsetupを追加" },
+        { text: "Review", sub: "権限・Hook・path" },
+        { text: "Finish", sub: "MCP・Pluginを再認証" },
+        { text: "Test", sub: "projectで動作確認" },
+      ],
+    },
+  ],
   "agents-02": [
     {
       type: "flow",
