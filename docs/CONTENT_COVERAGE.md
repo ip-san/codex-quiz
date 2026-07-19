@@ -23,6 +23,9 @@
 | Plugin distribution | 中〜高 | 基礎あり | versioningと公開審査 |
 | Image inputs | 中 | 基礎あり | visual regression運用 |
 | Import | 中〜高 | 基礎あり | 移行後の互換性監査 |
+| Memories・長期Goal | 高 | 実務フローあり | 実利用による調整 |
+| Integrated terminal・Git | 高 | 基礎あり | conflict解消 |
+| Linear・Slack | 中〜高 | 基礎あり | 障害時の再接続 |
 
 「着手」は、公式URL・topic・value・verifiedAtを持つ問題が存在する状態。問題数だけで完了とせず、主要な判断と失敗回避を説明できるまで追加する。
 
@@ -49,3 +52,7 @@
 ## 2026-07-19 第6回拡充
 
 170問から190問へ拡充した。追加した20問は、認証4問、Skill設計6問、Plugin配布4問、画像入力2問、他agentからのImport 4問。導入方法だけでなく、credential保護、暗黙trigger、配布scope、移行後の権限・認証reviewまでを学習対象にした。
+
+## 2026-07-19 第7回拡充
+
+190問から210問へ拡充した。追加した20問は、Memories 5問、長期Goal 4問、integrated terminal・App Git操作 5問、Linear・Slack連携 6問。継続的な作業context、検証可能な長期目標、App内でのreview、issue・threadからCloud taskへつなぐ流れを補完した。

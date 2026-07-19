@@ -15,7 +15,7 @@ const validQuiz: Quiz = {
 describe("Codex quiz quality gate", () => {
   it("ships only structurally valid quiz data", () => {
     expect(validateQuizzes(quizzes)).toEqual([]);
-    expect(quizzes).toHaveLength(190);
+    expect(quizzes).toHaveLength(210);
     const categoryCounts = quizzes.reduce<Record<string, number>>((counts, quiz) => {
       counts[quiz.category] = (counts[quiz.category] ?? 0) + 1;
       return counts;
@@ -27,10 +27,10 @@ describe("Codex quiz quality gate", () => {
       agents: 14,
       security: 23,
       config: 15,
-      extend: 34,
-      session: 15,
-      workflow: 20,
-      surfaces: 34,
+      extend: 40,
+      session: 20,
+      workflow: 24,
+      surfaces: 39,
     });
   });
 

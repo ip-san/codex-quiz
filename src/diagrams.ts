@@ -249,6 +249,52 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
       ],
     },
   ],
+  "session-16": [
+    {
+      type: "comparison",
+      label: "指示と記憶の役割",
+      columns: [
+        { heading: "AGENTS.md", items: ["必須のteam規則", "Gitでreview・共有"] },
+        { heading: "Memories", items: ["過去作業のhelpful recall", "生成・利用をchatで制御"] },
+      ],
+    },
+  ],
+  "workflow-21": [
+    {
+      type: "flow",
+      label: "検証可能なGoal",
+      steps: [
+        { text: "Outcome", sub: "完成する結果" },
+        { text: "Constraints", sub: "守る境界" },
+        { text: "Verification", sub: "test・measurement" },
+        { text: "Done", sub: "自分で完了確認" },
+      ],
+    },
+  ],
+  "extend-35": [
+    {
+      type: "flow",
+      label: "LinearからCodexへ委譲",
+      steps: [
+        { text: "Issue", sub: "assign / @Codex" },
+        { text: "Cloud chat", sub: "environmentで作業" },
+        { text: "Progress", sub: "Activityへ更新" },
+        { text: "Result", sub: "summary・chat・PR" },
+      ],
+    },
+  ],
+  "extend-38": [
+    {
+      type: "flow",
+      label: "SlackからCodexへ委譲",
+      steps: [
+        { text: "Thread", sub: "contextを要約" },
+        { text: "@Codex", sub: "repoを明示" },
+        { text: "Cloud chat", sub: "変更と検証" },
+        { text: "Reply", sub: "結果またはchat link" },
+      ],
+    },
+  ],
   "agents-02": [
     {
       type: "flow",
