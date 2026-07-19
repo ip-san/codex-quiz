@@ -94,6 +94,7 @@ function App() {
   const [quizMode, setQuizMode] = useState<QuizMode>("normal");
   const [studyPhase, setStudyPhase] = useState(false);
   const [showChapterIntro, setShowChapterIntro] = useState(false);
+  const feedbackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -435,6 +436,10 @@ function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   });
 
+  useEffect(() => {
+    if (selected !== null) feedbackRef.current?.focus();
+  }, [selected]);
+
   if (screen === "quiz" && question && quizMode === "overview" && showChapterIntro) {
     const learning = categoryLearning[question.category];
     return (
@@ -474,7 +479,15 @@ function App() {
             </span>
           </div>
         </header>
-        <div className="progress-track">
+        <div
+          className="progress-track"
+          role="progressbar"
+          aria-label="クイズの進捗"
+          aria-valuemin={1}
+          aria-valuemax={session.length}
+          aria-valuenow={index + 1}
+          aria-valuetext={`${session.length}問中${index + 1}問目`}
+        >
           <span style={{ width: `${((index + 1) / session.length) * 100}%` }} />
         </div>
         <section className="question-card">
@@ -514,8 +527,12 @@ function App() {
             </div>
           ) : (
             <>
-              <h1>{question.question}</h1>
-              <div className="choices">
+              <h1 id="question-title">{question.question}</h1>
+              <fieldset
+                className="choices"
+                aria-labelledby="question-title"
+                style={{ margin: 0, padding: 0, border: 0, minWidth: 0 }}
+              >
                 {displayedChoices.map((choice, choiceIndex) => {
                   let state = "";
                   if (quizMode !== "exam") {
@@ -528,6 +545,7 @@ function App() {
                       key={choice.originalIndex}
                       onClick={() => answer(choice.originalIndex)}
                       disabled={selected !== null}
+                      aria-pressed={selected === choice.originalIndex}
                     >
                       <span className="choice-letter">{String.fromCharCode(65 + choiceIndex)}</span>
                       <span>{choice.text}</span>
@@ -536,10 +554,14 @@ function App() {
                     </button>
                   );
                 })}
-              </div>
+              </fieldset>
               {selected !== null && (
                 <div
+                  ref={feedbackRef}
                   className={`feedback ${quizMode === "exam" ? "is-exam" : selected === question.answer ? "is-correct" : "is-wrong"}`}
+                  role="status"
+                  aria-live="polite"
+                  tabIndex={-1}
                 >
                   <strong>
                     {quizMode === "exam"
@@ -842,7 +864,7 @@ function App() {
 
   return (
     <main>
-      <nav>
+      <nav aria-label="メインナビゲーション">
         <div className="brand">
           <Logo />
           <b>Codex Quiz</b>
