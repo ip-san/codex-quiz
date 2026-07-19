@@ -57,7 +57,7 @@ npm run check
 
 `main`ブランチへpushすると、`.github/workflows/deploy-pages.yml` が品質ゲートと本番ビルドを実行し、成功した `dist/` をGitHub Pagesへ公開します。手動実行はGitHub Actionsの「Deploy GitHub Pages」から行えます。
 
-初回のみ、GitHubリポジトリの **Settings → Pages → Build and deployment → Source** を **GitHub Actions** に設定してください。
+workflowは初回デプロイ時にGitHub Pagesの有効化も試みます。組織やリポジトリのポリシーで自動有効化が許可されない場合は、GitHubリポジトリの **Settings → Pages → Build and deployment → Source** を **GitHub Actions** に設定してください。
 
 ## 出題カテゴリ
 
