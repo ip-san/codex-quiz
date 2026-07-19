@@ -714,6 +714,56 @@
     "2": "GitHub Pagesはこのquizの配信先で、Remote Codexの実行環境ではありません。",
     "3": "公式manualは仕様の情報源ですが、実際のfile・MCP・Skillを提供するhostではありません。"
   },
+  "surfaces-06": {
+    "1": "Codex CLIにはScheduledの作成・履歴管理画面がありません。ChatGPT webまたはdesktop appのScheduledを使います。",
+    "2": "IDE extensionはpromptやworkspace変更の事前testには使えますが、Scheduled管理画面は提供しません。",
+    "3": "Git reflogはrepository履歴の参照用で、定期taskの作成・pause・run確認を管理しません。"
+  },
+  "surfaces-07": {
+    "1": "GitHubを開くだけではlocal fileへ到達できません。予定時刻にmachine、app、対象projectが利用可能である必要があります。",
+    "2": "browserの開閉はlocal scheduled taskの実行条件ではありません。desktop appを動作させておきます。",
+    "3": "Cloud環境削除はlocal taskを動かす条件ではありません。選択したlocal projectがdisk上にあることを確認します。"
+  },
+  "surfaces-08": {
+    "1": "scheduled taskはunattendedで動くため、毎回のinteractive approvalを前提にできません。既定権限を事前に絞ります。",
+    "2": "taskは選択したsandbox範囲でfileへ触れられます。一切変更不能とは限らないため対象と完了条件を限定します。",
+    "3": "read-only固定ではありません。default sandboxが使われるため、必要最小限のfilesystem・network accessを設定します。"
+  },
+  "surfaces-09": {
+    "1": "package.jsonはapplication依存の設定で、Codex agentとIDE sidebarの二つの設定layerをまとめません。",
+    "2": "AGENTS.mdは作業instruction用です。model・sandboxはconfig.toml、editor固有動作はchatgpt.*へ分けます。",
+    "3": "CSSとGit設定ではCodexのmodel、permission、IDE follow-up動作を制御できません。"
+  },
+  "surfaces-10": {
+    "1": "native Windowsへ毎回copyするとLinux toolchainとのpath差や重複が生じます。repositoryがWSLならagentもWSLで動かします。",
+    "2": "WSL利用にsandbox解除は不要です。実行場所とpermission boundaryは別々に設定します。",
+    "3": "Cloud secretはlocal repository pathの設定場所ではありません。Windows専用IDE settingでWSL実行を選びます。"
+  },
+  "surfaces-11": {
+    "1": "strict-configは未知config fieldをerrorにするflagで、open fileやselectionをpromptへ追加しません。",
+    "2": "completionはshell補完scriptの生成用です。editor contextを次のpromptへ含めるには`/ide`を使います。",
+    "3": "logoutは認証を終了する操作で、IDE contextの追加とは無関係です。必要なfileを開いて`/ide`を実行します。"
+  },
+  "surfaces-12": {
+    "1": "followUpQueueModeは実行中messageのqueue/steer用で、reviewを別chatへ分ける設定ではありません。",
+    "2": "openOnStartupはsidebar起動時表示を制御します。review deliveryはdetachedへ設定します。",
+    "3": "localeOverrideは表示言語用で、review chatの分離方法を変えません。"
+  },
+  "surfaces-13": {
+    "1": "権限を広げる再実行は原因情報を増やさずriskだけを上げます。まず`/feedback`で再現条件とlogを整理します。",
+    "2": "全session削除は診断contextを失います。問題のchat IDと必要最小限のlogを残して報告します。",
+    "3": "Git履歴初期化はIDE/app不具合の報告に不要で、repository dataを失う危険があります。"
+  },
+  "surfaces-14": {
+    "1": "GitはCodex authやsession historyを暗号化・同期しません。Windows側とWSL側のCodex homeを確認します。",
+    "2": "IDEが常にCloudを使うためではありません。native WindowsとWSLは既定のhome directoryが異なります。",
+    "3": "PWA cacheではなく、Windows `%USERPROFILE%/.codex`とWSL `~/.codex`の分離が原因です。"
+  },
+  "surfaces-15": {
+    "1": "`codex delete`は保存sessionを削除するcommandで、環境横断のdiagnostic reportを作りません。",
+    "2": "`codex apply`はCloud chatのdiff適用用です。認証やruntimeの診断にはdoctorを使います。",
+    "3": "completionはshell補完生成用です。権限を広げる前に`codex doctor`のreportで故障layerを特定します。"
+  },
   "basic-15": {
     "1": "API key利用はPlatformの従量課金とorganization policyに従い、ChatGPT利用枠とは別です。",
     "2": "GitHub deploy keyはrepository access用で、CodexのOpenAI認証には使用しません。",

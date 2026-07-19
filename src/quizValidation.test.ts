@@ -69,7 +69,8 @@ describe("Codex quiz quality gate", () => {
   it("requires useful feedback for every wrong choice when feedback is provided", () => {
     const issues = validateQuizzes([{ ...validQuiz, wrongFeedback: { 1: "短い" } }]);
     expect(issues.filter((issue) => issue.field === "wrongFeedback")).toHaveLength(3);
-    expect(Object.keys(wrongFeedback)).toHaveLength(144);
+    expect(Object.keys(wrongFeedback)).toHaveLength(154);
+    expect(Object.keys(wrongFeedback).filter((id) => !quizzes.some((quiz) => quiz.id === id))).toEqual([]);
   });
 
   it("rejects feedback attached to the correct answer", () => {
