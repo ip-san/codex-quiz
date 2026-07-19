@@ -20,6 +20,7 @@ Claude版の成熟したcontent quality gateを参考にし、Claude固有のカ
 - server-renderによるlandmark・操作名検査、クイズ進捗・回答結果のARIA対応
 - Chromium E2Eによるhome・回答focus・URL共有・deep link検査
 - axe-coreによるhome・quiz・reader・progressのWCAG 2.1 A/AA検査
+- Lighthouseによるperformance・accessibility・best practices・SEOの継続検査
 
 ## 開発中
 
@@ -35,7 +36,7 @@ Claude版の成熟したcontent quality gateを参考にし、Claude固有のカ
 - 実践シナリオ
 - 日次目標、XP、習熟レベル、学習推奨
 - ダークモード、テーマ設定、通知、PWA更新UI
-- Visual Regression、Lighthouse
+- Visual Regression
 - 問題の公式ドキュメント差分監査と自動品質ループ
 - Electron版とCodex利用履歴レコメンド
 

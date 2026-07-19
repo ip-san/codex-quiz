@@ -57,6 +57,8 @@ npm run check
 
 `npm run test:e2e` ではChromium上の主要導線に加え、home・quiz・reader・progressをaxe-coreで検査し、WCAG 2.1 A/AA違反を検出します。
 
+`npm run lighthouse:check` では本番ビルドをローカル配信し、Performance 80、Accessibility 95、Best Practices 90、SEO 80を最低スコアとして検査します。
+
 ## GitHub Pagesへのデプロイ
 
 `main`ブランチへpushすると、`.github/workflows/deploy-pages.yml` が品質ゲートと本番ビルドを実行し、成功した `dist/` をGitHub Pagesへ公開します。手動実行はGitHub Actionsの「Deploy GitHub Pages」から行えます。
