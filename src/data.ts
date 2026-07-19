@@ -269,6 +269,56 @@ const initialWrongFeedback: Record<string, Record<number, string>> = {
     2: "reviewを無効化すると同じ問題を検出する機会を失います。instructionと機械検査で発生自体を減らします。",
     3: "問題fileを無視すると不具合が残ります。判断規則はAGENTS.md、判定可能な条件はlintやtestで強制します。",
   },
+  "session-06": {
+    1: "`/init`はAGENTS.mdのstarterを作る操作で、現在のchat IDやcontext残量を表示しません。",
+    2: "local/cloud modeの切替ではrate limitやtoken usageを確認できません。session情報は`/status`で調べます。",
+    3: "`/feedback`は不具合報告用です。長いrunの残量と設定確認には`/status`を使います。",
+  },
+  "session-07": {
+    1: "元chatの削除は主作業を保持する目的と逆です。ephemeralな`/side`で疑問だけを分離します。",
+    2: "`/compact`はmain chatを要約する操作で、疑問を別conversationとして扱うものではありません。",
+    3: "一時的な質問のためにrepositoryを作り直す必要はありません。同じcontextからside chatを開始します。",
+  },
+  "session-08": {
+    1: "full accessは権限設定で、follow-upを現在runへsteerするか次runへqueueする動作を決めません。",
+    2: "openOnStartupはIDE起動時の表示設定です。実行中messageの配送はfollowUpQueueModeで制御します。",
+    3: "MCP serverの有無はfollow-up queueと無関係です。queueを選ぶと次のrunまでmessageを待たせます。",
+  },
+  "session-09": {
+    1: "永久削除すると後からconversationを参照・復元できません。単なる整理ならarchiveを選びます。",
+    2: "working tree削除はchat一覧の整理ではなくcodeを失う危険があります。sessionだけをarchiveします。",
+    3: "logoutは認証状態を変える操作で、保存済みchatを整理しません。archive/unarchiveを使い分けます。",
+  },
+  "session-10": {
+    1: "theme変更は表示だけを変え、複数turnで追跡するobjectiveを設定しません。`/goal`へ完了条件を与えます。",
+    2: "`/mcp`は接続情報の確認用で、長期taskの進捗を継続管理する操作ではありません。",
+    3: "feedback送信はproduct report用です。作業目標の設定・編集・pause・resumeには`/goal`を使います。",
+  },
+  "workflow-06": {
+    1: "`/review local`はGitHub PR commentの正式triggerではありません。PR上で正確に`@codex review`とmentionします。",
+    2: "`codex apply PR`はGitHub reviewを開始するcommentではありません。repositoryのCodex review設定も確認します。",
+    3: "`@github inspect`ではCodex reviewerを起動しません。PR commentから`@codex review`を送ります。",
+  },
+  "workflow-07": {
+    1: "全表記揺れへcommentすると重要なriskが埋もれます。既定reviewは重大なP0・P1へ絞られます。",
+    2: "変更されていない全行の検査ではPR差分の重大問題へ集中できません。変更contextとreview guidanceを使います。",
+    3: "package人気度はcode defectのseverityではありません。正しさ・security・回帰riskの高い問題を優先します。",
+  },
+  "workflow-08": {
+    1: "PR titleへ毎回長い規則を書くと再利用できず、package階層ごとのscopeも表現しにくくなります。",
+    2: "正解位置はquiz dataの都合で、repository code reviewの判断規則にはなりません。",
+    3: "Git履歴削除はreview guidanceを適用せず、監査可能性も失います。対象に近いAGENTS.mdへ規則を置きます。",
+  },
+  "workflow-09": {
+    1: "PRを閉じて履歴を消す必要はありません。同じPR contextで修正対象を具体的に`@codex`へ依頼します。",
+    2: "doctorはlocal CLI診断用で、PRで報告されたP1 defectを修正するworkflowではありません。",
+    3: "automatic reviewを無効にしても既知のP1は直りません。指摘を特定して修正と検証を依頼します。",
+  },
+  "workflow-12": {
+    1: "無人taskへ最初からfull accessを与える前に、通常chatでpromptと必要権限を検証してscopeを絞ります。",
+    2: "失敗条件がないとautomationが誤った状態を成功扱いします。対象・停止条件・報告内容を手動testします。",
+    3: "履歴を隠すと失敗原因を改善できません。まずregular chatで結果を確認し、安定したpromptだけをscheduleします。",
+  },
   "basic-06": {
     1: "CSS検査ではGit差分のbugや回帰をreviewできません。対象を指定して`codex review`を使います。",
     2: "disk監査は未commit変更やbase branchとの差分reviewとは別の作業です。",
