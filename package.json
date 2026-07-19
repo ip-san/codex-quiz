@@ -15,8 +15,9 @@
     "format:check": "biome format src/",
     "quiz:check": "vitest run src/quizValidation.test.ts",
     "docs:check": "node scripts/validate-doc-links.mjs",
+    "bundle:check": "node scripts/check-bundle-size.mjs",
     "type-coverage": "type-coverage --at-least 95 --strict",
-    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run docs:check && npm run type-coverage && npm run build"
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run docs:check && npm run type-coverage && npm run build && npm run bundle:check"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^6.0.2",

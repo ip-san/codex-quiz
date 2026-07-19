@@ -1,5 +1,9 @@
 # 品質運用
 
+## Bundle size
+
+`npm run check`は本番build後にentry JavaScriptを検査し、raw 440 KiBまたはgzip 135 KiBを超えた場合に失敗する。問題追加で上限へ近づいた場合は、データ分割・lazy load・vendor chunk分離を検討し、理由なく上限だけを引き上げない。
+
 品質は、コードが動くこと、問題が学習に役立つこと、公式仕様に追従することの3層で管理します。
 
 ## push前ゲート
@@ -13,6 +17,7 @@ flowchart LR
   Q --> D[docs link check]
   D --> V[型カバレッジ]
   V --> B[本番build]
+  B --> S[bundle size]
 ```
 
 `npm run check` が全検査を順番に実行します。途中で失敗した変更はPagesへ配信しません。
@@ -26,6 +31,7 @@ flowchart LR
 | docs link check | 文書の移動・改名による案内切れ |
 | type-coverage | 暗黙の型抜け |
 | Vite build | 配信成果物を作れない変更 |
+| bundle size | 初期JavaScriptの意図しない肥大化 |
 
 GitHub ActionsではPull Requestと `main` push時に同じゲートを実行します。Pages workflowもデプロイ前に再実行します。
 
