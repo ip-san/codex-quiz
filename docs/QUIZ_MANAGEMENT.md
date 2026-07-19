@@ -31,7 +31,7 @@ type Quiz = {
 };
 ```
 
-古い問題との段階的互換性のため高度なメタデータは型上optionalですが、新規問題では `difficulty`、`value`、`topic`、`referenceUrl`、`verifiedAt`を必須として扱います。不正解別 `wrongFeedback` は次のスキーマ移行で追加予定です。
+古い問題との段階的互換性のため高度なメタデータは型上optionalですが、新規問題では `difficulty`、`value`、`topic`、`referenceUrl`、`verifiedAt`を必須として扱います。不正解別 `wrongFeedback` は実務価値の高い問題から段階的に移行しています。
 
 ## フィールド規則
 

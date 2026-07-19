@@ -56,3 +56,7 @@
 ## 2026-07-19 第7回拡充
 
 190問から210問へ拡充した。追加した20問は、Memories 5問、長期Goal 4問、integrated terminal・App Git操作 5問、Linear・Slack連携 6問。継続的な作業context、検証可能な長期目標、App内でのreview、issue・threadからCloud taskへつなぐ流れを補完した。
+
+## 2026-07-19 不正解別feedback移行 第2回
+
+実務価値の高い10問へ不正解別feedbackを追加し、移行済みは15問になった。対象はpromptの4要素、context、境界、完了条件、AGENTS.mdの再読込、read-only・workspace-write、危険操作、未commit差分のreview。誤答ごとに「なぜ違うか」と「次に何を確認するか」を示し、名称暗記ではなく安全な実務判断の修正を優先した。
