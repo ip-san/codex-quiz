@@ -59,6 +59,11 @@ try {
     if (score < minimum) failures.push(`${category} ${Math.round(score * 100)} < ${Math.round(minimum * 100)}`);
   }
 
+  const incompleteAudits = result.lhr.categories.seo.auditRefs
+    .filter(({ weight, id }) => weight > 0 && result.lhr.audits[id]?.score !== 1)
+    .map(({ id }) => `${id}: ${result.lhr.audits[id]?.title ?? "Unknown audit"}`);
+  if (incompleteAudits.length > 0) console.log(`SEO opportunities:\n- ${incompleteAudits.join("\n- ")}`);
+
   if (failures.length > 0) throw new Error(`Lighthouse thresholds failed: ${failures.join(", ")}`);
 } finally {
   try {

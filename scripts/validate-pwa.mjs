@@ -41,6 +41,26 @@ const html = await readFile(resolve("index.html"), "utf8");
 if (!/rel="apple-touch-icon"[^>]+apple-touch-icon\.png/.test(html)) {
   errors.push("index.html is missing the PNG apple-touch-icon");
 }
+for (const metadata of ["canonical", "og:title", "og:description", "og:image", "twitter:card"]) {
+  if (!html.includes(metadata)) errors.push(`index.html is missing ${metadata} metadata`);
+}
+
+try {
+  const ogImage = await readFile(resolve(publicDir, "og-image.png"));
+  if (ogImage.readUInt32BE(16) !== 1200 || ogImage.readUInt32BE(20) !== 630) {
+    errors.push("og-image.png must be 1200x630");
+  }
+} catch {
+  errors.push("og-image.png does not exist");
+}
+
+for (const publicFile of ["robots.txt", "sitemap.xml"]) {
+  try {
+    await readFile(resolve(publicDir, publicFile));
+  } catch {
+    errors.push(`${publicFile} does not exist`);
+  }
+}
 
 if (errors.length > 0) {
   console.error(errors.join("\n"));

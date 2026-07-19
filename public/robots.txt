@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ip-san.github.io/codex-quiz/sitemap.xml
