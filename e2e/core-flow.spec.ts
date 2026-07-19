@@ -24,6 +24,15 @@ test("answering announces feedback and moves focus", async ({ page }) => {
   await expect(feedback).toBeFocused();
 });
 
+test("a wrong answer loads its choice-specific feedback", async ({ page }) => {
+  await page.goto("/?q=basic-01");
+  await page.getByRole("button", { name: /Responses API/ }).click();
+
+  const feedback = page.getByRole("status");
+  await expect(feedback).toContainText("terminal");
+  await expect(feedback).toContainText("Codex CLI");
+});
+
 test("question share URL opens a one-question session", async ({ page }) => {
   await page.goto("/?q=basic-01");
   const progress = page.getByRole("progressbar", { name: "クイズの進捗" });

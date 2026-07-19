@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { categories, categoryLearning, quizzes, type Category, type Quiz } from "./data";
+import { categories, categoryLearning, hydrateWrongFeedback, quizzes, type Category, type Quiz } from "./data";
 import { orderChoices } from "./domain/choiceOrder";
 import { DiagramRenderer } from "./components/DiagramRenderer";
 import { quizDiagrams } from "./diagrams";
@@ -94,7 +94,19 @@ function App() {
   const [quizMode, setQuizMode] = useState<QuizMode>("normal");
   const [studyPhase, setStudyPhase] = useState(false);
   const [showChapterIntro, setShowChapterIntro] = useState(false);
+  const [, setFeedbackRevision] = useState(0);
   const feedbackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (screen !== "quiz") return;
+    let active = true;
+    void hydrateWrongFeedback().then(() => {
+      if (active) setFeedbackRevision((revision) => revision + 1);
+    });
+    return () => {
+      active = false;
+    };
+  }, [screen]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);

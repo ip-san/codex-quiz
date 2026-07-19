@@ -1,0 +1,722 @@
+{
+  "prompt-01": {
+    "1": "予算や時刻は必要な場合の補足情報ですが、依頼の目的や成功条件の代わりにはなりません。",
+    "2": "モデル設定だけでは、何を作り、どの制約を守り、何をもって完了とするかが伝わりません。",
+    "3": "Git情報は関連contextになり得ますが、目標・制約・完了条件がなければ作業範囲を判断できません。"
+  },
+  "prompt-02": {
+    "1": "手順を過度に固定すると、目的に合う安全で簡潔な方法をCodexが選ぶ余地まで失われます。",
+    "2": "背景だけでは成功状態を判断できません。まず欲しい結果を示し、必要なcontextを続けます。",
+    "3": "曖昧な代名詞は対象の取り違えを招きます。変更対象や期待結果を具体的に示します。"
+  },
+  "prompt-03": {
+    "0": "リポジトリ全体の貼り付けは重要情報を埋もれさせます。関連fileやerrorへ範囲を絞ります。",
+    "2": "error本文や再現手順は原因を特定する重要なcontextです。省略せず必要な範囲を渡します。",
+    "3": "file名やpathは変更対象を特定する手掛かりです。機密性に問題がなければ明示します。"
+  },
+  "prompt-04": {
+    "1": "外部への送信や削除は影響が大きいため、モデル任せにせず実行してよい境界を明示します。",
+    "2": "対象名を省くと誤操作の原因になります。下書き対象と、送信しないことを具体的に示します。",
+    "3": "完了条件を省くと下書き作成と実送信の区別が曖昧になります。停止地点を明記します。"
+  },
+  "prompt-05": {
+    "1": "行数の増加は品質を示しません。期待動作とtest結果のような検証可能な条件を使います。",
+    "2": "質問を禁止すると重要な前提の誤解を修正できません。曖昧さが重大なら確認できる余地を残します。",
+    "3": "無関係なfileの変更はreview範囲と回帰riskを増やします。必要な変更と検証結果で完了を定義します。"
+  },
+  "agents-10": {
+    "1": "OSの再インストールは指示contextの再読込と無関係です。新しいCodexセッションを開始します。",
+    "2": "Git履歴の削除は作業を失う危険があり、現在のセッションが保持する指示contextも更新しません。",
+    "3": "画像化してもAGENTS.mdとして読み込まれません。更新後の指示は新しいセッションで確認します。"
+  },
+  "safe-08": {
+    "1": "read-onlyはfilesystem書込みを制限する設定で、network accessを必ず開放するものではありません。",
+    "2": "管理者権限の付与とは逆に、調査時の変更を防ぐためfilesystem accessを狭める設定です。",
+    "3": "Git履歴を変更・削除する権限は与えません。repositoryを読み取って調査する用途に向きます。"
+  },
+  "safe-09": {
+    "1": "workspace外やOS全体への書込みは許可範囲ではありません。必要なら対象を確認して承認を求めます。",
+    "2": "外部service操作はconnectorやnetwork、承認policyにも従い、workspace-writeだけでは許可されません。",
+    "3": "本番DB変更はfilesystemのworkspace-writeとは別の外部操作です。接続権限と承認を個別に扱います。"
+  },
+  "safe-10": {
+    "1": "対象未確認の再帰削除は必要なdataまで失う危険があります。正確なpathと影響範囲を先に確認します。",
+    "2": "安全制約の常時解除は被害範囲を広げます。信頼できる対象へ必要最小限の許可だけを与えます。",
+    "3": "危険な操作は実行結果と対象を報告し、意図した変更かユーザーが確認できる状態にします。"
+  },
+  "workflow-01": {
+    "1": "remote画像は現在の作業treeのcode差分ではありません。commit前はuncommitted changesを選びます。",
+    "2": "保存sessionの削除は差分reviewにならず、継続中のcontextを失う可能性があります。",
+    "3": "model catalogの確認ではstaged・unstaged・untrackedの変更内容を検査できません。"
+  },
+  "agents-01": {
+    "1": "package-lock.jsonは依存versionの固定用で、Codexへbuild規則や完了条件を伝える場所ではありません。",
+    "2": ".gitignoreはGitの追跡対象を指定します。開発手順やreview規則はAGENTS.mdへ記述します。",
+    "3": "画像では指示を自動適用・差分reviewしにくいため、version管理できるAGENTS.mdを使います。"
+  },
+  "agents-02": {
+    "0": "rootの指示は広く適用されますが、作業場所に近いAGENTS.mdの具体的な指示が優先されます。",
+    "2": "更新日時では優先順位を決めません。repository rootからcurrent directoryまでの階層で決まります。",
+    "3": "file sizeは優先順位と無関係です。対象fileに近い階層のinstructionを確認します。"
+  },
+  "agents-03": {
+    "1": "`/reset`はAGENTS.mdの雛形を作るquick-startではありません。current repositoryでは`/init`を使います。",
+    "2": "deploy操作ではrepository固有のbuild・test・review規則を記したAGENTS.mdは生成されません。",
+    "3": "exportは既存dataを外へ出す操作を示す名称で、repository instructionの初期化には使いません。"
+  },
+  "agents-04": {
+    "1": "保存のたびに指示chainが再構築される前提ではありません。変更後は新しいsessionで確認します。",
+    "2": "Git commitは指示を共有できますが、実行中sessionのinstructionを自動再読込する契機ではありません。",
+    "3": "OS再起動まで待つ必要はありません。Codexの新しいrunまたはTUI sessionを開始します。"
+  },
+  "agents-05": {
+    "1": "override fileは例外規則を適用するための正式な探索候補で、存在すれば無視されません。",
+    "2": "同じ階層でrandom選択はされません。AGENTS.override.mdが通常のAGENTS.mdより先に選ばれます。",
+    "3": "Markdown instructionとして読み込まれるため、画像へ変換する必要はありません。"
+  },
+  "safe-01": {
+    "0": "model選択は推論能力や速度に関する設定です。承認modeは操作前に許可を求める条件を決めます。",
+    "2": "文字encodingはfile処理の規則で、危険なcommandを実行してよいかの判断を制御しません。",
+    "3": "Gitの作者名はcommit metadataです。shellや外部操作の承認条件とは別に設定します。"
+  },
+  "safe-02": {
+    "1": "回答言語はpromptやlocaleの問題です。sandboxはfilesystemやnetworkへの技術的な境界を設けます。",
+    "2": "editorの配色は表示設定であり、agentがread・writeできるpathやnetwork範囲を制限しません。",
+    "3": "クイズ難易度は学習用metadataです。Codexの操作範囲はsandbox設定で制御します。"
+  },
+  "safe-03": {
+    "0": "初回からfull accessにすると誤操作の影響範囲が広がります。既定制限で必要性を確認します。",
+    "2": "承認をすべて無効にすると重要な外部操作を止められません。riskに応じたpolicyを保ちます。",
+    "3": "system全体へのwriteは通常不要です。信頼できるworkspaceへ必要最小限の権限を与えます。"
+  },
+  "safe-04": {
+    "1": "全pathへの無制限writeを意図するflagではありません。必要な追加directoryだけを明示します。",
+    "2": "root全体のmountは範囲が広すぎます。`--add-dir`で対象directoryを限定します。",
+    "3": "Gitを無効化しても追加directoryへの書込み許可にはなりません。sandboxのwritable rootを指定します。"
+  },
+  "workflow-02": {
+    "1": "reviewは指摘を返す段階で、確認なしにpushしません。修正と公開は別の依頼・承認で進めます。",
+    "2": "review対象を自動revertすると変更を失います。まず優先度付きの指摘を確認します。",
+    "3": "repositoryの再作成は差分reviewに不要で、作業contextを失う危険があります。"
+  },
+  "basic-01": {
+    "1": "Responses APIはapplicationへモデル機能を組み込むAPIです。terminalでrepositoryを扱うclientはCodex CLIです。",
+    "2": "Canvasはterminal上でlocal repositoryを調査・編集・検証するCodex clientではありません。",
+    "3": "DALL·Eは画像生成の選択肢で、terminalからcoding workflowを実行する製品ではありません。"
+  },
+  "basic-02": {
+    "0": "要件が曖昧なまま全fileを書き換えるとscope外変更が増えます。Planでcontextと成功条件を整理します。",
+    "2": "既存repositoryの調査に新規repositoryは不要です。対象project内で要件と影響範囲を確認します。",
+    "3": "testを削除すると期待動作を検証しにくくなります。Plan後の実装では関連testを維持・追加します。"
+  },
+  "basic-03": {
+    "0": "未検証の出力を本番へ送ると回帰を見逃します。test・型・lintと差分reviewを先に行います。",
+    "2": "会話を削除しても実装品質は上がらず、判断contextを失います。検証結果を同じtaskで確認します。",
+    "3": "model名の変更は検証の代替になりません。期待動作とcode差分を機械検査とreviewで確かめます。"
+  },
+  "basic-04": {
+    "1": "`codex paint`は非対話runのcommandではありません。scriptやCIでは`codex exec`を使います。",
+    "2": "filesystemのmountではpromptを非対話実行してstdoutやJSONLへ結果を渡せません。",
+    "3": "HTML serverの起動ではCodex taskをautomationへ組み込めません。`codex exec`でrunします。"
+  },
+  "basic-05": {
+    "1": "`codex rewind`では保存済みinteractive sessionを選択してcontextを継続できません。",
+    "2": "fileの再生では会話状態を復元できません。session IDまたは直近sessionを`codex resume`で選びます。",
+    "3": "Git状態の復元とCodex会話の再開は別です。対話contextを続ける時は`codex resume`を使います。"
+  },
+  "config-01": {
+    "1": ".git/configはGit remote等の設定で、repository固有のCodex layerとして読み込まれません。",
+    "2": "applicationのTypeScript設定はCodex clientのsandbox・model・MCP既定値を制御しません。",
+    "3": "README.lockはCodex project configの正式な探索場所ではありません。`.codex/config.toml`を使います。"
+  },
+  "config-02": {
+    "1": "各repositoryのindex.htmlへ個人設定を書くとCodex clientは読み込まず、project codeも汚します。",
+    "2": "temporary directoryでは複数repositoryへ安定して共有できません。user-level configへ置きます。",
+    "3": "GitHub Issueは設定layerではなく公開範囲も異なります。個人既定値はlocal user configで管理します。"
+  },
+  "config-03": {
+    "1": "hardware温度やWi-Fi名はCodexのconfig.tomlで調整するagent動作設定ではありません。",
+    "2": "株価・天気・時刻は外部dataで、model・権限・MCPなどのdurable Codex設定ではありません。",
+    "3": "HTMLやCSSだけでなく、model、reasoning、sandbox、approval、MCP等を設定できます。"
+  },
+  "config-04": {
+    "1": "Git commit作成はrepository操作です。`-c`は一回のCodex runへconfig値を重ねるために使います。",
+    "2": "設定fileを削除せず、保存済み既定値を残したままその呼び出しだけ上書きできます。",
+    "3": "CSS変数ではなくTOMLとして解釈されるCodex設定keyとvalueを渡します。"
+  },
+  "config-05": {
+    "1": "`--persona`はprofile fileを重ねる正式なflagではありません。`--profile`を使います。",
+    "2": "CSS presetではmodelやapproval等をまとめたCodex設定layerを選択できません。",
+    "3": "Git branchとCodex config profileは別の概念です。名前付き設定は`--profile`で選択します。"
+  },
+  "session-01": {
+    "1": "repository削除はcontext整理ではなく作業dataの損失につながります。`/compact`で会話を要約してtokenを空けます。",
+    "2": "同じraw logの再投入はcontext消費を増やします。重要な決定と結果をcompactした要約へ残します。",
+    "3": "権限拡大はcontext windowを空けません。sandboxとapprovalは必要最小限のまま会話だけをcompactします。"
+  },
+  "session-02": {
+    "1": "背景を省いた新規chatでは以前の判断や制約を失います。同じ作業なら保存済みsessionをresumeします。",
+    "2": "branch削除は会話contextの再開に不要で、未統合の変更を失う危険があります。sessionとGit状態を別々に確認します。",
+    "3": "model名だけでは昨日のconversation historyを復元できません。保存済みchatを選んでresumeします。"
+  },
+  "session-03": {
+    "1": "元の会話を削除すると比較基準を失います。forkはoriginal transcriptを残したまま新しいchatへ分岐します。",
+    "2": "全fileのrevertはcodeを戻す操作で、同じ履歴から別案を試す会話分岐ではありません。",
+    "3": "Gitは同じbranchを複数worktreeへ同時checkoutできません。会話案の分岐にはsession forkを使います。"
+  },
+  "session-04": {
+    "1": "長いlogを繰り返し貼ると主threadの要件と判断が埋もれます。独立解析を分離して結果だけ戻します。",
+    "2": "完了条件を削ると解析結果の採否を判断できません。主threadには成功条件を保持します。",
+    "3": "巨大promptへ全情報を集約すると探索noiseが増えます。独立したlog解析はsubagentへ委譲します。"
+  },
+  "session-05": {
+    "1": "全commandのraw出力は必要箇所だけ要約し、主threadには意思決定へ影響する結果を残します。",
+    "2": "無関係なstack traceは注意とcontextを消費します。原因に関係する抜粋と結論だけを共有します。",
+    "3": "重複file一覧より、対象fileを選んだ理由や検証結果の方が後続判断に役立ちます。"
+  },
+  "workflow-03": {
+    "1": "同じLocal checkoutで別taskを並行すると未commit差分が混ざります。独立checkoutのWorktreeへ分けます。",
+    "2": "read-onlyの説明ページはbranchとworking treeを隔離した実装環境ではありません。",
+    "3": "archive済みchatは並列作業用checkoutを提供しません。新しいWorktree chatを開始します。"
+  },
+  "workflow-04": {
+    "1": "Git管理を解除すると履歴と差分reviewを失います。setup scriptと必要最小限のignored file指定で再現します。",
+    "2": "毎回の手作業copyは漏れやsecret混入を招きます。依存準備をsetupへ、ignored fileを`.worktreeinclude`へ定義します。",
+    "3": "Gitは同じbranchを二つのworktreeへ同時checkoutできません。Codex-managed worktreeとHandoffの制約に従います。"
+  },
+  "workflow-05": {
+    "1": "同一branchの強制checkoutはGit制約と作業差分を壊す危険があります。Handoffに必要なGit操作を任せます。",
+    "2": "先にworktreeを削除すると移動対象の変更を扱いにくくなります。chatとcodeをHandoffしてから整理します。",
+    "3": "履歴の再入力ではcodeとchatを一体で移せず、判断contextも欠落します。既存chatをHandoffします。"
+  },
+  "surfaces-01": {
+    "1": "Cloudだけでは手元の未commit working treeをそのまま直接扱えません。現在のcheckoutを使うLocalが適します。",
+    "2": "Plugin Marketplaceは拡張機能を探す場所で、local差分を編集・検証する実行環境ではありません。",
+    "3": "archive環境は現在のworking treeで短い修正を続ける場所ではありません。Local projectを開きます。"
+  },
+  "surfaces-02": {
+    "1": "Localだけでは処理をPCから切り離せません。remote containerで実行するCloud environmentを選びます。",
+    "2": "AGENTS.override.mdはinstructionを与えるfileで、hosted execution environmentそのものではありません。",
+    "3": "shell補完はCLI入力を助ける機能で、repositoryを遠隔containerへcheckoutしてtaskを実行しません。"
+  },
+  "surfaces-03": {
+    "1": "secretをagent phaseへ平文で残すとrepository codeやtoolから漏れるriskがあります。Cloud secretはsetupだけで使います。",
+    "2": "public repositoryでもsecretの扱いは緩和されません。setup終了時に除かれ、agent phaseへ渡りません。",
+    "3": "model設定はCloud secretの公開範囲を変更しません。必要な認証処理はsetup phase内で完了させます。"
+  },
+  "surfaces-04": {
+    "1": "agent phaseの無制限networkは既定ではありません。外部接続が必要な時だけ環境単位で最小範囲を許可します。",
+    "2": "setup phaseは依存導入のためnetworkを利用できます。offlineが既定なのはその後のagent phaseです。",
+    "3": "GitHubだけが常に許可される前提ではありません。agent networkは環境設定のallowlistまたはunrestrictedで決めます。"
+  },
+  "surfaces-05": {
+    "1": "Cloud環境設定ページはremote runtimeを構成する場所で、編集中のselectionとdiffに密着した対話surfaceではありません。",
+    "2": "MCP server modeはtool integration用で、editor内の選択codeを見ながら修正するUIではありません。",
+    "3": "Plugin marketplace CLIは拡張を探す用途です。editor contextを直接渡す作業にはIDE extensionを使います。"
+  },
+  "safe-11": {
+    "1": "danger-full-accessはfilesystem境界まで外すため、package取得だけという目的より権限が広すぎます。",
+    "2": "approvalとsandboxの同時無効化は不要な書込みと外部操作まで許します。workspace-writeのnetworkだけを有効にします。",
+    "3": "writable rootをOS全体へ広げてもnetwork許可の代わりにはならず、誤書込みの影響範囲だけが増えます。"
+  },
+  "safe-13": {
+    "1": "read-only hintが併記されてもdestructive annotationは打ち消されません。副作用を確認する承認が必要です。",
+    "2": "annotationはapp/MCP toolの副作用を判断する重要metadataです。Codexはdestructive callを承認対象にします。",
+    "3": "MCP toolをshellへ変換して安全性を決めるわけではありません。宣言されたtool metadataとpolicyで承認します。"
+  },
+  "safe-14": {
+    "1": "session全体の許可は同じ操作が繰り返し必要と確認できた場合に限り、まずone-time scopeを選びます。",
+    "2": "承認を避けるためのfull accessは影響範囲を過度に広げます。必要な操作を狭いscopeで許可します。",
+    "3": "無関係なprojectまで許可すると誤操作時の被害範囲が増えます。現在のtaskに必要な境界だけを選びます。"
+  },
+  "agents-11": {
+    "1": "network_accessは外部接続の設定で、AGENTS.md instruction chainの読込byte上限を変えません。",
+    "2": "review_modelはreview時のmodel選択であり、末尾のinstructionが切れる問題を解決しません。",
+    "3": "起動時のsidebar表示はproject document discoveryと無関係です。上限を上げるかnested fileへ分割します。"
+  },
+  "agents-12": {
+    "1": "`.worktreeinclude`はignored local fileをmanaged worktreeへcopyする指定で、instruction探索名は増やしません。",
+    "2": "MCP server名は外部tool接続の識別子です。代替instruction file名はconfigのfallback listへ登録します。",
+    "3": "Git remote名を変えてもAGENTS discovery候補は変わりません。`project_doc_fallback_filenames`を設定します。"
+  },
+  "agents-13": {
+    "1": "package-lock.jsonは依存versionの固定用で、個人styleやteamのagent instructionを置く場所ではありません。",
+    "2": "個人だけの回答styleをrepositoryへ強制するとteam全員へ不要な指示が適用されます。global scopeへ分離します。",
+    "3": "browser履歴はversion管理も自動instruction読込もできません。共有build手順はrepositoryのAGENTS.mdへ置きます。"
+  },
+  "agents-14": {
+    "1": "口頭だけでは新しいsessionや別のcontributorへ規則が残りません。近いAGENTS.mdへ再利用可能な形で記録します。",
+    "2": "reviewを無効化すると同じ問題を検出する機会を失います。instructionと機械検査で発生自体を減らします。",
+    "3": "問題fileを無視すると不具合が残ります。判断規則はAGENTS.md、判定可能な条件はlintやtestで強制します。"
+  },
+  "session-06": {
+    "1": "`/init`はAGENTS.mdのstarterを作る操作で、現在のchat IDやcontext残量を表示しません。",
+    "2": "local/cloud modeの切替ではrate limitやtoken usageを確認できません。session情報は`/status`で調べます。",
+    "3": "`/feedback`は不具合報告用です。長いrunの残量と設定確認には`/status`を使います。"
+  },
+  "session-07": {
+    "1": "元chatの削除は主作業を保持する目的と逆です。ephemeralな`/side`で疑問だけを分離します。",
+    "2": "`/compact`はmain chatを要約する操作で、疑問を別conversationとして扱うものではありません。",
+    "3": "一時的な質問のためにrepositoryを作り直す必要はありません。同じcontextからside chatを開始します。"
+  },
+  "session-08": {
+    "1": "full accessは権限設定で、follow-upを現在runへsteerするか次runへqueueする動作を決めません。",
+    "2": "openOnStartupはIDE起動時の表示設定です。実行中messageの配送はfollowUpQueueModeで制御します。",
+    "3": "MCP serverの有無はfollow-up queueと無関係です。queueを選ぶと次のrunまでmessageを待たせます。"
+  },
+  "session-09": {
+    "1": "永久削除すると後からconversationを参照・復元できません。単なる整理ならarchiveを選びます。",
+    "2": "working tree削除はchat一覧の整理ではなくcodeを失う危険があります。sessionだけをarchiveします。",
+    "3": "logoutは認証状態を変える操作で、保存済みchatを整理しません。archive/unarchiveを使い分けます。"
+  },
+  "session-10": {
+    "1": "theme変更は表示だけを変え、複数turnで追跡するobjectiveを設定しません。`/goal`へ完了条件を与えます。",
+    "2": "`/mcp`は接続情報の確認用で、長期taskの進捗を継続管理する操作ではありません。",
+    "3": "feedback送信はproduct report用です。作業目標の設定・編集・pause・resumeには`/goal`を使います。"
+  },
+  "workflow-06": {
+    "1": "`/review local`はGitHub PR commentの正式triggerではありません。PR上で正確に`@codex review`とmentionします。",
+    "2": "`codex apply PR`はGitHub reviewを開始するcommentではありません。repositoryのCodex review設定も確認します。",
+    "3": "`@github inspect`ではCodex reviewerを起動しません。PR commentから`@codex review`を送ります。"
+  },
+  "workflow-07": {
+    "1": "全表記揺れへcommentすると重要なriskが埋もれます。既定reviewは重大なP0・P1へ絞られます。",
+    "2": "変更されていない全行の検査ではPR差分の重大問題へ集中できません。変更contextとreview guidanceを使います。",
+    "3": "package人気度はcode defectのseverityではありません。正しさ・security・回帰riskの高い問題を優先します。"
+  },
+  "workflow-08": {
+    "1": "PR titleへ毎回長い規則を書くと再利用できず、package階層ごとのscopeも表現しにくくなります。",
+    "2": "正解位置はquiz dataの都合で、repository code reviewの判断規則にはなりません。",
+    "3": "Git履歴削除はreview guidanceを適用せず、監査可能性も失います。対象に近いAGENTS.mdへ規則を置きます。"
+  },
+  "workflow-09": {
+    "1": "PRを閉じて履歴を消す必要はありません。同じPR contextで修正対象を具体的に`@codex`へ依頼します。",
+    "2": "doctorはlocal CLI診断用で、PRで報告されたP1 defectを修正するworkflowではありません。",
+    "3": "automatic reviewを無効にしても既知のP1は直りません。指摘を特定して修正と検証を依頼します。"
+  },
+  "workflow-12": {
+    "1": "無人taskへ最初からfull accessを与える前に、通常chatでpromptと必要権限を検証してscopeを絞ります。",
+    "2": "失敗条件がないとautomationが誤った状態を成功扱いします。対象・停止条件・報告内容を手動testします。",
+    "3": "履歴を隠すと失敗原因を改善できません。まずregular chatで結果を確認し、安定したpromptだけをscheduleします。"
+  },
+  "basic-06": {
+    "1": "CSS検査ではGit差分のbugや回帰をreviewできません。対象を指定して`codex review`を使います。",
+    "2": "disk監査は未commit変更やbase branchとの差分reviewとは別の作業です。",
+    "3": "単なるdiff表示では専用reviewerの優先度付き指摘を得られません。"
+  },
+  "basic-07": {
+    "1": "file分割では会話contextを引き継ぐ別chatを作れません。`codex fork`を使います。",
+    "2": "model複製はsession分岐ではありません。元 transcriptを残して新chatへforkします。",
+    "3": "Git branchと会話の分岐は別です。session contextの分岐には`codex fork`を使います。"
+  },
+  "basic-08": {
+    "1": "`codex merge-cloud`は公式CLI commandではありません。cloud chatの最新diffは`codex apply`で適用します。",
+    "2": "code downloadだけではlocal working treeへpatchを適用するworkflowになりません。",
+    "3": "全同期では対象chatの最新diffを限定して適用できません。chat IDを確認してapplyします。"
+  },
+  "basic-09": {
+    "1": "UIのautocomplete設定ではshell用completion scriptを生成できません。",
+    "2": "shell初期化専用の非公式commandではなく、利用shellを指定して`codex completion`を使います。",
+    "3": "hint表示ではTab補完をshellへ登録できません。生成scriptをshell設定へ読み込みます。"
+  },
+  "basic-10": {
+    "1": "自動修復より先に診断reportで設定・認証・runtime・Git等の状態を確認します。",
+    "2": "CSSのhealth checkではCodex local環境を横断診断できません。",
+    "3": "Gitだけの診断では認証やterminal、app-server等の原因を見落とします。"
+  },
+  "config-06": {
+    "1": "CSS engine指定では今回のrunだけmodelを上書きできません。`--model`を使います。",
+    "2": "agent名はmodel選択とは別です。保存設定を変えず一時変更する時は`--model`です。",
+    "3": "非公式なruntime optionではなく、文書化された`--model`または`-m`を使います。"
+  },
+  "config-07": {
+    "1": "CSS failure optionでは未知のconfig keyを検出できません。`--strict-config`を使います。",
+    "2": "Git検証とconfig schema検証は別です。未知fieldをerrorにするflagを選びます。",
+    "3": "read-onlyはsandbox設定です。config typoのfail-fastには`--strict-config`を使います。"
+  },
+  "config-08": {
+    "1": "非公式なcwd optionではなく、agent開始前のworking directoryは`--cd`または`-C`で指定します。",
+    "2": "Git root固定ではsubdirectory固有の設定や指示を対象にできません。",
+    "3": "folder UIを開く操作ではCLI agentの開始directoryを明示できません。"
+  },
+  "config-09": {
+    "1": "install操作では今回のrunだけfeature flagを有効化するoverrideになりません。",
+    "2": "CSS用の非公式optionではなく、repeat可能な`--enable`を使います。",
+    "3": "fileへ永続書込みせず一時的に試すため、CLI overrideの`--enable`を使います。"
+  },
+  "config-10": {
+    "1": "model pathだけではLM StudioかOllamaかを選択できません。`--oss`とproviderを指定します。",
+    "2": "任意vendor名ではなく、文書化されたlocal providerから選びます。",
+    "3": "CSS設定ではlocal open-source model backendを選べません。"
+  },
+  "safe-24": {
+    "1": "severity表示だけを変えてもarchitectureやtrust boundaryの誤解は残ります。threat modelを修正します。",
+    "2": "同じscanの反復より、entry pointやassetを正しく記述したcontext改善が先です。",
+    "3": "sandboxを緩めてもsecurity scanの優先順位contextは改善せず、riskだけが増えます。"
+  },
+  "safe-25": {
+    "1": "modelが疑った段階は候補であり、clean sandboxでの再現evidenceを持つvalidated findingとは異なります。",
+    "2": "lint警告だけではexploitabilityを再現したことになりません。validation evidenceを確認します。",
+    "3": "patch提案の存在だけでは問題の再現成功を示しません。findingのvalidation結果を確認します。"
+  },
+  "safe-26": {
+    "1": "自動でmainへpushされる前提ではありません。patchとevidenceを人がreviewしてPRとして扱います。",
+    "2": "validated findingでも無関係とは限りません。再現条件と対象codeをreviewします。",
+    "3": "履歴削除はfindingを解決せず、調査evidenceを失います。最小patchと回帰testを検証します。"
+  },
+  "safe-27": {
+    "1": "scannerへ任せきりにせず、repository固有のasset・entry point・trust boundaryを補います。",
+    "2": "全file除外は検出範囲を失います。誤ったassumptionをthreat modelで訂正します。",
+    "3": "severity固定ではbusiness contextに応じた優先順位を改善できません。"
+  },
+  "safe-28": {
+    "1": "validated表示は有力なevidenceですが、business impactやpatch妥当性の人間reviewを不要にはしません。",
+    "2": "全 findingの即時自動修正は回帰riskがあります。優先順位とpatchをreviewします。",
+    "3": "security test削除は防御を弱めます。再現testと既存testで修正を確認します。"
+  },
+  "safe-29": {
+    "1": "広い全面scanを先に回すとnoiseが増えます。変更範囲とsecurity観点を限定して調査します。",
+    "2": "認証なし公開はapp-serverの操作面を外部へ露出します。local bindまたは認証・secure proxyを使います。",
+    "3": "secretをrepositoryへ保存すると漏えいします。secret managerと最小scopeを使います。"
+  },
+  "extend-41": {
+    "1": "shell text解析よりSDKのthread・turn APIを使う方が状態とeventを構造的に扱えます。",
+    "2": "completion scriptはshell補完用で、製品内のmulti-turn integrationを提供しません。",
+    "3": "Git hookはrepository lifecycle用で、Codex threadのprogrammatic制御には向きません。"
+  },
+  "extend-42": {
+    "1": "public networkへ認証なしでlistenすると第三者に操作面を露出します。local transportか認証を使います。",
+    "2": "GitHub tokenはapp-server client認証用のbearer tokenとは限りません。用途別credentialを分けます。",
+    "3": "CORSだけではWebSocket clientの認証と通信保護を代替できません。"
+  },
+  "extend-43": {
+    "1": "schema無視はupgrade時の破損を招きます。生成schemaとversion差分をreviewします。",
+    "2": "experimental fieldの恒久依存は互換性riskがあります。capability opt-inとfallbackを設計します。",
+    "3": "受信eventを文字列連結すると型と順序を失います。JSON-RPC eventとして処理します。"
+  },
+  "extend-44": {
+    "1": "自由文の後処理はformat driftに弱いため、SDKまたはexecのschema付きstructured outputを使います。",
+    "2": "screenshotではCIが安定してfieldを検証できません。machine-readable schemaを指定します。",
+    "3": "model任せの任意formatでは後続jobが壊れます。必要fieldと型をschemaで固定します。"
+  },
+  "safe-30": {
+    "1": "workspace-writeでも`.git`は保護対象です。通常の編集権限とGit metadataへの書き込み権限を同一視しません。",
+    "2": "承認を無効にしてもsandbox境界は別に残ります。sandbox modeとapproval policyを分けて診断します。",
+    "3": "repositoryを作り直す前に、保護パスと必要なGit操作の承認経路を確認します。"
+  },
+  "safe-31": {
+    "1": "`.git`がpointer fileでも、解決先のGit directoryは再帰的に保護されます。",
+    "2": "pointer fileを通常directoryへ変換する必要はありません。保護境界を理解して承認可能なGit操作を使います。",
+    "3": "sandboxを全面解除せず、必要なGit操作だけを明示して承認します。"
+  },
+  "safe-32": {
+    "1": "`never`は全promptを消すため、必要なcategoryだけ対話的に残す要件に合いません。",
+    "2": "danger-full-accessは技術境界も広げます。category単位の承認制御にはgranular policyを使います。",
+    "3": "Hookは検査を追加できますが、承認prompt categoryのallow/rejectを直接表す設定ではありません。"
+  },
+  "safe-33": {
+    "1": "auto-reviewはsandbox内の通常操作すべてを二重reviewする仕組みではありません。",
+    "2": "auto-reviewはinteractive approvalが発生する構成で機能します。`never`ではreviewへ回すprompt自体がありません。",
+    "3": "reviewerは承認判断を補助しますが、sandboxの技術境界を置き換えません。"
+  },
+  "safe-34": {
+    "1": "critical-risk actionはreviewer policyでdenyされます。自動承認を前提にしません。",
+    "2": "parse failureをallow扱いにすると安全側へ倒れません。公式動作はfail closedです。",
+    "3": "timeout時もactionは実行されません。statusを確認して必要なら人が再評価します。"
+  },
+  "safe-35": {
+    "1": "managed requirementsがある場合、local reviewer policyより組織側が優先されます。",
+    "2": "project configは管理者制約を回避できません。矛盾は設定を削除せずadminと調整します。",
+    "3": "CLI overrideもadmin-enforced requirementsを越えるための仕組みではありません。"
+  },
+  "config-16": {
+    "1": "親shell全体を継承すると不要なsecretまで子processへ渡る可能性があります。",
+    "2": "repositoryのenv fileへsecretを移すと漏えい面が増えます。必要な変数だけを明示します。",
+    "3": "sandboxを解除しても環境変数漏えい対策にはなりません。shell environment policyを設定します。"
+  },
+  "config-17": {
+    "1": "既定filterはKEY・SECRET・TOKEN系の漏えいを減らします。無効化は慎重に扱います。",
+    "2": "excludeを外すとcredential候補が子processへ渡りやすくなります。",
+    "3": "全環境変数のlog出力は秘密情報を露出します。必要な名前だけを確認します。"
+  },
+  "config-18": {
+    "1": "user configは管理者の上限制約を上書きできません。",
+    "2": "projectをtrustedにしてもorganization policyは解除されません。",
+    "3": "再installではなく、requirements.tomlの制約とadmin方針を確認します。"
+  },
+  "config-19": {
+    "1": "networkを有効化しても`.git`や`.codex`の保護は別のfilesystem policyとして残ります。",
+    "2": "approval policyはprompt条件であり、network capabilityそのものを付与しません。",
+    "3": "MCP追加はshell commandのnetwork access設定とは別です。"
+  },
+  "safe-36": {
+    "1": "proxy featureだけではcommand network accessは有効になりません。sandbox側のnetwork設定も確認します。",
+    "2": "danger-full-accessへ広げず、workspace-writeのnetwork設定とproxy policyを組み合わせます。",
+    "3": "MCP transport設定はspawnしたshell command全体のnetwork accessを付与しません。"
+  },
+  "safe-37": {
+    "1": "`*.example.com`はsubdomainだけで、apexの`example.com`には一致しません。",
+    "2": "denyはallowより優先されるため、例外denyを保持できます。",
+    "3": "global allowは広すぎます。必要なhostを限定し、deny precedenceを利用します。"
+  },
+  "safe-38": {
+    "1": "wildcard domain allowはlocal/private destinationの明示例外になりません。",
+    "2": "global allowでもlocal/private addressは既定で遮断されます。",
+    "3": "sandbox全面解除ではなく、必要なlocalhost targetだけを正確に許可します。"
+  },
+  "basic-19": {
+    "1": "TLS verificationを無効化すると中間者攻撃へ弱くなります。組織CA bundleを指定します。",
+    "2": "API keyを変えてもcertificate trust errorは解決しません。",
+    "3": "sandboxを解除せず、HTTPS clientが信頼するCAを正しく設定します。"
+  },
+  "basic-20": {
+    "1": "job全体へexportするとrepository-controlledな後続processにもsecretが残り得ます。",
+    "2": "API keyを引数にするとprocess listやlogへ露出しやすくなります。",
+    "3": "repository fileへの保存は漏えいriskを増やします。単一runへinlineで渡します。"
+  },
+  "config-20": {
+    "1": "OTel exportは既定でdisabledです。利用時はexporterを明示します。",
+    "2": "user promptは既定でredactされます。収集には明示的なprivacy判断が必要です。",
+    "3": "RUST_LOGはlocal diagnosticsで、OTel collectorへの構造化export設定とは別です。"
+  },
+  "config-21": {
+    "1": "通常のTUI logよりlogin専用logを先に確認すると認証flowを切り分けやすくなります。",
+    "2": "auth.jsonを共有するとcredentialを漏らす危険があります。",
+    "3": "sandbox解除はOAuth callbackやdevice-code failureの原因診断ではありません。"
+  },
+  "config-22": {
+    "1": "`codex exec`はmessageをinlineへ出すため、TUI用log fileだけを待っても情報を得られません。",
+    "2": "interactive UIを起動するとCIの非対話性を失います。stderr/stdoutを収集します。",
+    "3": "traceを無条件共有するとsecretが含まれ得ます。必要なfilterとredactionを使います。"
+  },
+  "extend-45": {
+    "1": "base URLだけではCodexが付けるserver固有callback IDを欠き、redirect URI mismatchになり得ます。",
+    "2": "任意のwildcard redirectは認証境界を広げます。実際のderived URIを登録します。",
+    "3": "OAuth callback不一致はsandbox解除で解決する問題ではありません。"
+  },
+  "extend-46": {
+    "1": "`auto`はserver既定へ任せるため、writeだけ確認する要件を明示できません。",
+    "2": "`approve`はpromptを減らす方向で、最小権限の確認要件に合いません。",
+    "3": "server全体を無効化せず、read/write metadataに応じたapproval modeを設定します。"
+  },
+  "basic-16": {
+    "1": "`codex doctor`は広い環境診断には使えますが、現在の認証方式だけならlogin statusが直接的です。",
+    "2": "`/mcp`は外部MCP接続の状態で、Codex本体のChatGPT/API key認証とは別です。",
+    "3": "Git statusはrepository状態だけを示し、Codex credentialを確認しません。"
+  },
+  "basic-17": {
+    "1": "他人のauth.jsonをcopyするとcredential共有・account混同・漏えいにつながります。device authを使います。",
+    "2": "API keyをGitへcommitしてはいけません。必要ならsecret storeからrun単位で渡します。",
+    "3": "sandboxはcommand権限の境界で、browser callbackを受けられない認証問題の解決策ではありません。"
+  },
+  "basic-18": {
+    "1": "sandbox_modeはfilesystem・network権限の設定で、credential保存先ではありません。",
+    "2": "web_search設定は検索挙動を制御し、token storageとは関係しません。",
+    "3": "approval_policyは確認promptの条件です。credentialはkeyringまたは適切に保護したfileへ保存します。"
+  },
+  "extend-21": {
+    "1": "STDIOはlocal process起動向けです。remote OAuth flowにはStreamable HTTPを選びます。",
+    "2": "localStorageはbrowser storageであり、Codex MCP transportではありません。",
+    "3": "Git hookはrepository event用で、remote MCPの通信・OAuth認証を提供しません。"
+  },
+  "extend-22": {
+    "1": "Codex本体のlogin commandとMCP server別OAuth loginは別のcommand体系です。",
+    "2": "`/approve oauth`という操作はありません。登録名をcodex mcp loginへ渡します。",
+    "3": "Git credentialはGit remote用です。MCP OAuth credentialはCodexのMCP設定で管理します。"
+  },
+  "extend-23": {
+    "1": "CSSはUI表現で、MCP tool横断の動作制約をagentへ伝えません。",
+    "2": "commit messageだけではserverを利用する全session・toolへ制約が届きません。",
+    "3": "tool名へ情報を詰めるより、server instructionsの先頭で共通制約を明示します。"
+  },
+  "extend-24": {
+    "1": "Skillも選択後はcontextを使います。最初から全本文を入れないことがprogressive disclosureの要点です。",
+    "2": "random削除ではなく、name・description・pathによる発見と必要時の全文読込で制御します。",
+    "3": "scriptは常時実行されません。SKILL.mdのworkflowに従い必要な時だけ利用します。"
+  },
+  "extend-25": {
+    "1": "MCPやHookはSkillの必須要素ではありません。外部接続やlifecycle制御が必要な時だけ組み合わせます。",
+    "2": "marketplaceやlogoはPlugin配布では有用ですが、最小Skillの成立条件ではありません。",
+    "3": "GitHub ActionやAPI keyなしでもSkillは成立します。SKILL.mdの明確な手順が中心です。"
+  },
+  "extend-26": {
+    "1": "logoは選択補助の本質ではありません。短縮されても用途が分かるdescriptionを改善します。",
+    "2": "全taskでの強制実行はscope外動作を増やします。triggerと境界を正確にします。",
+    "3": "nameを不安定にすると明示指定と発見性が悪化します。安定した名前と具体的descriptionを使います。"
+  },
+  "workflow-13": {
+    "1": "detached HEADでも同じrepository objectと履歴を参照します。作業を残す時にbranch化します。",
+    "2": "Gitは同一branchの複数worktree checkoutを制限します。detached開始はその衝突を避けます。",
+    "3": "未追跡fileは自動commitされません。diffをreviewし、必要な変更を明示的に保存します。"
+  },
+  "workflow-14": {
+    "1": "既定は1件ではなく最近15件です。重要作業は自動整理任せにせずbranchやcommitへ残します。",
+    "2": "100件ではありません。disk利用と必要な並列作業数に応じて上限を調整します。",
+    "3": "既定は無制限ではありません。長期保持にはpermanent worktreeを使い分けます。"
+  },
+  "workflow-15": {
+    "1": "削除前snapshotがあるためrestore可能な場合があります。重要変更はGitでも明示的に保全します。",
+    "2": "archiveやcleanupはmainへの自動mergeではありません。復元後にdiff・test・mergeを行います。",
+    "3": "snapshotは公開repositoryへのpushではありません。外部公開は別の明示操作です。"
+  },
+  "workflow-16": {
+    "1": "side chatは軽量な会話分岐で、長期保持する独立worktreeの代替ではありません。",
+    "2": "managed worktreeをarchiveするとcleanup対象になり得ます。長期利用にはpermanentを選びます。",
+    "3": "Cloud secretはcredential管理用で、local worktreeの保持形式ではありません。"
+  },
+  "surfaces-23": {
+    "1": "一方のOSを禁止せず、defaultとplatform overrideでteamの実環境を再現します。",
+    "2": "AGENTS.mdへ秘密鍵を書いてはいけません。command規約とsecret管理を分離します。",
+    "3": "Cloud secretはlocal setup commandのplatform差を表す仕組みではありません。"
+  },
+  "surfaces-24": {
+    "1": "built-in browserは独立profileなので、普段のbrowserのtabやCookieを自動共有しません。",
+    "2": "repository単位にChrome全体を複製する仕組みではありません。必要なaccountへ明示loginします。",
+    "3": "MCP認証とbrowser sessionは別です。既存Chrome sessionが必要ならChrome extensionを検討します。"
+  },
+  "surfaces-25": {
+    "1": "page全体の曖昧な依頼より、対象elementと期待結果を結び付けると修正scopeが明確になります。",
+    "2": "Git履歴削除はUI修正に不要で、復旧可能性を損ないます。",
+    "3": "full CDP permissionは必要以上に広い場合があります。annotationと必要なbrowser操作から始めます。"
+  },
+  "surfaces-26": {
+    "1": "site accessは操作可能範囲を許すだけで、page textをsystem instructionへ昇格しません。",
+    "2": "購入・送信・削除などのsensitive actionには引き続き境界確認が必要です。",
+    "3": "website permissionからlocal filesystem accessが自動付与されることはありません。"
+  },
+  "surfaces-27": {
+    "1": "Appshotはfrontmost window中心です。desktop全体や全fileを自動収集するものではありません。",
+    "2": "browser history全体をcaptureしません。ただし画面上の機密情報には注意します。",
+    "3": "Git branch全体ではなく視覚的なwindow contextをchatへ添付する機能です。"
+  },
+  "surfaces-29": {
+    "1": "repositoryとGitはhost側にあります。phoneへGitがなくてもhostがonlineなら操作できます。",
+    "2": "個別MCP OAuthだけでなくhost自体のsleep・network・app状態を先に確認します。",
+    "3": "GitHub Pagesの公開設定はRemote hostへの接続可否を決めません。"
+  },
+  "session-16": {
+    "1": "Memoryは必ず全chatへ注入される保証がなく、chat単位で利用を止めることもできます。",
+    "2": "MemoryはteamがGitでreviewする規則fileではありません。共有規則はAGENTS.md等へ置きます。",
+    "3": "Memoryはsystem・managed policyより強くありません。必須制約の唯一のsourceにしません。"
+  },
+  "session-17": {
+    "1": "webとlocal clientは常に一つのfileを共有しません。利用surfaceと接続hostを確認します。",
+    "2": "MemoryはGitHub repositoryへ自動保存されません。team規則は別途version管理します。",
+    "3": "MCPは外部tool接続であり、CodexのMemory storeそのものではありません。"
+  },
+  "session-18": {
+    "1": "`/compact`はconversation contextを圧縮し、Memory利用・生成のcontrolではありません。",
+    "2": "`/theme`は表示設定で、Memory privacyや生成可否を変更しません。",
+    "3": "`/completion`はshell補完用で、chat単位のMemory設定とは関係しません。"
+  },
+  "session-19": {
+    "1": "chat削除はMemory生成の診断にならず、必要な作業contextも失います。idle更新を待ちます。",
+    "2": "sandboxはtool権限の境界で、background Memory生成のtimingを早めません。",
+    "3": "同じpromptの連打は重複noiseを増やします。idle・quota・chat設定を確認します。"
+  },
+  "session-20": {
+    "1": "Memory fileにmalwareが必ず入るわけではありません。問題は過去作業contextの意図しない共有です。",
+    "2": "Memory review自体がGit branchを削除することはありません。共有対象とGit操作を分けます。",
+    "3": "API pricingではなく、summary・evidence・repository情報などの機密性を確認します。"
+  },
+  "workflow-21": {
+    "1": "modelやthemeは実行設定で、Goalの達成状態を検証する条件にはなりません。",
+    "2": "branch・tagだけでは期待するoutcomeと守る境界が分かりません。",
+    "3": "名前・日付・色では完了判定できません。測定可能なverificationを含めます。"
+  },
+  "workflow-22": {
+    "1": "権限を広げても曖昧なoutcomeは明確になりません。先に成功条件とboundaryを定義します。",
+    "2": "verificationを削除するとGoalが終わったか自己判断できなくなります。",
+    "3": "曖昧さを別agentへ渡すだけでは解消しません。Planで必要情報を集めます。"
+  },
+  "workflow-23": {
+    "1": "chat削除ではGoal contextを失います。pauseして同じchatをresumeします。",
+    "2": "同一scopeへ複数chatから同時writeすると競合し得ます。所有範囲を分離できない限り避けます。",
+    "3": "full accessは接続断への対策ではなく、不要に権限を広げます。"
+  },
+  "workflow-24": {
+    "1": "Goal modeは継続性を追加しますが、sandboxをfull accessへ変更しません。",
+    "2": "承認要求は既存approval policyに従います。Goal開始だけでauto allowされません。",
+    "3": "repository外のwrite可否も既存filesystem policyのままです。必要時にscopeを明示します。"
+  },
+  "surfaces-35": {
+    "1": "terminalはchatのproject/worktreeへscopeされ、常にfilesystem rootから始まるわけではありません。",
+    "2": "GitHub Pages server上でlocal commandを実行するterminalではありません。",
+    "3": "random repositoryではなく、chat作成時に選んだrun locationへ結び付きます。"
+  },
+  "extend-35": {
+    "1": "issue本文へAPI keyを貼ると閲覧者・通知・logへsecretが露出します。integrationの認証を使います。",
+    "2": "localStorage exportはLinearからCloud taskを開始する手段ではありません。",
+    "3": "Git branch削除は委譲に不要で、既存作業を失う危険があります。assignまたはmentionを使います。"
+  },
+  "extend-36": {
+    "1": "titleを空にするとcontextがさらに減り、environment選択が不安定になります。",
+    "2": "全environment削除では作業先を失います。対象repoを依頼で明示します。",
+    "3": "MCP tokenをcommentへ貼ってはいけません。repo指定とcredential管理を分離します。"
+  },
+  "extend-37": {
+    "1": "GitHub Pagesは静的hostingで、Linear issueをlocal Codexへtool提供しません。",
+    "2": "Appshotはwindow contextの添付機能で、Linear APIのread/write接続ではありません。",
+    "3": "Service WorkerはWeb appのoffline処理で、Linear OAuth tool integrationを提供しません。"
+  },
+  "extend-38": {
+    "1": "channel topicは広く共有されるためsecret保存場所にしてはいけません。",
+    "2": "browser Cookie共有はaccount侵害につながります。Slack Appの認証を使います。",
+    "3": "integrationがthread contextを渡せるため、repository zipの反復添付は不要です。"
+  },
+  "extend-39": {
+    "1": "history削除では決定事項も失います。最新messageで必要contextを要約します。",
+    "2": "曖昧な代名詞は対象・scopeを不明確にします。repoと完了条件を具体化します。",
+    "3": "権限拡大はcontext不足を解決しません。必要な情報とboundaryを先に整理します。"
+  },
+  "extend-40": {
+    "1": "Slack history全削除は過剰で、admin posting controlの代替ではありません。",
+    "2": "repository公開は情報露出を増やし、Slackへの結果本文制御とは無関係です。",
+    "3": "MCP transport変更ではSlack Appの投稿policyを制御できません。workspace admin設定を使います。"
+  },
+  "surfaces-36": {
+    "1": "terminal outputは画像化しなくても参照できます。重要なvisual差だけscreenshotを補います。",
+    "2": "current terminal outputはCodexから参照可能です。期待結果や再現条件をpromptで補足します。",
+    "3": "Git commit前のfailed outputも参照できます。commitはterminal visibilityの条件ではありません。"
+  },
+  "surfaces-37": {
+    "1": "Memoryは過去contextのrecallで、team共通commandをtop barから実行するActionの代替ではありません。",
+    "2": "毎回Skillをinstallする必要はありません。反復commandはprojectのActionとして共有します。",
+    "3": "API keyはcredentialであり、commandを保存する場所ではありません。"
+  },
+  "surfaces-38": {
+    "1": "全fileを画像化すると対象lineとcode contextが曖昧になります。inline commentを使います。",
+    "2": "branch削除はfeedback伝達に不要で、作業を失う危険があります。",
+    "3": "terminal theme変更では対象codeと修正意図を結び付けられません。"
+  },
+  "surfaces-39": {
+    "1": "AppのGit controlは日常操作向けで、history完全書換えだけの機能ではありません。",
+    "2": "repository hostingの削除はbuilt-in Git controlの通常用途ではなく破壊的です。",
+    "3": "SSH private/public keyの管理・公開は通常Git操作と分離し、credentialを不用意に露出しません。"
+  },
+  "safe-12": {
+    "1": "検索toolの許可はshellのsandbox設定を変更しません。二つは独立して制御されます。",
+    "2": "shellの接続先がGit repositoryだけに限定される規則ではなく、network policyで範囲を決めます。",
+    "3": "web searchを有効にしてもfilesystem sandboxや承認policyは維持されます。"
+  },
+  "workflow-11": {
+    "1": "standaloneはrunごとに新しいchatを作るため、同じ会話の判断を継続する用途には向きません。",
+    "2": "定期確認のたびにrepositoryを作り直す必要はなく、同じprojectとchat contextを再利用できます。",
+    "3": "Scheduled taskの管理面はwebまたはdesktop appですが、IDE拡張の削除は解決になりません。"
+  },
+  "extend-20": {
+    "1": "local Codex hostのconfig.tomlはChatGPT webへ同期されず、web側ではPluginを管理します。",
+    "2": "browserのfile accessはweb serviceにローカルCodex設定を読み込ませる仕組みではありません。",
+    "3": "設定fileをGitへpushしてもChatGPT webが安全に読み込んで接続することはありません。"
+  },
+  "surfaces-28": {
+    "1": "phoneは操作interfaceであり、repositoryやtoolchain一式を端末内へ複製しません。",
+    "2": "GitHub Pagesはこのquizの配信先で、Remote Codexの実行環境ではありません。",
+    "3": "公式manualは仕様の情報源ですが、実際のfile・MCP・Skillを提供するhostではありません。"
+  },
+  "basic-15": {
+    "1": "API key利用はPlatformの従量課金とorganization policyに従い、ChatGPT利用枠とは別です。",
+    "2": "GitHub deploy keyはrepository access用で、CodexのOpenAI認証には使用しません。",
+    "3": "MCP bearer tokenは個別MCP serverの認証用で、Codex本体へのsign-inではありません。"
+  }
+}

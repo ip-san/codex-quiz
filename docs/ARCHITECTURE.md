@@ -7,6 +7,7 @@ Codex Quizは、React + TypeScript + Viteで構成したブラウザ完結型PWA
 ```mermaid
 flowchart LR
   D["src/data.ts\n問題・カテゴリ"] --> A["App.tsx\n画面とセッション"]
+  F["src/wrongFeedback.json\n不正解別feedback"] -. クイズ開始時に遅延読込み .-> A
   G["src/diagrams.ts\n図解データ"] --> A
   A --> C["Quiz UI\n出題・解説・検索"]
   A <--> L["localStorage\n進捗・SRS・再開"]
@@ -21,6 +22,7 @@ flowchart LR
 | ファイル | 責務 |
 |---|---|
 | `src/data.ts` | 型、カテゴリ、学習目標、問題データ |
+| `src/wrongFeedback.json` | 問題ID・誤答choiceごとのfeedback。初期画面では読み込まずクイズ開始時に取得 |
 | `src/App.tsx` | 画面遷移、クイズ進行、検索、入出力、URL共有 |
 | `src/domain/choiceOrder.ts` | 選択肢と正解位置のランダム化 |
 | `src/domain/progressData.ts` | 保存データの解釈と検証 |
@@ -42,6 +44,7 @@ sequenceDiagram
   participant S as localStorage
 
   U->>A: モードを選択
+  A->>Q: 不正解別feedbackを遅延読込み
   A->>Q: 条件に合う問題を抽出
   A->>A: 選択肢をランダム化
   U->>A: 回答
@@ -50,6 +53,7 @@ sequenceDiagram
 ```
 
 正解位置の暗記を防ぐため、問題データの `answer` は表示前に選択肢と一緒に並べ替えます。保存時は問題IDを安定キーとして使います。
+問題一覧や進捗画面の初期表示を重くしないため、不正解別feedbackは別chunkへ分離し、クイズ画面を開いた時点で問題IDへ結合します。品質検査では分離データを全問題へ結合してから構造と内容を検証します。
 
 ## 保存とプライバシー
 
