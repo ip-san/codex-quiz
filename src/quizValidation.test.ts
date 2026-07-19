@@ -15,7 +15,7 @@ const validQuiz: Quiz = {
 describe("Codex quiz quality gate", () => {
   it("ships only structurally valid quiz data", () => {
     expect(validateQuizzes(quizzes)).toEqual([]);
-    expect(quizzes).toHaveLength(220);
+    expect(quizzes).toHaveLength(230);
     const categoryCounts = quizzes.reduce<Record<string, number>>((counts, quiz) => {
       counts[quiz.category] = (counts[quiz.category] ?? 0) + 1;
       return counts;
@@ -25,8 +25,8 @@ describe("Codex quiz quality gate", () => {
       basics: 18,
       prompting: 17,
       agents: 14,
-      security: 29,
-      config: 15,
+      security: 35,
+      config: 19,
       extend: 44,
       session: 20,
       workflow: 24,
@@ -48,7 +48,7 @@ describe("Codex quiz quality gate", () => {
   it("requires useful feedback for every wrong choice when feedback is provided", () => {
     const issues = validateQuizzes([{ ...validQuiz, wrongFeedback: { 1: "短い" } }]);
     expect(issues.filter((issue) => issue.field === "wrongFeedback")).toHaveLength(3);
-    expect(quizzes.filter((quiz) => quiz.wrongFeedback)).toHaveLength(55);
+    expect(quizzes.filter((quiz) => quiz.wrongFeedback)).toHaveLength(65);
   });
 
   it("detects duplicate IDs and questions", () => {
