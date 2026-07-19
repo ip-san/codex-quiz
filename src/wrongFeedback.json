@@ -814,6 +814,56 @@
     "2": "TUIの色設定は人向けの表示だけを変えます。機械処理には一行一eventのJSONL streamが適します。",
     "3": "AGENTS.mdはagentへの指示で、実行eventの出力形式ではありません。`codex exec --json`を選びます。"
   },
+  "basic-13": {
+    "1": "文字数を固定してもfield名や型は保証されません。後続jobが読む契約をJSON Schemaで定義します。",
+    "2": "terminal themeは表示だけを変え、最終responseの構造には影響しません。`--output-schema`を使います。",
+    "3": "自由文への正規表現は表現揺れで壊れやすいため、生成時点でSchema準拠を要求します。"
+  },
+  "basic-14": {
+    "1": "`codex completion`はshell completion生成用で、会話・承認・stream eventを扱うclient APIではありません。",
+    "2": "Git aliasはGit commandの短縮であり、Codex threadやapproval protocolを提供しません。",
+    "3": "PWA manifestはWebアプリのinstall情報です。rich Codex client統合にはapp-serverを使います。"
+  },
+  "safe-15": {
+    "1": "job全体へsecretを置くと、repository管理下のscriptやdependency hookにも露出します。単一processへ絞ります。",
+    "2": "API keyをrepositoryへcommitすると履歴に残り、失効・rotationが必要になる重大な漏えいです。",
+    "3": "logへ出したsecretはartifactや閲覧者へ広がります。keyは出力せず、実行時だけinlineで渡します。"
+  },
+  "safe-16": {
+    "1": "danger-full-accessは権限を広げる設定で、memory上のsecretをrunner privilegeから守れません。",
+    "2": "Git credentialの永続化はsudo除去の代わりになりません。Action既定のdrop-sudoを維持します。",
+    "3": "未信頼forkからsecret付きworkflowを自由に起動すると入力・codeを攻撃者が制御できます。trusted triggerへ絞ります。"
+  },
+  "safe-17": {
+    "1": "fork PRへsecretを渡すと、攻撃者が変更したcodeやpromptから盗まれる可能性があります。",
+    "2": "HTML commentやhidden textも未信頼入力です。命令として採用せずsanitize対象にします。",
+    "3": "unsafe modeは被害範囲を広げます。入力の信頼境界とrunner権限を両方制限します。"
+  },
+  "safe-18": {
+    "1": "read-onlyはrootやsudoを自動で除きません。drop-sudoまたはunprivileged userを併用します。",
+    "2": "read-onlyはCodex processのnetwork利用を絞りますが、job全体の全stepまで無効化する保証ではありません。",
+    "3": "sandbox設定はworkflow起動者をtrustedへ変えません。triggerと外部入力の検証は別途必要です。"
+  },
+  "workflow-17": {
+    "1": "Pages deployは公開工程で、review対象のsource codeをrunnerへ用意しません。先にcheckoutします。",
+    "2": "branch削除はreviewに不要で破壊的です。対象refと必要なhistoryをcheckoutして差分を渡します。",
+    "3": "API keyをfileへ書くと漏えい範囲が広がります。code checkoutとsecret注入は別stepとして安全に扱います。"
+  },
+  "workflow-18": {
+    "1": "入力源は二つとも必須ではありません。短い指示はprompt、version管理する長い指示はprompt-fileを選びます。",
+    "2": "Actionがrandomに選ぶ契約ではなく、二重指定は設定errorです。一方だけを残します。",
+    "3": "instruction sourceを三つ指定する仕様はありません。`prompt`か`prompt-file`の一方です。"
+  },
+  "workflow-19": {
+    "1": "Service Worker cacheはPWA asset用で、GitHub Action stepの最終回答outputではありません。",
+    "2": "Git reflogはrepositoryの参照更新履歴です。Codexの回答は`final-message`から取得します。",
+    "3": "terminal themeは表示設定で、後続jobへ渡せるoutput valueを生成しません。"
+  },
+  "workflow-20": {
+    "1": "変更file数を増やすことは品質条件ではありません。根本原因へ必要な最小差分に絞ります。",
+    "2": "原因と検証なしのpushは誤修正を見逃します。失敗再現と同じcheckの成功を完了条件にします。",
+    "3": "test削除によるgreen化は不具合を隠します。既存の期待を保った修正後にtestを通します。"
+  },
   "basic-15": {
     "1": "API key利用はPlatformの従量課金とorganization policyに従い、ChatGPT利用枠とは別です。",
     "2": "GitHub deploy keyはrepository access用で、CodexのOpenAI認証には使用しません。",
