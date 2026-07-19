@@ -45,6 +45,12 @@ describe("Codex quiz quality gate", () => {
     );
   });
 
+  it("requires useful feedback for every wrong choice when feedback is provided", () => {
+    const issues = validateQuizzes([{ ...validQuiz, wrongFeedback: { 1: "短い" } }]);
+    expect(issues.filter((issue) => issue.field === "wrongFeedback")).toHaveLength(3);
+    expect(quizzes.filter((quiz) => quiz.wrongFeedback)).toHaveLength(5);
+  });
+
   it("detects duplicate IDs and questions", () => {
     const issues = validateQuizzes([validQuiz, { ...validQuiz }]);
     expect(issues.map((issue) => issue.message)).toContain("IDが重複しています");

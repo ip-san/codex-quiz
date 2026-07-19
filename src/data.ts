@@ -15,6 +15,35 @@ export type Quiz = {
   topic?: string;
   referenceUrl?: string;
   verifiedAt?: string;
+  wrongFeedback?: Record<number, string>;
+};
+
+const initialWrongFeedback: Record<string, Record<number, string>> = {
+  "safe-12": {
+    1: "検索toolの許可はshellのsandbox設定を変更しません。二つは独立して制御されます。",
+    2: "shellの接続先がGit repositoryだけに限定される規則ではなく、network policyで範囲を決めます。",
+    3: "web searchを有効にしてもfilesystem sandboxや承認policyは維持されます。",
+  },
+  "workflow-11": {
+    1: "standaloneはrunごとに新しいchatを作るため、同じ会話の判断を継続する用途には向きません。",
+    2: "定期確認のたびにrepositoryを作り直す必要はなく、同じprojectとchat contextを再利用できます。",
+    3: "Scheduled taskの管理面はwebまたはdesktop appですが、IDE拡張の削除は解決になりません。",
+  },
+  "extend-20": {
+    1: "local Codex hostのconfig.tomlはChatGPT webへ同期されず、web側ではPluginを管理します。",
+    2: "browserのfile accessはweb serviceにローカルCodex設定を読み込ませる仕組みではありません。",
+    3: "設定fileをGitへpushしてもChatGPT webが安全に読み込んで接続することはありません。",
+  },
+  "surfaces-28": {
+    1: "phoneは操作interfaceであり、repositoryやtoolchain一式を端末内へ複製しません。",
+    2: "GitHub Pagesはこのquizの配信先で、Remote Codexの実行環境ではありません。",
+    3: "公式manualは仕様の情報源ですが、実際のfile・MCP・Skillを提供するhostではありません。",
+  },
+  "basic-15": {
+    1: "API key利用はPlatformの従量課金とorganization policyに従い、ChatGPT利用枠とは別です。",
+    2: "GitHub deploy keyはrepository access用で、CodexのOpenAI認証には使用しません。",
+    3: "MCP bearer tokenは個別MCP serverの認証用で、Codex本体へのsign-inではありません。",
+  },
 };
 
 export const categories: Record<Category, { label: string; icon: string; description: string }> = {
@@ -253,3 +282,8 @@ export const quizzes: Quiz[] = [
   { id: "extend-39", category: "extend", difficulty: "intermediate", value: "practical", topic: "slack.long-thread", question: "長いSlack threadから依頼する時に精度を上げる方法は？", choices: ["最新messageで要点・対象repo・完了条件をまとめ直す", "過去messageをすべて削除する", "曖昧な代名詞だけを使う", "全権限を許可する"], answer: 0, explanation: "Codexはthread historyを参照できますが、長い会話では重要contextが埋もれます。最新依頼で決定とscopeを要約します。", source: "Codex Slack integration", referenceUrl: "https://learn.chatgpt.com/docs/third-party/slack", verifiedAt: "2026-07-19" },
   { id: "extend-40", category: "extend", difficulty: "intermediate", value: "practical", topic: "slack.enterprise-posting", question: "EnterpriseでCodexの結果本文をSlack channelへ投稿させたくない。可能な制御は？", choices: ["adminがanswer投稿を無効化し、chat linkだけ返す", "全Slack historyを削除する", "repositoryをpublicにする", "MCPをSTDIOへ変える"], answer: 0, explanation: "Workspace adminはtask完了時のanswer投稿を無効化でき、その場合Slackにはchat linkだけが返ります。environment情報の露出を抑えられます。", source: "Codex Slack integration", referenceUrl: "https://learn.chatgpt.com/docs/third-party/slack", verifiedAt: "2026-07-19" },
 ];
+
+for (const quiz of quizzes) {
+  const feedback = initialWrongFeedback[quiz.id];
+  if (feedback) quiz.wrongFeedback = feedback;
+}

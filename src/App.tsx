@@ -550,6 +550,12 @@ function App() {
                   </strong>
                   {quizMode !== "exam" && (
                     <>
+                      {selected !== question.answer && question.wrongFeedback?.[selected] && (
+                        <p className="wrong-feedback">
+                          <b>この選択肢が違う理由</b>
+                          {question.wrongFeedback[selected]}
+                        </p>
+                      )}
                       <p>{question.explanation}</p>
                       <DiagramRenderer diagrams={quizDiagrams[question.id] ?? []} />
                       <span className="review-schedule">↻ {getReviewLabel(progress.questions[question.id])}</span>

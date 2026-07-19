@@ -49,6 +49,15 @@ export function validateQuizzes(quizzes: Quiz[]): ValidationIssue[] {
         add("verifiedAt", "価値分類した問題には有効な事実確認日が必要です");
       }
     }
+    if (quiz.wrongFeedback) {
+      for (const choiceIndex of quiz.choices.keys()) {
+        if (choiceIndex === quiz.answer) continue;
+        const feedback = quiz.wrongFeedback[choiceIndex]?.trim();
+        if (!feedback || feedback.length < 16) {
+          add("wrongFeedback", `不正解${choiceIndex + 1}には16文字以上のfeedbackが必要です`);
+        }
+      }
+    }
   }
 
   return issues;
