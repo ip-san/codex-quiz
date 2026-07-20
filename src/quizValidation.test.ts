@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { quizzes, type Quiz } from "./data";
+import { quizDiagrams } from "./diagrams";
 import { assertValidQuizzes, validateQuizzes } from "./quizValidation";
 import wrongFeedback from "./wrongFeedback.json";
 import wrongFeedbackSource from "./wrongFeedback.json?raw";
@@ -114,5 +115,14 @@ describe("Codex quiz quality gate", () => {
   it("rejects blank choices even when four slots exist", () => {
     const issues = validateQuizzes([{ ...validQuiz, choices: ["正解", "誤答", " ", "別の誤答"] }]);
     expect(issues.map((issue) => issue.message)).toContain("空の選択肢は使用できません");
+  });
+
+  it("keeps diagrams attached to real questions and preserves terminal examples", () => {
+    expect(Object.keys(quizDiagrams).filter((id) => !quizzes.some((quiz) => quiz.id === id))).toEqual([]);
+    const terminalDiagrams = Object.values(quizDiagrams)
+      .flat()
+      .filter((diagram) => diagram.type === "terminal");
+    expect(terminalDiagrams).toHaveLength(13);
+    expect(terminalDiagrams.every((diagram) => diagram.lines.some((line) => line.kind === "command"))).toBe(true);
   });
 });

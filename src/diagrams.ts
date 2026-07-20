@@ -306,4 +306,118 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
       ],
     },
   ],
+  "basic-11": [
+    {
+      type: "terminal",
+      label: "履歴を残さない一回限りの実行",
+      lines: [
+        { kind: "command", text: 'codex exec --ephemeral "triage this repository"' },
+        { kind: "output", text: "Repositoryを調査して結果を返す" },
+        { kind: "info", text: "session rollout fileはdiskへ保存しない" },
+      ],
+    },
+  ],
+  "basic-13": [
+    {
+      type: "terminal",
+      label: "最終回答をJSON Schemaへ固定",
+      lines: [
+        { kind: "command", text: 'codex exec "summarize failures" --output-schema ./schema.json' },
+        { kind: "output", text: '{"summary":"...","severity":"high"}' },
+        { kind: "info", text: "後続jobはfieldと型を前提に処理できる" },
+      ],
+    },
+  ],
+  "basic-16": [
+    {
+      type: "terminal",
+      label: "現在の認証方法を確認",
+      lines: [
+        { kind: "command", text: "codex login status" },
+        { kind: "output", text: "Signed in with ChatGPT" },
+        { kind: "info", text: "共有前にtoken自体は表示しない" },
+      ],
+    },
+  ],
+  "basic-17": [
+    {
+      type: "terminal",
+      label: "headless環境でdevice code認証",
+      lines: [
+        { kind: "command", text: "codex login --device-auth" },
+        { kind: "output", text: "Open the verification URL and enter the code" },
+        { kind: "info", text: "credential fileを別端末からcopyしない" },
+      ],
+    },
+  ],
+  "session-06": [
+    {
+      type: "terminal",
+      label: "長いsessionの状態を確認",
+      lines: [
+        { kind: "command", text: "/status" },
+        { kind: "output", text: "Chat ID · context usage · rate limits" },
+        { kind: "info", text: "compactや分岐の時期を判断" },
+      ],
+    },
+  ],
+  "session-07": [
+    {
+      type: "terminal",
+      label: "主作業を保ったまま一時質問",
+      lines: [
+        { kind: "command", text: "/side" },
+        { kind: "output", text: "Ephemeral side chat started" },
+        { kind: "info", text: "main transcriptを中断せず疑問を調査" },
+      ],
+    },
+  ],
+  "config-14": [
+    {
+      type: "terminal",
+      label: "設定layerと制約を診断",
+      lines: [
+        { kind: "command", text: "/debug-config" },
+        { kind: "output", text: "CLI → project → profile → user → system" },
+        { kind: "info", text: "requirementsによる制約も同時に確認" },
+      ],
+    },
+  ],
+  "config-15": [
+    {
+      type: "terminal",
+      label: "対話CLIのdebug logを取得",
+      lines: [
+        { kind: "command", text: "RUST_LOG=debug codex -c log_dir=./.codex-log" },
+        { kind: "output", text: "./.codex-log/codex-tui.log" },
+        { kind: "info", text: "共有前にsecretや機密pathを確認" },
+      ],
+    },
+  ],
+  "safe-21": [
+    {
+      type: "terminal",
+      label: "Ruleをsession適用前にtest",
+      lines: [
+        {
+          kind: "command",
+          text: "codex execpolicy check --pretty --rules ~/.codex/rules/default.rules -- gh pr view 42",
+        },
+        { kind: "output", text: '{"decision":"prompt","matchedRules":[...]}' },
+        { kind: "info", text: "strictest decisionと一致Ruleを確認" },
+      ],
+    },
+  ],
+  "extend-22": [
+    {
+      type: "terminal",
+      label: "登録済みMCP serverへOAuth login",
+      lines: [
+        { kind: "command", text: "codex mcp login linear" },
+        { kind: "output", text: "Complete authorization in your browser" },
+        { kind: "command", text: "codex mcp list" },
+        { kind: "info", text: "server名ごとに接続状態を確認" },
+      ],
+    },
+  ],
 };

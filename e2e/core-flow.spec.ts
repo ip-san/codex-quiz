@@ -33,6 +33,16 @@ test("a wrong answer loads its choice-specific feedback", async ({ page }) => {
   await expect(feedback).toContainText("Codex CLI");
 });
 
+test("terminal operation examples can be replayed and copied", async ({ page }) => {
+  await page.goto("/?q=basic-11");
+  await page.getByRole("button", { name: /--ephemeral/ }).click();
+
+  await expect(page.getByRole("button", { name: "操作例を再生" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "コマンドをコピー" })).toBeVisible();
+  await page.getByRole("button", { name: "操作例を再生" }).click();
+  await expect(page.locator(".diagram-terminal p.command")).toContainText("codex exec --ephemeral");
+});
+
 test("question share URL opens a one-question session", async ({ page }) => {
   await page.goto("/?q=basic-01");
   const progress = page.getByRole("progressbar", { name: "クイズの進捗" });
