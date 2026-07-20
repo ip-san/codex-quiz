@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { categories, categoryLearning, hydrateWrongFeedback, quizzes, type Category, type Quiz } from "./data";
 import { orderChoices } from "./domain/choiceOrder";
+import { selectBalancedExam } from "./domain/examSelection";
 import { DiagramRenderer } from "./components/DiagramRenderer";
 import { quizDiagrams } from "./diagrams";
 import {
@@ -266,7 +267,9 @@ function App() {
     const nextSession =
       mode === "overview"
         ? [...quizzes].sort((a, b) => categoryLearning[a.category].chapter - categoryLearning[b.category].chapter)
-        : shuffle(quizzes).slice(0, mode === "exam" ? quizzes.length : 10);
+        : mode === "exam"
+          ? selectBalancedExam(quizzes)
+          : shuffle(quizzes).slice(0, 10);
     const label = mode === "overview" ? "全体像学習パス" : mode === "study" ? "読んでから解く" : "実力テスト";
     setSession(nextSession);
     setIndex(0);
@@ -1007,9 +1010,9 @@ function App() {
           <button className="mode-card" onClick={() => startMode("exam")}>
             <span>03</span>
             <div>
-              <small>{quizzes.length} QUESTIONS</small>
+              <small>100 QUESTIONS</small>
               <h3>実力テスト</h3>
-              <p>途中で正解を表示せず、現在の理解度をまとめて確認。</p>
+              <p>9カテゴリからバランスよく100問。途中で正解を表示せず実力を確認。</p>
             </div>
             <b>→</b>
           </button>

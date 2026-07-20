@@ -15,6 +15,14 @@ test("home exposes navigation and starts a quiz", async ({ page }) => {
   await expect(page.locator("fieldset.choices")).toBeVisible();
 });
 
+test("exam starts a balanced 100-question session", async ({ page }) => {
+  await page.getByRole("button", { name: /実力テスト/ }).click();
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "100");
+  const savedIds = await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-session") ?? "null").ids);
+  expect(savedIds).toHaveLength(100);
+  expect(new Set(savedIds).size).toBe(100);
+});
+
 test("answering announces feedback and moves focus", async ({ page }) => {
   await page.getByRole("button", { name: /ランダム10問を始める/ }).click();
   await page.locator("button.choice").first().click();
