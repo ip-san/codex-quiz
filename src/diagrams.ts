@@ -93,6 +93,72 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
       ],
     },
   ],
+  "session-09": [
+    {
+      type: "terminal",
+      label: "現在のsessionを残して整理",
+      lines: [
+        { kind: "command", text: "/archive" },
+        { kind: "output", text: "Session archived" },
+        { kind: "info", text: "transcriptを削除せずactive listから片付ける" },
+      ],
+    },
+  ],
+  "session-10": [
+    {
+      type: "terminal",
+      label: "長期作業のgoalを設定",
+      lines: [
+        { kind: "command", text: "/goal" },
+        { kind: "output", text: "Set or manage a persistent goal" },
+        { kind: "info", text: "具体的な完了条件を設定し、複数turnで追跡" },
+      ],
+    },
+  ],
+  "session-13": [
+    {
+      type: "terminal",
+      label: "Subagent threadを確認",
+      lines: [
+        { kind: "command", text: "/agent" },
+        { kind: "output", text: "Select an active agent thread" },
+        { kind: "info", text: "main threadへ戻って結果を統合" },
+      ],
+    },
+  ],
+  "session-18": [
+    {
+      type: "terminal",
+      label: "chat単位のMemoryを管理",
+      lines: [
+        { kind: "command", text: "/memories" },
+        { kind: "output", text: "Configure memory use and generation" },
+        { kind: "info", text: "global設定ではなく現在chatの利用・生成を切り替える" },
+      ],
+    },
+  ],
+  "surfaces-11": [
+    {
+      type: "terminal",
+      label: "IDE contextの自動添付を切替",
+      lines: [
+        { kind: "command", text: "/ide-context" },
+        { kind: "output", text: "Automatic IDE context enabled" },
+        { kind: "info", text: "open fileやselectionを次のpromptへ含める" },
+      ],
+    },
+  ],
+  "surfaces-13": [
+    {
+      type: "terminal",
+      label: "再現情報を添えて不具合報告",
+      lines: [
+        { kind: "command", text: "/feedback" },
+        { kind: "output", text: "Open feedback dialog" },
+        { kind: "info", text: "送信前に添付logと機密情報を確認" },
+      ],
+    },
+  ],
   "session-01": [
     {
       type: "terminal",

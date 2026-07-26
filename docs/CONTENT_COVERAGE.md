@@ -157,6 +157,8 @@ Claude版の図解密度と操作感を参考にしつつ、Codex公式仕様の
 
 実務の入口になる `/init`、`codex exec`、`codex resume`、`codex review`、`codex fork`、`codex apply`、`codex completion`、`codex doctor` の8問へterminal操作例を追加した。terminal図は13件から21件、図解付き問題は37問から45問へ拡充した。名称暗記だった `/init` は、repository用AGENTS.mdの叩き台を作るscenarioへ更新し、公式reference・難易度・実務価値・topic・検証日も付与した。
 
+archive、長期Goal、Subagent切替、Memory制御、IDE context、feedbackの6問にも操作例を追加し、terminal図を27件、図解付き問題を51問へ拡充した。公式マニュアルのsurface別command表を照合し、IDE extensionの古い `/ide` 表記を現行の `/ide-context` へ修正した。
+
 ## 2026-07-19 Lighthouse品質ゲート
 
 本番ビルドへLighthouseの最低スコア検査を追加した。Performance 80、Accessibility 95、Best Practices 90、SEO 80を下回る退行をGitHub Actionsで検出し、問題数ではなく学習画面の配信品質を継続的に守る。
