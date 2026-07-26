@@ -163,6 +163,10 @@ archive、長期Goal、Subagent切替、Memory制御、IDE context、feedbackの
 
 既存の高価値10問を強化し、移行済みを184問から194問へ増やした。repository Skillのscope・script・implicit invocation、Pluginの配布単位・manifest・directory構造・marketplace・install cache、Remote hostのnetwork公開、Scheduled taskのbackground worktreeを対象とした。再現性不足、credential漏えい、app-serverのpublic露出、進行中作業との競合を避けるfeedbackを追加した。
 
+## 2026-07-26 不正解別feedback移行 第18回
+
+既存の高価値10問を強化し、移行済みを194問から204問へ増やした。Steer / Queue、反復失敗のAGENTS.md規則化、重要boundary、最終検証、曖昧要件のinterview、単一・複数画像のcontextと、Subagentの並列化対象・token cost・thread切替を対象とした。未検証情報の断定、曖昧な全面rewrite、画像の誤解釈、競合しやすい並列writeを避けるfeedbackを追加した。
+
 ## 2026-07-19 Lighthouse品質ゲート
 
 本番ビルドへLighthouseの最低スコア検査を追加した。Performance 80、Accessibility 95、Best Practices 90、SEO 80を下回る退行をGitHub Actionsで検出し、問題数ではなく学習画面の配信品質を継続的に守る。
