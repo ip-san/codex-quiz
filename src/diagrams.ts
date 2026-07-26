@@ -5,6 +5,94 @@ export type DiagramData =
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "agents-03": [
+    {
+      type: "terminal",
+      label: "repository用の指示書を初期化",
+      lines: [
+        { kind: "command", text: "/init" },
+        { kind: "output", text: "Create an AGENTS.md file" },
+        { kind: "info", text: "生成後にbuild・test・review規則を実態に合わせて編集" },
+      ],
+    },
+  ],
+  "basic-04": [
+    {
+      type: "terminal",
+      label: "CIから非対話で実行",
+      lines: [
+        { kind: "command", text: 'codex exec "Summarize the repository structure"' },
+        { kind: "output", text: "Repository summary…" },
+        { kind: "info", text: "最終messageをstdoutで後続処理へ渡せる" },
+      ],
+    },
+  ],
+  "basic-05": [
+    {
+      type: "terminal",
+      label: "保存済みsessionを再開",
+      lines: [
+        { kind: "command", text: "codex resume" },
+        { kind: "output", text: "Select a saved session" },
+        { kind: "info", text: "以前のtranscriptとcontextを引き継いで作業" },
+      ],
+    },
+  ],
+  "basic-06": [
+    {
+      type: "terminal",
+      label: "未commit変更を非対話review",
+      lines: [
+        { kind: "command", text: "codex review --uncommitted" },
+        { kind: "output", text: "Review staged, unstaged, and untracked changes" },
+        { kind: "info", text: "指摘を確認してから修正・test・commit" },
+      ],
+    },
+  ],
+  "basic-07": [
+    {
+      type: "terminal",
+      label: "同じcontextから別案へ分岐",
+      lines: [
+        { kind: "command", text: "codex fork" },
+        { kind: "output", text: "Select a session to fork" },
+        { kind: "info", text: "元のtranscriptを残したまま新しいchatを開始" },
+      ],
+    },
+  ],
+  "basic-08": [
+    {
+      type: "terminal",
+      label: "Cloud chatのdiffをlocalへ適用",
+      lines: [
+        { kind: "command", text: "codex apply <TASK_ID>" },
+        { kind: "output", text: "Applied patch to the working tree" },
+        { kind: "info", text: "適用後にgit diffとtestを確認" },
+      ],
+    },
+  ],
+  "basic-09": [
+    {
+      type: "terminal",
+      label: "PowerShell補完scriptを生成",
+      lines: [
+        { kind: "command", text: "codex completion powershell" },
+        { kind: "output", text: "# PowerShell completion script" },
+        { kind: "info", text: "生成結果をshell設定へ読み込み、再起動後にTabで確認" },
+      ],
+    },
+  ],
+  "basic-10": [
+    {
+      type: "terminal",
+      label: "CLI環境を横断診断",
+      lines: [
+        { kind: "command", text: "codex doctor" },
+        { kind: "output", text: "Installation · config · auth · runtime · Git · terminal" },
+        { kind: "info", text: "自動修復ではなく、原因を絞るdiagnostic report" },
+      ],
+    },
+  ],
   "session-01": [
     {
       type: "terminal",

@@ -122,7 +122,7 @@ describe("Codex quiz quality gate", () => {
     const terminalDiagrams = Object.values(quizDiagrams)
       .flat()
       .filter((diagram) => diagram.type === "terminal");
-    expect(terminalDiagrams).toHaveLength(13);
+    expect(terminalDiagrams).toHaveLength(21);
     expect(terminalDiagrams.every((diagram) => diagram.lines.some((line) => line.kind === "command"))).toBe(true);
   });
 });
