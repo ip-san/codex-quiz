@@ -918,5 +918,55 @@
     "1": "API key利用はPlatformの従量課金とorganization policyに従い、ChatGPT利用枠とは別です。",
     "2": "GitHub deploy keyはrepository access用で、CodexのOpenAI認証には使用しません。",
     "3": "MCP bearer tokenは個別MCP serverの認証用で、Codex本体へのsign-inではありません。"
+  },
+  "extend-27": {
+    "1": "browser historyは個人端末の閲覧記録であり、teamがreview・version管理できるSkill配布場所ではありません。",
+    "2": "dist/assetsはbuild成果物向けです。Codexがrepository scoped Skillとして探索する`.agents/skills`を使います。",
+    "3": "GitHub Pages settingsは公開設定であり、Codexがlocal Skillを読み込むdirectoryではありません。"
+  },
+  "extend-28": {
+    "1": "長いcommandを毎回生成すると表記やoptionが揺れます。決定的な処理はSkill同梱scriptへ固定します。",
+    "2": "記憶だけでは手順の再現性やreview可能性を保証できません。検証処理をscriptとしてversion管理します。",
+    "3": "常時full accessは再現性を高めず影響範囲だけを広げます。必要な権限で同梱scriptを実行します。"
+  },
+  "extend-29": {
+    "1": "SKILL.mdを空にすると安全な明示実行時にも手順がありません。invocation policyと手順内容は分けて管理します。",
+    "2": "全MCP削除は外部toolを失うだけで、Skill自体のimplicit invocationを制御しません。",
+    "3": "Git branch名はSkill選択policyとして読まれません。`agents/openai.yaml`のpolicyで明示的に制御します。"
+  },
+  "extend-30": {
+    "1": "AGENTS.mdはrepository指示には適しますが、複数Skillやconnectorをinstall可能にpackageする単位ではありません。",
+    "2": "localStorage exportはこのPWAの学習data用で、Codex capabilityをteamへ配布する形式ではありません。",
+    "3": "terminal themeは表示設定です。Skill・MCP・Hook・assetをまとめて配布するにはPluginを使います。"
+  },
+  "extend-31": {
+    "1": "`.codex/config.toml`はproject設定であり、Pluginの名前・version・同梱componentを宣言するmanifestではありません。",
+    "2": "package-lock.jsonはNode依存関係の固定fileです。Codex Pluginの必須entry pointにはなりません。",
+    "3": "public/manifest.jsonはWeb app用途の一般的な場所で、Codex Pluginが探索するmanifest pathではありません。"
+  },
+  "extend-32": {
+    "1": "componentをmanifest directoryへ集約しません。`.codex-plugin/`にはmanifestを置き、skills等はplugin rootへ配置します。",
+    "2": "assetsだけをGit外へ出すとPluginとして再現可能に配布できません。必要なassetもpackage内でpathを宣言します。",
+    "3": "配置をrunごとに変えるとmanifest pathが壊れます。安定したplugin root構造をversion管理します。"
+  },
+  "extend-33": {
+    "1": "auth.jsonにはcredentialが含まれ、marketplace catalogの共有場所ではありません。commitや配布もしません。",
+    "2": "dist/index.htmlはWeb build成果物です。repository scoped marketplaceとしてCodexが読む場所ではありません。",
+    "3": "OS keyringはsecret保存用です。Plugin一覧とsource metadataを共有するmarketplace fileには使いません。"
+  },
+  "extend-34": {
+    "1": "install済みPluginは通常cacheされたcopyを使うため、marketplace source directoryの直接編集だけでは更新されません。",
+    "2": "Git commitはsource履歴を更新しますが、install cacheのversion更新や再installを自動では行いません。",
+    "3": "browser cache削除はCodexのPlugin install cacheを更新しません。正式な更新・再install flowを使います。"
+  },
+  "surfaces-30": {
+    "1": "認証なしWebSocketのpublic公開は第三者へapp-server操作面を露出します。trusted network内へ閉じます。",
+    "2": "SSH keyをrepositoryへcommitするとcredential漏えいになります。keyは安全なcredential storageで管理します。",
+    "3": "全port許可は不要なattack surfaceを増やします。VPNやmesh越しに必要な接続だけを許可します。"
+  },
+  "workflow-10": {
+    "1": "現在のLocalで動かすと未完了変更と定期taskの変更が混ざります。専用worktreeでbranchと作業treeを分離します。",
+    "2": "Git管理外では差分追跡や安全な統合が難しくなります。Git repositoryのbackground worktreeを使います。",
+    "3": "同じbranchを強制checkoutすると進行中作業と競合します。独立したworktreeとbranchへ隔離します。"
   }
 }
