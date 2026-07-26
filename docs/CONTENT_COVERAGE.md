@@ -171,6 +171,10 @@ archive、長期Goal、Subagent切替、Memory制御、IDE context、feedbackの
 
 既存の高価値10問を強化し、移行済みを204問から214問へ増やした。Subagentのpermission継承、Plugin / MCPとComputer Useの選択、localhostのbuilt-in browser、Cloud setup shell・maintenance・cache invalidation、Local environmentのsetup・actions、Importの非破壊性とinstruction移行を対象とした。過剰権限、壊れやすい座標操作、Cloud / browser cacheの混同、既存setupの誤削除を避けるfeedbackを追加した。
 
+## 2026-07-27 不正解別feedback移行 第20回
+
+既存10問を強化し、移行済みを214問から224問へ増やした。Import後の認証・security review、global AGENTS.md・override・32 KiB上限・fallback filename、sandbox bypass・sandbox mode・approval policy、Hookの用途を対象とした。credential公開、instruction precedenceの誤解、初見repositoryや本番環境でのsandbox回避、Hookと通常promptの混同を避けるfeedbackを追加した。
+
 ## 2026-07-19 Lighthouse品質ゲート
 
 本番ビルドへLighthouseの最低スコア検査を追加した。Performance 80、Accessibility 95、Best Practices 90、SEO 80を下回る退行をGitHub Actionsで検出し、問題数ではなく学習画面の配信品質を継続的に守る。

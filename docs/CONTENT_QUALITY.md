@@ -51,7 +51,7 @@ practical問題は通常出題とSRS期限超過問題の同条件時に弱く�
 
 ## 現在の移行課題
 
-1. `wrongFeedback`を全問題へ段階的に付与する（214 / 240問。データ形式・画面・検査は実装済み）。
+1. `wrongFeedback`を全問題へ段階的に付与する（224 / 240問。データ形式・画面・検査は実装済み）。
 2. ページ名だけの`source`を公式referenceUrlへ移行する。
 3. 全問題へdifficulty、value、topic、verifiedAtを付与する。
 4. CLI名称暗記問題を実務シナリオ型へ書き換える。

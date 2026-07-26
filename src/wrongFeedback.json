@@ -1068,5 +1068,55 @@
     "1": "auth.jsonはCodex credential保存fileであり、repository instructionの移行先に使いません。",
     "2": "Service WorkerはPWAのcache・offline処理用で、agent向けrepository規則を保持しません。",
     "3": "MCP OAuth tokenは外部server認証用です。instruction fileの内容はAGENTS.mdへ対応付けます。"
+  },
+  "surfaces-33": {
+    "1": "sandbox全無効化は認証不足を解決せず、local commandの影響範囲だけを広げます。status cardからsetupします。",
+    "2": "Importの重複実行は同じ設定を増やす可能性があります。まずFinish表示とconnectionの認証状態を確認します。",
+    "3": "auth.jsonの公開はcredential漏えいです。tokenを共有せず、各connectionの正規認証flowを完了します。"
+  },
+  "surfaces-34": {
+    "1": "UIの色は権限や自動実行riskを判断できません。外部tool・Hook・Pluginのcapabilityを先にreviewします。",
+    "2": "クイズの正解位置はImportされたagent設定の安全性と無関係です。tool制限とcredentialを確認します。",
+    "3": "faviconは公開サイトの表示assetです。Import後に実行され得るHookやMCP actionのreviewを代替しません。"
+  },
+  "agents-06": {
+    "1": "distはprojectのbuild成果物で、全repositoryへ適用する個人instructionの探索場所ではありません。",
+    "2": "/tmpは一時領域で永続的なglobal guidanceに不向きです。Codex home直下へ配置します。",
+    "3": "node_modulesはdependency管理領域で更新時に消え得ます。個人指示は`~/.codex/AGENTS.md`へ置きます。"
+  },
+  "agents-07": {
+    "1": "global階層ではoverrideと通常fileを両方連結せず、最初の非emptyなoverrideを優先します。",
+    "2": "AGENTS.override.mdの選択はproject設定を削除しません。global guidanceとして一時的に置き換えます。",
+    "3": "instruction fileの優先はGit管理を無効化しません。Codexが読み込むguidanceだけが変わります。"
+  },
+  "agents-08": {
+    "1": "32 bytesでは実用的な指示をほとんど保持できません。既定上限は合計32 KiBです。",
+    "2": "1 GiBは既定値ではなく、巨大な指示はcontextを圧迫します。必要なら分割または上限調整します。",
+    "3": "上限なしではありません。`project_doc_max_bytes`へ到達すると追加instructionの読込みを停止します。"
+  },
+  "agents-09": {
+    "1": "`git_instruction_aliases`は公式のfallback filename設定ではありません。",
+    "2": "READMEを自動でsystem instructionにする設定ではありません。使う名前をfallback listへ明示します。",
+    "3": "任意globですべてのfileをinstruction化しません。許可する代替名を順序付きで登録します。"
+  },
+  "safe-05": {
+    "1": "初見repositoryには未信頼scriptやprompt injectionがあり得るため、承認とsandboxを残します。",
+    "2": "個人PCのrootでsandboxを回避するとsystem全体へ書込み可能になり、影響範囲が広すぎます。",
+    "3": "本番server直結状態でのbypassは実dataへ即時影響します。外部で隔離されたrunner等に限定します。"
+  },
+  "safe-06": {
+    "1": "low・medium・highはsandbox名ではなく、reasoning effort等で使われる段階表現です。",
+    "2": "local・remote・hybridは実行場所の分類で、filesystem accessを制御するsandbox値ではありません。",
+    "3": "safe・fast・turboは文書化されたsandbox optionではありません。3つの正式値から選びます。"
+  },
+  "safe-07": {
+    "1": "yes・noだけではcommand trustや必要時確認を表現できません。文書化されたpolicy値を使います。",
+    "2": "slow・fast・autoは承認policyではなく、いつ人へ確認するかを指定できません。",
+    "3": "local・cloudは実行surfaceの区別です。CLIのapproval prompt条件を制御する値ではありません。"
+  },
+  "extend-10": {
+    "1": "一度だけの文章要約は通常promptで十分です。Hookはlifecycle上の反復可能な機械検査へ使います。",
+    "2": "配色選択はUI設定であり、tool call前後のpolicy enforcementを行うHook用途ではありません。",
+    "3": "株価確認はlive data connector等の役割です。Hookはcommandやfile editの検査・強制に適します。"
   }
 }
