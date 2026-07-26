@@ -1018,5 +1018,55 @@
     "1": "`/theme`はterminal表示themeの選択で、実行中agent threadの一覧や切替には使いません。",
     "2": "`/archive`は現在sessionを整理して終了する操作です。active Subagentのinspectionとは目的が異なります。",
     "3": "`/fast`は対応modelのservice tierを切り替えます。Subagent threadの状態確認は`/agent`で行います。"
+  },
+  "session-14": {
+    "1": "Subagentを常にfull accessにすると親の安全境界を迂回します。実際にはparent turnのsandboxを継承します。",
+    "2": "全Subagentがread-only固定ではありません。親で選択したpermission modeが委譲先にも適用されます。",
+    "3": "agentの順番で権限は変わりません。各childはparentのlive runtime overrideを引き継ぎます。"
+  },
+  "surfaces-16": {
+    "1": "画面座標だけの自動化はlayout変更に弱く、構造化されたdataやaction metadataも利用できません。",
+    "2": "full access shellは専用integrationの代替にならず、不要なfilesystem・command権限まで広げます。",
+    "3": "毎回のscreenshot手作業は反復性が低いため、利用可能ならPluginやMCPの構造化toolを先に使います。"
+  },
+  "surfaces-17": {
+    "1": "外部app全体のComputer Useは操作範囲が広くなります。localhost検証はbuilt-in browserから始めます。",
+    "2": "Cloud環境削除はlocal Web画面の視覚確認と無関係で、保存済み設定を失う可能性があります。",
+    "3": "MCP OAuth callbackはserver認証用です。開発中Web appの表示・click・screenshot検証には使いません。"
+  },
+  "surfaces-18": {
+    "1": "secretだけが原因ではありません。通常の`export`もsetupとagentが別shellなのでそのまま継承されません。",
+    "2": "Git checkoutはsetup shellのprocess environmentをagent shellへ移す仕組みではありません。",
+    "3": "MCP OAuthはCloud container内の一般環境変数を上書きしません。永続設定へ明示的に保存します。"
+  },
+  "surfaces-19": {
+    "1": "AGENTS.override.md削除はcached dependencyを更新しません。再開時のmaintenance scriptを使います。",
+    "2": "browser cacheはCloud container cacheと別物で、repository dependencyの更新には影響しません。",
+    "3": "GitHub review commentはcode review用です。cached environmentのmaintenance処理は実行しません。"
+  },
+  "surfaces-20": {
+    "1": "変更後も古いcacheを永久利用する仕様ではありません。setup・maintenance・variable・secret変更でinvalidateされます。",
+    "2": "cache invalidationはcontainer再構築に関する処理で、repositoryのmain branchを削除しません。",
+    "3": "Cloud cacheがLocal worktreeへ変換されることはありません。Cloud environment内で再作成されます。"
+  },
+  "surfaces-21": {
+    "1": "Appshot hotkeyは画面context添付用で、新規worktreeのdependency installを自動実行しません。",
+    "2": "Remote QR codeはhost接続用です。project固有のinstallやinitial buildは定義できません。",
+    "3": "browser download設定はWeb download先を扱うもので、worktree作成時のsetup処理ではありません。"
+  },
+  "surfaces-22": {
+    "1": "Session archiveは会話整理用で、team共通の開発server・test shortcutを定義しません。",
+    "2": "MCP OAuthは外部server認証です。local projectの定型commandをtop barへ追加する機能ではありません。",
+    "3": "Computer Use allowlistはGUI操作権限を管理します。integrated terminalの共有action定義とは別です。"
+  },
+  "surfaces-31": {
+    "1": "Importは既存設定の初期化ではなく、選択した対応itemを追加します。取込後も内容はreviewします。",
+    "2": "repository削除はImportに不要で、未commit作業や履歴を失う危険があります。",
+    "3": "ChatGPT accountの作り直しは不要です。同じdesktop appのImport画面からsetupを追加します。"
+  },
+  "surfaces-32": {
+    "1": "auth.jsonはCodex credential保存fileであり、repository instructionの移行先に使いません。",
+    "2": "Service WorkerはPWAのcache・offline処理用で、agent向けrepository規則を保持しません。",
+    "3": "MCP OAuth tokenは外部server認証用です。instruction fileの内容はAGENTS.mdへ対応付けます。"
   }
 }
