@@ -199,6 +199,10 @@ session再読込みを重ねて問う2問のうち1問を、monorepoの対象sub
 
 `codex doctor`を同じ状況で問う2問のうち1問を、IDEでMCP server追加後にRestart extensionとOAuth Authenticateを行う復旧scenarioへ置き換えた。Promptingの最終確認2問も、完了条件の監査と未検証情報の報告という別の学習目標へtopicを分離した。今後の意味重複を早期検出するため、全240問でtopicが一意であることを品質検査へ追加した。
 
+## 2026-07-28 正解後ボタンのresponsive修正
+
+正解時の短いfeedbackで次問ボタンの`float`が枠の高さから外れ、表示が崩れる問題を修正した。ボタンを通常flowのまま右寄せし、540px以下では従来どおり全幅表示する。375×812の実ブラウザ確認と、ボタンの四辺がfeedback枠内に収まることを測るE2Eを追加した。
+
 ## 2026-07-19 Lighthouse品質ゲート
 
 本番ビルドへLighthouseの最低スコア検査を追加した。Performance 80、Accessibility 95、Best Practices 90、SEO 80を下回る退行をGitHub Actionsで検出し、問題数ではなく学習画面の配信品質を継続的に守る。

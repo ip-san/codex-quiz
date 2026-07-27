@@ -32,6 +32,23 @@ test("answering announces feedback and moves focus", async ({ page }) => {
   await expect(feedback).toBeFocused();
 });
 
+test("correct-answer action stays inside feedback on mobile", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/?q=basic-01");
+  await page.getByRole("button", { name: /Codex CLI/ }).click();
+
+  const feedback = page.getByRole("status");
+  const nextButton = feedback.getByRole("button", { name: /結果を見る/ });
+  const feedbackBox = await feedback.boundingBox();
+  const buttonBox = await nextButton.boundingBox();
+
+  expect(feedbackBox).not.toBeNull();
+  expect(buttonBox).not.toBeNull();
+  expect(buttonBox!.x).toBeGreaterThanOrEqual(feedbackBox!.x);
+  expect(buttonBox!.x + buttonBox!.width).toBeLessThanOrEqual(feedbackBox!.x + feedbackBox!.width);
+  expect(buttonBox!.y + buttonBox!.height).toBeLessThanOrEqual(feedbackBox!.y + feedbackBox!.height);
+});
+
 test("a wrong answer loads its choice-specific feedback", async ({ page }) => {
   await page.goto("/?q=basic-01");
   await page.getByRole("button", { name: /Responses API/ }).click();
