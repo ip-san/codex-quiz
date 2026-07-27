@@ -179,6 +179,10 @@ archive、長期Goal、Subagent切替、Memory制御、IDE context、feedbackの
 
 残る16問を強化し、全240問への不正解別feedback移行を完了した。Skill・Plugin・MCPの基礎commandと構成、Promptの出力・context・曖昧要件・最終確認・process指定、Hook handlerを対象とした。公式マニュアルから消えた`agents.max_depth`問題は、現行の`agents.max_concurrent_threads_per_session`を選ぶ実務scenarioへ置き換えた。全問題で誤答ごとの理由と正しい判断基準を表示し、件数・ID・正解への誤設定・16文字以上の内容を継続検査する。
 
+## 2026-07-27 追跡metadata移行 第1回
+
+不足39問のうちExtend 9問とPrompt 1問へdifficulty・value・topic・公式referenceUrl・verifiedAtを追加し、追跡可能な問題を201問から211問へ増やした。`codex mcp`、`codex plugin`、`codex plugin marketplace`、`codex mcp-server`とSkill明示指定は、名称だけを問う形式から、管理・配布・agent連携の目的に応じて操作を選ぶscenarioへ書き換えた。
+
 ## 2026-07-19 Lighthouse品質ゲート
 
 本番ビルドへLighthouseの最低スコア検査を追加した。Performance 80、Accessibility 95、Best Practices 90、SEO 80を下回る退行をGitHub Actionsで検出し、問題数ではなく学習画面の配信品質を継続的に守る。
