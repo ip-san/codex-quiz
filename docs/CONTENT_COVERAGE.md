@@ -195,6 +195,10 @@ Prompting 9問とAGENTS.md基礎1問へ全追跡metadataを追加し、移行済
 
 session再読込みを重ねて問う2問のうち1問を、monorepoの対象subdirectoryでactiveなinstruction chainを検証するscenarioへ置き換えた。公式manualの`--cd`によるnested override確認手順をterminal図として追加し、図解付き問題を52問、再生・コピー可能なterminal操作例を28件へ拡充した。
 
+## 2026-07-28 意味重複の継続監査
+
+`codex doctor`を同じ状況で問う2問のうち1問を、IDEでMCP server追加後にRestart extensionとOAuth Authenticateを行う復旧scenarioへ置き換えた。Promptingの最終確認2問も、完了条件の監査と未検証情報の報告という別の学習目標へtopicを分離した。今後の意味重複を早期検出するため、全240問でtopicが一意であることを品質検査へ追加した。
+
 ## 2026-07-19 Lighthouse品質ゲート
 
 本番ビルドへLighthouseの最低スコア検査を追加した。Performance 80、Accessibility 95、Best Practices 90、SEO 80を下回る退行をGitHub Actionsで検出し、問題数ではなく学習画面の配信品質を継続的に守る。

@@ -750,9 +750,9 @@
     "3": "PWA cacheではなく、Windows `%USERPROFILE%/.codex`とWSL `~/.codex`の分離が原因です。"
   },
   "surfaces-15": {
-    "1": "`codex delete`は保存sessionを削除するcommandで、環境横断のdiagnostic reportを作りません。",
-    "2": "`codex apply`はCloud chatのdiff適用用です。認証やruntimeの診断にはdoctorを使います。",
-    "3": "completionはshell補完生成用です。権限を広げる前に`codex doctor`のreportで故障layerを特定します。"
+    "1": "`codex delete`は保存sessionを削除します。MCP設定の再読込みにはextensionを再起動します。",
+    "2": "`codex apply`はCloud chatのdiff適用用で、IDEのMCP server一覧を更新しません。",
+    "3": "sandbox解除はMCP設定を再読込みせず、local commandの影響範囲だけを不必要に広げます。"
   },
   "extend-11": {
     "1": "package-lock.jsonは依存versionの固定用で、Codex lifecycle Hookの探索場所ではありません。",

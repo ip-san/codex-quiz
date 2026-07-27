@@ -40,6 +40,7 @@ describe("Codex quiz quality gate", () => {
       workflow: 24,
       surfaces: 39,
     });
+    expect(new Set(quizzes.map((quiz) => quiz.topic)).size).toBe(quizzes.length);
   });
 
   it("accepts a complete four-choice quiz", () => {
