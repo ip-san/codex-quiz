@@ -1118,5 +1118,85 @@
     "1": "一度だけの文章要約は通常promptで十分です。Hookはlifecycle上の反復可能な機械検査へ使います。",
     "2": "配色選択はUI設定であり、tool call前後のpolicy enforcementを行うHook用途ではありません。",
     "3": "株価確認はlive data connector等の役割です。Hookはcommandやfile editの検査・強制に適します。"
+  },
+  "extend-01": {
+    "1": "Cookieはbrowser stateの保存手段で、手順・reference・scriptを再利用するCodex workflowではありません。",
+    "2": "Viewportは表示領域を表すUI用語で、繰り返す作業手順をpackageして選択する仕組みではありません。",
+    "3": "Commit hashはGitの特定状態を識別しますが、実行手順や支援resourceをまとめません。"
+  },
+  "extend-02": {
+    "1": "CSS Modulesはstyle scopeの仕組みで、外部serviceのlive dataやactionをCodex toolとして公開しません。",
+    "2": "WebAssemblyだけではCodexとのtool discovery・schema・認証を標準化できません。MCPを使います。",
+    "3": "Git tagはrepository revisionの目印で、外部serviceへの接続や操作interfaceではありません。"
+  },
+  "extend-03": {
+    "1": "SkillとPluginは画像formatではありません。workflow authoringとinstall可能な配布bundleを使い分けます。",
+    "2": "OSやCPUの分類ではなく、Codex capabilityの再利用範囲と配布方法の違いです。",
+    "3": "完全に同一ではありません。複数Skill・MCP・Hook等をまとめて配布する時はPluginが適します。"
+  },
+  "extend-04": {
+    "1": "`codex bridge-css`は文書化されたMCP管理commandではありません。`codex mcp`配下を使います。",
+    "2": "`codex api-only`はserver追加・一覧・削除・OAuth認証を管理するCLI体系ではありません。",
+    "3": "socket fileだけではMCP設定を登録・一覧・remove・loginできません。専用subcommandを使います。"
+  },
+  "extend-05": {
+    "1": "HTML script tagはWeb pageへscriptを読み込む構文で、Codex Skillの明示選択には使いません。",
+    "2": "commit hashはGit revisionを示すだけで、利用するSkill名をCodexへ指定しません。",
+    "3": "CSS class selectorはstyle対象の指定です。Skillは`$skill-name`形式で明示します。"
+  },
+  "extend-06": {
+    "1": "`codex addon-css`は公式Plugin管理commandではなく、install・list・removeを実行できません。",
+    "2": "`codex bundle-only`は文書化されたPlugin CLIではありません。configured marketplaceを扱う専用commandを使います。",
+    "3": "単一extension fileの操作ではPlugin installation stateを管理できません。`codex plugin`を使います。"
+  },
+  "extend-07": {
+    "1": "`codex store git`は公式marketplace管理体系ではありません。Git sourceもplugin marketplace配下で扱います。",
+    "2": "`codex registry-css`は文書化されたcommandではなく、marketplaceの追加・更新・削除を行いません。",
+    "3": "fileだけを直接扱う方式に限定されません。Gitまたはlocal sourceを専用commandで登録します。"
+  },
+  "extend-08": {
+    "1": "`codex mcp add-self`はCodex processをMCP serverとしてstdio公開するcommandではありません。",
+    "2": "`codex server-html`は文書化されたserver modeではなく、MCP protocolを提供しません。",
+    "3": "port名だけではstdio MCP serverを起動できません。`codex mcp-server`を実行します。"
+  },
+  "extend-09": {
+    "1": "Skillは実行fileだけに限定されず、判断手順やreferenceも含めて再利用性を高めます。",
+    "2": "画像一枚もassetにはできますが、それだけではtask workflowや実行条件を説明できません。",
+    "3": "model名だけはSkillになりません。SKILL.mdのinstructionと必要なresourceを組み合わせます。"
+  },
+  "prompt-06": {
+    "1": "無関係な長い履歴は重要な出力条件を埋もれさせ、context消費も増やします。",
+    "2": "秘密情報一覧は不要なcredential露出です。結果形式の指定にsecretを含めません。",
+    "3": "曖昧な形容詞だけでは長さ・構造・利用場面を判断できません。具体的なformatと用途を示します。"
+  },
+  "prompt-07": {
+    "1": "無関係な全社newsは対象codeの判断を改善せず、必要なrepository contextを埋もれさせます。",
+    "2": "モデルへ見せない制約は遵守できません。変更禁止範囲や完了条件をpromptへ明示します。",
+    "3": "空の添付fileは追加contextを提供しません。関連source・error・再現条件へ絞ります。"
+  },
+  "prompt-08": {
+    "1": "推測だけで本番反映すると前提違いが直接利用者へ影響します。質問とplanを先に行います。",
+    "2": "全制約削除は意図しない変更範囲を広げます。重要なboundaryを確認して残します。",
+    "3": "testを省く依頼は曖昧要件による誤実装を検出しにくくします。完了条件と検証方法を具体化します。"
+  },
+  "prompt-09": {
+    "1": "差分をreviewせず送信すると意図しない変更やsecret混入を見逃します。最終確認を残します。",
+    "2": "logを全削除すると失敗原因と未検証箇所を追えません。必要な診断情報を保ちます。",
+    "3": "作業後に成功条件を都合よく変えると完了判定ができません。最初の条件との一致を確認します。"
+  },
+  "prompt-10": {
+    "1": "結果だけが重要なら手順を過剰固定せず、Codexが適切な調査・検証方法を選べる余地を残します。",
+    "2": "常時固定するとrepository状況へ適応できません。監査順序などprocess自体が要件の時に限定します。",
+    "3": "自由度を与えたい場合に細かな手順固定は逆効果です。goal・boundary・outputを中心に伝えます。"
+  },
+  "extend-17": {
+    "1": "promptとagent handlerは現在parseされてもskipされます。実行されるhandlerはcommandです。",
+    "2": "HTTPだけをhandler typeとして直接指定する仕様ではありません。必要ならcommandから処理を呼びます。",
+    "3": "React componentはHook handlerではありません。Hookはlifecycle eventへcommandを設定します。"
+  },
+  "session-15": {
+    "1": "`agents.max_depth`は現行の同時thread上限fieldではありません。session単位のconcurrency設定を使います。",
+    "2": "`sandbox.max_children`は文書化されたSubagent concurrency fieldではなく、sandbox設定と混同しています。",
+    "3": "`threads.unlimited`は公式設定ではありません。resourceとcostを制御できる数値上限を設定します。"
   }
 }

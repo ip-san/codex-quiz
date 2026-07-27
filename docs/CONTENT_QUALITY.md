@@ -49,11 +49,14 @@ CLI、設定値、成熟度、対応surface、既定動作など更新されや�
 
 practical問題は通常出題とSRS期限超過問題の同条件時に弱く優先する。価値スコアは難易度の代用にせずtie-breakとして使う。triviaは上級者検索や実力テストには残せるが、初心者の学習パスでは優先しない。
 
+## 完了した移行
+
+- `wrongFeedback`を全240問へ付与済み。データ形式・遅延読込みUI・全選択肢の品質検査も実装済み。
+
 ## 現在の移行課題
 
-1. `wrongFeedback`を全問題へ段階的に付与する（224 / 240問。データ形式・画面・検査は実装済み）。
-2. ページ名だけの`source`を公式referenceUrlへ移行する。
-3. 全問題へdifficulty、value、topic、verifiedAtを付与する。
-4. CLI名称暗記問題を実務シナリオ型へ書き換える。
-5. 選択肢品質lintと公式URL検査をCIへ追加する。
-6. OpenAI公式マニュアルのカバレッジ表とVerified Factsを整備する。
+1. ページ名だけの`source`を公式referenceUrlへ移行する。
+2. 全問題へdifficulty、value、topic、verifiedAtを付与する。
+3. CLI名称暗記問題を実務シナリオ型へ書き換える。
+4. 選択肢品質lintと公式URL検査をCIへ追加する。
+5. OpenAI公式マニュアルのカバレッジ表とVerified Factsを整備する。
