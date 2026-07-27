@@ -25,9 +25,9 @@
     "3": "無関係なfileの変更はreview範囲と回帰riskを増やします。必要な変更と検証結果で完了を定義します。"
   },
   "agents-10": {
-    "1": "OSの再インストールは指示contextの再読込と無関係です。新しいCodexセッションを開始します。",
-    "2": "Git履歴の削除は作業を失う危険があり、現在のセッションが保持する指示contextも更新しません。",
-    "3": "画像化してもAGENTS.mdとして読み込まれません。更新後の指示は新しいセッションで確認します。"
+    "1": "OSの再installでは、対象subdirectoryからどのinstruction fileが探索されるかを検証できません。",
+    "2": "Git履歴の削除は作業を失う危険があり、activeなinstruction chainの確認には不要です。",
+    "3": "画像はproject instructionとして探索されません。対象directoryでCodexを起動し、active sourceを確認します。"
   },
   "safe-08": {
     "1": "read-onlyはfilesystem書込みを制限する設定で、network accessを必ず開放するものではありません。",

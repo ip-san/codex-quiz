@@ -5,6 +5,20 @@ export type DiagramData =
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "agents-10": [
+    {
+      type: "terminal",
+      label: "nested instructionの適用を確認",
+      lines: [
+        {
+          kind: "command",
+          text: 'codex --cd services/payments --ask-for-approval never "Show which instruction files are active."',
+        },
+        { kind: "output", text: "Active instructions: AGENTS.md → services/payments/AGENTS.md" },
+        { kind: "info", text: "変更前に対象subtreeの指示chainを確認" },
+      ],
+    },
+  ],
   "agents-03": [
     {
       type: "terminal",

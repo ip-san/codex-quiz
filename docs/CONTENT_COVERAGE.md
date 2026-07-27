@@ -3,7 +3,7 @@
 | 領域 | 実務価値 | 状態 | 次の重点 |
 |---|---:|---|---|
 | Prompting・完了条件 | 最重要 | 実務フローあり | 既存問題のscenario品質改善 |
-| AGENTS.md | 最重要 | 実務フローあり | monorepo別の検証規則 |
+| AGENTS.md | 最重要 | 実務フローあり | 指示chainの監査を実装済み |
 | 承認・sandbox | 最重要 | 実務フローあり | granular approval policy |
 | Review | 最重要 | 実務フローあり | CI連携とレビュー失敗の診断 |
 | Session・context | 高 | 実務フローあり | memoriesと長期goalの運用 |
@@ -190,6 +190,10 @@ Prompting 9問とAGENTS.md基礎1問へ全追跡metadataを追加し、移行済
 ## 2026-07-27 追跡metadata移行 完了
 
 残るAGENTS.md 7問、承認・sandbox 11問、Hook 1問へ全追跡metadataを追加し、全240問の移行を完了した。nested guidance、override、global guidance、32 KiB上限、fallback filename、session再読込み、approvalとsandboxの責務分離、最小権限、追加writable root、bypass境界、read-only・workspace-writeの選択、破壊的操作、PreToolUse Hookを、名称暗記から実務上の判断scenarioへ書き換えた。
+
+## 2026-07-27 AGENTS.md意味重複の解消
+
+session再読込みを重ねて問う2問のうち1問を、monorepoの対象subdirectoryでactiveなinstruction chainを検証するscenarioへ置き換えた。公式manualの`--cd`によるnested override確認手順をterminal図として追加し、図解付き問題を52問、再生・コピー可能なterminal操作例を28件へ拡充した。
 
 ## 2026-07-19 Lighthouse品質ゲート
 
