@@ -187,6 +187,10 @@ archive、長期Goal、Subagent切替、Memory制御、IDE context、feedbackの
 
 Prompting 9問とAGENTS.md基礎1問へ全追跡metadataを追加し、移行済みを211問から221問へ増やした。Goal・Context・Output・Boundary、result-first、関連context、外部送信禁止、done criteria、曖昧要件のinterview、最終check、process constraintを、抽象的な用語説明から実装・調査・共有時の判断scenarioへ書き換えた。
 
+## 2026-07-27 追跡metadata移行 完了
+
+残るAGENTS.md 7問、承認・sandbox 11問、Hook 1問へ全追跡metadataを追加し、全240問の移行を完了した。nested guidance、override、global guidance、32 KiB上限、fallback filename、session再読込み、approvalとsandboxの責務分離、最小権限、追加writable root、bypass境界、read-only・workspace-writeの選択、破壊的操作、PreToolUse Hookを、名称暗記から実務上の判断scenarioへ書き換えた。
+
 ## 2026-07-19 Lighthouse品質ゲート
 
 本番ビルドへLighthouseの最低スコア検査を追加した。Performance 80、Accessibility 95、Best Practices 90、SEO 80を下回る退行をGitHub Actionsで検出し、問題数ではなく学習画面の配信品質を継続的に守る。
