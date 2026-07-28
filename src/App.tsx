@@ -15,6 +15,8 @@ import { getReviewLabel, isReviewDue, scheduleReview, type QuestionProgress } fr
 
 type Screen = "home" | "quiz" | "result" | "reader" | "progress";
 type QuizMode = "normal" | "study" | "exam" | "overview";
+const CATEGORY_COUNT = Object.keys(categories).length;
+
 type ResumeSession = {
   ids: string[];
   index: number;
@@ -466,7 +468,9 @@ function App() {
     return (
       <main className="chapter-page">
         <div className="chapter-card">
-          <span className="chapter-number">CHAPTER {learning.chapter} / 9</span>
+          <span className="chapter-number">
+            CHAPTER {learning.chapter} / {CATEGORY_COUNT}
+          </span>
           <div className="chapter-icon">{categories[question.category].icon}</div>
           <p className="eyebrow">{categories[question.category].label}</p>
           <h1>{learning.goal}</h1>
@@ -968,7 +972,7 @@ function App() {
           <span>公式準拠の問題</span>
         </div>
         <div>
-          <strong>{Object.keys(categories).length}</strong>
+          <strong>{CATEGORY_COUNT}</strong>
           <span>学習カテゴリ</span>
         </div>
         <div>
@@ -992,7 +996,7 @@ function App() {
           <button className="mode-card featured" onClick={() => startMode("overview")}>
             <span>01</span>
             <div>
-              <small>9 CHAPTERS</small>
+              <small>{CATEGORY_COUNT} CHAPTERS</small>
               <h3>全体像モード</h3>
               <p>基本から拡張まで、順番にCodexの全体像をつかむ。</p>
             </div>
@@ -1012,7 +1016,7 @@ function App() {
             <div>
               <small>100 QUESTIONS</small>
               <h3>実力テスト</h3>
-              <p>9カテゴリからバランスよく100問。途中で正解を表示せず実力を確認。</p>
+              <p>{CATEGORY_COUNT}カテゴリからバランスよく100問。途中で正解を表示せず実力を確認。</p>
             </div>
             <b>→</b>
           </button>

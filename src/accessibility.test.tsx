@@ -30,5 +30,7 @@ describe("accessibility landmarks", () => {
     expect(html).toContain("解説を読む");
     expect(html).toContain("ランダム10問を始める");
     expect(html).toContain("<strong>9</strong><span>学習カテゴリ</span>");
+    expect(html).toContain("<small>9 CHAPTERS</small>");
+    expect(html).toContain("9カテゴリからバランスよく100問");
   });
 });
