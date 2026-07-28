@@ -86,3 +86,12 @@ test("reader and progress deep links open the requested screen", async ({ page }
   await expect(page.getByRole("heading", { name: "学習の現在地" })).toBeVisible();
   await expect(page).toHaveURL(/\?view=progress$/);
 });
+
+test("primary screens do not overflow horizontally at the minimum mobile width", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 700 });
+
+  for (const path of ["/", "/?view=reader", "/?view=progress"]) {
+    await page.goto(path);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  }
+});

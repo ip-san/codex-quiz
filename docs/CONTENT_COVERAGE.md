@@ -203,6 +203,8 @@ session再読込みを重ねて問う2問のうち1問を、monorepoの対象sub
 
 正解時の短いfeedbackで次問ボタンの`float`が枠の高さから外れ、表示が崩れる問題を修正した。ボタンを通常flowのまま右寄せし、540px以下では従来どおり全幅表示する。最小対応幅320pxの実ブラウザでterminal図解付きfeedbackまで確認し、ボタンの四辺がfeedback枠内に収まることとpage全体に横overflowがないことを測るE2Eを追加した。
 
+ホーム・解説リーダー・進捗画面も320px幅の実ブラウザで監査し、横overflowがないことを確認した。3画面のdeep linkを巡回してdocument幅を検査するresponsive E2Eを追加し、クイズ画面だけでなく主要4画面の最小幅を継続保証する。
+
 ## 2026-07-19 Lighthouse品質ゲート
 
 本番ビルドへLighthouseの最低スコア検査を追加した。Performance 80、Accessibility 95、Best Practices 90、SEO 80を下回る退行をGitHub Actionsで検出し、問題数ではなく学習画面の配信品質を継続的に守る。
