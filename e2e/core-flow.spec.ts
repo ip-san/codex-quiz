@@ -33,7 +33,7 @@ test("answering announces feedback and moves focus", async ({ page }) => {
 });
 
 test("correct-answer action stays inside feedback on mobile", async ({ page }) => {
-  await page.setViewportSize({ width: 375, height: 812 });
+  await page.setViewportSize({ width: 320, height: 700 });
   await page.goto("/?q=basic-01");
   await page.getByRole("button", { name: /Codex CLI/ }).click();
 
@@ -47,6 +47,7 @@ test("correct-answer action stays inside feedback on mobile", async ({ page }) =
   expect(buttonBox!.x).toBeGreaterThanOrEqual(feedbackBox!.x);
   expect(buttonBox!.x + buttonBox!.width).toBeLessThanOrEqual(feedbackBox!.x + feedbackBox!.width);
   expect(buttonBox!.y + buttonBox!.height).toBeLessThanOrEqual(feedbackBox!.y + feedbackBox!.height);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
 });
 
 test("a wrong answer loads its choice-specific feedback", async ({ page }) => {
