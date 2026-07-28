@@ -205,6 +205,10 @@ session再読込みを重ねて問う2問のうち1問を、monorepoの対象sub
 
 ホーム・解説リーダー・進捗画面も320px幅の実ブラウザで監査し、横overflowがないことを確認した。3画面のdeep linkを巡回してdocument幅を検査するresponsive E2Eを追加し、クイズ画面だけでなく主要4画面の最小幅を継続保証する。
 
+## 2026-07-28 ホーム統計のデータ連動
+
+ホームの学習カテゴリ数が過去の6カテゴリで固定され、現在の9カテゴリと不一致だった表示bugを修正した。問題数と同様にカテゴリ定義から動的算出し、実データ拡充時に表示だけが古くならないようstatic render testを追加した。
+
 ## 2026-07-19 Lighthouse品質ゲート
 
 本番ビルドへLighthouseの最低スコア検査を追加した。Performance 80、Accessibility 95、Best Practices 90、SEO 80を下回る退行をGitHub Actionsで検出し、問題数ではなく学習画面の配信品質を継続的に守る。

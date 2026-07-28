@@ -968,7 +968,7 @@ function App() {
           <span>公式準拠の問題</span>
         </div>
         <div>
-          <strong>6</strong>
+          <strong>{Object.keys(categories).length}</strong>
           <span>学習カテゴリ</span>
         </div>
         <div>
