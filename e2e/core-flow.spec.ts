@@ -77,6 +77,17 @@ test("question share URL opens a one-question session", async ({ page }) => {
   await expect(page).toHaveURL(/\?q=basic-01$/);
 });
 
+test("result retry preserves the completed session scope", async ({ page }) => {
+  await page.goto("/?q=basic-01");
+  await page.locator("button.choice").first().click();
+  await page.getByRole("button", { name: "結果を見る" }).click();
+  await expect(page.getByRole("heading", { name: /すばらしい|いい調子|ここから伸びます/ })).toBeVisible();
+
+  await page.getByRole("button", { name: "同じ内容でもう一度" }).click();
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "1");
+  await expect(page).toHaveURL(/\?q=basic-01$/);
+});
+
 test("reader and progress deep links open the requested screen", async ({ page }) => {
   await page.goto("/?view=reader");
   await expect(page.getByRole("textbox", { name: "問題を検索" })).toBeVisible();
@@ -92,6 +103,13 @@ test("primary screens do not overflow horizontally at the minimum mobile width",
 
   for (const path of ["/", "/?view=reader", "/?view=progress"]) {
     await page.goto(path);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+    const width = await page.evaluate(() => document.documentElement.scrollWidth);
+    const overflow = await page.evaluate(() =>
+      [...document.querySelectorAll<HTMLElement>("body *")]
+        .filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1)
+        .slice(0, 5)
+        .map((element) => `${element.tagName.toLowerCase()}.${element.className}`),
+    );
+    expect(width, `${path} should not overflow horizontally: ${overflow.join(", ")}`).toBeLessThanOrEqual(320);
   }
 });

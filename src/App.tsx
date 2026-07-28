@@ -297,6 +297,29 @@ function App() {
     window.scrollTo(0, 0);
   };
 
+  const restartSession = () => {
+    const nextSession = quizMode === "overview" ? session : shuffle(session);
+    setSession(nextSession);
+    setIndex(0);
+    setScore(0);
+    setSelected(null);
+    setStudyPhase(quizMode === "study");
+    setShowChapterIntro(quizMode === "overview");
+    setScreen("quiz");
+    const resume = {
+      ids: nextSession.map((quiz) => quiz.id),
+      index: 0,
+      score: 0,
+      label: sessionLabel,
+      category: sessionCategory,
+      selected: null,
+      mode: quizMode,
+    };
+    localStorage.setItem("codex-quiz-session", JSON.stringify(resume));
+    setResumableSession(resume);
+    window.scrollTo(0, 0);
+  };
+
   const answer = (choice: number) => {
     if (selected !== null) return;
     const correct = choice === question.answer;
@@ -638,8 +661,8 @@ function App() {
           </div>
           <p>正答率 {percent}%</p>
           <div className="result-actions">
-            <button className="primary" onClick={() => start()}>
-              もう一度挑戦
+            <button className="primary" onClick={restartSession}>
+              同じ内容でもう一度
             </button>
             <button className="secondary" onClick={() => setScreen("home")}>
               ホームへ
