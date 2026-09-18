@@ -27,6 +27,20 @@ test("quiz has no WCAG A or AA violations", async ({ page }) => {
   await scan(page);
 });
 
+test("chapter introduction has no WCAG A or AA violations", async ({ page }) => {
+  await page.getByRole("button", { name: /全体像モード/ }).click();
+  await expect(page.getByRole("button", { name: /チャプターを始める/ })).toBeVisible();
+  await scan(page);
+});
+
+test("result has no WCAG A or AA violations", async ({ page }) => {
+  await page.goto("/?q=basic-01");
+  await page.locator("button.choice").first().click();
+  await page.getByRole("button", { name: "結果を見る" }).click();
+  await expect(page.getByRole("button", { name: "同じ内容でもう一度" })).toBeVisible();
+  await scan(page);
+});
+
 test("reader has no WCAG A or AA violations", async ({ page }) => {
   await page.goto("/?view=reader");
   await expect(page.getByRole("textbox", { name: "問題を検索" })).toBeVisible();

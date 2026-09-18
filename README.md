@@ -61,7 +61,7 @@ npm run check
 
 `npm run quiz:check` では、問題ID、カテゴリ、4択、正解インデックス、問題・選択肢の重複、解説長、公式出典を検査します。GitHub Actionsでもpush・Pull Requestごとに同じ品質ゲートを実行します。
 
-`npm run test:e2e` ではChromium上の主要導線に加え、home・quiz・reader・progressをaxe-coreで検査し、WCAG 2.1 A/AA違反を検出します。
+`npm run test:e2e` ではChromium上の主要導線に加え、home・quiz・chapter・result・reader・progressをaxe-coreで検査し、WCAG 2.1 A/AA違反を検出します。
 
 `npm run lighthouse:check` では本番ビルドをローカル配信し、Performance 80、Accessibility 95、Best Practices 90、SEO 80を最低スコアとして検査します。
 
