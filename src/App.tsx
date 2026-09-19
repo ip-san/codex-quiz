@@ -31,7 +31,19 @@ const readResumeSession = (): ResumeSession | null => {
   try {
     const value = JSON.parse(localStorage.getItem("codex-quiz-session") ?? "null") as ResumeSession | null;
     if (!value || !Array.isArray(value.ids) || value.ids.length === 0) return null;
-    if (value.index < 0 || value.index >= value.ids.length) return null;
+    if (!Number.isInteger(value.index) || value.index < 0 || value.index >= value.ids.length) return null;
+    if (
+      !Number.isInteger(value.score) ||
+      value.score < 0 ||
+      value.score > value.index + (value.selected === null ? 0 : 1)
+    )
+      return null;
+    if (typeof value.label !== "string" || !value.label.trim()) return null;
+    if (value.category !== null && !Object.hasOwn(categories, value.category)) return null;
+    if (value.mode !== undefined && !["normal", "study", "exam", "overview"].includes(value.mode)) return null;
+    if (value.selected !== null && (!Number.isInteger(value.selected) || value.selected < 0 || value.selected > 3))
+      return null;
+    if (new Set(value.ids).size !== value.ids.length) return null;
     if (value.ids.some((id) => !quizzes.some((quiz) => quiz.id === id))) return null;
     return value;
   } catch {
@@ -230,6 +242,8 @@ function App() {
     setSessionLabel("苦手問題の復習");
     setSessionCategory(null);
     setQuizMode("normal");
+    setStudyPhase(false);
+    setShowChapterIntro(false);
     setScreen("quiz");
     const resume = {
       ids: nextSession.map((quiz) => quiz.id),
@@ -254,6 +268,8 @@ function App() {
     setSessionLabel("60秒チェック");
     setSessionCategory(null);
     setQuizMode("normal");
+    setStudyPhase(false);
+    setShowChapterIntro(false);
     setScreen("quiz");
     const resume = {
       ids: nextSession.map((quiz) => quiz.id),
@@ -458,6 +474,7 @@ function App() {
     setSessionCategory(resumableSession.category);
     setQuizMode(resumableSession.mode ?? "normal");
     setStudyPhase((resumableSession.mode ?? "normal") === "study" && resumableSession.selected === null);
+    setShowChapterIntro(false);
     setScreen("quiz");
   };
 

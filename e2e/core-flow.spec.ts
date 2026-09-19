@@ -5,6 +5,31 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => localStorage.clear());
 });
 
+test("invalid saved session is ignored without deleting the original", async ({ page }) => {
+  const invalid = { ids: ["basic-01"], index: "0", score: 0, label: "broken", category: null, selected: null };
+  await page.evaluate((value) => localStorage.setItem("codex-quiz-session", JSON.stringify(value)), invalid);
+  await page.reload();
+  await expect(page.getByRole("heading", { name: /Codexを/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /再開する/ })).toHaveCount(0);
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-session") ?? "null"))).toEqual(invalid);
+});
+
+for (const mode of ["normal", "study", "exam", "overview"]) {
+  test(`saved ${mode} answer resumes without adding another attempt`, async ({ page }) => {
+    await page.evaluate((savedMode) => {
+      localStorage.setItem("codex-quiz-session", JSON.stringify({
+        ids: ["basic-01"], index: 0, score: 1, label: "再開テスト",
+        category: null, selected: 0, mode: savedMode,
+      }));
+    }, mode);
+    await page.reload();
+    await page.getByRole("button", { name: /再開する/ }).click();
+    await expect(page.getByRole("button", { name: "結果を見る" })).toBeVisible();
+    await expect(page.locator("button.choice").first()).toBeDisabled();
+    expect(await page.evaluate(() => localStorage.getItem("codex-quiz-progress"))).toBeNull();
+  });
+}
+
 test("chapter progress survives reload and starts category practice", async ({ page }) => {
   await page.goto("/?q=basic-01");
   await page.getByRole("button", { name: /Codex CLI/ }).click();
