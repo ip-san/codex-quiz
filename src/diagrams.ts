@@ -5,6 +5,27 @@ export type DiagramData =
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "prompt-18": [
+    {
+      type: "flow",
+      label: "保存の不具合を同じ手順で検証する",
+      steps: [
+        { text: "再現", sub: "操作順と結果を記録" },
+        { text: "修正", sub: "原因へ絞って変更" },
+        { text: "再確認", sub: "再読込後の値も確認" },
+      ],
+    },
+  ],
+  "prompt-21": [
+    {
+      type: "comparison",
+      label: "画像と文章でUI要件を補う",
+      columns: [
+        { heading: "画像で示す", items: ["配置・余白", "文字・色", "静止状態の見た目"] },
+        { heading: "文章で補う", items: ["入力エラーの条件", "保存中・失敗時の動作", "キーボード操作"] },
+      ],
+    },
+  ],
   "agents-10": [
     {
       type: "terminal",

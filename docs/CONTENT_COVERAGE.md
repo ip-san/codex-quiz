@@ -228,3 +228,7 @@ axe-coreによるWCAG 2.1 A/AA検査を、既存のhome・quiz・reader・progre
 ## 2026-07-19 Lighthouse品質ゲート
 
 本番ビルドへLighthouseの最低スコア検査を追加した。Performance 80、Accessibility 95、Best Practices 90、SEO 80を下回る退行をGitHub Actionsで検出し、問題数ではなく学習画面の配信品質を継続的に守る。
+
+## 2026-09-19 実務scenario拡充・第2弾
+
+公式[Prompting Codex](https://learn.chatgpt.com/docs/prompting)を確認し、プロンプト分野へ5問追加して255問にした。再現手順によるbug修正、処理経路と根拠ファイル、関数単位の境界値テスト、画像に見えないUI動作、互換性を保つ段階的refactorを扱う。全追加問題へ誤答別feedbackと追跡metadataを付与し、flow・comparison図解を2問へ追加した。図解付き問題は54問。topic識別子の一意性だけでは意味重複を保証できないため、READMEの検査説明も実態へ合わせた。
