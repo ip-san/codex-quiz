@@ -5,6 +5,35 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => localStorage.clear());
 });
 
+test("malformed progress does not crash and is backed up before new answers", async ({ page }) => {
+  const raw = JSON.stringify({ answered: 3, correct: 1, questions: {}, bookmarks: {}, history: "broken" });
+  await page.evaluate((value) => localStorage.setItem("codex-quiz-progress", value), raw);
+  await page.reload();
+  await expect(page.getByRole("heading", { name: /Codexを/ })).toBeVisible();
+  expect(await page.evaluate(() => localStorage.getItem("codex-quiz-progress"))).toBe(raw);
+  expect(await page.evaluate(() => localStorage.getItem("codex-quiz-progress-recovery"))).toBe(raw);
+  await page.goto("/?q=basic-01");
+  await page.getByRole("button", { name: /Codex CLI/ }).click();
+  expect(await page.evaluate(() => localStorage.getItem("codex-quiz-progress-recovery"))).toBe(raw);
+});
+
+for (const mode of ["normal", "study", "exam", "overview"]) {
+  test(`unanswered ${mode} session resumes at the saved question`, async ({ page }) => {
+    await page.evaluate((savedMode) => localStorage.setItem("codex-quiz-session", JSON.stringify({
+      ids: ["basic-01"], index: 0, score: 0, label: "未回答の再開",
+      category: null, selected: null, mode: savedMode,
+    })), mode);
+    await page.reload();
+    await page.getByRole("button", { name: /再開する/ }).click();
+    if (mode === "study") await page.getByRole("button", { name: /理解したら問題へ/ }).click();
+    await expect(page.locator("button.choice")).toHaveCount(4);
+    await expect(page.locator("button.choice").first()).toBeEnabled();
+    await page.getByRole("button", { name: "ホームへ戻る" }).click();
+    await page.getByRole("button", { name: /再開する/ }).click();
+    await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuenow", "1");
+  });
+}
+
 test("invalid saved session is ignored without deleting the original", async ({ page }) => {
   const invalid = { ids: ["basic-01"], index: "0", score: 0, label: "broken", category: null, selected: null };
   await page.evaluate((value) => localStorage.setItem("codex-quiz-session", JSON.stringify(value)), invalid);

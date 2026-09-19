@@ -52,16 +52,27 @@ const readResumeSession = (): ResumeSession | null => {
 };
 
 const readProgress = (): SavedProgress => {
+  let raw: string | null = null;
   try {
-    const stored = JSON.parse(localStorage.getItem("codex-quiz-progress") ?? "") as Partial<SavedProgress>;
-    return {
-      answered: stored.answered ?? 0,
-      correct: stored.correct ?? 0,
-      questions: stored.questions ?? {},
-      bookmarks: stored.bookmarks ?? [],
-      history: stored.history ?? [],
-    };
+    raw = localStorage.getItem("codex-quiz-progress");
+    if (raw === null) return emptyProgress;
+    const stored: unknown = JSON.parse(raw);
+    if (!stored || typeof stored !== "object" || Array.isArray(stored)) throw new Error("Invalid saved progress");
+    return parseProgressExport(
+      JSON.stringify({
+        format: "codex-quiz-progress",
+        version: 1,
+        data: { ...emptyProgress, ...stored },
+      }),
+    );
   } catch {
+    if (raw !== null) {
+      try {
+        localStorage.setItem("codex-quiz-progress-recovery", raw);
+      } catch {
+        // Storage may be unavailable; never delete the original saved data.
+      }
+    }
     return emptyProgress;
   }
 };
