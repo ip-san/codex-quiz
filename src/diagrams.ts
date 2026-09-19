@@ -5,6 +5,31 @@ export type DiagramData =
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "session-24": [
+    {
+      type: "terminal",
+      label: "元の会話を残し、別案を検討する",
+      lines: [
+        { kind: "info", text: "起動済みのCodex CLIの入力欄で操作します（shellコマンドではありません）" },
+        { kind: "command", text: "/fork" },
+        { kind: "info", text: "ここまでの履歴を、新しいIDの会話へ引き継ぐ" },
+        { kind: "info", text: "元の会話の履歴はそのまま残る" },
+        { kind: "info", text: "分岐先で代替案を相談する。ファイルの作業場所を分離する操作とは別です" },
+      ],
+    },
+  ],
+  "session-25": [
+    {
+      type: "terminal",
+      label: "別の話題は、新しい会話で始める",
+      lines: [
+        { kind: "info", text: "起動済みのCodex CLIの入力欄で操作します（shellコマンドではありません）" },
+        { kind: "command", text: "/new" },
+        { kind: "info", text: "CLIを終了せず、会話のcontextを新しくする" },
+        { kind: "info", text: "新しい質問を入力する。前の会話を要約して続ける/compactとは目的が違う" },
+      ],
+    },
+  ],
   "session-21": [
     {
       type: "terminal",
