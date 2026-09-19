@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-19 実務scenario拡充・第4弾
+
+公式[Git worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees)を確認し、3問を追加して263問とした。未commit変更を引き継ぐ開始状態、.worktreeincludeがignoredファイルだけを対象とする点、local managed worktreeとCLIで作成したworktreeの適用範囲を扱う。既存のsetup・handoff問題との重複を避け、設定ファイルが渡らない原因を判断するscenarioに絞った。全問に誤答別feedbackと追跡metadataを付与した。
+
 ## 2026-09-19 実務scenario拡充・第3弾
 
 公式[Developer commands](https://learn.chatgpt.com/docs/developer-commands)を確認し、セッション管理へ5問を追加して260問とした。resumeのdirectory検索範囲、再開先directoryの選択、明示的な`--cd`の優先順位、fork後の会話IDと履歴、新しいcontextを作る`/new`とcompactの使い分けを扱う。全問に誤答別feedbackと追跡metadataを付与。`codex resume --last`と`codex resume --all`の違いを示すterminal図解を追加し、図解55問・terminal例29件となった。
