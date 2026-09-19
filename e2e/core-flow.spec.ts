@@ -5,6 +5,20 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => localStorage.clear());
 });
 
+test("reader filters weak questions and resets empty filters", async ({ page }) => {
+  await page.goto("/?q=basic-01");
+  await page.getByRole("button", { name: /Responses API/ }).click();
+  await page.goto("/?view=reader");
+  await page.getByRole("combobox", { name: "復習対象で絞り込み" }).selectOption("weak");
+  await expect(page.locator(".reader-card")).toHaveCount(1);
+  await page.getByRole("textbox", { name: "問題を検索" }).fill("no-matching-question-xyz");
+  await expect(page.locator(".reader-card")).toHaveCount(0);
+  await page.getByRole("button", { name: "絞り込みをすべて解除" }).click();
+  await expect(page.getByRole("combobox", { name: "復習対象で絞り込み" })).toHaveValue("all");
+  await expect(page.getByRole("textbox", { name: "問題を検索" })).toHaveValue("");
+  expect(await page.locator(".reader-card").count()).toBeGreaterThan(1);
+});
+
 test("beginner guide starts study mode and remains available after learning", async ({ page }) => {
   await page.reload();
   const guide = page.locator("details.learning-guide");

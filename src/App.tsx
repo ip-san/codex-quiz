@@ -88,6 +88,7 @@ function App() {
   const [readerQuery, setReaderQuery] = useState("");
   const [readerCategory, setReaderCategory] = useState<Category | "all">("all");
   const [bookmarksOnly, setBookmarksOnly] = useState(false);
+  const [readerReview, setReaderReview] = useState<"all" | "weak" | "due">("all");
   const [sessionLabel, setSessionLabel] = useState("ランダム10問");
   const [sessionCategory, setSessionCategory] = useState<Category | null>(null);
   const [shareMessage, setShareMessage] = useState("");
@@ -176,7 +177,10 @@ function App() {
       );
     const matchesCategory = readerCategory === "all" || quiz.category === readerCategory;
     const matchesBookmark = !bookmarksOnly || progress.bookmarks.includes(quiz.id);
-    return matchesQuery && matchesCategory && matchesBookmark;
+    const matchesReview =
+      readerReview === "all" ||
+      (readerReview === "weak" ? weakQuestions : dueQuestions).some((item) => item.id === quiz.id);
+    return matchesQuery && matchesCategory && matchesBookmark && matchesReview;
   });
   const streak = calculateStreak(progress.history);
   const categoryStats = Object.keys(categories).map((key) => {
@@ -741,13 +745,25 @@ function App() {
           </select>
           <button
             className={`filter-button ${bookmarksOnly ? "active" : ""}`}
+            aria-pressed={bookmarksOnly}
             onClick={() => setBookmarksOnly((value) => !value)}
           >
             ★ 保存済み {progress.bookmarks.length}
           </button>
+          <select
+            aria-label="復習対象で絞り込み"
+            value={readerReview}
+            onChange={(event) => setReaderReview(event.target.value as "all" | "weak" | "due")}
+          >
+            <option value="all">すべての学習状態</option>
+            <option value="weak">苦手問題（{weakQuestions.length}問）</option>
+            <option value="due">復習時期が来た問題（{dueQuestions.length}問）</option>
+          </select>
         </section>
         <section className="reader-results">
-          <p className="reader-count">{readerQuestions.length}件を表示</p>
+          <p className="reader-count" role="status">
+            {readerQuestions.length}件を表示
+          </p>
           <div className="reader-list">
             {readerQuestions.map((quiz) => (
               <article className="reader-card" key={quiz.id}>
@@ -778,6 +794,17 @@ function App() {
             <div className="empty-reader">
               <strong>該当する解説がありません</strong>
               <p>検索語やフィルターを変更してください。</p>
+              <button
+                className="secondary"
+                onClick={() => {
+                  setReaderQuery("");
+                  setReaderCategory("all");
+                  setBookmarksOnly(false);
+                  setReaderReview("all");
+                }}
+              >
+                絞り込みをすべて解除
+              </button>
             </div>
           )}
         </section>
