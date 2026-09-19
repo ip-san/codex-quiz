@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { categories, categoryLearning, hydrateWrongFeedback, quizzes, type Category, type Quiz } from "./data";
 import { orderChoices } from "./domain/choiceOrder";
 import { selectBalancedExam } from "./domain/examSelection";
+import { scenarios } from "./domain/scenarios";
 import { DiagramRenderer } from "./components/DiagramRenderer";
 import { quizDiagrams } from "./diagrams";
 import {
@@ -14,7 +15,7 @@ import {
 import { getReviewLabel, isReviewDue, scheduleReview, type QuestionProgress } from "./domain/spacedRepetition";
 
 type Screen = "home" | "quiz" | "result" | "reader" | "progress";
-type QuizMode = "normal" | "study" | "exam" | "overview";
+type QuizMode = "normal" | "study" | "exam" | "overview" | "scenario";
 const CATEGORY_COUNT = Object.keys(categories).length;
 
 type ResumeSession = {
@@ -40,7 +41,8 @@ const readResumeSession = (): ResumeSession | null => {
       return null;
     if (typeof value.label !== "string" || !value.label.trim()) return null;
     if (value.category !== null && !Object.hasOwn(categories, value.category)) return null;
-    if (value.mode !== undefined && !["normal", "study", "exam", "overview"].includes(value.mode)) return null;
+    if (value.mode !== undefined && !["normal", "study", "exam", "overview", "scenario"].includes(value.mode))
+      return null;
     if (value.selected !== null && (!Number.isInteger(value.selected) || value.selected < 0 || value.selected > 3))
       return null;
     if (new Set(value.ids).size !== value.ids.length) return null;
@@ -296,7 +298,36 @@ function App() {
     window.scrollTo(0, 0);
   };
 
-  const startMode = (mode: Exclude<QuizMode, "normal">) => {
+  const startScenario = (scenario: (typeof scenarios)[number]) => {
+    const nextSession = scenario.ids
+      .map((id) => quizzes.find((quiz) => quiz.id === id))
+      .filter((quiz): quiz is Quiz => Boolean(quiz));
+    if (nextSession.length !== scenario.ids.length) return;
+    const resume: ResumeSession = {
+      ids: [...scenario.ids],
+      index: 0,
+      score: 0,
+      label: scenario.title,
+      category: null,
+      selected: null,
+      mode: "scenario",
+    };
+    setSession(nextSession);
+    setIndex(0);
+    setScore(0);
+    setSelected(null);
+    setSessionLabel(scenario.title);
+    setSessionCategory(null);
+    setQuizMode("scenario");
+    setStudyPhase(false);
+    setShowChapterIntro(false);
+    localStorage.setItem("codex-quiz-session", JSON.stringify(resume));
+    setResumableSession(resume);
+    setScreen("quiz");
+    window.scrollTo(0, 0);
+  };
+
+  const startMode = (mode: "study" | "exam" | "overview") => {
     const nextSession =
       mode === "overview"
         ? [...quizzes].sort((a, b) => categoryLearning[a.category].chapter - categoryLearning[b.category].chapter)
@@ -329,7 +360,7 @@ function App() {
   };
 
   const restartSession = () => {
-    const nextSession = quizMode === "overview" ? session : shuffle(session);
+    const nextSession = quizMode === "overview" || quizMode === "scenario" ? session : shuffle(session);
     setSession(nextSession);
     setIndex(0);
     setScore(0);
@@ -571,6 +602,12 @@ function App() {
           <span style={{ width: `${((index + 1) / session.length) * 100}%` }} />
         </div>
         <section className="question-card">
+          {quizMode === "scenario" && (
+            <p className="eyebrow">
+              {sessionLabel} · STEP {index + 1}/{session.length} ·{" "}
+              {scenarios.find((course) => course.title === sessionLabel)?.steps[index]}
+            </p>
+          )}
           <div className="question-tools">
             <div className="eyebrow">
               <span>{categories[question.category].icon}</span>
@@ -1111,6 +1148,26 @@ function App() {
           解説を読んで10問に挑戦
         </button>
       </details>
+      <section className="mode-section" aria-labelledby="scenario-heading">
+        <h2 id="scenario-heading">実践シナリオ</h2>
+        <p>各3問。実務の順序で判断を練習します。実際のコード操作は行いません。</p>
+        <div className="mode-grid">
+          {scenarios.map((scenario) => (
+            <div className="learning-guide" key={scenario.id}>
+              <h3>{scenario.title}</h3>
+              <p>{scenario.description}</p>
+              <ol>
+                {scenario.steps.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ol>
+              <button className="secondary" onClick={() => startScenario(scenario)}>
+                {scenario.title}を始める
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
       <section className="stats">
         <div>
           <strong>{quizzes.length}</strong>

@@ -5,6 +5,24 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => localStorage.clear());
 });
 
+test("scenario keeps its order through resume, completion and retry", async ({ page }) => {
+  await page.reload();
+  await page.getByRole("button", { name: "不具合を再現して修正を確かめるを始める" }).click();
+  const savedIds = ["prompt-18", "prompt-20", "workflow-01"];
+  await page.locator("button.choice").first().click();
+  await page.getByRole("button", { name: /次の問題へ/ }).click();
+  await page.reload();
+  await page.getByRole("button", { name: /再開する/ }).click();
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuenow", "2");
+  for (let i = 0; i < 2; i++) {
+    await page.locator("button.choice").first().click();
+    await page.getByRole("button", { name: /次の問題へ|結果を見る/ }).click();
+  }
+  await page.getByRole("button", { name: "同じ内容でもう一度" }).click();
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-session") ?? "null").ids)).toEqual(savedIds);
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuenow", "1");
+});
+
 test("malformed progress does not crash and is backed up before new answers", async ({ page }) => {
   const raw = JSON.stringify({ answered: 3, correct: 1, questions: {}, bookmarks: {}, history: "broken" });
   await page.evaluate((value) => localStorage.setItem("codex-quiz-progress", value), raw);
