@@ -5,6 +5,41 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => localStorage.clear());
 });
 
+test("beginner guide starts study mode and remains available after learning", async ({ page }) => {
+  await page.reload();
+  const guide = page.locator("details.learning-guide");
+  await expect(guide).toHaveAttribute("open", "");
+  await page.getByRole("button", { name: "解説を読んで10問に挑戦" }).click();
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-session") ?? "null"));
+  expect(saved.mode).toBe("study");
+  expect(saved.ids).toHaveLength(10);
+  await page.goto("/?q=basic-01");
+  await page.getByRole("button", { name: /Codex CLI/ }).click();
+  await page.goto("/");
+  await expect(guide).not.toHaveAttribute("open");
+  await guide.locator("summary").click();
+  await expect(page.getByRole("button", { name: "解説を読んで10問に挑戦" })).toBeVisible();
+});
+
+test("result recommends weak review after a wrong answer", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.goto("/?q=basic-01");
+  await page.getByRole("button", { name: /Responses API/ }).click();
+  await page.getByRole("button", { name: "結果を見る" }).click();
+  await expect(page.getByRole("heading", { name: "次のおすすめ" })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  await page.getByRole("button", { name: "苦手問題を復習する" }).click();
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "1");
+});
+
+test("result allows a learner with no pending review to finish", async ({ page }) => {
+  await page.goto("/?q=basic-01");
+  await page.getByRole("button", { name: /Codex CLI/ }).click();
+  await page.getByRole("button", { name: "結果を見る" }).click();
+  await page.getByRole("button", { name: "学習の成果を見る" }).click();
+  await expect(page.getByRole("heading", { name: "学習の現在地" })).toBeVisible();
+});
+
 test("home exposes navigation and starts a quiz", async ({ page }) => {
   await page.reload();
   await expect(page.getByRole("navigation", { name: "メインナビゲーション" })).toBeVisible();

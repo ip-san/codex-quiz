@@ -111,3 +111,29 @@ footer { border-top: 1px solid #dddad2; padding: 35px max(28px, calc((100vw - 11
 .diagram.diagram-terminal > figcaption,
 .diagram.diagram-config > figcaption { color: #b8bdc0; }
 .diagram-terminal header span { color: #adb2b5; }
+ .learning-guide {
+  margin: 24px 0;
+  padding: 20px;
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.learning-guide summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.learning-guide h2 {
+  font-size: 1.15rem;
+}
+.learning-guide p,
+.learning-guide li {
+  line-height: 1.8;
+}
+.learning-guide ol {
+  padding-left: 1.5em;
+}
+.learning-guide button {
+  max-width: 100%;
+  white-space: normal;
+}
