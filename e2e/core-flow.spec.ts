@@ -5,6 +5,20 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => localStorage.clear());
 });
 
+test("reader links a specific quiz and its official reference", async ({ page }) => {
+  await page.goto("/?view=reader");
+  const card = page.locator(".reader-card").first();
+  const quizLink = card.getByRole("link", { name: "この問題を解く" });
+  const destination = await quizLink.getAttribute("href");
+  const reference = card.getByRole("link", { name: "公式資料を読む（別タブ）" });
+  await expect(reference).toHaveAttribute("href", /^https:\/\/(learn\.chatgpt\.com|developers\.openai\.com)\//);
+  await expect(reference).toHaveAttribute("target", "_blank");
+  await quizLink.click();
+  expect(new URL(page.url()).search).toBe(destination);
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "1");
+  await expect(page.locator("button.choice")).toHaveCount(4);
+});
+
 test("reader filters weak questions and resets empty filters", async ({ page }) => {
   await page.goto("/?q=basic-01");
   await page.getByRole("button", { name: /Responses API/ }).click();

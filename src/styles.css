@@ -137,3 +137,16 @@ footer { border-top: 1px solid #dddad2; padding: 35px max(28px, calc((100vw - 11
   max-width: 100%;
   white-space: normal;
 }
+.reader-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-top: 16px;
+}
+.reader-card-actions a {
+  color: #174d36;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 8px 0;
+  overflow-wrap: anywhere;
+}

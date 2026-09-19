@@ -787,6 +787,14 @@ function App() {
                 <p>{quiz.explanation}</p>
                 <DiagramRenderer diagrams={quizDiagrams[quiz.id] ?? []} />
                 <div className="reader-source">OpenAI公式 — {quiz.source}</div>
+                <div className="reader-card-actions">
+                  <a href={`?q=${encodeURIComponent(quiz.id)}`}>この問題を解く →</a>
+                  {quiz.referenceUrl && (
+                    <a href={quiz.referenceUrl} target="_blank" rel="noopener noreferrer">
+                      公式資料を読む（別タブ）
+                    </a>
+                  )}
+                </div>
               </article>
             ))}
           </div>
