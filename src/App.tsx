@@ -873,6 +873,29 @@ function App() {
             </div>
           </div>
           <div className="dashboard-grid">
+            <section className="mastery-panel" aria-labelledby="chapter-progress-heading">
+              <h2 id="chapter-progress-heading">チャプターの学習状況</h2>
+              <p>各章の全問に1回以上回答すると「一巡済み」です。正答率や習熟とは別の目安です。</p>
+              {categoryCounts.map(({ key, count }) => {
+                const answered = quizzes.filter(
+                  (quiz) => quiz.category === key && (progress.questions[quiz.id]?.attempts ?? 0) > 0,
+                ).length;
+                return (
+                  <div className="learning-guide" key={key}>
+                    <h3>
+                      第{categoryLearning[key].chapter}章 · {categories[key].label}
+                    </h3>
+                    <p>
+                      {answered === count ? "一巡済み" : answered === 0 ? "未着手" : "学習中"} · 回答済み {answered}/
+                      {count}問 · 残り {count - answered}問
+                    </p>
+                    <button className="secondary" onClick={() => start(key)}>
+                      {answered === count ? "この章を復習する" : "この章を学ぶ"}
+                    </button>
+                  </div>
+                );
+              })}
+            </section>
             <section className="mastery-panel">
               <div className="panel-title">
                 <div>

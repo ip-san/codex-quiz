@@ -5,6 +5,19 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => localStorage.clear());
 });
 
+test("chapter progress survives reload and starts category practice", async ({ page }) => {
+  await page.goto("/?q=basic-01");
+  await page.getByRole("button", { name: /Codex CLI/ }).click();
+  await page.goto("/?view=progress");
+  await expect(page.getByRole("heading", { name: "チャプターの学習状況" })).toBeVisible();
+  await page.reload();
+  const chapters = page.getByRole("region", { name: "チャプターの学習状況" });
+  await expect(chapters).toContainText("回答済み 1/20問");
+  await expect(chapters).toContainText("残り 19問");
+  await chapters.getByRole("button", { name: "この章を学ぶ" }).first().click();
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "20");
+});
+
 test("reader links a specific quiz and its official reference", async ({ page }) => {
   await page.goto("/?view=reader");
   const card = page.locator(".reader-card").first();
