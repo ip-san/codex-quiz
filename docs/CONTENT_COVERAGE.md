@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-19 実務scenario拡充・第3弾
+
+公式[Developer commands](https://learn.chatgpt.com/docs/developer-commands)を確認し、セッション管理へ5問を追加して260問とした。resumeのdirectory検索範囲、再開先directoryの選択、明示的な`--cd`の優先順位、fork後の会話IDと履歴、新しいcontextを作る`/new`とcompactの使い分けを扱う。全問に誤答別feedbackと追跡metadataを付与。`codex resume --last`と`codex resume --all`の違いを示すterminal図解を追加し、図解55問・terminal例29件となった。
+
 | 領域 | 実務価値 | 状態 | 次の重点 |
 |---|---:|---|---|
 | Prompting・完了条件 | 最重要 | 実務フローあり | 既存問題のscenario品質改善 |

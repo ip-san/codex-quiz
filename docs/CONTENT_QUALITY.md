@@ -51,8 +51,8 @@ practical問題は通常出題とSRS期限超過問題の同条件時に弱く�
 
 ## 完了した移行
 
-- `wrongFeedback`を全255問へ付与済み。データ形式・遅延読込みUI・全選択肢の品質検査も実装済み。
-- `difficulty`・`value`・`topic`・`referenceUrl`・`verifiedAt`を全255問へ付与済み。公式仕様の再検証対象を追跡可能にしている。
+- `wrongFeedback`を全260問へ付与済み。データ形式・遅延読込みUI・全選択肢の品質検査も実装済み。
+- `difficulty`・`value`・`topic`・`referenceUrl`・`verifiedAt`を全260問へ付与済み。公式仕様の再検証対象を追跡可能にしている。
 
 ## 現在の拡充方針
 

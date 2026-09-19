@@ -5,6 +5,18 @@ export type DiagramData =
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "session-21": [
+    {
+      type: "terminal",
+      label: "CLIの再開候補を探す範囲",
+      lines: [
+        { kind: "command", text: "codex resume --last" },
+        { kind: "info", text: "現在の作業directory内の最新sessionを再開" },
+        { kind: "command", text: "codex resume --all" },
+        { kind: "info", text: "別directoryの候補も含め、対象sessionを選ぶ" },
+      ],
+    },
+  ],
   "prompt-18": [
     {
       type: "flow",

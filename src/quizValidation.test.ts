@@ -23,7 +23,7 @@ const validQuiz: Quiz = {
 describe("Codex quiz quality gate", () => {
   it("ships only structurally valid quiz data", () => {
     expect(validateQuizzes(quizzesWithFeedback)).toEqual([]);
-    expect(quizzes).toHaveLength(255);
+    expect(quizzes).toHaveLength(260);
     const categoryCounts = quizzes.reduce<Record<string, number>>((counts, quiz) => {
       counts[quiz.category] = (counts[quiz.category] ?? 0) + 1;
       return counts;
@@ -36,7 +36,7 @@ describe("Codex quiz quality gate", () => {
       security: 43,
       config: 22,
       extend: 46,
-      session: 20,
+      session: 25,
       workflow: 24,
       surfaces: 39,
     });
@@ -72,7 +72,7 @@ describe("Codex quiz quality gate", () => {
   it("requires useful feedback for every wrong choice when feedback is provided", () => {
     const issues = validateQuizzes([{ ...validQuiz, wrongFeedback: { 1: "短い" } }]);
     expect(issues.filter((issue) => issue.field === "wrongFeedback")).toHaveLength(3);
-    expect(Object.keys(wrongFeedback)).toHaveLength(255);
+    expect(Object.keys(wrongFeedback)).toHaveLength(260);
     expect(Object.keys(wrongFeedback).filter((id) => !quizzes.some((quiz) => quiz.id === id))).toEqual([]);
     const declaredFeedbackIds = [...wrongFeedbackSource.matchAll(/^ {2}"([^"]+)": \{$/gm)].map(([, id]) => id);
     expect(new Set(declaredFeedbackIds).size).toBe(declaredFeedbackIds.length);
@@ -123,7 +123,7 @@ describe("Codex quiz quality gate", () => {
     const terminalDiagrams = Object.values(quizDiagrams)
       .flat()
       .filter((diagram) => diagram.type === "terminal");
-    expect(terminalDiagrams).toHaveLength(28);
+    expect(terminalDiagrams).toHaveLength(29);
     expect(terminalDiagrams.every((diagram) => diagram.lines.some((line) => line.kind === "command"))).toBe(true);
   });
 });
