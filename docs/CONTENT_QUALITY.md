@@ -51,13 +51,13 @@ practical問題は通常出題とSRS期限超過問題の同条件時に弱く�
 
 ## 完了した移行
 
-- `wrongFeedback`を全240問へ付与済み。データ形式・遅延読込みUI・全選択肢の品質検査も実装済み。
-- `difficulty`・`value`・`topic`・`referenceUrl`・`verifiedAt`を全240問へ付与済み。公式仕様の再検証対象を追跡可能にしている。
+- `wrongFeedback`を全250問へ付与済み。データ形式・遅延読込みUI・全選択肢の品質検査も実装済み。
+- `difficulty`・`value`・`topic`・`referenceUrl`・`verifiedAt`を全250問へ付与済み。公式仕様の再検証対象を追跡可能にしている。
 
-## 現在の移行課題
+## 現在の拡充方針
 
-1. ページ名だけの`source`を公式referenceUrlへ移行する。
-2. 全問題へdifficulty、value、topic、verifiedAtを付与する。
-3. CLI名称暗記問題を実務シナリオ型へ書き換える。
-4. 選択肢品質lintと公式URL検査をCIへ追加する。
-5. OpenAI公式マニュアルのカバレッジ表とVerified Factsを整備する。
+1. 既存の一意topicを、異なる失敗・復旧状況から判断するscenarioで補強する。
+2. 問題数だけを目標にせず、実務価値が高く誤操作を防げる内容を優先する。
+3. 追加問題にもwrongFeedbackと全追跡metadataを同時に付与する。
+4. OpenAI公式ドキュメントの更新に合わせ、referenceUrlとverifiedAtを継続監査する。
+5. terminal操作が理解を助ける問題へ、再生・コピー可能な図解を選択的に追加する。

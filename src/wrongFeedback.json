@@ -1198,5 +1198,55 @@
     "1": "`agents.max_depth`は現行の同時thread上限fieldではありません。session単位のconcurrency設定を使います。",
     "2": "`sandbox.max_children`は文書化されたSubagent concurrency fieldではなく、sandbox設定と混同しています。",
     "3": "`threads.unlimited`は公式設定ではありません。resourceとcostを制御できる数値上限を設定します。"
+  },
+  "agents-15": {
+    "0": "同じ階層の候補をすべて結合しません。優先順で最初の非空fileだけを採用します。",
+    "2": "更新日時はinstruction discoveryの優先条件ではありません。file名の優先順で判断します。",
+    "3": "file sizeでは選びません。override、AGENTS.md、fallbackの順で最初の非空fileを使います。"
+  },
+  "agents-16": {
+    "0": "空のoverride fileは採用されません。同じ階層の次候補であるAGENTS.mdまで探索が続きます。",
+    "2": "global guidanceだけに限定されません。project階層では空fileをskipして次の候補を確認します。",
+    "3": "空のinstruction fileは起動errorではありません。無視されるため内容のある次候補が使われます。"
+  },
+  "agents-17": {
+    "0": "project rootを検出できない時にfilesystem rootまで遡ると、意図しない親指示を拾うため行いません。",
+    "2": "固定の3階層という規則はありません。project rootがなければcurrent directoryだけを確認します。",
+    "3": "global scopeとは別に、project scopeとしてcurrent directoryのinstruction fileを確認します。"
+  },
+  "agents-18": {
+    "0": "global fileは全repositoryへ影響します。payment固有のreview規則にはscopeが広すぎます。",
+    "2": "package-lock.jsonはdependency解決結果であり、Codex code reviewの指示を保持するfileではありません。",
+    "3": "毎回の手入力は漏れや表現揺れを生みます。対象codeに近い永続的なreview規則へ置きます。"
+  },
+  "agents-19": {
+    "0": "repository規則の置換はteamにも影響し、個人用と自動化用profileを安全に分離できません。",
+    "2": "Git author名はcommit metadataであり、Codex homeやglobal instructionの探索先を変えません。",
+    "3": "sandbox解除はinstruction profileの分離と無関係で、不要に実行権限を広げます。"
+  },
+  "safe-39": {
+    "0": "modeの有効化はmenuへ表示する設定です。既存chatへ自動選択される操作ではありません。",
+    "2": "Full accessを利用可能にするだけで、全chatのsandboxを一括無効化することはありません。",
+    "3": "local設定でorganization requirementsは解除できません。管理policyは引き続き適用されます。"
+  },
+  "safe-40": {
+    "0": "automatic reviewへ切り替えてもsandboxは同じです。OS全体へのaccessは自動付与されません。",
+    "2": "Approve for meはread-onlyへ縮小するmodeではなく、越境requestのreview方法を変えます。",
+    "3": "networkだけを無制限にする設定ではありません。sandbox boundaryとreviewerは独立controlです。"
+  },
+  "safe-41": {
+    "0": "Full accessは強い権限です。通常作業の初期値として必要性を確認せず選ぶものではありません。",
+    "2": "sandbox全面無効は最小権限に反します。workspace内で進め、越境時に確認するmodeから始めます。",
+    "3": "organization policyの回避は安全なmode選択ではありません。許可された境界内で作業します。"
+  },
+  "safe-42": {
+    "0": "themeは見た目の設定で、permission modeが利用可能かどうかを決めません。",
+    "2": "commit数は権限policyと無関係です。local設定とorganization requirementsを確認します。",
+    "3": "画面解像度は権限modeをdisabledにしません。管理されたpermission要件を確認します。"
+  },
+  "safe-43": {
+    "1": "`/theme`は表示設定の入口であり、sandboxやapproval modeを確認・変更しません。",
+    "2": "Git configはrepositoryやcommitの設定で、実行中Codex sessionのpermission controlではありません。",
+    "3": "`npm permissions`はCodex CLIのpermission modeを操作するcommandではありません。"
   }
 }

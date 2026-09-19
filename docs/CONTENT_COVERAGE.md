@@ -221,6 +221,10 @@ session再読込みを重ねて問う2問のうち1問を、monorepoの対象sub
 
 axe-coreによるWCAG 2.1 A/AA検査を、既存のhome・quiz・reader・progressに加えて、全体像モードのchapter introductionとセッション完了後のresultへ拡張した。新規検査で見つかった結果スコアの分母表示のコントラスト不足を修正した。表示条件のある主要画面も実際の操作で到達して検査し、公開導線6画面のアクセシビリティ退行をCIで検出する。
 
+## 2026-09-19 実務scenario拡充・第1弾
+
+240問から250問へ拡充した。OpenAI公式の現行PermissionsとAGENTS.md guideを再確認し、AGENTS.mdの1階層1file・空file skip・project root不在時・review規則のscope・`CODEX_HOME` profileを5問、permission modeの有効化と選択・automatic reviewとsandboxの分離・推奨初期mode・organization requirements・CLIの`/permissions`を5問追加した。全問を実務scenario型とし、選択肢別feedback、一意topic、難易度、実務価値、公式reference、検証日を同時に付与した。
+
 ## 2026-07-19 Lighthouse品質ゲート
 
 本番ビルドへLighthouseの最低スコア検査を追加した。Performance 80、Accessibility 95、Best Practices 90、SEO 80を下回る退行をGitHub Actionsで検出し、問題数ではなく学習画面の配信品質を継続的に守る。
