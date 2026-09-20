@@ -980,9 +980,9 @@
     "3": "全port許可は不要なattack surfaceを増やします。VPNやmesh越しに必要な接続だけを許可します。"
   },
   "workflow-10": {
-    "1": "現在のLocalで動かすと未完了変更と定期taskの変更が混ざります。専用worktreeでbranchと作業treeを分離します。",
+    "1": "現在のLocalで動かすと未完了変更と定期taskの変更が混ざります。専用worktreeで作業場所を分離します。",
     "2": "Git管理外では差分追跡や安全な統合が難しくなります。Git repositoryのbackground worktreeを使います。",
-    "3": "同じbranchを強制checkoutすると進行中作業と競合します。独立したworktreeとbranchへ隔離します。"
+    "3": "同じbranchを強制checkoutすると進行中作業と競合します。専用worktreeで作業場所を分離します。"
   },
   "prompt-11": {
     "1": "Queueは現在のrunを変えず、完了後の次runまでmessageを待たせます。不足contextの即時補充にはSteerを使います。",

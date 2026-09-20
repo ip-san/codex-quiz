@@ -56,4 +56,11 @@ export const scenarios = [
     ids: ["agents-10", "agents-15", "agents-04"],
     steps: ["対象フォルダーで読み込み元を確認する", "同じ階層の優先ファイルを調べる", "修正した指示を読み直す"],
   },
+  {
+    id: "scheduled-operations",
+    title: "定期タスクを安全に運用する",
+    description: "毎朝のコード点検を自動化。依頼を試運転し、手元の変更と分離して、予定時刻の実行条件を確認します。",
+    ids: ["workflow-12", "workflow-10", "surfaces-07"],
+    steps: ["定期化する前に試運転する", "手元の作業と分離する", "実行時の端末とアプリを確認する"],
+  },
 ] as const;
