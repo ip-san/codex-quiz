@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-21 MCP接続の復旧
+
+「登録したMCPが使えない原因を調べる」を追加し全11コース。extend-19、surfaces-15、extend-22を共有config→IDEの再読込み→OAuth認証の順で学習する。公式[MCP](https://learn.chatgpt.com/docs/extend/mcp)で正解・誤答解説と既存terminal例を照合し検証日を更新。OAuth問題を登録後の未認証という状況判断へ改善。既存263問を維持し全コースのブラウザ検査へ含める。
+
 ## 2026-09-21 Cloud環境の診断
 
 「Cloud環境の設定と依存関係を切り分ける」を追加し全10コース。surfaces-18/03/19の正解・誤答解説と既存のsetup比較図を公式[Cloud environments](https://learn.chatgpt.com/docs/environments/cloud-environment)で確認し検証日を更新。通常の環境変数の永続化とsecretのsetup限定を混同しないよう解説を補強した。全263問を維持し、全コースのブラウザ回帰検査へ含める。

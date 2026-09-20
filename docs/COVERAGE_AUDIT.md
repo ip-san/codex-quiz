@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-09-21 MCP接続復旧の追加判断
+
+既存の指示不適用・Cloud診断とは異なり、外部ツールの登録先、IDEへの設定反映、サービス側認証を切り分けるため採用。extend-19、surfaces-15、extend-22を再利用し、破壊的なsession削除やsandbox解除で解決しようとする誤操作を防ぐ。AuthenticateとCLI loginは認証の代替入口で、両方を常に実行する必要はない。CodexをMCP serverとして起動するextend-08は本コースへ含めず、既知の廃止仕様の修正課題として残す。
+
 ## 2026-09-21 Cloud環境の診断コース
 
 ローカルの権限・worktree・CI出力とは別に、Cloudのsetupとagentの実行段階、秘密情報の利用範囲、container cache再開時の依存更新を判断するコースを採用。surfaces-18/03/19を再利用し、単なるCloudの名称確認ではなく、テストが動かない原因を設定→秘密情報→依存関係の順に切り分ける。公式Cloud environmentsで裏付け、secretを通常変数として残す回避策は教えない。新規画面と増問は不要。

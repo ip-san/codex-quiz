@@ -70,4 +70,11 @@ export const scenarios = [
     ids: ["surfaces-18", "surfaces-03", "surfaces-19"],
     steps: ["環境変数の引き継ぎを確認する", "秘密情報を使える段階を確認する", "キャッシュした依存関係を更新する"],
   },
+  {
+    id: "mcp-recovery",
+    title: "登録したMCPが使えない原因を調べる",
+    description: "外部ツールをIDEでも使いたい。共有設定を確認し、拡張を再読込みして、必要な認証を完了します。",
+    ids: ["extend-19", "surfaces-15", "extend-22"],
+    steps: ["共有する設定先を確認する", "IDEで設定を読み直す", "OAuth認証と接続状態を確認する"],
+  },
 ] as const;
