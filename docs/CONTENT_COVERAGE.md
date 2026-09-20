@@ -1,5 +1,11 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-20 実践シナリオ9問の最終照合
+
+prompt-18/19/20は[Prompting](https://learn.chatgpt.com/docs/prompting)、workflow-01は[Code review](https://learn.chatgpt.com/docs/code-review)、agents-01は[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)、safe-01は[Sandbox](https://learn.chatgpt.com/docs/sandboxing)、workflow-03/05/25は[Worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees)で再検証した。
+
+全9問の正解を確認しverifiedAtを更新。safe-01は参照先の内容が変わっていたためsandboxページへ修正。workflow-01の「変更前」を「コミット前」に修正し、workflow-05にhandoffのflow図を追加した。全263問・図解58問・terminal例31件。今回の再照合対象はシナリオ9問であり、全263問を同日に再検証したとは扱わない。
+
 ## 2026-09-20 本番PWAのブラウザ回帰検査
 
 開発サーバーとは別に本番ビルドのservice workerを使う検査を追加。再登録時の旧キャッシュ削除と他アプリのキャッシュ保持、取得済みの誤答解説を含むオフライン再開、再接続後の進捗維持を検査する。問題内容は変更しない。

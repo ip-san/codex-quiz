@@ -5,6 +5,17 @@ export type DiagramData =
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "workflow-05": [
+    {
+      type: "flow",
+      label: "変更と会話を手元へ引き継ぐ",
+      steps: [
+        { text: "Worktree", sub: "独立した作業場所で変更を確認" },
+        { text: "Hand off → Local", sub: "チャットとコードを移す" },
+        { text: "Local", sub: "普段の環境で検証して継続" },
+      ],
+    },
+  ],
   "session-24": [
     {
       type: "terminal",
