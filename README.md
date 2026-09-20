@@ -45,6 +45,8 @@ Codexの基本と実践を、短い4択クイズで学ぶPWAです。OpenAIの�
 
 ## 開発
 
+Node.js 22.19以上が必要です（Lighthouse 13の実行要件）。依存更新時は `npm audit` と通常の品質・ブラウザ検査を実施します。
+
 ```bash
 npm install
 npm run dev
