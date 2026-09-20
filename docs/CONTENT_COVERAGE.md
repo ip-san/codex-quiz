@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-20 実践シナリオを5コースへ拡充
+
+CI連携（basic-04/12/13）とHook検査（extend-12/13/14）を各3問で追加。既存問題を利用し全263問を維持する。[Non-interactive mode](https://learn.chatgpt.com/docs/non-interactive-mode)と[Hooks](https://learn.chatgpt.com/docs/hooks)で6問を再確認し、検証日を更新。Hookの事後検査が操作を取り消さない点を解説へ追記した。全5コースで途中再開・完走・再挑戦の出題順をブラウザ検査する。
+
 ## 2026-09-20 全問棚卸しと仕様差分の修正
 
 [網羅性監査](COVERAGE_AUDIT.md)を開始。全263問の題材・出典を棚卸しし、承認policyとHookの古い内容2問、sandboxの出典4問を修正した。問題数は維持。重複・不足候補と未確認範囲を分離して記録し、全問の事実再検証完了とは扱わない。

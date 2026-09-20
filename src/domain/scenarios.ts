@@ -20,4 +20,18 @@ export const scenarios = [
     ids: ["workflow-03", "workflow-25", "workflow-05"],
     steps: ["作業場所を分ける", "引き継ぐ変更を選ぶ", "手元へ受け渡す"],
   },
+  {
+    id: "ci-output",
+    title: "CIでCodexの結果を自動処理する",
+    description: "対話なしで調査を実行し、進行状況を追跡して、最終結果を後続ジョブへ渡します。",
+    ids: ["basic-04", "basic-12", "basic-13"],
+    steps: ["非対話で実行する", "実行イベントを読み取る", "最終結果の形式を決める"],
+  },
+  {
+    id: "hook-checks",
+    title: "Hookで実行前後を検査する",
+    description: "チームの検査Hookを更新。定義を確認し、危険な操作の事前検査と実行結果の確認を分けます。",
+    ids: ["extend-12", "extend-13", "extend-14"],
+    steps: ["変更した定義を確認する", "実行前に検査する", "実行後の結果を確認する"],
+  },
 ] as const;

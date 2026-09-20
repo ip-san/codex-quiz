@@ -2,9 +2,9 @@ import { expect, it } from "vitest";
 import { quizzes } from "../data";
 import { scenarios } from "./scenarios";
 
-it("provides three ordered courses backed by existing questions", () => {
-  expect(scenarios).toHaveLength(3);
-  expect(new Set(scenarios.map((course) => course.id)).size).toBe(3);
+it("provides five ordered courses backed by existing questions", () => {
+  expect(scenarios).toHaveLength(5);
+  expect(new Set(scenarios.map((course) => course.id)).size).toBe(scenarios.length);
   for (const course of scenarios) {
     expect(course.ids).toHaveLength(3);
     expect(course.steps).toHaveLength(course.ids.length);
