@@ -83,7 +83,7 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
           kind: "command",
           text: 'codex --cd services/payments --ask-for-approval never "Show which instruction files are active."',
         },
-        { kind: "output", text: "Active instructions: AGENTS.md → services/payments/AGENTS.md" },
+        { kind: "info", text: "読み込み元の説明を確認（例：rootのAGENTS.md → paymentsの指示ファイル）" },
         { kind: "info", text: "変更前に対象subtreeの指示chainを確認" },
       ],
     },

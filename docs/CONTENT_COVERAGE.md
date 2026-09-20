@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-21 チーム指示の不適用診断
+
+「チームの指示が反映されない原因を調べる」を追加し全8コース。agents-10/15/04で対象directoryの読み込み元、同階層の優先順位、変更後の再読込みを順に確認する。公式[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)で3問の正解・誤答解説とagents-10のterminal例を照合し検証日を更新。既存263問を維持し、全シナリオ共通のブラウザ検査へ含める。
+
 ## 2026-09-21 会話の再開と切り替え
 
 「中断した会話を探して作業を切り替える」を追加して全7コース。session-21/24/25で検索directory、履歴を残すfork、新しいcontextを作るnewを順に判断する。公式[Developer commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)で正解・誤答解説・既存terminal図解を照合し3問の検証日を更新。問題数263問・図解数は維持。全コースの再開・完走・再挑戦テストへ自動的に含まれる。

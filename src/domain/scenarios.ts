@@ -49,4 +49,11 @@ export const scenarios = [
     ids: ["session-21", "session-24", "session-25"],
     steps: ["見つからない会話を探す", "元の履歴を残して分岐する", "別の課題を新しい会話で始める"],
   },
+  {
+    id: "instruction-recovery",
+    title: "チームの指示が反映されない原因を調べる",
+    description: "支払いサービスでテスト規則が反映されません。読み込み元と優先順位を調べ、修正後に読み直します。",
+    ids: ["agents-10", "agents-15", "agents-04"],
+    steps: ["対象フォルダーで読み込み元を確認する", "同じ階層の優先ファイルを調べる", "修正した指示を読み直す"],
+  },
 ] as const;
