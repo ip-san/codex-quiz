@@ -457,8 +457,8 @@ function App() {
     try {
       const imported = parseProgressExport(await file.text());
       if (!window.confirm("現在の学習データを、選択したファイルの内容で置き換えますか？")) return;
-      setProgress(imported);
       localStorage.setItem("codex-quiz-progress", JSON.stringify(imported));
+      setProgress(imported);
       setDataMessage("学習データを読み込みました");
     } catch (error) {
       setDataMessage(error instanceof Error ? error.message : "学習データを読み込めませんでした");
