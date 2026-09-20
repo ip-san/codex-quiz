@@ -16,7 +16,7 @@
     "format:check": "biome format src/",
     "quiz:check": "vitest run src/quizValidation.test.ts",
     "docs:check": "node scripts/validate-doc-links.mjs",
-    "pwa:check": "node scripts/validate-pwa.mjs",
+    "pwa:check": "node scripts/validate-pwa.mjs && node scripts/validate-service-worker.mjs",
     "bundle:check": "node scripts/check-bundle-size.mjs",
     "lighthouse:check": "node scripts/check-lighthouse.mjs",
     "type-coverage": "type-coverage --at-least 95 --strict",
