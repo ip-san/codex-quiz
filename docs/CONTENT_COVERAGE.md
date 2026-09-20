@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-21 会話の再開と切り替え
+
+「中断した会話を探して作業を切り替える」を追加して全7コース。session-21/24/25で検索directory、履歴を残すfork、新しいcontextを作るnewを順に判断する。公式[Developer commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)で正解・誤答解説・既存terminal図解を照合し3問の検証日を更新。問題数263問・図解数は維持。全コースの再開・完走・再挑戦テストへ自動的に含まれる。
+
 ## 2026-09-21 最小権限の実践シナリオ
 
 「権限を広げすぎずに作業を進める」を追加し全6コースとした。safe-09/07/04でworkspace-write、on-request、追加writable rootを順に判断する。公式[Sandbox](https://learn.chatgpt.com/docs/sandboxing)と[CLI commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)で再確認し3問の検証日を更新。既存問題を活用し全263問を維持する。全コース共通の再開・完走・再挑戦テストの対象にも含める。

@@ -42,4 +42,11 @@ export const scenarios = [
     ids: ["safe-09", "safe-07", "safe-04"],
     steps: ["編集できる範囲を決める", "境界を越える前に確認する", "必要なフォルダーだけ追加する"],
   },
+  {
+    id: "session-recovery",
+    title: "中断した会話を探して作業を切り替える",
+    description: "昨日の調査を再開し、別案は元の履歴を残して検討。別の課題に移る時は会話を新しくします。",
+    ids: ["session-21", "session-24", "session-25"],
+    steps: ["見つからない会話を探す", "元の履歴を残して分岐する", "別の課題を新しい会話で始める"],
+  },
 ] as const;
