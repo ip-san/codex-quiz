@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-21 最小権限の実践シナリオ
+
+「権限を広げすぎずに作業を進める」を追加し全6コースとした。safe-09/07/04でworkspace-write、on-request、追加writable rootを順に判断する。公式[Sandbox](https://learn.chatgpt.com/docs/sandboxing)と[CLI commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)で再確認し3問の検証日を更新。既存問題を活用し全263問を維持する。全コース共通の再開・完走・再挑戦テストの対象にも含める。
+
 ## 2026-09-20 実践シナリオを5コースへ拡充
 
 CI連携（basic-04/12/13）とHook検査（extend-12/13/14）を各3問で追加。既存問題を利用し全263問を維持する。[Non-interactive mode](https://learn.chatgpt.com/docs/non-interactive-mode)と[Hooks](https://learn.chatgpt.com/docs/hooks)で6問を再確認し、検証日を更新。Hookの事後検査が操作を取り消さない点を解説へ追記した。全5コースで途中再開・完走・再挑戦の出題順をブラウザ検査する。
