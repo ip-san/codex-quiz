@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-20 全問棚卸しと仕様差分の修正
+
+[網羅性監査](COVERAGE_AUDIT.md)を開始。全263問の題材・出典を棚卸しし、承認policyとHookの古い内容2問、sandboxの出典4問を修正した。問題数は維持。重複・不足候補と未確認範囲を分離して記録し、全問の事実再検証完了とは扱わない。
+
 ## 2026-09-20 実践シナリオ9問の最終照合
 
 prompt-18/19/20は[Prompting](https://learn.chatgpt.com/docs/prompting)、workflow-01は[Code review](https://learn.chatgpt.com/docs/code-review)、agents-01は[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)、safe-01は[Sandbox](https://learn.chatgpt.com/docs/sandboxing)、workflow-03/05/25は[Worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees)で再検証した。

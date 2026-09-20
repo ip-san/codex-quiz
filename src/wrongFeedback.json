@@ -1125,9 +1125,9 @@
     "3": "safe・fast・turboは文書化されたsandbox optionではありません。3つの正式値から選びます。"
   },
   "safe-07": {
-    "1": "yes・noだけではcommand trustや必要時確認を表現できません。文書化されたpolicy値を使います。",
-    "2": "slow・fast・autoは承認policyではなく、いつ人へ確認するかを指定できません。",
-    "3": "local・cloudは実行surfaceの区別です。CLIのapproval prompt条件を制御する値ではありません。"
+    "1": "neverは承認を求めないpolicyです。境界を越える前の確認が必要ならon-requestを選びます。",
+    "2": "承認policyのuntrustedは廃止されています。projectの信頼設定とは区別して移行します。",
+    "3": "danger-full-accessはsandboxの制限を外す設定です。必要時の承認を求めるpolicyではありません。"
   },
   "extend-10": {
     "1": "一度だけの文章要約は通常promptで十分です。Hookはlifecycle上の反復可能な機械検査へ使います。",
@@ -1205,9 +1205,9 @@
     "3": "自由度を与えたい場合に細かな手順固定は逆効果です。goal・boundary・outputを中心に伝えます。"
   },
   "extend-17": {
-    "1": "promptとagent handlerは現在parseされてもskipされます。実行されるhandlerはcommandです。",
-    "2": "HTTPだけをhandler typeとして直接指定する仕様ではありません。必要ならcommandから処理を呼びます。",
-    "3": "React componentはHook handlerではありません。Hookはlifecycle eventへcommandを設定します。"
+    "1": "promptとagent handlerは解析されてもskipされます。commandとmcp_toolを目的に応じて使います。",
+    "2": "HTTPだけというhandlerではありません。接続済みMCP toolにはmcp_tool、scriptにはcommandを使います。",
+    "3": "React componentはHook handlerではありません。実行する検査に合わせてcommandかmcp_toolを選びます。"
   },
   "session-15": {
     "1": "`agents.max_depth`は現行の同時thread上限fieldではありません。session単位のconcurrency設定を使います。",
