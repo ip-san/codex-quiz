@@ -400,9 +400,9 @@
     "3": "Git hookはrepository lifecycle用で、Codex threadのprogrammatic制御には向きません。"
   },
   "extend-42": {
-    "1": "public networkへ認証なしでlistenすると第三者に操作面を露出します。local transportか認証を使います。",
-    "2": "GitHub tokenはapp-server client認証用のbearer tokenとは限りません。用途別credentialを分けます。",
-    "3": "CORSだけではWebSocket clientの認証と通信保護を代替できません。"
+    "1": "loopbackへのbindは公開範囲を端末内へ限定する対策です。別machineからは安全な接続経路も必要です。",
+    "2": "bearer token認証は接続clientを確認する対策です。remote接続ではTLSなどの通信保護と組み合わせます。",
+    "3": "TLS終端は通信保護のための対策です。認証なしの直接公開とは異なり、client認証も併用します。"
   },
   "extend-43": {
     "1": "schema無視はupgrade時の破損を招きます。生成schemaとversion差分をreviewします。",
@@ -1170,9 +1170,9 @@
     "3": "fileだけを直接扱う方式に限定されません。Gitまたはlocal sourceを専用commandで登録します。"
   },
   "extend-08": {
-    "1": "`codex mcp add-self`はCodex processをMCP serverとしてstdio公開するcommandではありません。",
-    "2": "`codex server-html`は文書化されたserver modeではなく、MCP protocolを提供しません。",
-    "3": "port名だけではstdio MCP serverを起動できません。`codex mcp-server`を実行します。"
+    "1": "App ServerはMCP serverと同じprotocolではありません。初期化とrequest・event処理も移行します。",
+    "2": "削除されたcommandはsandbox解除で復活しません。権限を広げず、現行の連携方式へ移行します。",
+    "3": "mcp addは外部MCP serverをCodexへ登録する操作です。Codex自体をApp Serverとして公開する操作ではありません。"
   },
   "extend-09": {
     "1": "Skillは実行fileだけに限定されず、判断手順やreferenceも含めて再利用性を高めます。",

@@ -77,4 +77,11 @@ export const scenarios = [
     ids: ["extend-19", "surfaces-15", "extend-22"],
     steps: ["共有する設定先を確認する", "IDEで設定を読み直す", "OAuth認証と接続状態を確認する"],
   },
+  {
+    id: "app-server-migration",
+    title: "古いCodex連携を安全に移行する",
+    description: "旧MCP起動方式をApp Serverへ移行。接続の保護と実験的APIへの依存を確認します。",
+    ids: ["extend-08", "extend-42", "extend-43"],
+    steps: ["廃止された連携方式を見直す", "遠隔接続を保護する", "実験的APIの互換性を管理する"],
+  },
 ] as const;

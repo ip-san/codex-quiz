@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-21 古い連携方式の移行
+
+「古いCodex連携を安全に移行する」を追加し全12コース。extend-08を廃止済みmcp-serverの起動暗記からApp Serverへの移行判断へ変更。extend-42の誤答解説と選択肢の不一致も修正し、WebSocketの実験的・本番非サポートという制約を明記した。extend-43を含む3問を公式[CLI commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)と[App Server](https://learn.chatgpt.com/docs/app-server)で照合。既存263問を維持し検証日を更新。対象3問には図解なし。
+
 ## 2026-09-21 MCP接続の復旧
 
 「登録したMCPが使えない原因を調べる」を追加し全11コース。extend-19、surfaces-15、extend-22を共有config→IDEの再読込み→OAuth認証の順で学習する。公式[MCP](https://learn.chatgpt.com/docs/extend/mcp)で正解・誤答解説と既存terminal例を照合し検証日を更新。OAuth問題を登録後の未認証という状況判断へ改善。既存263問を維持し全コースのブラウザ検査へ含める。
