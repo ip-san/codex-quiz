@@ -63,4 +63,11 @@ export const scenarios = [
     ids: ["workflow-12", "workflow-10", "surfaces-07"],
     steps: ["定期化する前に試運転する", "手元の作業と分離する", "実行時の端末とアプリを確認する"],
   },
+  {
+    id: "cloud-recovery",
+    title: "Cloud環境の設定と依存関係を切り分ける",
+    description: "Cloudでテストが動きません。消えた環境変数、秘密情報の利用範囲、古い依存関係を順に調べます。",
+    ids: ["surfaces-18", "surfaces-03", "surfaces-19"],
+    steps: ["環境変数の引き継ぎを確認する", "秘密情報を使える段階を確認する", "キャッシュした依存関係を更新する"],
+  },
 ] as const;

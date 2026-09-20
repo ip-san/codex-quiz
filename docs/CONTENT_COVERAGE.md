@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-21 Cloud環境の診断
+
+「Cloud環境の設定と依存関係を切り分ける」を追加し全10コース。surfaces-18/03/19の正解・誤答解説と既存のsetup比較図を公式[Cloud environments](https://learn.chatgpt.com/docs/environments/cloud-environment)で確認し検証日を更新。通常の環境変数の永続化とsecretのsetup限定を混同しないよう解説を補強した。全263問を維持し、全コースのブラウザ回帰検査へ含める。
+
 ## 2026-09-21 定期タスクの安全な運用
 
 workflow-12/10、surfaces-07を使った「定期タスクを安全に運用する」を追加し全9コース。公式[Scheduled tasks](https://learn.chatgpt.com/docs/automations)で試運転、worktreeによる変更の分離、端末・app・projectの実行条件を確認し検証日を更新。worktreeが必ずbranchを作ると誤解しないよう誤答解説も修正。全263問を維持し、全コースの再開・完走・再挑戦を検査する。
