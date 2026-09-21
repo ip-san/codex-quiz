@@ -301,12 +301,12 @@
   },
   "workflow-08": {
     "1": "PR titleへ毎回長い規則を書くと再利用できず、package階層ごとのscopeも表現しにくくなります。",
-    "2": "正解位置はquiz dataの都合で、repository code reviewの判断規則にはなりません。",
+    "2": "PRタイトルの統一だけでは、対象packageに適用する継続的なレビュー規則を定義できません。",
     "3": "Git履歴削除はreview guidanceを適用せず、監査可能性も失います。対象に近いAGENTS.mdへ規則を置きます。"
   },
   "workflow-09": {
     "1": "PRを閉じて履歴を消す必要はありません。同じPR contextで修正対象を具体的に`@codex`へ依頼します。",
-    "2": "doctorはlocal CLI診断用で、PRで報告されたP1 defectを修正するworkflowではありません。",
+    "2": "ローカルの診断commandだけでは、PRで報告されたP1問題の修正依頼になりません。指摘を特定して依頼します。",
     "3": "automatic reviewを無効にしても既知のP1は直りません。指摘を特定して修正と検証を依頼します。"
   },
   "workflow-12": {

@@ -98,4 +98,11 @@ export const scenarios = [
     ids: ["workflow-22", "workflow-24", "workflow-23"],
     steps: ["測定できる完了条件を決める", "継続と権限拡大を区別する", "接続断の前に中断する"],
   },
+  {
+    id: "github-review-recovery",
+    title: "GitHubレビューを動かし指摘の修正を依頼する",
+    description: "PRのレビューが動きません。起動条件を確認し、担当サービスの観点を伝え、指摘を修正依頼へつなげます。",
+    ids: ["workflow-06", "workflow-08", "workflow-09"],
+    steps: ["設定と依頼コメントを確認する", "対象に合うレビュー規則を置く", "指摘を特定して修正を依頼する"],
+  },
 ] as const;

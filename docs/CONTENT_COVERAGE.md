@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-21 GitHubレビューの復旧
+
+「GitHubレビューを動かし指摘の修正を依頼する」を追加し全15コース。workflow-06/08/09の正解・誤答解説を公式[GitHub](https://learn.chatgpt.com/docs/third-party/github)のTroubleshoot code review、Customize what Codex reviews、Act on review findingsへ照合。起動名暗記を未反応時の状況判断へ変更し、不自然な誤答を改善した。検証日を更新。対象3問には図解なし。問題数263問を維持する。
+
 ## 2026-09-21 長期Goalの進行管理
 
 「長期作業の完了条件と中断を管理する」を追加して全14コース。workflow-22/24/23を成功条件の具体化→権限境界の維持→接続断前のpauseの順に配置した。公式[Long-running work](https://learn.chatgpt.com/docs/long-running-work)で正解と誤答別解説を確認し、3問の検証日を更新。pause操作の問題はDesktop Appに範囲を明示した。対象3問に図解はなく、263問・図解58問を維持する。
