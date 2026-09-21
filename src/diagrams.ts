@@ -277,7 +277,7 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
   "workflow-04": [
     {
       type: "config",
-      label: "ignoredファイルをworktreeへコピー",
+      label: "local managed worktreeへ必要なignored設定だけコピー",
       filepath: ".worktreeinclude",
       lines: [
         { text: ".env", highlight: true },

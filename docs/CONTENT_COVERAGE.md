@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-21 worktreeの環境復旧
+
+「worktreeで不足する設定を安全に補う」を追加して全13コース。workflow-04/26/27を依存準備→ignored条件→作成方法の適用範囲の順で学ぶ。公式[Worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees)のGetting startedとCopy ignored local filesを読み、正解・誤答別解説・workflow-04の設定図を照合。workflow-04はlocal managed worktreeに対象を限定し、図にも対象と最小限のコピーを明記した。3問の検証日を更新し、263問・図解58問は維持。
+
 ## 2026-09-21 古い連携方式の移行
 
 「古いCodex連携を安全に移行する」を追加し全12コース。extend-08を廃止済みmcp-serverの起動暗記からApp Serverへの移行判断へ変更。extend-42の誤答解説と選択肢の不一致も修正し、WebSocketの実験的・本番非サポートという制約を明記した。extend-43を含む3問を公式[CLI commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)と[App Server](https://learn.chatgpt.com/docs/app-server)で照合。既存263問を維持し検証日を更新。対象3問には図解なし。

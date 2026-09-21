@@ -84,4 +84,11 @@ export const scenarios = [
     ids: ["extend-08", "extend-42", "extend-43"],
     steps: ["廃止された連携方式を見直す", "遠隔接続を保護する", "実験的APIの互換性を管理する"],
   },
+  {
+    id: "worktree-setup-recovery",
+    title: "worktreeで不足する設定を安全に補う",
+    description: "分離先だけでアプリが起動しません。依存準備、コピー対象、作成方法の違いを調べます。",
+    ids: ["workflow-04", "workflow-26", "workflow-27"],
+    steps: ["依存関係と設定を準備する", "コピー対象の条件を調べる", "自動コピーの適用範囲を確認する"],
+  },
 ] as const;
