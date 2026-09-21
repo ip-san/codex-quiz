@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-21 長期Goalの進行管理
+
+「長期作業の完了条件と中断を管理する」を追加して全14コース。workflow-22/24/23を成功条件の具体化→権限境界の維持→接続断前のpauseの順に配置した。公式[Long-running work](https://learn.chatgpt.com/docs/long-running-work)で正解と誤答別解説を確認し、3問の検証日を更新。pause操作の問題はDesktop Appに範囲を明示した。対象3問に図解はなく、263問・図解58問を維持する。
+
 ## 2026-09-21 worktreeの環境復旧
 
 「worktreeで不足する設定を安全に補う」を追加して全13コース。workflow-04/26/27を依存準備→ignored条件→作成方法の適用範囲の順で学ぶ。公式[Worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees)のGetting startedとCopy ignored local filesを読み、正解・誤答別解説・workflow-04の設定図を照合。workflow-04はlocal managed worktreeに対象を限定し、図にも対象と最小限のコピーを明記した。3問の検証日を更新し、263問・図解58問は維持。

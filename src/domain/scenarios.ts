@@ -91,4 +91,11 @@ export const scenarios = [
     ids: ["workflow-04", "workflow-26", "workflow-27"],
     steps: ["依存関係と設定を準備する", "コピー対象の条件を調べる", "自動コピーの適用範囲を確認する"],
   },
+  {
+    id: "goal-control",
+    title: "長期作業の完了条件と中断を管理する",
+    description: "大きな改修を任せる前に成功条件を整理。権限の境界を保ち、接続が切れる前に安全に中断します。",
+    ids: ["workflow-22", "workflow-24", "workflow-23"],
+    steps: ["測定できる完了条件を決める", "継続と権限拡大を区別する", "接続断の前に中断する"],
+  },
 ] as const;
