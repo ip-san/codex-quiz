@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-27 権限モード5問を監査
+
+safe-39〜43の正解と全誤答解説を[Permission modes](https://learn.chatgpt.com/docs/permission-modes)で再確認。設定での有効化は選択ではない、Auto-reviewはsandboxを広げない、通常はAsk for approvalから始める、組織制約を回避しない、CLIの確認入口という5目標を確認した。参照URLと検証日を更新し、safe-42の不自然な誤答とsafe-43の名称暗記型の文面を改善。対象5問に図解なし。263問・15コースを維持する。
+
 ## 2026-09-27 既知の出典不一致と重複を整理
 
 safe-10はSecurity製品への不適切な出典を除き、[Auto-review](https://learn.chatgpt.com/docs/sandboxing/auto-review)の明示的拒否後の対応へ具体化。agents-11/12は[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)を根拠に、結合上限とfallbackの選択順へ変更。prompt-15は[Prompting](https://learn.chatgpt.com/docs/prompting#do-a-local-code-review)に基づく修正後の再レビューへ変更した。4問の全選択肢・誤答別解説を更新し検証日を記録。対象4問に図解はない。263問・15コース・既存IDを維持し、学習データは削除しない。既存IDの過去正答率は旧内容を含む点に留意する。

@@ -1,5 +1,11 @@
 # 学習目標・網羅性監査
 
+## 2026-09-27 権限モードの部分監査
+
+safe-39〜43はPermission modesのEnable modesとHow permissions workを根拠に正解・誤答解説を照合済み。対象に図解なし。正解の変更は不要で、safe-42の誤答を再起動・branch変更・user configでの回避という現実的な誤解へ改善した。safe-43は作業範囲を変更する前の確認場面へ変更。今回の5問だけ検証日を更新。
+
+次の監査候補：beta permission profilesとlegacy sandbox設定の混在・優先順位、およびmanaged allowed_permission_profilesの例外。公式[Permissions](https://learn.chatgpt.com/docs/permissions)では両方式を混在させないことを案内している。今回の権限modeの5問と設定移行の全面監査は分けて扱う。全263問の監査完了ではない。
+
 ## 2026-09-27 既知4件の整理完了
 
 safe-10をAuto-reviewの拒否後の安全な対応へ具体化し、出典不一致を解消した。重複3組はagents-08/09とprompt-08を残し、agents-11を「同じ探索経路での分割は結合容量を減らさない」、agents-12を「複数fallbackの選択順」、prompt-15を「修正後の再レビュー」へ置換した。正解・全誤答解説を公式資料で確認。対象4問に図解なし。今回の4件は解消したが、全263問の再監査完了ではない。自動実行は再開せず、この公開単位で停止する。
