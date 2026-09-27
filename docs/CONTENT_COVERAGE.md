@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-27 既知の出典不一致と重複を整理
+
+safe-10はSecurity製品への不適切な出典を除き、[Auto-review](https://learn.chatgpt.com/docs/sandboxing/auto-review)の明示的拒否後の対応へ具体化。agents-11/12は[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)を根拠に、結合上限とfallbackの選択順へ変更。prompt-15は[Prompting](https://learn.chatgpt.com/docs/prompting#do-a-local-code-review)に基づく修正後の再レビューへ変更した。4問の全選択肢・誤答別解説を更新し検証日を記録。対象4問に図解はない。263問・15コース・既存IDを維持し、学習データは削除しない。既存IDの過去正答率は旧内容を含む点に留意する。
+
 ## 2026-09-21 GitHubレビューの復旧
 
 「GitHubレビューを動かし指摘の修正を依頼する」を追加し全15コース。workflow-06/08/09の正解・誤答解説を公式[GitHub](https://learn.chatgpt.com/docs/third-party/github)のTroubleshoot code review、Customize what Codex reviews、Act on review findingsへ照合。起動名暗記を未反応時の状況判断へ変更し、不自然な誤答を改善した。検証日を更新。対象3問には図解なし。問題数263問を維持する。
