@@ -445,14 +445,14 @@
     "3": "CLI overrideもadmin-enforced requirementsを越えるための仕組みではありません。"
   },
   "config-16": {
-    "1": "親shell全体を継承すると不要なsecretまで子processへ渡る可能性があります。",
-    "2": "repositoryのenv fileへsecretを移すと漏えい面が増えます。必要な変数だけを明示します。",
-    "3": "sandboxを解除しても環境変数漏えい対策にはなりません。shell environment policyを設定します。"
+    "1": "旧配列とfiltersは同じ設定layerで併用できず、後勝ちにはなりません。旧配列を外してfiltersへ整理します。",
+    "2": "`ignore_default_excludes`は名前にKEYなどを含む変数の自動除外を制御し、旧配列とfiltersの形式衝突は解消しません。",
+    "3": "sandboxのアクセス範囲を広げても設定形式の拒否は直りません。不要な権限拡大を避け、同じlayerの記法を統一します。"
   },
   "config-17": {
-    "1": "既定filterはKEY・SECRET・TOKEN系の漏えいを減らします。無効化は慎重に扱います。",
-    "2": "excludeを外すとcredential候補が子processへ渡りやすくなります。",
-    "3": "全環境変数のlog出力は秘密情報を露出します。必要な名前だけを確認します。"
+    "1": "既定値はfalseではなくtrueです。未指定ではKEY・SECRET・TOKEN名の自動除外が働かないため、falseを明示します。",
+    "2": "includeはその変数を残す指定で、secretを除外しません。必要な変数のみ許可し、不要なtokenを含めないでください。",
+    "3": "`set`は除外処理の後に変数を追加できるため、secretを指定するとむしろ子processへ戻す可能性があります。"
   },
   "config-18": {
     "1": "user configは管理者の上限制約を上書きできません。",

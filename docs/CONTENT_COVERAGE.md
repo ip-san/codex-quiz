@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-29 shell環境変数設定の部分監査
+
+config-16/17の正解・全誤答解説を公式[Advanced Configuration](https://learn.chatgpt.com/docs/config-file/config-advanced#shell-environment-policy)へ照合。旧`include_only`/`exclude`配列と新しい`filters`を同じlayerで併用すると設定が拒否される移行判断、および`ignore_default_excludes`の既定値trueではKEY・SECRET・TOKEN名の自動除外が行われない点へ更新した。該当2問に図解なし。263問・15コースを維持する。
+
 ## 2026-09-29 公開前品質ゲートの接続
 
 問題内容を変えず、GitHub Pagesの公開を共通Quality Gateの全job成功後に限定した。Pull Requestは同じ検査を独立実行し、`main` push時の重複した検査runを廃止。ブラウザE2E・PWA・Lighthouseが失敗した版は公開しない。

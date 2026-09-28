@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-09-29 shell環境変数設定の誤学習防止
+
+設定カテゴリの古いconfig-16/17を監査。旧記法と新記法の混在が拒否されること、`ignore_default_excludes`の既定値はtrueで自動secret名除外を行わないことを公式[Advanced Configuration](https://learn.chatgpt.com/docs/config-file/config-advanced#shell-environment-policy)で確認した。旧問題はこの既定値を曖昧に示し、旧`include_only`を新規設定の標準例のように扱っていたため、両問を実務での設定失敗診断へ置換。全誤答解説・検証日を更新、図解なし。IDと過去の学習履歴を維持するため旧内容の成績が残る。設定22問および権限43問の全面監査ではない。
+
 ## 2026-09-28 旧profile設定の移行
 
 config-05は`--profile`の名称暗記で、旧`[profiles.name]`のまま更新すると反映されない失敗を教えていなかった。公式[Advanced Configuration](https://learn.chatgpt.com/docs/config-file/config-advanced#profiles)で0.134.0以降の独立file形式とproject側からのprofile選択制限を照合し、同じIDを移行診断へ置換。全誤答解説を更新。既存図解なし、旧問題の学習履歴は残る。設定カテゴリ全22問の監査完了は意味しない。
