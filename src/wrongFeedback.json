@@ -150,9 +150,9 @@
     "3": "GitHub Issueは設定layerではなく公開範囲も異なります。個人既定値はlocal user configで管理します。"
   },
   "config-03": {
-    "1": "hardware温度やWi-Fi名はCodexのconfig.tomlで調整するagent動作設定ではありません。",
-    "2": "株価・天気・時刻は外部dataで、model・権限・MCPなどのdurable Codex設定ではありません。",
-    "3": "HTMLやCSSだけでなく、model、reasoning、sandbox、approval、MCP等を設定できます。"
+    "1": "新旧方式は自動合成されません。待つのではなく、読み込まれる旧設定とCLI指定を確認します。",
+    "2": "同じキーの追記では旧sandbox指定との混在は解消しません。設定全体から旧方式を調べます。",
+    "3": "Full accessはアクセス範囲を広げる設定であり、プロファイル移行の不備を直す手段ではありません。"
   },
   "config-04": {
     "1": "Git commit作成はrepository操作です。`-c`は一回のCodex runへconfig値を重ねるために使います。",

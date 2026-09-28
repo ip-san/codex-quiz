@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-28 権限プロファイル移行
+
+config-03を一般的な設定項目の列挙から、default_permissionsが効かない際の旧sandbox指定の診断へ変更。[Permissions](https://learn.chatgpt.com/docs/permissions)で正解と全誤答解説を照合し、betaである点とmanaged allowed_permission_profilesの例外を明記。対象に既存図解なし。問題IDを保持するため過去の学習履歴は旧内容を含む。263問・15コースを維持する。
+
 ## 2026-09-27 権限モード5問を監査
 
 safe-39〜43の正解と全誤答解説を[Permission modes](https://learn.chatgpt.com/docs/permission-modes)で再確認。設定での有効化は選択ではない、Auto-reviewはsandboxを広げない、通常はAsk for approvalから始める、組織制約を回避しない、CLIの確認入口という5目標を確認した。参照URLと検証日を更新し、safe-42の不自然な誤答とsafe-43の名称暗記型の文面を改善。対象5問に図解なし。263問・15コースを維持する。
