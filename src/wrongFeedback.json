@@ -790,14 +790,14 @@
     "3": "同期でもPostToolUseは実行後です。操作の事前拒否は同期PreToolUseで行い、実行済みの副作用とは分けます。"
   },
   "extend-15": {
-    "1": "matching command Hookは記載順の直列実行ではありません。共有stateや順序依存を避けます。",
-    "2": "最後のHookだけでなく全一致Hookが並列に開始されます。重複した副作用がないか確認します。",
-    "3": "random選択ではありません。複数sourceを含むmatching Hookがすべて起動する前提で設計します。"
+    "1": "記載順は実行の依存関係になりません。一致するcommand Hookは並列起動されるため、Aの完了を前提にできません。",
+    "2": "Aが呼出元toolを拒否しても、別の一致Hook Bの開始を防げません。toolの拒否とHook間の実行制御を分けます。",
+    "3": "timeoutは実行時間の上限で、起動順を固定する設定ではありません。B自身に必要な実行条件を持たせます。"
   },
   "extend-16": {
-    "1": "project Hookだけに置換されるとは限りません。user・project・plugin・managedの一致source全体を確認します。",
-    "2": "user Hookだけが残る単一値precedenceではありません。重複matcherによる二重実行に注意します。",
-    "3": "file名順に一つを選びません。Hookは複数layerから集約されるため`/hooks`でresolved setをreviewします。"
+    "1": "project Hookによるuser Hookの置換は起きません。モデル変更ではなく、両sourceの有効な定義とmatcherを調べます。",
+    "2": "userだけが残る設定ではありません。信頼済みprojectの一致Hookも集約されるため、両方を確認します。",
+    "3": "ファイル名順で一つに絞る仕組みではありません。名前ではなくsource全体の重複定義とmatcherを見直します。"
   },
   "extend-18": {
     "1": "利用者のGit履歴はPlugin capabilityの標準配置ではありません。Plugin root配下へHook定義を同梱します。",

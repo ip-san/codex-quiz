@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-28 Hookの順序依存と重複実行
+
+extend-15/16を公式[Hooks](https://learn.chatgpt.com/docs/hooks)のRuntime behaviorとWhere Codex looks for hooksで再確認。別Hookの開始は拒否で防げないことと、user/projectの定義は置換されず集約されることを失敗診断として出題し、全誤答解説・検証日を更新。対象2問に既存図解なし。263問・15コースを維持する。
+
 ## 2026-09-28 Hookの制御と副作用
 
 extend-13/14/17を公式[Hooks](https://learn.chatgpt.com/docs/hooks)で照合。事前拒否には同期検査と対応する拒否出力が必要であること、PostToolUseは実行済みの副作用を戻さないこと、async検査は呼出元の操作を制御できないことを説明した。extend-14/17は名称・handler列挙から失敗時の判断へ変更し、誤答別解説とextend-13の既存図解も更新。263問・15コース・図解58問を維持する。
