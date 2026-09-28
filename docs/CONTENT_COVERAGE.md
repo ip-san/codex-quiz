@@ -1,5 +1,13 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-28 URL復元の安定化
+
+画面初期化時に共有URLを読んで画面へ反映する前に、初期のホーム画面をURLへ書き戻す競合を修正。進捗画面を再読み込みするブラウザ検査で発見し、URLが保持されることを検査に追加した。問題・学習データ形式には変更なし。
+
+## 2026-09-28 承認Hookの対象範囲
+
+extend-18を公式[Hooks](https://learn.chatgpt.com/docs/hooks)のPermissionRequest節で確認し、承認不要の操作が検査から漏れる場合の診断へ変更した。正解・全誤答解説・検証日を更新。Pluginの配置は他の既存問題で継続して扱う。263問・15コースを維持する。
+
 ## 2026-09-28 network ruleの適用条件
 
 safe-36を公式[Agent approvals & security](https://learn.chatgpt.com/docs/agent-approvals-security#network-isolation)に基づき、許可domainの設定だけではcommand通信を制限できない場合の診断へ変更。正解・全誤答解説と検証日を更新し、local commandのproxyとweb search・MCPを混同しない説明を補った。263問・15コースを維持する。

@@ -800,9 +800,9 @@
     "3": "ファイル名順で一つに絞る仕組みではありません。名前ではなくsource全体の重複定義とmatcherを見直します。"
   },
   "extend-18": {
-    "1": "利用者のGit履歴はPlugin capabilityの標準配置ではありません。Plugin root配下へHook定義を同梱します。",
-    "2": "dist/index.htmlはWeb成果物で、Plugin lifecycle Hookとして読み込まれません。",
-    "3": "browser Cookieへcommand Hookを保存すると配布・reviewできません。`hooks/hooks.json`をmanifestと共に管理します。"
+    "1": "matcherはevent内の対象を絞ります。PermissionRequest自体は承認を求めない操作では発火しません。",
+    "2": "PostToolUseは操作後なので、既に起きた副作用を取り消せません。実行前に調べるならPreToolUseです。",
+    "3": "timeoutはHookの実行時間の上限です。承認要求がない操作でPermissionRequestを呼ぶ設定ではありません。"
   },
   "extend-19": {
     "1": "CSSはsurface表示用で、MCP transport・command・認証を共有しません。Codex config.tomlへ設定します。",

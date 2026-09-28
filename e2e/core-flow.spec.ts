@@ -85,6 +85,7 @@ test("chapter progress survives reload and starts category practice", async ({ p
   await page.getByRole("button", { name: /Codex CLI/ }).click();
   await page.goto("/?view=progress");
   await expect(page.getByRole("heading", { name: "チャプターの学習状況" })).toBeVisible();
+  await expect(page).toHaveURL(/\?view=progress$/);
   await page.reload();
   const chapters = page.getByRole("region", { name: "チャプターの学習状況" });
   await expect(chapters).toContainText("回答済み 1/20問");

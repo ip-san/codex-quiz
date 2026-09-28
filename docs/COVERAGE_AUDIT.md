@@ -1,5 +1,13 @@
 # 学習目標・網羅性監査
 
+## 2026-09-28 公開品質の回帰修正
+
+49件のブラウザ検査中に、進捗画面の再読み込みがホームへ戻る失敗を再現。共有URLの読み込みと書き戻しが初回描画で競合していたため、初期ルートの復元後にURLを更新するよう修正した。本文の事実監査とは別の公開品質修正で、進捗画面のURL保持を回帰検査へ追加した。
+
+## 2026-09-28 承認時だけ動くHookの見落とし
+
+extend-18のPlugin内Hook配置の名称暗記を、PermissionRequestの適用範囲を診断する問題へ置換した。公式[Hooks](https://learn.chatgpt.com/docs/hooks)ではPermissionRequestは承認を求める場合だけ発火し、承認不要の操作には発火しない。PreToolUseを実行前検査に使う判断と、PostToolUseでは副作用を戻せない制約を照合し、全誤答解説を更新。Pluginのmanifestとcomponent配置はextend-31/32で扱うため、増問せずこのIDへ高価値の未対応目標を割り当てた。既存図解なし、学習履歴は旧問題の成績を含む。実際のHook動作試験と全問監査は未完了。
+
 ## 2026-09-28 commandの通信先制限
 
 横断監査で優先した権限・network境界のうち、safe-36を「proxyを有効にしたのに通信できない」から「通信できるがdomain ruleが効かない」診断へ変更。公式[Agent approvals & security](https://learn.chatgpt.com/docs/agent-approvals-security#network-isolation)ではcommand network accessとnetwork proxyの二段階を明示し、proxy無効時は直接通信となる。正解・誤答解説を照合し、web searchやMCPへ同じruleが及ばない制約も説明した。safe-37/38のdomain優先順位、wildcard、localhost例外は同文書で方向性を確認したが、今回は本文・検証日を変更していない。safe-36に既存図解なし。IDを維持するため旧内容での過去成績は残る。全43件の安全カテゴリ監査完了とはしない。

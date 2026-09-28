@@ -105,6 +105,7 @@ function Logo() {
 
 function App() {
   const [screen, setScreen] = useState<Screen>("home");
+  const [routeReady, setRouteReady] = useState(false);
   const [progress, setProgress] = useState<SavedProgress>(readProgress);
   const [session, setSession] = useState<Quiz[]>([]);
   const [index, setIndex] = useState(0);
@@ -144,6 +145,7 @@ function App() {
     const category = params.get("category") as Category | null;
     if (view === "reader" || view === "progress") {
       setScreen(view);
+      setRouteReady(true);
       return;
     }
     const sharedQuestion = quizzes.find((quiz) => quiz.id === questionId);
@@ -151,6 +153,7 @@ function App() {
       setSession([sharedQuestion]);
       setSessionLabel("共有された問題");
       setScreen("quiz");
+      setRouteReady(true);
       return;
     }
     if (category && category in categories) {
@@ -159,11 +162,13 @@ function App() {
       setSessionLabel(categories[category].label);
       setScreen("quiz");
     }
+    setRouteReady(true);
   }, []);
 
   const activeQuestionId = session[index]?.id;
 
   useEffect(() => {
+    if (!routeReady) return;
     const params = new URLSearchParams();
     if (screen === "reader" || screen === "progress") params.set("view", screen);
     if (screen === "quiz" && sessionLabel === "共有された問題" && activeQuestionId) {
@@ -173,7 +178,7 @@ function App() {
     }
     const search = params.size ? `?${params.toString()}` : window.location.pathname;
     window.history.replaceState(null, "", search);
-  }, [activeQuestionId, screen, sessionCategory, sessionLabel]);
+  }, [activeQuestionId, routeReady, screen, sessionCategory, sessionLabel]);
 
   const question = session[index];
   const displayedChoices = useMemo(() => (question ? orderChoices(question.choices) : []), [question]);
