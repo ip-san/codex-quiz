@@ -47,3 +47,18 @@ test("invalid and cancelled imports preserve existing data", async ({ page }) =>
   await expect(page.locator('input[type="file"]')).toHaveValue("");
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-progress")!))).toEqual(progress);
 });
+
+test("failed import storage write keeps the existing learning data", async ({ page }) => {
+  await page.addInitScript(() => {
+    const original = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (key, value) {
+      if (key === "codex-quiz-progress") throw new DOMException("Storage is blocked", "QuotaExceededError");
+      original.call(this, key, value);
+    };
+  });
+  await page.reload();
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.locator('input[type="file"]').setInputFiles(file({ ...progress, bookmarks: [] }));
+  await expect(page.getByRole("status")).toContainText("端末に保存できませんでした");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-progress")!))).toEqual(progress);
+});

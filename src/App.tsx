@@ -13,10 +13,13 @@ import {
   type SessionRecord,
 } from "./domain/progressData";
 import { getReviewLabel, isReviewDue, scheduleReview, type QuestionProgress } from "./domain/spacedRepetition";
+import { removeStoredItem, writeStoredJson } from "./domain/storage";
 
 type Screen = "home" | "quiz" | "result" | "reader" | "progress";
 type QuizMode = "normal" | "study" | "exam" | "overview" | "scenario";
 const CATEGORY_COUNT = Object.keys(categories).length;
+const STORAGE_SAVE_WARNING =
+  "端末への保存に失敗しました。学習結果や再開状態が残らない可能性があります。ページを閉じる前に進捗画面からバックアップしてください。";
 
 type ResumeSession = {
   ids: string[];
@@ -119,6 +122,7 @@ function App() {
   const [sessionCategory, setSessionCategory] = useState<Category | null>(null);
   const [shareMessage, setShareMessage] = useState("");
   const [dataMessage, setDataMessage] = useState("");
+  const [storageWarning, setStorageWarning] = useState("");
   const importInputRef = useRef<HTMLInputElement>(null);
   const [resumableSession, setResumableSession] = useState<ResumeSession | null>(readResumeSession);
   const [quizMode, setQuizMode] = useState<QuizMode>("normal");
@@ -224,6 +228,26 @@ function App() {
     return { category, attempts, accuracy: attempts ? Math.round((correct / attempts) * 100) : 0 };
   });
 
+  const saveProgress = (next: SavedProgress) => {
+    setProgress(next);
+    if (!writeStoredJson("codex-quiz-progress", next)) {
+      setStorageWarning(STORAGE_SAVE_WARNING);
+    }
+  };
+
+  const saveSession = (resume: ResumeSession) => {
+    setResumableSession(resume);
+    if (!writeStoredJson("codex-quiz-session", resume)) {
+      setStorageWarning(STORAGE_SAVE_WARNING);
+    }
+  };
+
+  const storageAlert = storageWarning && (
+    <p className="storage-warning" role="alert">
+      {storageWarning}
+    </p>
+  );
+
   const beginSession = (nextSession: Quiz[], label: string, mode: QuizMode, category: Category | null = null) => {
     const resume: ResumeSession = {
       ids: nextSession.map((quiz) => quiz.id),
@@ -243,8 +267,7 @@ function App() {
     setQuizMode(mode);
     setStudyPhase(mode === "study");
     setShowChapterIntro(mode === "overview");
-    localStorage.setItem("codex-quiz-session", JSON.stringify(resume));
-    setResumableSession(resume);
+    saveSession(resume);
     setScreen("quiz");
     window.scrollTo(0, 0);
   };
@@ -304,8 +327,7 @@ function App() {
         [question.id]: scheduleReview(previous, correct),
       },
     };
-    setProgress(next);
-    localStorage.setItem("codex-quiz-progress", JSON.stringify(next));
+    saveProgress(next);
     const resume = {
       ids: session.map((quiz) => quiz.id),
       index,
@@ -315,14 +337,13 @@ function App() {
       selected: choice,
       mode: quizMode,
     };
-    localStorage.setItem("codex-quiz-session", JSON.stringify(resume));
-    setResumableSession(resume);
+    saveSession(resume);
   };
 
   const resetProgress = () => {
     if (!window.confirm("これまでの回答履歴と正答率をリセットしますか？")) return;
-    localStorage.removeItem("codex-quiz-progress");
-    setProgress(emptyProgress);
+    if (removeStoredItem("codex-quiz-progress")) setProgress(emptyProgress);
+    else setStorageWarning("学習データを削除できませんでした。端末の保存設定を確認してください。");
   };
 
   const toggleBookmark = (questionId: string) => {
@@ -330,8 +351,7 @@ function App() {
       ? progress.bookmarks.filter((id) => id !== questionId)
       : [...progress.bookmarks, questionId];
     const next = { ...progress, bookmarks };
-    setProgress(next);
-    localStorage.setItem("codex-quiz-progress", JSON.stringify(next));
+    saveProgress(next);
   };
 
   const exportProgress = () => {
@@ -363,7 +383,7 @@ function App() {
     try {
       const imported = parseProgressExport(await file.text());
       if (!window.confirm("現在の学習データを、選択したファイルの内容で置き換えますか？")) return;
-      localStorage.setItem("codex-quiz-progress", JSON.stringify(imported));
+      if (!writeStoredJson("codex-quiz-progress", imported)) throw new Error("学習データを端末に保存できませんでした");
       setProgress(imported);
       setDataMessage("学習データを読み込みました");
     } catch (error) {
@@ -383,9 +403,12 @@ function App() {
         label: sessionLabel,
       };
       const nextProgress = { ...progress, history: [record, ...progress.history].slice(0, 50) };
-      setProgress(nextProgress);
-      localStorage.setItem("codex-quiz-progress", JSON.stringify(nextProgress));
-      localStorage.removeItem("codex-quiz-session");
+      saveProgress(nextProgress);
+      if (!removeStoredItem("codex-quiz-session")) {
+        setStorageWarning(
+          "完了したセッションを端末から削除できませんでした。再読み込み後の再開状態に注意してください。",
+        );
+      }
       setResumableSession(null);
       setScreen("result");
     } else {
@@ -402,8 +425,7 @@ function App() {
         selected: null,
         mode: quizMode,
       };
-      localStorage.setItem("codex-quiz-session", JSON.stringify(resume));
-      setResumableSession(resume);
+      saveSession(resume);
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -427,8 +449,8 @@ function App() {
   };
 
   const discardResume = () => {
-    localStorage.removeItem("codex-quiz-session");
-    setResumableSession(null);
+    if (removeStoredItem("codex-quiz-session")) setResumableSession(null);
+    else setStorageWarning("学習セッションを端末から削除できませんでした。端末の保存設定を確認してください。");
   };
 
   useEffect(() => {
@@ -459,6 +481,7 @@ function App() {
     const learning = categoryLearning[question.category];
     return (
       <main className="chapter-page">
+        {storageAlert}
         <div className="chapter-card">
           <span className="chapter-number">
             CHAPTER {learning.chapter} / {CATEGORY_COUNT}
@@ -484,6 +507,7 @@ function App() {
   if (screen === "quiz" && question) {
     return (
       <main className="quiz-shell">
+        {storageAlert}
         <header className="quiz-header">
           <button className="brand brand-button" onClick={() => setScreen("home")} aria-label="ホームへ戻る">
             <Logo />
@@ -624,6 +648,7 @@ function App() {
     const percent = Math.round((score / session.length) * 100);
     return (
       <main className="result-page">
+        {storageAlert}
         <div className="result-card">
           <Logo />
           <p className="eyebrow result-label">SESSION COMPLETE</p>
@@ -673,6 +698,7 @@ function App() {
   if (screen === "reader") {
     return (
       <main className="reader-page">
+        {storageAlert}
         <header className="reader-header">
           <button className="brand brand-button" onClick={() => setScreen("home")}>
             <Logo />
@@ -797,6 +823,7 @@ function App() {
       : 0;
     return (
       <main className="dashboard-page">
+        {storageAlert}
         <header className="reader-header">
           <button className="brand brand-button" onClick={() => setScreen("home")}>
             <Logo />
@@ -963,6 +990,7 @@ function App() {
 
   return (
     <main>
+      {storageAlert}
       <nav aria-label="メインナビゲーション">
         <div className="brand">
           <Logo />

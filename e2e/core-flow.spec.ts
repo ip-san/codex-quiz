@@ -38,6 +38,20 @@ test("malformed progress does not crash and is backed up before new answers", as
   expect(await page.evaluate(() => localStorage.getItem("codex-quiz-progress-recovery"))).toBe(raw);
 });
 
+test("blocked browser storage warns without interrupting a quiz", async ({ page }) => {
+  await page.addInitScript(() => {
+    const original = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (key, value) {
+      if (key.startsWith("codex-quiz-")) throw new DOMException("Storage is blocked", "QuotaExceededError");
+      original.call(this, key, value);
+    };
+  });
+  await page.goto("/?q=basic-01");
+  await page.getByRole("button", { name: /Codex CLI/ }).click();
+  await expect(page.getByRole("alert")).toContainText("端末への保存に失敗しました");
+  await expect(page.getByRole("button", { name: "結果を見る" })).toBeVisible();
+});
+
 for (const mode of ["normal", "study", "exam", "overview"]) {
   test(`unanswered ${mode} session resumes at the saved question`, async ({ page }) => {
     await page.evaluate((savedMode) => localStorage.setItem("codex-quiz-session", JSON.stringify({
