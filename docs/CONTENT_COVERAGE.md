@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-28 名前付き設定の移行
+
+config-05を公式[Advanced Configuration](https://learn.chatgpt.com/docs/config-file/config-advanced#profiles)の現行profile形式と照合。flag名を選ぶ暗記問題から、Codex 0.134.0以降に旧`[profiles.name]`が読まれない問題の復旧へ置換し、正解・全誤答解説・検証日を更新した。増問なし。
+
 ## 2026-09-28 URL復元の安定化
 
 画面初期化時に共有URLを読んで画面へ反映する前に、初期のホーム画面をURLへ書き戻す競合を修正。進捗画面を再読み込みするブラウザ検査で発見し、URLが保持されることを検査に追加した。問題・学習データ形式には変更なし。

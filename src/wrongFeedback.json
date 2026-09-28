@@ -160,9 +160,9 @@
     "3": "CSS変数ではなくTOMLとして解釈されるCodex設定keyとvalueを渡します。"
   },
   "config-05": {
-    "1": "`--persona`はprofile fileを重ねる正式なflagではありません。`--profile`を使います。",
-    "2": "CSS presetではmodelやapproval等をまとめたCodex設定layerを選択できません。",
-    "3": "Git branchとCodex config profileは別の概念です。名前付き設定は`--profile`で選択します。"
+    "1": "Codex 0.134.0以降、`--profile`は旧`[profiles.name]`を読みません。起動順ではなく、独立したprofile fileへ移します。",
+    "2": "project configではprofile selectorが無視されます。user側の名前付きprofile fileをCLIの`--profile`で選びます。",
+    "3": "Git branch名はCodexの設定layerを選択しません。旧tableを`~/.codex/deep-review.config.toml`へ移行します。"
   },
   "session-01": {
     "1": "repository削除はcontext整理ではなく作業dataの損失につながります。`/compact`で会話を要約してtokenを空けます。",
