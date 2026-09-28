@@ -224,83 +224,44 @@ function App() {
     return { category, attempts, accuracy: attempts ? Math.round((correct / attempts) * 100) : 0 };
   });
 
-  const start = (category?: Category) => {
-    const pool = category ? quizzes.filter((quiz) => quiz.category === category) : quizzes;
-    const nextSession = shuffle(pool).slice(0, category ? pool.length : 10);
-    const label = category ? categories[category].label : "ランダム10問";
+  const beginSession = (nextSession: Quiz[], label: string, mode: QuizMode, category: Category | null = null) => {
+    const resume: ResumeSession = {
+      ids: nextSession.map((quiz) => quiz.id),
+      index: 0,
+      score: 0,
+      label,
+      category,
+      selected: null,
+      mode,
+    };
     setSession(nextSession);
     setIndex(0);
     setScore(0);
     setSelected(null);
     setSessionLabel(label);
-    setSessionCategory(category ?? null);
-    setQuizMode("normal");
-    setStudyPhase(false);
-    setScreen("quiz");
-    const resume = {
-      ids: nextSession.map((quiz) => quiz.id),
-      index: 0,
-      score: 0,
-      label,
-      category: category ?? null,
-      selected: null,
-      mode: "normal" as const,
-    };
+    setSessionCategory(category);
+    setQuizMode(mode);
+    setStudyPhase(mode === "study");
+    setShowChapterIntro(mode === "overview");
     localStorage.setItem("codex-quiz-session", JSON.stringify(resume));
     setResumableSession(resume);
+    setScreen("quiz");
     window.scrollTo(0, 0);
+  };
+
+  const start = (category?: Category) => {
+    const pool = category ? quizzes.filter((quiz) => quiz.category === category) : quizzes;
+    const nextSession = shuffle(pool).slice(0, category ? pool.length : 10);
+    const label = category ? categories[category].label : "ランダム10問";
+    beginSession(nextSession, label, "normal", category ?? null);
   };
 
   const startWeak = () => {
-    const nextSession = shuffle(weakQuestions);
-    setSession(nextSession);
-    setIndex(0);
-    setScore(0);
-    setSelected(null);
-    setSessionLabel("苦手問題の復習");
-    setSessionCategory(null);
-    setQuizMode("normal");
-    setStudyPhase(false);
-    setShowChapterIntro(false);
-    setScreen("quiz");
-    const resume = {
-      ids: nextSession.map((quiz) => quiz.id),
-      index: 0,
-      score: 0,
-      label: "苦手問題の復習",
-      category: null,
-      selected: null,
-      mode: "normal" as const,
-    };
-    localStorage.setItem("codex-quiz-session", JSON.stringify(resume));
-    setResumableSession(resume);
-    window.scrollTo(0, 0);
+    beginSession(shuffle(weakQuestions), "苦手問題の復習", "normal");
   };
 
   const startDue = () => {
-    const nextSession = shuffle(dueQuestions).slice(0, 3);
-    setSession(nextSession);
-    setIndex(0);
-    setScore(0);
-    setSelected(null);
-    setSessionLabel("60秒チェック");
-    setSessionCategory(null);
-    setQuizMode("normal");
-    setStudyPhase(false);
-    setShowChapterIntro(false);
-    setScreen("quiz");
-    const resume = {
-      ids: nextSession.map((quiz) => quiz.id),
-      index: 0,
-      score: 0,
-      label: "60秒チェック",
-      category: null,
-      selected: null,
-      mode: "normal" as const,
-    };
-    localStorage.setItem("codex-quiz-session", JSON.stringify(resume));
-    setResumableSession(resume);
-    window.scrollTo(0, 0);
+    beginSession(shuffle(dueQuestions).slice(0, 3), "60秒チェック", "normal");
   };
 
   const startScenario = (scenario: (typeof scenarios)[number]) => {
@@ -308,28 +269,7 @@ function App() {
       .map((id) => quizzes.find((quiz) => quiz.id === id))
       .filter((quiz): quiz is Quiz => Boolean(quiz));
     if (nextSession.length !== scenario.ids.length) return;
-    const resume: ResumeSession = {
-      ids: [...scenario.ids],
-      index: 0,
-      score: 0,
-      label: scenario.title,
-      category: null,
-      selected: null,
-      mode: "scenario",
-    };
-    setSession(nextSession);
-    setIndex(0);
-    setScore(0);
-    setSelected(null);
-    setSessionLabel(scenario.title);
-    setSessionCategory(null);
-    setQuizMode("scenario");
-    setStudyPhase(false);
-    setShowChapterIntro(false);
-    localStorage.setItem("codex-quiz-session", JSON.stringify(resume));
-    setResumableSession(resume);
-    setScreen("quiz");
-    window.scrollTo(0, 0);
+    beginSession(nextSession, scenario.title, "scenario");
   };
 
   const startMode = (mode: "study" | "exam" | "overview") => {
@@ -340,51 +280,12 @@ function App() {
           ? selectBalancedExam(quizzes)
           : shuffle(quizzes).slice(0, 10);
     const label = mode === "overview" ? "全体像学習パス" : mode === "study" ? "読んでから解く" : "実力テスト";
-    setSession(nextSession);
-    setIndex(0);
-    setScore(0);
-    setSelected(null);
-    setSessionLabel(label);
-    setSessionCategory(null);
-    setQuizMode(mode);
-    setStudyPhase(mode === "study");
-    setShowChapterIntro(mode === "overview");
-    setScreen("quiz");
-    const resume = {
-      ids: nextSession.map((quiz) => quiz.id),
-      index: 0,
-      score: 0,
-      label,
-      category: null,
-      selected: null,
-      mode,
-    };
-    localStorage.setItem("codex-quiz-session", JSON.stringify(resume));
-    setResumableSession(resume);
-    window.scrollTo(0, 0);
+    beginSession(nextSession, label, mode);
   };
 
   const restartSession = () => {
     const nextSession = quizMode === "overview" || quizMode === "scenario" ? session : shuffle(session);
-    setSession(nextSession);
-    setIndex(0);
-    setScore(0);
-    setSelected(null);
-    setStudyPhase(quizMode === "study");
-    setShowChapterIntro(quizMode === "overview");
-    setScreen("quiz");
-    const resume = {
-      ids: nextSession.map((quiz) => quiz.id),
-      index: 0,
-      score: 0,
-      label: sessionLabel,
-      category: sessionCategory,
-      selected: null,
-      mode: quizMode,
-    };
-    localStorage.setItem("codex-quiz-session", JSON.stringify(resume));
-    setResumableSession(resume);
-    window.scrollTo(0, 0);
+    beginSession(nextSession, sessionLabel, quizMode, sessionCategory);
   };
 
   const answer = (choice: number) => {
