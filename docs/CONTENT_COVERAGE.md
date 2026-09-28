@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-28 Hookの二段階の信頼
+
+extend-11/12を公式[Hooks](https://learn.chatgpt.com/docs/hooks)のWhere Codex looks for hooksとReview and trust hooksへ照合。project設定layerの信頼と非managed Hookの定義hashに対する信頼を区別し、読み込み不成立・変更後のskipを診断する問題へ改善した。正解・全誤答解説と検証日を更新。対象に図解なし。263問・15コースを維持する。
+
 ## 2026-09-28 Hookの順序依存と重複実行
 
 extend-15/16を公式[Hooks](https://learn.chatgpt.com/docs/hooks)のRuntime behaviorとWhere Codex looks for hooksで再確認。別Hookの開始は拒否で防げないことと、user/projectの定義は置換されず集約されることを失敗診断として出題し、全誤答解説・検証日を更新。対象2問に既存図解なし。263問・15コースを維持する。
