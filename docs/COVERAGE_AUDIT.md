@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-09-28 commandの通信先制限
+
+横断監査で優先した権限・network境界のうち、safe-36を「proxyを有効にしたのに通信できない」から「通信できるがdomain ruleが効かない」診断へ変更。公式[Agent approvals & security](https://learn.chatgpt.com/docs/agent-approvals-security#network-isolation)ではcommand network accessとnetwork proxyの二段階を明示し、proxy無効時は直接通信となる。正解・誤答解説を照合し、web searchやMCPへ同じruleが及ばない制約も説明した。safe-37/38のdomain優先順位、wildcard、localhost例外は同文書で方向性を確認したが、今回は本文・検証日を変更していない。safe-36に既存図解なし。IDを維持するため旧内容での過去成績は残る。全43件の安全カテゴリ監査完了とはしない。
+
 ## 2026-09-28 9カテゴリ横断の優先度確認
 
 `node scripts/content-inventory.mjs`の全263問をカテゴリと出典別に再集計し、既存の学習目標・実践コースを確認した。次表の「9月前」は最終確認日が2026-09-01より前の件数で、誤り件数ではない。カテゴリ単位の出題有無と深さの暫定評価であり、全選択肢・全図解を最新の公式資料で再検証した結果ではない。

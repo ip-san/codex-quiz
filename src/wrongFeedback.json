@@ -465,9 +465,9 @@
     "3": "MCP追加はshell commandのnetwork access設定とは別です。"
   },
   "safe-36": {
-    "1": "proxy featureだけではcommand network accessは有効になりません。sandbox側のnetwork設定も確認します。",
-    "2": "danger-full-accessへ広げず、workspace-writeのnetwork設定とproxy policyを組み合わせます。",
-    "3": "MCP transport設定はspawnしたshell command全体のnetwork accessを付与しません。"
+    "1": "network_accessを切ると必要なAPI接続も止まります。通信を許しつつ宛先を絞るにはproxyの有効化を確認します。",
+    "2": "proxyが無効ならdomain rule自体が通信先を制限しません。許可先を追加する前に制約の適用状態を調べます。",
+    "3": "approval_policyは承認の扱いで、commandの通信先ルールを有効化する設定ではありません。"
   },
   "safe-37": {
     "1": "`*.example.com`はsubdomainだけで、apexの`example.com`には一致しません。",

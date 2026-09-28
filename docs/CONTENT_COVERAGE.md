@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-28 network ruleの適用条件
+
+safe-36を公式[Agent approvals & security](https://learn.chatgpt.com/docs/agent-approvals-security#network-isolation)に基づき、許可domainの設定だけではcommand通信を制限できない場合の診断へ変更。正解・全誤答解説と検証日を更新し、local commandのproxyとweb search・MCPを混同しない説明を補った。263問・15コースを維持する。
+
 ## 2026-09-28 全カテゴリの優先度監査と初回runの点検
 
 [網羅性監査](COVERAGE_AUDIT.md)に9カテゴリの問題数・検証日の分布・次の確認先を記録した。これは学習目標の棚卸しで、全263問の最新仕様照合ではない。公式[Scheduled tasks](https://learn.chatgpt.com/docs/automations)に基づき、surfaces-08を一般的な権限設計から「初回の数回で範囲外の結果が出た場合の調整」へ改善。誤答別feedbackと検証日を更新し、263問・15コースを維持する。
