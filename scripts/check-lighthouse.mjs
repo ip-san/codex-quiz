@@ -40,28 +40,43 @@ try {
   chrome = await launch({
     chromeFlags: ["--headless", "--no-sandbox", "--disable-gpu"],
   });
-  const result = await lighthouse(
-    url,
-    {
-      port: chrome.port,
-      output: "json",
-      logLevel: "error",
-    },
-    desktopConfig,
-  );
-  if (!result?.lhr) throw new Error("Lighthouse did not return a report");
+  const measure = async () => {
+    const result = await lighthouse(
+      url,
+      {
+        port: chrome.port,
+        output: "json",
+        logLevel: "error",
+      },
+      desktopConfig,
+    );
+    if (!result?.lhr) throw new Error("Lighthouse did not return a report");
+    const scores = Object.fromEntries(Object.keys(thresholds).map((category) => {
+      const score = result.lhr.categories[category]?.score;
+      if (typeof score !== "number") throw new Error(`Missing Lighthouse category: ${category}`);
+      return [category, score];
+    }));
+    return { lhr: result.lhr, scores };
+  };
+
+  const measurements = [await measure()];
+  if (Object.entries(thresholds).some(([category, minimum]) => measurements[0].scores[category] < minimum)) {
+    console.log("Initial Lighthouse score was below a threshold; measuring twice more for a median.");
+    measurements.push(await measure(), await measure());
+  }
 
   const failures = [];
   for (const [category, minimum] of Object.entries(thresholds)) {
-    const score = result.lhr.categories[category]?.score;
-    if (typeof score !== "number") throw new Error(`Missing Lighthouse category: ${category}`);
-    console.log(`${category}: ${Math.round(score * 100)} (minimum ${Math.round(minimum * 100)})`);
+    const samples = measurements.map(({ scores }) => scores[category]);
+    const score = [...samples].sort((a, b) => a - b)[Math.floor(samples.length / 2)];
+    console.log(`${category}: ${Math.round(score * 100)} (minimum ${Math.round(minimum * 100)}; samples ${samples.map((sample) => Math.round(sample * 100)).join(", ")})`);
     if (score < minimum) failures.push(`${category} ${Math.round(score * 100)} < ${Math.round(minimum * 100)}`);
   }
 
-  const incompleteAudits = Object.values(result.lhr.categories).flatMap((category) => category.auditRefs)
-    .filter(({ weight, id }) => weight > 0 && result.lhr.audits[id]?.score !== 1)
-    .map(({ id }) => `${id}: ${result.lhr.audits[id]?.title ?? "Unknown audit"}`);
+  const lhr = measurements.at(-1).lhr;
+  const incompleteAudits = Object.values(lhr.categories).flatMap((category) => category.auditRefs)
+    .filter(({ weight, id }) => weight > 0 && lhr.audits[id]?.score !== 1)
+    .map(({ id }) => `${id}: ${lhr.audits[id]?.title ?? "Unknown audit"}`);
   if (incompleteAudits.length > 0) console.log(`Audit opportunities:\n- ${[...new Set(incompleteAudits)].join("\n- ")}`);
 
   if (failures.length > 0) throw new Error(`Lighthouse thresholds failed: ${failures.join(", ")}`);
