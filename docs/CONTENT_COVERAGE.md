@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-28 Hookの制御と副作用
+
+extend-13/14/17を公式[Hooks](https://learn.chatgpt.com/docs/hooks)で照合。事前拒否には同期検査と対応する拒否出力が必要であること、PostToolUseは実行済みの副作用を戻さないこと、async検査は呼出元の操作を制御できないことを説明した。extend-14/17は名称・handler列挙から失敗時の判断へ変更し、誤答別解説とextend-13の既存図解も更新。263問・15コース・図解58問を維持する。
+
 ## 2026-09-28 管理者設定の適用条件
 
 config-18の正解・誤答解説を公式[Configuration Reference](https://learn.chatgpt.com/docs/config-file/config-reference#requirementstoml)で確認し、permission-profile allowlistの対応条件を解説へ追記。0.138.0以降が必要で、0.137.0以前は新しい管理項目を無視することを明記した。設定配布と保護の有効化を混同しないための補足で、従来の管理者制約を回避しないという学習目標は維持。既存図解なし。263問・15コースを維持する。

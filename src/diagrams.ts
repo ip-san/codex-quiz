@@ -323,9 +323,9 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
       type: "flow",
       label: "ツール実行を挟むHook",
       steps: [
-        { text: "PreToolUse", sub: "実行前にポリシー検査" },
-        { text: "Tool", sub: "Bashなどを実行" },
-        { text: "PostToolUse", sub: "結果を品質検査" },
+        { text: "PreToolUse", sub: "同期で事前検査・拒否なら実行しない" },
+        { text: "Tool", sub: "拒否されなければ実行・副作用が生じる" },
+        { text: "PostToolUse", sub: "実行後の検査・自動で元には戻らない" },
       ],
     },
   ],

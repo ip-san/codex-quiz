@@ -785,9 +785,9 @@
     "3": "SessionStartだけでは各shell callの引数を直前に検査できません。tool matcher付きPreToolUseを使います。"
   },
   "extend-14": {
-    "1": "UserPromptSubmitはuser message送信時で、commandのstdout・stderrを受けた後の品質検査ではありません。",
-    "2": "PreCompactは要約前のeventです。tool resultを評価する処理はPostToolUseへ置きます。",
-    "3": "SessionStartはthread開始時だけです。各command完了後の結果検査にはPostToolUseを使います。"
+    "1": "Hookの失敗はファイル更新のrollbackではありません。既に生じた副作用を確認し、必要な修正・復旧を行います。",
+    "2": "検査の再実行は更新前の内容を復元しません。差分や保存された元データを確認し、復旧方法を判断します。",
+    "3": "同期でもPostToolUseは実行後です。操作の事前拒否は同期PreToolUseで行い、実行済みの副作用とは分けます。"
   },
   "extend-15": {
     "1": "matching command Hookは記載順の直列実行ではありません。共有stateや順序依存を避けます。",
@@ -1205,9 +1205,9 @@
     "3": "自由度を与えたい場合に細かな手順固定は逆効果です。goal・boundary・outputを中心に伝えます。"
   },
   "extend-17": {
-    "1": "promptとagent handlerは解析されてもskipされます。commandとmcp_toolを目的に応じて使います。",
-    "2": "HTTPだけというhandlerではありません。接続済みMCP toolにはmcp_tool、scriptにはcommandを使います。",
-    "3": "React componentはHook handlerではありません。実行する検査に合わせてcommandかmcp_toolを選びます。"
+    "1": "asyncのbackground Hookは呼出元の操作を拒否できません。拒否出力を書くだけでは実行前の待機は保証されません。",
+    "2": "timeoutはHookが動ける時間の上限です。長くしてもasync実行が同期の事前検査に変わるわけではありません。",
+    "3": "非同期検査の失敗で副作用が戻る仕組みはありません。止める必要のある検査は操作前に同期で実行します。"
   },
   "session-15": {
     "1": "`agents.max_depth`は現行の同時thread上限fieldではありません。session単位のconcurrency設定を使います。",
