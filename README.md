@@ -114,7 +114,7 @@ LighthouseのChrome起動に必要なchrome-launcherは開発依存として明�
 
 ## GitHub Pagesへのデプロイ
 
-`main`ブランチへpushすると、`.github/workflows/deploy-pages.yml` が品質ゲートと本番ビルドを実行し、成功した `dist/` をGitHub Pagesへ公開します。手動実行はGitHub Actionsの「Deploy GitHub Pages」から行えます。
+`main`ブランチへpushすると、`.github/workflows/deploy-pages.yml` が共通の品質ワークフローを呼び、型・単体・ブラウザ・PWA・Lighthouseの全検査が成功してから本番ビルドとGitHub Pages公開へ進みます。Pull Requestは同じ品質ワークフローで検査します。手動実行はGitHub Actionsの「Deploy GitHub Pages」から行えます。
 
 workflowは初回デプロイ時にGitHub Pagesの有効化も試みます。組織やリポジトリのポリシーで自動有効化が許可されない場合は、GitHubリポジトリの **Settings → Pages → Build and deployment → Source** を **GitHub Actions** に設定してください。
 

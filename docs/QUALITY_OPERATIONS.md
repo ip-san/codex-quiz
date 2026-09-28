@@ -33,7 +33,7 @@ flowchart LR
 | Vite build | 配信成果物を作れない変更 |
 | bundle size | 初期JavaScriptの意図しない肥大化 |
 
-GitHub ActionsではPull Requestと `main` push時に同じゲートを実行します。Pages workflowもデプロイ前に再実行します。
+GitHub ActionsではPull Requestを共通のQuality Gate workflowで検査します。`main` pushと手動公開時はPages workflowが同じQuality Gateを呼び、通常検査・ブラウザE2EとPWA・Lighthouseの全jobが成功した時だけ本番ビルドとデプロイを開始します。どれかが失敗またはskipされた場合は後続jobも進みません。
 
 ## コンテンツ監査
 
@@ -65,6 +65,7 @@ GitHub ActionsではPull Requestと `main` push時に同じゲートを実行し
 - 新規問題の正解位置が表示時に変わっても正しく採点される。
 - 解説と図解が回答後・リーダー・読んでから解くモードで表示される。
 - PagesのActions runが成功し、公開URLで新しい版を確認できる。
+- Pages workflow内のQuality Gateにあるquality・e2e・lighthouseの3 jobがすべて成功する。
 
 ## 現在の重点課題
 
