@@ -730,9 +730,9 @@
     "3": "Cloud環境削除はlocal taskを動かす条件ではありません。選択したlocal projectがdisk上にあることを確認します。"
   },
   "surfaces-08": {
-    "1": "scheduled taskはunattendedで動くため、毎回のinteractive approvalを前提にできません。既定権限を事前に絞ります。",
-    "2": "taskは選択したsandbox範囲でfileへ触れられます。一切変更不能とは限らないため対象と完了条件を限定します。",
-    "3": "read-only固定ではありません。default sandboxが使われるため、必要最小限のfilesystem・network accessを設定します。"
+    "1": "事前の手動テストだけでは定期実行の実際の結果を保証できません。最初の数回の結果から範囲と条件を見直します。",
+    "2": "実行を増やしても範囲外の変更が自動で修正されるわけではありません。結果を調べて設定を調整します。",
+    "3": "通知を隠すと異常に気づきにくくなります。対象外へ広がった原因を確認し、promptや使用toolを修正します。"
   },
   "surfaces-09": {
     "1": "package.jsonはapplication依存の設定で、Codex agentとIDE sidebarの二つの設定layerをまとめません。",

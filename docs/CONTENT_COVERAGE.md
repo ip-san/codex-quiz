@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-28 全カテゴリの優先度監査と初回runの点検
+
+[網羅性監査](COVERAGE_AUDIT.md)に9カテゴリの問題数・検証日の分布・次の確認先を記録した。これは学習目標の棚卸しで、全263問の最新仕様照合ではない。公式[Scheduled tasks](https://learn.chatgpt.com/docs/automations)に基づき、surfaces-08を一般的な権限設計から「初回の数回で範囲外の結果が出た場合の調整」へ改善。誤答別feedbackと検証日を更新し、263問・15コースを維持する。
+
 ## 2026-09-28 Hookの二段階の信頼
 
 extend-11/12を公式[Hooks](https://learn.chatgpt.com/docs/hooks)のWhere Codex looks for hooksとReview and trust hooksへ照合。project設定layerの信頼と非managed Hookの定義hashに対する信頼を区別し、読み込み不成立・変更後のskipを診断する問題へ改善した。正解・全誤答解説と検証日を更新。対象に図解なし。263問・15コースを維持する。
