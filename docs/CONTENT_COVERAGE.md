@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-29 権限profileの保護継承
+
+safe-02を公式[Permissions](https://learn.chatgpt.com/docs/permissions)へ照合し、`:workspace`を継承して既定の`.codex`保護を維持しつつdenyを追加する実務判断へ置換した。空のfilesystem ruleは保護の継承を意味せず、`:danger-full-access`は継承元にできない。全誤答解説と検証日を更新。図解なし。263問・15コースを維持する。
+
 ## 2026-09-29 shell環境変数設定の部分監査
 
 config-16/17の正解・全誤答解説を公式[Advanced Configuration](https://learn.chatgpt.com/docs/config-file/config-advanced#shell-environment-policy)へ照合。旧`include_only`/`exclude`配列と新しい`filters`を同じlayerで併用すると設定が拒否される移行判断、および`ignore_default_excludes`の既定値trueではKEY・SECRET・TOKEN名の自動除外が行われない点へ更新した。該当2問に図解なし。263問・15コースを維持する。

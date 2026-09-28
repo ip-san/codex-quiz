@@ -95,9 +95,9 @@
     "3": "Gitの作者名はcommit metadataです。shellや外部操作の承認条件とは別に設定します。"
   },
   "safe-02": {
-    "1": "回答言語はpromptやlocaleの問題です。sandboxはfilesystemやnetworkへの技術的な境界を設けます。",
-    "2": "editorの配色は表示設定であり、agentがread・writeできるpathやnetwork範囲を制限しません。",
-    "3": "クイズ難易度は学習用metadataです。Codexの操作範囲はsandbox設定で制御します。"
+    "1": "空のfilesystem tableは`:workspace`の保護を自動継承しません。既定保護を残すなら明示的にextendsします。",
+    "2": "`:danger-full-access`は独自profileの継承元として拒否されます。最小限の例外を足すなら`:workspace`から始めます。",
+    "3": "approval policyは承認要求の扱いです。特定ファイルをread拒否する境界はfilesystem ruleで定義します。"
   },
   "safe-03": {
     "1": "初回からOS全体とnetworkを開くと誤操作の影響範囲が広がります。必要なworkspace境界から始めます。",

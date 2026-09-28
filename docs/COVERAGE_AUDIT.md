@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-09-29 独自権限profileの基準保護
+
+safe-02の自明な名称選択を、独自permission profileを作る際の保護継承へ置換。公式[Permissions](https://learn.chatgpt.com/docs/permissions)で`:workspace`のextends、`.codex`のread-only保護、空filesystem tableの制限と警告、`:danger-full-access`の継承禁止を確認した。正解・全誤答解説・検証日を更新。IDを維持するため旧問題の成績は残る。図解なし。権限カテゴリ全43問の監査完了ではない。
+
 ## 2026-09-29 shell環境変数設定の誤学習防止
 
 設定カテゴリの古いconfig-16/17を監査。旧記法と新記法の混在が拒否されること、`ignore_default_excludes`の既定値はtrueで自動secret名除外を行わないことを公式[Advanced Configuration](https://learn.chatgpt.com/docs/config-file/config-advanced#shell-environment-policy)で確認した。旧問題はこの既定値を曖昧に示し、旧`include_only`を新規設定の標準例のように扱っていたため、両問を実務での設定失敗診断へ置換。全誤答解説・検証日を更新、図解なし。IDと過去の学習履歴を維持するため旧内容の成績が残る。設定22問および権限43問の全面監査ではない。
