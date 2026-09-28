@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-28 管理者設定の適用条件
+
+config-18の正解・誤答解説を公式[Configuration Reference](https://learn.chatgpt.com/docs/config-file/config-reference#requirementstoml)で確認し、permission-profile allowlistの対応条件を解説へ追記。0.138.0以降が必要で、0.137.0以前は新しい管理項目を無視することを明記した。設定配布と保護の有効化を混同しないための補足で、従来の管理者制約を回避しないという学習目標は維持。既存図解なし。263問・15コースを維持する。
+
 ## 2026-09-28 権限プロファイル移行
 
 config-03を一般的な設定項目の列挙から、default_permissionsが効かない際の旧sandbox指定の診断へ変更。[Permissions](https://learn.chatgpt.com/docs/permissions)で正解と全誤答解説を照合し、betaである点とmanaged allowed_permission_profilesの例外を明記。対象に既存図解なし。問題IDを保持するため過去の学習履歴は旧内容を含む。263問・15コースを維持する。
