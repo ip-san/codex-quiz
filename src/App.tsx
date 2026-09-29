@@ -676,7 +676,7 @@ function App() {
         {storageAlert}
         <div className="result-card">
           <Logo />
-          <p className="eyebrow result-label">SESSION COMPLETE</p>
+          <p className="eyebrow result-label">学習を完了</p>
           <h1>{percent >= 80 ? "すばらしい！" : percent >= 60 ? "いい調子です" : "ここから伸びます"}</h1>
           <div className="score-ring" style={{ "--score": `${percent * 3.6}deg` } as React.CSSProperties}>
             <div>
