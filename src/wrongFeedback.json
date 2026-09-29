@@ -1140,9 +1140,9 @@
     "3": "Commit hashはGitの特定状態を識別しますが、実行手順や支援resourceをまとめません。"
   },
   "extend-02": {
-    "1": "CSS Modulesはstyle scopeの仕組みで、外部serviceのlive dataやactionをCodex toolとして公開しません。",
-    "2": "WebAssemblyだけではCodexとのtool discovery・schema・認証を標準化できません。MCPを使います。",
-    "3": "Git tagはrepository revisionの目印で、外部serviceへの接続や操作interfaceではありません。"
+    "1": "AGENTS.mdは作業上の指示を伝えますが、外部サービスの最新データを取得する接続そのものは作りません。",
+    "2": "Skillは手順や参照資料をまとめられますが、外部の最新データには対応する接続とtoolが必要です。",
+    "3": "会話の再開は過去の文脈を引き継ぐ操作です。外部サービスの現在の状態を自動同期するものではありません。"
   },
   "extend-03": {
     "1": "SkillとPluginは画像formatではありません。workflow authoringとinstall可能な配布bundleを使い分けます。",
@@ -1155,9 +1155,9 @@
     "3": "socket fileだけではMCP設定を登録・一覧・remove・loginできません。専用subcommandを使います。"
   },
   "extend-05": {
-    "1": "HTML script tagはWeb pageへscriptを読み込む構文で、Codex Skillの明示選択には使いません。",
-    "2": "commit hashはGit revisionを示すだけで、利用するSkill名をCodexへ指定しません。",
-    "3": "CSS class selectorはstyle対象の指定です。Skillは`$skill-name`形式で明示します。"
+    "1": "descriptionとの一致で暗黙に選ばれる場合はありますが、特定のSkillを必ず今回の依頼へ指定する方法ではありません。",
+    "2": "インストールはSkillを利用可能にする操作で、すべての依頼への無条件適用ではありません。",
+    "3": "AGENTS.mdはプロジェクト指示を記載できますが、今回使うSkillの明示指定は依頼文の`$skill-name`で行います。"
   },
   "extend-06": {
     "1": "`codex addon-css`は公式Plugin管理commandではなく、install・list・removeを実行できません。",
