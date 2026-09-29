@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import {
   categories,
   categoryLearning,
@@ -25,6 +25,7 @@ import { getReviewLabel, isReviewDue, scheduleReview, type QuestionProgress } fr
 import { removeStoredItem, writeStoredJson } from "./domain/storage";
 
 type Screen = "home" | "quiz" | "result" | "reader" | "progress";
+const MobileMenu = lazy(() => import("./components/MobileMenu"));
 type QuizMode = "normal" | "study" | "exam" | "overview" | "scenario";
 const CATEGORY_COUNT = Object.keys(categories).length;
 const difficultyOptions: Array<{ key: Difficulty; label: string; description: string }> = [
@@ -1036,39 +1037,9 @@ function App() {
             <span className="status-dot" /> {quizzes.length}問を収録
           </div>
         </div>
-        <details className="mobile-nav">
-          <summary>
-            <span aria-hidden="true">☰</span> メニュー
-          </summary>
-          <div className="mobile-nav-panel">
-            <button
-              onClick={(event) => {
-                window.location.hash = "scenario-heading";
-                event.currentTarget.closest("details")?.removeAttribute("open");
-              }}
-            >
-              実践シナリオ
-            </button>
-            <button
-              onClick={(event) => {
-                window.location.hash = "learning-modes";
-                event.currentTarget.closest("details")?.removeAttribute("open");
-              }}
-            >
-              学習モード
-            </button>
-            <button
-              onClick={(event) => {
-                window.location.hash = "categories";
-                event.currentTarget.closest("details")?.removeAttribute("open");
-              }}
-            >
-              カテゴリ
-            </button>
-            <button onClick={() => setScreen("progress")}>進捗を見る</button>
-            <button onClick={() => setScreen("reader")}>解説を読む</button>
-          </div>
-        </details>
+        <Suspense fallback={null}>
+          <MobileMenu onNavigate={setScreen} />
+        </Suspense>
       </nav>
       <section className="hero">
         <div className="hero-copy">

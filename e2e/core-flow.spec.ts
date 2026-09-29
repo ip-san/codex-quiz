@@ -229,6 +229,19 @@ test("mobile menu reaches home sections and expands scenarios", async ({ page })
   await expect(page.getByRole("heading", { name: "学習の現在地" })).toBeVisible();
 });
 
+test("mobile drawer closes with Escape and backdrop", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.reload();
+  const menu = page.locator(".mobile-nav");
+  await menu.locator("summary").click();
+  await expect(menu).toHaveAttribute("open", "");
+  await page.keyboard.press("Escape");
+  await expect(menu).not.toHaveAttribute("open");
+  await menu.locator("summary").click();
+  await page.locator(".mobile-nav-backdrop").click({ position: { x: 300, y: 300 } });
+  await expect(menu).not.toHaveAttribute("open");
+});
+
 test("exam starts a balanced 100-question session", async ({ page }) => {
   await page.getByRole("button", { name: /実力テスト/ }).click();
   await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "100");

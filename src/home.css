@@ -9,6 +9,24 @@
 .home-nav .nav-actions > button { color: #424b55; font-size: 13px; }
 .home-nav .nav-actions > button:hover { color: #20272e; }
 .home-nav .nav-badge { background: #f0f2f4; color: #4c5661; font-size: 11px; letter-spacing: 0; text-transform: none; }
+.mobile-nav summary { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid #d6dbe0; border-radius: 10px; background: #fff; color: #20272e; font-size: 12px; }
+.mobile-nav summary span { margin: 0; }
+.menu-glyph { display: grid; gap: 3px; width: 16px; }
+.menu-glyph i { display: block; width: 16px; height: 2px; border-radius: 2px; background: currentColor; }
+.mobile-nav-backdrop { position: fixed; z-index: 20; inset: 0; width: 100%; border: 0; background: #10182099; cursor: default; }
+.mobile-nav-panel { position: fixed; z-index: 21; inset: 0 auto 0 0; width: min(340px, 88vw); max-height: none; padding: 0; display: flex; flex-direction: column; gap: 0; overflow-y: auto; border: 0; border-radius: 0 18px 18px 0; background: #fff; box-shadow: 18px 0 54px #10182030; animation: menu-enter .22s ease-out both; }
+.mobile-nav-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 29px 22px 24px; border-bottom: 1px solid #e5e8ec; }
+.mobile-nav-header strong, .mobile-nav-header small { display: block; }
+.mobile-nav-header strong { color: #20272e; font-size: 19px; letter-spacing: -.04em; }
+.mobile-nav-header small { margin-top: 5px; color: #66717c; font-size: 11px; }
+.mobile-nav-header button { width: 36px; height: 36px; padding: 0; border: 1px solid #e1e4e8; border-radius: 9px; background: #f7f8fa; color: #303a45; font-size: 23px; line-height: 1; }
+.mobile-nav-section { margin: 24px 22px 7px; color: #59636f; font: 700 10px "DM Mono", monospace; letter-spacing: .13em; }
+.mobile-nav-panel > button:not(.mobile-nav-header button) { position: relative; display: block; width: auto; margin: 2px 10px; padding: 13px 32px 13px 14px; border: 0; border-radius: 9px; background: transparent; color: #20272e; text-align: left; font-size: 14px; font-weight: 700; }
+.mobile-nav-panel > button:not(.mobile-nav-header button)::after { content: '›'; position: absolute; right: 15px; top: 17px; color: #8d97a1; font-size: 19px; font-weight: 400; }
+.mobile-nav-panel > button:not(.mobile-nav-header button) small { display: block; margin-top: 4px; color: #66717c; font-size: 11px; font-weight: 400; }
+.mobile-nav-panel > button:not(.mobile-nav-header button):hover, .mobile-nav-panel > button:not(.mobile-nav-header button):focus-visible { background: #f1f3f5; }
+.mobile-nav-footer { margin-top: auto; padding: 25px 22px; border-top: 1px solid #e5e8ec; color: #59636f; font-size: 10px; line-height: 1.5; }
+@keyframes menu-enter { from { transform: translateX(-20px); opacity: .7; } to { transform: translateX(0); opacity: 1; } }
 
 .hero {
   min-height: 480px;
@@ -199,4 +217,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .next-step-card .primary:hover, .scenario-more:hover { transform: none; }
+  .mobile-nav-panel { animation: none; }
 }
