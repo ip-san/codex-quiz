@@ -6,6 +6,8 @@ Codexの基本と実践を、短い4択クイズで学ぶPWAです。OpenAIの�
 
 ## 現在の機能
 
+axe-coreの検査を回答前だけでなく、正解・不正解のfeedback、手順図の再生中、320px幅のスマホ表示にも拡張しました。検出した補助文字のコントラスト不足も修正しています（2026-09-29）。
+
 全体像のMCP問題に、外部サービス→MCP接続→Codexのtoolという情報経路の再生図を追加しました（2026-09-29）。
 
 手順型の図解を再生すると各段階が順に強調されます。全段階は常に読め、動きを抑える端末設定では強調のアニメーションを停止します。全体像の権限問題にも手順図を追加しました（2026-09-29）。
@@ -120,7 +122,7 @@ npm run check
 
 `npm run quiz:check` では、問題ID、カテゴリ、4択、正解インデックス、問題・選択肢の重複、解説長、公式出典を検査します。GitHub Actionsでもpush・Pull Requestごとに同じ品質ゲートを実行します。
 
-`npm run test:e2e` ではChromium上の主要導線に加え、home・quiz・chapter・result・reader・progressをaxe-coreで検査し、WCAG 2.1 A/AA違反を検出します。
+`npm run test:e2e` ではChromium上の主要導線に加え、home・quiz・chapter・result・reader・progressと回答後の状態をaxe-coreで検査し、WCAG 2.1 A/AA違反を検出します。axe検査だけを実行する場合は`npm run test:a11y`を使います。これらはCIのブラウザ検査に含まれます。
 
 `npm run lighthouse:check` では本番ビルドをローカル配信し、Performance 80、Accessibility 95、Best Practices 90、SEO 80を最低スコアとして検査します。
 
