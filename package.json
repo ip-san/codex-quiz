@@ -18,6 +18,7 @@
     "format:check": "biome format src/",
     "quiz:check": "vitest run src/quizValidation.test.ts",
     "docs:check": "node scripts/validate-doc-links.mjs",
+    "content:queue": "node scripts/content-inventory.mjs --priority",
     "pwa:check": "node scripts/validate-pwa.mjs && node scripts/validate-service-worker.mjs",
     "bundle:check": "node scripts/check-bundle-size.mjs",
     "lighthouse:check": "node scripts/check-lighthouse.mjs",
