@@ -29,7 +29,8 @@ describe("accessibility landmarks", () => {
     expect(html).toContain(">進捗</button>");
     expect(html).toContain("解説を読む");
     expect(html).toContain("ランダム10問を始める");
-    expect(html).toContain("<strong>9</strong><span>学習カテゴリ</span>");
+    expect(html).toContain("あなたの次の一歩");
+    expect(html).toContain("まず全体像を18問でつかむ");
     expect(html).toContain("9 CHAPTERS · 18 QUESTIONS");
     expect(html).toContain("Codexで仕事を進める5つの段階");
     expect(html).toContain("9カテゴリからバランスよく100問");

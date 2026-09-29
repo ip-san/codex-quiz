@@ -25,6 +25,7 @@
 3. [設計判断](DECISIONS.md) — なぜ現在の方式を選んだか
 4. [追いつきロードマップ](PARITY_ROADMAP.md) — 実装済みと今後の優先順位
 5. [開発履歴](DEVELOPMENT_HISTORY.md) — 日付付きの実装・品質改善の記録
+6. [トップページ設計の調査](HOME_DESIGN_RESEARCH.md) — 他の学習アプリとの比較と採用判断
 
 ## 文書の責務
 

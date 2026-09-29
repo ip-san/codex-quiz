@@ -1076,25 +1076,17 @@ function App() {
       </nav>
       <section className="hero">
         <div className="hero-copy">
-          <div className="pill">CODEX LEARNING STUDIO · 9 CATEGORIES</div>
+          <div className="pill">OPENAI公式資料にもとづく · 実務のためのクイズ</div>
           <h1>
-            知っている、から
+            Codexを、
             <br />
-            <em>使いこなせる</em>へ。
+            <em>判断できる力</em>に。
           </h1>
           <p>
-            公式ドキュメントを、実務で迷わない判断力に。
+            覚えるだけで終わらない。実際の仕事に近い場面で選び、
             <br className="desktop" />
-            1問ずつ試して、理由まで身につけよう。
+            解説と公式資料で「なぜ」を確かめる学習アプリ。
           </p>
-          <div className="hero-actions">
-            <button className="primary" onClick={() => startMode("overview")}>
-              まず全体像を18問でつかむ <span>→</span>
-            </button>
-            <button className="quiet-action" onClick={() => start()}>
-              ランダム10問を始める
-            </button>
-          </div>
           <div className="hero-proof">
             <span>
               <strong>{quizzes.length}</strong> 問
@@ -1104,53 +1096,97 @@ function App() {
             </span>
             <span>登録不要</span>
           </div>
+          <section className="hero-preview" aria-label="クイズの学び方">
+            <span>HOW IT WORKS</span>
+            <p>
+              <b>01</b> 状況を読む <i>→</i> <b>02</b> 判断する <i>→</i> <b>03</b> 理由を確かめる
+            </p>
+          </section>
         </div>
-        <div
-          className="terminal-card"
-          role="img"
-          aria-label="状況を読み、次の一手を選び、解説と根拠を確かめる学習の流れ"
-        >
-          <div className="terminal-top">
-            <span />
-            <span />
-            <span />
-            <small>codex / learning path</small>
+        <div className="next-step-card">
+          <div className="next-step-heading">
+            <span className="next-step-icon" aria-hidden="true">
+              ↗
+            </span>
+            <span>あなたの次の一歩</span>
           </div>
-          <div className="terminal-body">
-            <p className="terminal-comment">現場で使う知識を、順番に。</p>
-            <p>
-              <i>01</i> 状況を読む
-            </p>
-            <p>
-              <i>02</i> 次の一手を選ぶ
-            </p>
-            <p>
-              <i>03</i> 解説と根拠を確かめる
-            </p>
-            <div className="terminal-result">
-              <span aria-hidden="true">●</span> 学んだことが、次の仕事につながる
-            </div>
+          {resumableSession ? (
+            <>
+              <p className="next-step-kicker">CONTINUE LEARNING</p>
+              <h2>前回の続きから</h2>
+              <p>
+                {resumableSession.label} · {resumableSession.index + 1}/{resumableSession.ids.length}問目
+              </p>
+              <button className="primary" onClick={resumeQuiz}>
+                再開する <span>→</span>
+              </button>
+              <button className="next-step-discard" onClick={discardResume}>
+                保存した途中経過を破棄
+              </button>
+            </>
+          ) : dueQuestions.length > 0 ? (
+            <>
+              <p className="next-step-kicker">REVIEW · {dueQuestions.length}問が復習時期</p>
+              <h2>3問だけ、思い出す。</h2>
+              <p>前に解いた知識を、短い復習で確かめましょう。</p>
+              <button className="primary" onClick={startDue}>
+                60秒チェック <span>→</span>
+              </button>
+            </>
+          ) : weakQuestions.length > 0 ? (
+            <>
+              <p className="next-step-kicker">REVIEW · {weakQuestions.length}問</p>
+              <h2>迷った問題から、もう一度。</h2>
+              <p>間違えた理由を見直して、次の判断につなげます。</p>
+              <button className="primary" onClick={startWeak}>
+                苦手問題を復習 <span>→</span>
+              </button>
+            </>
+          ) : progress.answered > 0 ? (
+            <>
+              <p className="next-step-kicker">PRACTICE</p>
+              <h2>次の10問に進もう。</h2>
+              <p>分野を横断して、実務の判断を少しずつ磨きます。</p>
+              <button className="primary" onClick={() => start()}>
+                10問の練習を始める <span>→</span>
+              </button>
+            </>
+          ) : (
+            <>
+              <p className="next-step-kicker">START HERE · 約18問</p>
+              <h2>最初は、全体の地図から。</h2>
+              <p>9分野から2問ずつ。解きながらCodexの使いどころをつかめます。</p>
+              <button className="primary" onClick={() => startMode("overview")}>
+                まず全体像を18問でつかむ <span>→</span>
+              </button>
+            </>
+          )}
+          <div className="next-step-secondary">
+            <button onClick={() => start()}>ランダム10問を始める</button>
+            <button onClick={() => setScreen("reader")}>解説から読む</button>
           </div>
         </div>
       </section>
-      {resumableSession && (
-        <section className="resume-banner">
+      {progress.answered > 0 && (
+        <section className="home-progress" aria-label="現在の学習状況">
           <div>
-            <p className="eyebrow">CONTINUE</p>
-            <h2>前回の続きから</h2>
-            <p>
-              {resumableSession.label} · {resumableSession.index + 1}/{resumableSession.ids.length}問目
-            </p>
+            <strong>{progress.answered}</strong>
+            <span>これまでの回答</span>
           </div>
           <div>
-            <button className="primary" onClick={resumeQuiz}>
-              再開する <span>→</span>
-            </button>
-            <button onClick={discardResume}>破棄</button>
+            <strong>{accuracy}%</strong>
+            <span>通算正答率</span>
           </div>
+          <div>
+            <strong>{dueQuestions.length}</strong>
+            <span>復習待ちの問題</span>
+          </div>
+          <button onClick={() => setScreen("progress")}>
+            詳しい進捗を見る <span aria-hidden="true">→</span>
+          </button>
         </section>
       )}
-      <details className="learning-guide intro-guide" open={progress.answered === 0 ? true : undefined}>
+      <details className="learning-guide intro-guide">
         <summary>はじめての方へ · 3ステップの学び方</summary>
         <h2>迷ったら、まず全体像から</h2>
         <ol>
@@ -1285,55 +1321,6 @@ function App() {
           {showAllScenarios ? "シナリオを閉じる" : `すべてのシナリオを見る（全${scenarios.length}件）`}
         </button>
       </section>
-      <section className="stats">
-        <div>
-          <strong>{quizzes.length}</strong>
-          <span>公式準拠の問題</span>
-        </div>
-        <div>
-          <strong>{CATEGORY_COUNT}</strong>
-          <span>学習カテゴリ</span>
-        </div>
-        <div>
-          <strong>{progress.answered}</strong>
-          <span>これまでの回答</span>
-        </div>
-        <div>
-          <strong>{accuracy}%</strong>
-          <span>通算正答率</span>
-        </div>
-      </section>
-      {dueQuestions.length > 0 && (
-        <section className="due-banner">
-          <div className="due-clock">↻</div>
-          <div>
-            <p className="eyebrow">SPACED REPETITION</p>
-            <h2>今日の復習が届いています</h2>
-            <p>記憶が薄れるタイミングの問題を、3問だけ確認しましょう。</p>
-          </div>
-          <strong>
-            {dueQuestions.length}
-            <small>問</small>
-          </strong>
-          <button className="primary" onClick={startDue}>
-            60秒チェック <span>→</span>
-          </button>
-        </section>
-      )}
-      {weakQuestions.length > 0 && (
-        <section className="review-banner">
-          <div>
-            <p className="eyebrow">REVIEW</p>
-            <h2>苦手を、次の得意に。</h2>
-            <p>
-              正答率が低い、または直近で間違えた問題が <strong>{weakQuestions.length}問</strong> あります。
-            </p>
-          </div>
-          <button className="primary" onClick={startWeak}>
-            苦手問題を復習 <span>→</span>
-          </button>
-        </section>
-      )}
       <section className="category-section" id="categories">
         <div className="section-heading">
           <div>
