@@ -20,7 +20,7 @@ beforeEach(() => {
 describe("accessibility landmarks", () => {
   it("renders a named navigation landmark and main content", () => {
     const html = renderToStaticMarkup(<App />);
-    expect(html).toContain('<nav aria-label="メインナビゲーション">');
+    expect(html).toContain('aria-label="メインナビゲーション"');
     expect(html).toContain("<main>");
   });
 

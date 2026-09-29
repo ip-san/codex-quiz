@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-29 スマホの学習導線
+
+問題内容や収録数は変えず、幅540px以下のホームに折りたたみ式メニューを追加。実践シナリオ・学習モード・カテゴリへのページ内移動と進捗・解説をまとめ、15件の実践シナリオは最初の3件だけ表示して残りを展開可能にした。主導線の全体像18問とランダム10問は隠さない。320px幅の操作・移動・展開をブラウザ検査へ追加。公式仕様の新たな監査を意味しない。
+
 ## 2026-09-29 CLI会話の再開と分岐
 
 basic-05/07を公式[Developer commands](https://learn.chatgpt.com/docs/developer-commands)で再確認。`codex resume`は保存済みinteractive sessionを同じchatで続け、`codex fork`は履歴を引き継ぐ新chatへ分けて元のtranscriptを残す。旧設問の架空commandを誤答にした名称暗記から、resume・fork・新規chat・Git branchの違いを判断する場面へ変更。正解・全誤答feedbackと既存terminal図を照合し、図は現行記述と一致するため変更なし。ID・263問・図解数を維持し、旧回答の学習履歴は残る。

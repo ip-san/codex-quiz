@@ -142,6 +142,7 @@ function App() {
   const [quizMode, setQuizMode] = useState<QuizMode>("normal");
   const [studyPhase, setStudyPhase] = useState(false);
   const [showChapterIntro, setShowChapterIntro] = useState(false);
+  const [showAllScenarios, setShowAllScenarios] = useState(false);
   const [, setFeedbackRevision] = useState(0);
   const feedbackRef = useRef<HTMLDivElement>(null);
 
@@ -1024,7 +1025,7 @@ function App() {
   return (
     <main>
       {storageAlert}
-      <nav aria-label="メインナビゲーション">
+      <nav className="home-nav" aria-label="メインナビゲーション">
         <div className="brand">
           <Logo />
           <b>Codex Quiz</b>
@@ -1038,6 +1039,39 @@ function App() {
             <span className="status-dot" /> {quizzes.length} questions
           </div>
         </div>
+        <details className="mobile-nav">
+          <summary>
+            <span aria-hidden="true">☰</span> メニュー
+          </summary>
+          <div className="mobile-nav-panel">
+            <button
+              onClick={(event) => {
+                window.location.hash = "scenario-heading";
+                event.currentTarget.closest("details")?.removeAttribute("open");
+              }}
+            >
+              実践シナリオ
+            </button>
+            <button
+              onClick={(event) => {
+                window.location.hash = "learning-modes";
+                event.currentTarget.closest("details")?.removeAttribute("open");
+              }}
+            >
+              学習モード
+            </button>
+            <button
+              onClick={(event) => {
+                window.location.hash = "categories";
+                event.currentTarget.closest("details")?.removeAttribute("open");
+              }}
+            >
+              カテゴリ
+            </button>
+            <button onClick={() => setScreen("progress")}>進捗を見る</button>
+            <button onClick={() => setScreen("reader")}>解説を読む</button>
+          </div>
+        </details>
       </nav>
       <section className="hero">
         <div className="hero-copy">
@@ -1157,7 +1191,7 @@ function App() {
       <section className="mode-section" aria-labelledby="scenario-heading">
         <h2 id="scenario-heading">実践シナリオ</h2>
         <p>各3問。実務の順序で判断を練習します。実際のコード操作は行いません。</p>
-        <div className="mode-grid">
+        <div className={`mode-grid scenario-grid${showAllScenarios ? " is-expanded" : ""}`}>
           {scenarios.map((scenario) => (
             <div className="learning-guide" key={scenario.id}>
               <h3>{scenario.title}</h3>
@@ -1173,6 +1207,13 @@ function App() {
             </div>
           ))}
         </div>
+        <button
+          className="scenario-more"
+          onClick={() => setShowAllScenarios((value) => !value)}
+          aria-expanded={showAllScenarios}
+        >
+          {showAllScenarios ? "シナリオを閉じる" : `残り${scenarios.length - 3}件のシナリオを見る`}
+        </button>
       </section>
       <section className="stats">
         <div>
@@ -1192,7 +1233,7 @@ function App() {
           <span>通算正答率</span>
         </div>
       </section>
-      <section className="mode-section">
+      <section className="mode-section" id="learning-modes">
         <div className="section-heading">
           <div>
             <p className="eyebrow">LEARNING MODES</p>

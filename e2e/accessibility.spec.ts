@@ -21,6 +21,14 @@ test("home has no WCAG A or AA violations", async ({ page }) => {
   await scan(page);
 });
 
+test("open mobile menu has no WCAG A or AA violations", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.reload();
+  await page.getByText("メニュー", { exact: false }).click();
+  await expect(page.getByRole("button", { name: "進捗を見る" })).toBeVisible();
+  await scan(page);
+});
+
 test("quiz has no WCAG A or AA violations", async ({ page }) => {
   await page.getByRole("button", { name: /ランダム10問を始める/ }).click();
   await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toBeVisible();

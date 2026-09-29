@@ -185,6 +185,25 @@ test("home exposes navigation and starts a quiz", async ({ page }) => {
   await expect(page.locator("fieldset.choices")).toBeVisible();
 });
 
+test("mobile menu reaches home sections and expands scenarios", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.reload();
+  await expect(page.getByRole("button", { name: "まず全体像を18問でつかむ" })).toBeVisible();
+  const lastScenario = scenarios.at(-1);
+  expect(lastScenario).toBeDefined();
+  if (!lastScenario) return;
+  await expect(page.getByRole("button", { name: `${lastScenario.title}を始める` })).toBeHidden();
+  await page.getByRole("button", { name: new RegExp(`残り${scenarios.length - 3}件のシナリオを見る`) }).click();
+  await expect(page.getByRole("button", { name: `${lastScenario.title}を始める` })).toBeVisible();
+  await page.getByText("メニュー", { exact: false }).click();
+  await page.getByRole("button", { name: "カテゴリ", exact: true }).click();
+  await expect(page).toHaveURL(/#categories$/);
+  await expect(page.getByRole("heading", { name: "カテゴリから学ぶ" })).toBeInViewport();
+  await page.getByText("メニュー", { exact: false }).click();
+  await page.getByRole("button", { name: "進捗を見る" }).click();
+  await expect(page.getByRole("heading", { name: "学習の現在地" })).toBeVisible();
+});
+
 test("exam starts a balanced 100-question session", async ({ page }) => {
   await page.getByRole("button", { name: /実力テスト/ }).click();
   await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "100");
