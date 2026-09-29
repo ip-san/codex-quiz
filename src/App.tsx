@@ -1,5 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { categories, categoryLearning, hydrateWrongFeedback, quizzes, type Category, type Quiz } from "./data";
+import {
+  categories,
+  categoryLearning,
+  hydrateWrongFeedback,
+  quizzes,
+  type Category,
+  type Difficulty,
+  type Quiz,
+} from "./data";
 import { orderChoices } from "./domain/choiceOrder";
 import { selectBalancedExam } from "./domain/examSelection";
 import { overviewQuestionIds, selectOverviewQuestions } from "./domain/overviewPath";
@@ -19,6 +27,11 @@ import { removeStoredItem, writeStoredJson } from "./domain/storage";
 type Screen = "home" | "quiz" | "result" | "reader" | "progress";
 type QuizMode = "normal" | "study" | "exam" | "overview" | "scenario";
 const CATEGORY_COUNT = Object.keys(categories).length;
+const difficultyOptions: Array<{ key: Difficulty; label: string; description: string }> = [
+  { key: "beginner", label: "入門", description: "基本を確認" },
+  { key: "intermediate", label: "実践", description: "判断を深める" },
+  { key: "advanced", label: "発展", description: "応用に挑戦" },
+];
 const STORAGE_SAVE_WARNING =
   "端末への保存に失敗しました。学習結果や再開状態が残らない可能性があります。ページを閉じる前に進捗画面からバックアップしてください。";
 
@@ -282,6 +295,11 @@ function App() {
 
   const startWeak = () => {
     beginSession(shuffle(weakQuestions), "苦手問題の復習", "normal");
+  };
+
+  const startDifficulty = (difficulty: Difficulty, label: string) => {
+    const pool = quizzes.filter((quiz) => quiz.difficulty === difficulty);
+    beginSession(selectBalancedExam(pool, 10), `${label}10問`, "normal");
   };
 
   const startDue = () => {
@@ -1212,6 +1230,20 @@ function App() {
             </div>
             <b>→</b>
           </button>
+        </div>
+        <div className="difficulty-practice">
+          <div>
+            <h3>難易度から10問練習</h3>
+            <p>全分野から、今の自分に合う深さを選べます。</p>
+          </div>
+          <div className="difficulty-options">
+            {difficultyOptions.map((option) => (
+              <button key={option.key} onClick={() => startDifficulty(option.key, option.label)}>
+                <strong>{option.label}</strong>
+                <small>{option.description}</small>
+              </button>
+            ))}
+          </div>
         </div>
       </section>
       {dueQuestions.length > 0 && (

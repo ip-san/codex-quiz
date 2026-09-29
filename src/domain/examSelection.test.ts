@@ -28,4 +28,17 @@ describe("balanced exam selection", () => {
     const second = selectBalancedExam(quizzes, 100, seededRandom(2)).map((quiz) => quiz.id);
     expect(first).not.toEqual(second);
   });
+
+  it.each(["beginner", "intermediate", "advanced"] as const)("selects balanced %s practice questions", (level) => {
+    const practice = selectBalancedExam(
+      quizzes.filter((quiz) => quiz.difficulty === level),
+      10,
+      seededRandom(42),
+    );
+    const categories = new Set(practice.map((quiz) => quiz.category));
+    expect(practice).toHaveLength(10);
+    expect(new Set(practice.map((quiz) => quiz.id)).size).toBe(10);
+    expect(practice.every((quiz) => quiz.difficulty === level)).toBe(true);
+    expect(categories.size).toBeGreaterThanOrEqual(3);
+  });
 });

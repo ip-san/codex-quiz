@@ -17,6 +17,8 @@ Claude版のローカルREADME・図解rendererとCodex版の実装を比較。�
 
 今回、全体像パスのagents-01へ個人→repository→下位directoryの階層図を追加。公式[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)に基づくCodex固有の内容であり、Claude版の指示仕様は転用していない。次は図解数だけでなく、未図解の高価値判断と内容監査の優先順位を確認する。
 
+同日、全263問に既にある難易度metadataを使い、入門・実践・発展から選ぶ10問練習を追加した。新しい問題を増やさず、カテゴリを巡回する既存の抽出ロジックで分野の偏りを抑えた。既存のセッション保存形式を使って再開・再挑戦できる。
+
 ## 2026-07-19 比較監査からの導入
 
 Claude版の成熟したcontent quality gateを参考にし、Claude固有のカテゴリや用語は転用せず、Codex版へID prefixとcategoryの対応、空choice、正解へのwrongFeedback混入、topic命名、verifiedAt形式の検査を追加した。今後はE2E・a11y・bundle制限をCodex版の構成に合わせて段階導入する。
@@ -44,7 +46,6 @@ Claude版の成熟したcontent quality gateを参考にし、Claude固有のカ
 
 公開までの必須作業と進捗は[公開開発計画](RELEASE_PLAN.md)を正とする。以下の未実装候補をすべて今回の完成条件に含めるわけではない。
 
-- 難易度別出題
 - 公式資料と照合して見つかった、実務上の不足学習目標への問題追加・改善
 
 ## 次段階

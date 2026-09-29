@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { scenarios } from "../src/domain/scenarios";
 import { overviewQuestionIds } from "../src/domain/overviewPath";
+import { quizzes } from "../src/data";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
@@ -190,6 +191,19 @@ test("exam starts a balanced 100-question session", async ({ page }) => {
   const savedIds = await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-session") ?? "null").ids);
   expect(savedIds).toHaveLength(100);
   expect(new Set(savedIds).size).toBe(100);
+});
+
+test("difficulty practice keeps its selected level through resume", async ({ page }) => {
+  await page.getByRole("button", { name: /発展 応用に挑戦/ }).click();
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "10");
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-session") ?? "null"));
+  expect(saved.label).toBe("発展10問");
+  expect(saved.ids).toHaveLength(10);
+  expect(saved.ids.every((id: string) => quizzes.find((quiz) => quiz.id === id)?.difficulty === "advanced")).toBe(true);
+
+  await page.reload();
+  await page.getByRole("button", { name: /再開する/ }).click();
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "10");
 });
 
 test("overview introduces all nine chapters in a short fixed path and resumes", async ({ page }) => {
