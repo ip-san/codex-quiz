@@ -24,12 +24,14 @@
 2. [アーキテクチャ](ARCHITECTURE.md) — データ、画面、保存、配信の関係
 3. [設計判断](DECISIONS.md) — なぜ現在の方式を選んだか
 4. [追いつきロードマップ](PARITY_ROADMAP.md) — 実装済みと今後の優先順位
+5. [開発履歴](DEVELOPMENT_HISTORY.md) — 日付付きの実装・品質改善の記録
 
 ## 文書の責務
 
 | 文書 | 更新するタイミング |
 |---|---|
-| `README.md` | 利用者に見える機能、起動方法、公開方法が変わったとき |
+| `README.md` | 利用者に見える機能や使い始め方が変わったとき。日付付き作業記録は載せない |
+| `DEVELOPMENT_HISTORY.md` | 実装・品質改善の履歴を残すとき |
 | `CONTENT_COVERAGE.md` | 公式トピックの対応状況が変わったとき |
 | `QUIZ_MANAGEMENT.md` | 問題スキーマや追加手順が変わったとき |
 | `CONTENT_QUALITY.md` | 採用基準やコンテンツlint規則が変わったとき |

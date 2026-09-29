@@ -2,7 +2,7 @@
 
 ## 必要な環境
 
-- Node.js 22
+- Node.js 22.19以上
 - npm
 - Git
 
@@ -28,6 +28,10 @@ npm run dev
 | `npm run quiz:check` | 問題データ検証 |
 | `npm run docs:check` | 文書内のローカルリンク検証 |
 | `npm run check` | push前に必要な全品質ゲート |
+| `npm run test:e2e` | Chromiumで主要画面・アクセシビリティを検査 |
+| `npm run test:pwa` | 本番ビルドのPWA動作を検査 |
+| `npm run lighthouse:check` | 表示品質スコアを検査 |
+| `npm run content:queue` | 確認日の古い実務問題の再監査候補を表示 |
 | `npm run build` | `dist/`へ本番ビルド |
 | `npm run preview` | 本番ビルドをローカル表示 |
 
@@ -52,7 +56,7 @@ codex-quiz/
 
 1. 変更対象と関連テストを確認する。
 2. コンテンツ変更なら[クイズ管理](QUIZ_MANAGEMENT.md)に従って公式資料を確認する。
-3. 実装し、利用者から見える変更ならREADMEや関連文書も更新する。
+3. 実装し、利用者から見える変更ならREADME、作業記録なら[開発履歴](DEVELOPMENT_HISTORY.md)など責務に合う文書を更新する。
 4. `npm run check` を実行する。
 5. ブラウザでモバイル幅とデスクトップ幅を確認する。
 
