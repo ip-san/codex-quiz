@@ -457,7 +457,11 @@ function App() {
   useEffect(() => {
     if (screen !== "quiz" || !question) return;
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return;
+      if (
+        event.target instanceof Element &&
+        event.target.closest("button, a, input, textarea, select, [contenteditable='true']")
+      )
+        return;
       if (selected === null && ["1", "2", "3", "4"].includes(event.key)) {
         const displayedIndex = Number(event.key) - 1;
         const originalIndex = displayedChoices[displayedIndex]?.originalIndex;
