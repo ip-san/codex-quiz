@@ -7,18 +7,36 @@ type FlowDiagramData = Extract<DiagramData, { type: "flow" }>;
 function FlowDiagram({ diagram }: { diagram: FlowDiagramData }) {
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [playing, setPlaying] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
   useEffect(() => {
-    if (!playing || activeStep === null) return;
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => {
+      setReducedMotion(media.matches);
+      if (media.matches) setPlaying(false);
+    };
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion || !playing || activeStep === null) return;
     if (activeStep >= diagram.steps.length - 1) {
       setPlaying(false);
       return;
     }
     const timer = window.setTimeout(() => setActiveStep((step) => (step === null ? 0 : step + 1)), 1100);
     return () => window.clearTimeout(timer);
-  }, [activeStep, diagram.steps.length, playing]);
+  }, [activeStep, diagram.steps.length, playing, reducedMotion]);
 
   const replay = () => {
+    if (reducedMotion) {
+      setPlaying(false);
+      setActiveStep((step) => (step === null || step >= diagram.steps.length - 1 ? 0 : step + 1));
+      return;
+    }
     setActiveStep(0);
     setPlaying(true);
   };
@@ -26,8 +44,8 @@ function FlowDiagram({ diagram }: { diagram: FlowDiagramData }) {
   return (
     <>
       <div className="diagram-flow-controls">
-        <button type="button" onClick={replay} aria-label="手順を再生">
-          ↻ 手順を再生
+        <button type="button" onClick={replay} aria-label={reducedMotion ? "次の手順を表示" : "手順を再生"}>
+          ↻ {reducedMotion ? "次の手順を表示" : "手順を再生"}
         </button>
         {activeStep !== null && (
           <span aria-live="polite">

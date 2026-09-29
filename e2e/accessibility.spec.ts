@@ -59,7 +59,7 @@ test("correct feedback and replaying a flow have no WCAG A or AA violations", as
   await expect(page.getByRole("status")).toContainText("正解です");
   await scan(page);
 
-  await page.getByRole("button", { name: "手順を再生" }).click();
+  await page.getByRole("button", { name: "次の手順を表示" }).click();
   await expect(page.getByText("1 / 3")).toBeVisible();
   await scan(page);
 });
@@ -77,18 +77,30 @@ test("mobile quiz feedback has no WCAG A or AA violations", async ({ page }) => 
   await page.setViewportSize({ width: 320, height: 720 });
   await page.goto("/?q=safe-03");
   await page.getByRole("button", { name: /必要なworkspace範囲から始め/ }).click();
-  await expect(page.getByRole("button", { name: "手順を再生" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "次の手順を表示" })).toBeVisible();
   await scan(page);
 });
 
 test("keyboard activation of a diagram control does not advance the quiz", async ({ page }) => {
   await page.goto("/?q=safe-03");
   await page.getByRole("button", { name: /必要なworkspace範囲から始め/ }).click();
-  const replay = page.getByRole("button", { name: "手順を再生" });
+  const replay = page.getByRole("button", { name: "次の手順を表示" });
   await replay.focus();
   await page.keyboard.press("Enter");
 
   await expect(replay).toBeVisible();
   await expect(page.getByText("1 / 3")).toBeVisible();
   await expect(page.getByRole("button", { name: "結果を見る" })).toBeVisible();
+});
+
+test("reduced motion advances a flow only on request", async ({ page }) => {
+  await page.goto("/?q=safe-03");
+  await page.getByRole("button", { name: /必要なworkspace範囲から始め/ }).click();
+  const nextStep = page.getByRole("button", { name: "次の手順を表示" });
+  await nextStep.click();
+  await expect(page.getByText("1 / 3")).toBeVisible();
+  await page.waitForTimeout(1400);
+  await expect(page.getByText("1 / 3")).toBeVisible();
+  await nextStep.click();
+  await expect(page.getByText("2 / 3")).toBeVisible();
 });
