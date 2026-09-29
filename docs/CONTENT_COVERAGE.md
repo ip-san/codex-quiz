@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-29 Claude版との比較と指示階層の図解
+
+[機能移植ロードマップ](PARITY_ROADMAP.md)へ、現行の問題・図解・内容鮮度・実力テスト・付加機能・Desktop機能の差と優先順位を記録した。全体像パスのagents-01に、個人のCodex home→repository root→下位directoryの指示chainを示すhierarchy図を追加。[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)の探索・連結・近いdirectoryの優先を照合した。正解や選択肢は変えず、図解付き61問、全263問・15コースを維持。図解形式が増えたことだけで学習品質の同等性を認定しない。
+
 ## 2026-09-29 動きを抑える設定への対応
 
 flow図は従来CSSのtransitionだけ停止し、自動の段階送りが残っていた。`prefers-reduced-motion: reduce`では自動送りを止め、ボタンで一段ずつ進む動作へ変更した。端末設定の切替時にも進行中の自動送りを止める。ブラウザ回帰検査で一定時間後も段階が変わらず、次の押下でだけ進むことを確認。問題データは変更していない。

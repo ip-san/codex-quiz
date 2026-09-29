@@ -104,3 +104,12 @@ test("reduced motion advances a flow only on request", async ({ page }) => {
   await nextStep.click();
   await expect(page.getByText("2 / 3")).toBeVisible();
 });
+
+test("instruction hierarchy is readable and has no WCAG A or AA violations", async ({ page }) => {
+  await page.goto("/?q=agents-01");
+  await page.getByRole("button", { name: /AGENTS\.md/ }).click();
+  const hierarchy = page.locator(".diagram-hierarchy");
+  await expect(hierarchy.locator("li")).toHaveCount(3);
+  await expect(hierarchy.locator(".emphasis")).toContainText("repository root");
+  await scan(page);
+});

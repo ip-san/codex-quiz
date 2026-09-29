@@ -1,10 +1,22 @@
 export type DiagramData =
   | { type: "terminal"; label: string; lines: Array<{ kind: "command" | "output" | "info"; text: string }> }
   | { type: "flow"; label: string; steps: Array<{ text: string; sub?: string }> }
+  | { type: "hierarchy"; label: string; items: Array<{ text: string; sub: string; emphasis?: boolean }> }
   | { type: "comparison"; label: string; columns: Array<{ heading: string; items: string[] }> }
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "agents-01": [
+    {
+      type: "hierarchy",
+      label: "AGENTS.mdの適用範囲",
+      items: [
+        { text: "個人のCodex home", sub: "個人に共通する指示" },
+        { text: "repository root", sub: "team共通のbuild・lint・review規則", emphasis: true },
+        { text: "下位directory", sub: "その領域に固有の指示を追加" },
+      ],
+    },
+  ],
   "extend-02": [
     {
       type: "flow",

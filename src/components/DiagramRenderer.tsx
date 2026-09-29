@@ -119,6 +119,16 @@ export function DiagramRenderer({ diagrams }: { diagrams: DiagramData[] }) {
           <figcaption>{diagram.label}</figcaption>
           {diagram.type === "terminal" && <TerminalDiagram diagram={diagram} />}
           {diagram.type === "flow" && <FlowDiagram diagram={diagram} />}
+          {diagram.type === "hierarchy" && (
+            <ol className="diagram-hierarchy">
+              {diagram.items.map((item) => (
+                <li className={item.emphasis ? "emphasis" : ""} key={item.text}>
+                  <strong>{item.text}</strong>
+                  <span>{item.sub}</span>
+                </li>
+              ))}
+            </ol>
+          )}
           {diagram.type === "comparison" && (
             <div className="diagram-comparison">
               {diagram.columns.map((column) => (

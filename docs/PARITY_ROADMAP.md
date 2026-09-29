@@ -2,6 +2,21 @@
 
 Codex QuizはUIの複製ではなく、OpenAI公式Codexマニュアルを事実確認の基準として、Claude Code Quizと同等の学習体験・保守性・品質ゲートを実現する。
 
+## 2026-09-29 現行コードベースの差分と優先順位
+
+Claude版のローカルREADME・図解rendererとCodex版の実装を比較。数は収録量であり、公式仕様の網羅率や学習効果そのものを示さない。
+
+| 差分 | Claude版 / Codex版 | 優先判断 |
+|---|---|---|
+| 問題と図解の厚み | 870問・図解付き250問 / 263問・61問 | 高。図解の必要な誤解と公式資料で裏付けられる不足を優先し、水増ししない |
+| 図解の表現 | 15形式 / 5形式（今回hierarchyを追加） | 高。単なる種類増ではなく、手順・階層・比較を適切に使い分ける |
+| 内容の鮮度維持 | Claude版はドキュメント照合・利用データ分析のループを記載 / Codex版は部分監査と品質ゲート | 高。最新仕様との差分監査を進める。利用データ収集にはプライバシー設計が必要 |
+| 実力テスト | 100問・60分 / 分野均等100問・制限時間なし | 中。時間制限は任意にし、学習を急がせない設計で検討 |
+| 修了証・レベル・ダークモード | Claude版に実装 / Codex版は未実装 | 中。導線と学習内容の品質を先に固める |
+| DesktopのAIコーチ・履歴分析 | Claude版に実装 / Codex版はPWAのみ | 別製品規模。権限・個人データ・運用費の検討なしに移植しない |
+
+今回、全体像パスのagents-01へ個人→repository→下位directoryの階層図を追加。公式[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)に基づくCodex固有の内容であり、Claude版の指示仕様は転用していない。次は図解数だけでなく、未図解の高価値判断と内容監査の優先順位を確認する。
+
 ## 2026-07-19 比較監査からの導入
 
 Claude版の成熟したcontent quality gateを参考にし、Claude固有のカテゴリや用語は転用せず、Codex版へID prefixとcategoryの対応、空choice、正解へのwrongFeedback混入、topic命名、verifiedAt形式の検査を追加した。今後はE2E・a11y・bundle制限をCodex版の構成に合わせて段階導入する。
@@ -22,7 +37,7 @@ Claude版の成熟したcontent quality gateを参考にし、Claude固有のカ
 - 本番entry bundleのraw・gzip上限検査
 - server-renderによるlandmark・操作名検査、クイズ進捗・回答結果のARIA対応
 - Chromium E2Eによるhome・回答focus・URL共有・deep link検査
-- axe-coreによるhome・quiz・reader・progressのWCAG 2.1 A/AA検査
+- axe-coreによる主要6画面、回答後、図解、スマホ幅のWCAG 2.1 A/AA検査
 - Lighthouseによるperformance・accessibility・best practices・SEOの継続検査
 
 ## 開発中
@@ -30,12 +45,11 @@ Claude版の成熟したcontent quality gateを参考にし、Claude固有のカ
 公開までの必須作業と進捗は[公開開発計画](RELEASE_PLAN.md)を正とする。以下の未実装候補をすべて今回の完成条件に含めるわけではない。
 
 - 難易度別出題
-- Codex固有問題の大幅拡充
+- 公式資料と照合して見つかった、実務上の不足学習目標への問題追加・改善
 
 ## 次段階
 
 - チャプター修了状態、修了証（初回の基本案内は実装済み）
-- 実践シナリオ
 - 日次目標、XP、習熟レベル、学習推奨の高度化（結果画面の基本案内は実装済み）
 - ダークモード、テーマ設定、通知、PWA更新UI
 - Visual Regression
