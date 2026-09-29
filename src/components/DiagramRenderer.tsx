@@ -1,7 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { DiagramData } from "../diagrams";
 
 type TerminalDiagramData = Extract<DiagramData, { type: "terminal" }>;
+type FlowDiagramData = Extract<DiagramData, { type: "flow" }>;
+
+function FlowDiagram({ diagram }: { diagram: FlowDiagramData }) {
+  const [activeStep, setActiveStep] = useState<number | null>(null);
+  const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
+    if (!playing || activeStep === null) return;
+    if (activeStep >= diagram.steps.length - 1) {
+      setPlaying(false);
+      return;
+    }
+    const timer = window.setTimeout(() => setActiveStep((step) => (step === null ? 0 : step + 1)), 1100);
+    return () => window.clearTimeout(timer);
+  }, [activeStep, diagram.steps.length, playing]);
+
+  const replay = () => {
+    setActiveStep(0);
+    setPlaying(true);
+  };
+
+  return (
+    <>
+      <div className="diagram-flow-controls">
+        <button type="button" onClick={replay} aria-label="手順を再生">
+          ↻ 手順を再生
+        </button>
+        {activeStep !== null && (
+          <span aria-live="polite">
+            {activeStep + 1} / {diagram.steps.length}
+          </span>
+        )}
+      </div>
+      <div className="diagram-flow">
+        {diagram.steps.map((step, stepIndex) => (
+          <div className={activeStep === stepIndex ? "active" : ""} key={step.text}>
+            <span>{step.text}</span>
+            {step.sub && <small>{step.sub}</small>}
+            {stepIndex < diagram.steps.length - 1 && <b>→</b>}
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
 
 function TerminalDiagram({ diagram }: { diagram: TerminalDiagramData }) {
   const [replayKey, setReplayKey] = useState(0);
@@ -55,17 +100,7 @@ export function DiagramRenderer({ diagrams }: { diagrams: DiagramData[] }) {
         <figure className={`diagram diagram-${diagram.type}`} key={`${diagram.type}-${diagram.label}`}>
           <figcaption>{diagram.label}</figcaption>
           {diagram.type === "terminal" && <TerminalDiagram diagram={diagram} />}
-          {diagram.type === "flow" && (
-            <div className="diagram-flow">
-              {diagram.steps.map((step, stepIndex) => (
-                <div key={step.text}>
-                  <span>{step.text}</span>
-                  {step.sub && <small>{step.sub}</small>}
-                  {stepIndex < diagram.steps.length - 1 && <b>→</b>}
-                </div>
-              ))}
-            </div>
-          )}
+          {diagram.type === "flow" && <FlowDiagram diagram={diagram} />}
           {diagram.type === "comparison" && (
             <div className="diagram-comparison">
               {diagram.columns.map((column) => (

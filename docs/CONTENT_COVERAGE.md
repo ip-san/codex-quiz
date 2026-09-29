@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-29 手順図の段階表示
+
+flow図解に再生操作と現在段階の強調を追加した。図の全文は再生前も再生中も読め、動きを抑える端末設定では強調のtransitionを停止する。全体像パスのsafe-03に、最小限のworkspace範囲→範囲外操作の必要性確認→限定的な承認を示す図を追加。[Permissions](https://learn.chatgpt.com/docs/permissions)で権限profileの対象、[Worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees)で既存図の対象を照合した。問題本文・正解は維持し、図解付きは59問、terminal例は31件、問題は263問。権限設定のすべてをこの3段階だけで説明するものではない。
+
 ## 2026-09-29 全体像パスの拡張2問
 
 extend-02/05を公式[Model Context Protocol](https://learn.chatgpt.com/docs/extend/mcp)と[Build skills](https://learn.chatgpt.com/docs/build-skills)へ照合。MCPの名称暗記と明らかに無関係な誤答を、外部の最新データを得るための接続と、今回使うSkillの明示指定を区別する場面型に改善した。全誤答feedbackと検証日を更新。両問に図解なし。問題ID、263問・15コースは維持し、旧設問の成績は残る。18問全体の最新仕様監査を完了した意味ではない。

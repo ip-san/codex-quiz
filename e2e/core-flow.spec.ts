@@ -269,6 +269,18 @@ test("terminal operation examples can be replayed and copied", async ({ page }) 
   await expect(page.locator(".diagram-terminal p.command")).toContainText("codex exec --ephemeral");
 });
 
+test("permission flow can be replayed step by step", async ({ page }) => {
+  await page.goto("/?q=safe-03");
+  await page.getByRole("button", { name: /必要なworkspace範囲から始め/ }).click();
+
+  const flow = page.locator(".diagram-flow");
+  await expect(flow.locator(".active")).toHaveCount(0);
+  await page.getByRole("button", { name: "手順を再生" }).click();
+  await expect(flow.locator(".active")).toContainText("範囲を絞る");
+  await expect(flow.locator(".active")).toContainText("限定して承認", { timeout: 4000 });
+  await expect(page.getByText("3 / 3")).toBeVisible();
+});
+
 test("question share URL opens a one-question session", async ({ page }) => {
   await page.goto("/?q=basic-01");
   const progress = page.getByRole("progressbar", { name: "クイズの進捗" });

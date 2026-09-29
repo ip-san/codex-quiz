@@ -5,6 +5,17 @@ export type DiagramData =
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "safe-03": [
+    {
+      type: "flow",
+      label: "初めてのrepositoryで権限を決める",
+      steps: [
+        { text: "範囲を絞る", sub: "必要なworkspaceから開始" },
+        { text: "必要性を確認", sub: "範囲外の操作を特定" },
+        { text: "限定して承認", sub: "必要な操作だけ広げる" },
+      ],
+    },
+  ],
   "workflow-05": [
     {
       type: "flow",
