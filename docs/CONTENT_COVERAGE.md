@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-29 MCPの情報経路を可視化
+
+全体像パスのextend-02に外部サービス→MCP接続→Codex toolのflow図を追加し、段階再生で説明できるようにした。公式[MCP](https://learn.chatgpt.com/docs/extend/mcp)に基づき、認証は必要なserverで行うと明示した。問題本文・正解は変更せず、図解付き60問、terminal操作例31件、全263問を維持。外部サービスが無条件に利用可能になることや、すべてのtoolが自動実行されることを示す図ではない。
+
 ## 2026-09-29 手順図の段階表示
 
 flow図解に再生操作と現在段階の強調を追加した。図の全文は再生前も再生中も読め、動きを抑える端末設定では強調のtransitionを停止する。全体像パスのsafe-03に、最小限のworkspace範囲→範囲外操作の必要性確認→限定的な承認を示す図を追加。[Permissions](https://learn.chatgpt.com/docs/permissions)で権限profileの対象、[Worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees)で既存図の対象を照合した。問題本文・正解は維持し、図解付きは59問、terminal例は31件、問題は263問。権限設定のすべてをこの3段階だけで説明するものではない。

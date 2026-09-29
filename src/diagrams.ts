@@ -5,6 +5,17 @@ export type DiagramData =
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "extend-02": [
+    {
+      type: "flow",
+      label: "外部の最新情報がCodexへ届く経路",
+      steps: [
+        { text: "外部サービス", sub: "現在の課題データ" },
+        { text: "MCP接続", sub: "対応serverを設定、必要なら認証" },
+        { text: "Codexのtool", sub: "必要な情報を取得" },
+      ],
+    },
+  ],
   "safe-03": [
     {
       type: "flow",
