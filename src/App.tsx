@@ -26,6 +26,14 @@ import { removeStoredItem, writeStoredJson } from "./domain/storage";
 
 type Screen = "home" | "quiz" | "result" | "reader" | "progress";
 const MobileMenu = lazy(() => import("./components/MobileMenu"));
+const FirstVisitGuide = lazy(() => import("./components/FirstVisitGuide"));
+const shouldShowFirstVisitGuide = () => {
+  try {
+    return !localStorage.getItem("codex-quiz-intro-seen") && readProgress().answered === 0 && !readResumeSession();
+  } catch {
+    return false;
+  }
+};
 type QuizMode = "normal" | "study" | "exam" | "overview" | "scenario";
 const CATEGORY_COUNT = Object.keys(categories).length;
 const difficultyOptions: Array<{ key: Difficulty; label: string; description: string }> = [
@@ -124,6 +132,7 @@ function Logo() {
 function App() {
   const [screen, setScreen] = useState<Screen>("home");
   const [routeReady, setRouteReady] = useState(false);
+  const [showFirstVisitGuide, setShowFirstVisitGuide] = useState(shouldShowFirstVisitGuide);
   const [progress, setProgress] = useState<SavedProgress>(readProgress);
   const [session, setSession] = useState<Quiz[]>([]);
   const [index, setIndex] = useState(0);
@@ -147,6 +156,15 @@ function App() {
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [, setFeedbackRevision] = useState(0);
   const feedbackRef = useRef<HTMLDivElement>(null);
+  const finishFirstVisitGuide = (startOverview: boolean) => {
+    try {
+      localStorage.setItem("codex-quiz-intro-seen", "1");
+    } catch {
+      // The guide still closes when browser storage is unavailable.
+    }
+    setShowFirstVisitGuide(false);
+    if (startOverview) startMode("overview");
+  };
 
   useEffect(() => {
     if (screen !== "quiz") return;
@@ -502,6 +520,14 @@ function App() {
   useEffect(() => {
     if (selected !== null) feedbackRef.current?.focus();
   }, [selected]);
+
+  if (routeReady && screen === "home" && showFirstVisitGuide) {
+    return (
+      <Suspense fallback={<main className="first-visit-loading">Codex Quiz</main>}>
+        <FirstVisitGuide onComplete={finishFirstVisitGuide} />
+      </Suspense>
+    );
+  }
 
   if (screen === "quiz" && question && quizMode === "overview" && showChapterIntro) {
     const learning = categoryLearning[question.category];
@@ -1029,6 +1055,7 @@ function App() {
           <b>Codex Quiz</b>
         </div>
         <div className="nav-actions">
+          <button onClick={() => setShowFirstVisitGuide(true)}>はじめての方へ</button>
           <button onClick={() => setScreen("progress")}>進捗</button>
           <button onClick={() => setScreen("reader")}>
             解説を読む {progress.bookmarks.length > 0 && <span>{progress.bookmarks.length}</span>}
@@ -1038,7 +1065,7 @@ function App() {
           </div>
         </div>
         <Suspense fallback={null}>
-          <MobileMenu onNavigate={setScreen} />
+          <MobileMenu onNavigate={setScreen} onIntro={() => setShowFirstVisitGuide(true)} />
         </Suspense>
       </nav>
       <section className="hero">
@@ -1063,12 +1090,6 @@ function App() {
             </span>
             <span>登録不要</span>
           </div>
-          <section className="hero-preview" aria-label="クイズの学び方">
-            <span>学習の流れ</span>
-            <p>
-              <b>01</b> 状況を読む <i>→</i> <b>02</b> 判断する <i>→</i> <b>03</b> 理由を確かめる
-            </p>
-          </section>
         </div>
         <div className="next-step-card">
           <div className="next-step-heading">
@@ -1153,19 +1174,6 @@ function App() {
           </button>
         </section>
       )}
-      <details className="learning-guide intro-guide">
-        <summary>はじめての方へ · 3ステップの学び方</summary>
-        <h2>迷ったら、まず全体像から</h2>
-        <ol>
-          <li>18問で9分野を見渡す</li>
-          <li>解説で判断の理由を確かめる</li>
-          <li>苦手な分野を後日もう一度</li>
-        </ol>
-        <p>クイズ内のターミナルは学習用の表示で、コマンドは実行されません。進捗はこのブラウザに保存されます。</p>
-        <button className="secondary" onClick={() => startMode("overview")}>
-          18問で全体像を学ぶ
-        </button>
-      </details>
       <section className="mode-section" id="learning-modes">
         <div className="section-heading">
           <div>

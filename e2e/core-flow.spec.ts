@@ -5,7 +5,24 @@ import { quizzes } from "../src/data";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
-  await page.evaluate(() => localStorage.clear());
+  await page.evaluate(() => {
+    localStorage.clear();
+    localStorage.setItem("codex-quiz-intro-seen", "1");
+  });
+  await page.reload();
+});
+
+test("first visit guide introduces learning before the menu", async ({ page }) => {
+  await page.evaluate(() => localStorage.removeItem("codex-quiz-intro-seen"));
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Codexを、使える知識に。" })).toBeVisible();
+  await page.getByRole("button", { name: "学び方を見る" }).click();
+  await expect(page.getByRole("heading", { name: "まず、全体の地図から。" })).toBeVisible();
+  await page.getByRole("button", { name: "18問で始める" }).click();
+  await page.getByRole("button", { name: /チャプターを始める/ }).click();
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "18");
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: /判断できる力/ })).toBeVisible();
 });
 
 test("home recommends the next action from saved learning state", async ({ page }) => {
@@ -161,19 +178,17 @@ test("reader filters weak questions and resets empty filters", async ({ page }) 
 
 test("beginner guide starts the overview and remains available after learning", async ({ page }) => {
   await page.reload();
-  const guide = page.locator("details.learning-guide");
-  await expect(guide).not.toHaveAttribute("open");
-  await guide.locator("summary").click();
-  await page.getByRole("button", { name: "18問で全体像を学ぶ" }).click();
+  await page.getByRole("button", { name: "はじめての方へ" }).click();
+  await page.getByRole("button", { name: "学び方を見る" }).click();
+  await page.getByRole("button", { name: "18問で始める" }).click();
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-session") ?? "null"));
   expect(saved.mode).toBe("overview");
   expect(saved.ids).toHaveLength(18);
   await page.goto("/?q=basic-01");
   await page.getByRole("button", { name: /Codex CLI/ }).click();
   await page.goto("/");
-  await expect(guide).not.toHaveAttribute("open");
-  await guide.locator("summary").click();
-  await expect(page.getByRole("button", { name: "18問で全体像を学ぶ" })).toBeVisible();
+  await page.getByRole("button", { name: "はじめての方へ" }).click();
+  await expect(page.getByRole("heading", { name: "Codexを、使える知識に。" })).toBeVisible();
 });
 
 test("result recommends weak review after a wrong answer", async ({ page }) => {

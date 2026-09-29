@@ -1,4 +1,26 @@
 /* Home-only presentation. Quiz, reader, and progress screens keep their own styles. */
+.first-visit { min-height: 100dvh; background: #f7f8fa; color: #20272e; }
+.first-visit-loading { display: grid; place-items: center; min-height: 100dvh; background: #f7f8fa; color: #20272e; font-size: 20px; font-weight: 700; }
+.first-visit-header { display: flex; align-items: center; justify-content: space-between; max-width: 1040px; margin: auto; padding: 25px 28px; }
+.first-visit-header strong { font-size: 19px; letter-spacing: -.04em; }
+.first-visit-header strong span { margin-left: 8px; }
+.first-visit-header button { border: 0; background: transparent; color: #4f5964; font-size: 12px; white-space: nowrap; text-decoration: underline; text-underline-offset: 4px; }
+.first-visit-body { display: grid; align-content: center; max-width: 760px; min-height: calc(100dvh - 84px); margin: auto; padding: 45px 28px 90px; }
+.first-visit-steps { width: fit-content; margin-bottom: 28px; padding: 7px 11px; border: 1px solid #dce1e5; border-radius: 6px; background: #fff; color: #59636f; font: 500 11px "DM Mono", monospace; }
+.first-visit-kicker { margin: 0 0 15px; color: #a94727; font: 700 11px "DM Mono", monospace; letter-spacing: .14em; }
+.first-visit h1 { margin: 0 0 22px; font-size: clamp(34px, 6vw, 58px); line-height: 1.27; letter-spacing: -.065em; }
+.first-visit section > p:not(.first-visit-kicker) { max-width: 600px; color: #4f5964; font-size: 16px; line-height: 1.9; }
+.first-visit-visual { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 35px 0; padding: 22px; border: 1px solid #dfe3e8; border-radius: 14px; background: #fff; }
+.first-visit-visual span { color: #303a45; font-size: 13px; font-weight: 700; }
+.first-visit-visual b { margin-right: 7px; color: #a94727; font: 700 11px "DM Mono", monospace; }
+.first-visit-visual i { color: #9ca4ad; font-style: normal; }
+.first-visit-path { display: grid; gap: 10px; margin: 29px 0; padding: 0; list-style: none; counter-reset: path; }
+.first-visit-path li { padding: 15px 18px; border: 1px solid #dfe3e8; border-radius: 9px; background: #fff; color: #303a45; font-size: 14px; }
+.first-visit-path li::before { counter-increment: path; content: '0' counter(path); margin-right: 16px; color: #a94727; font: 700 11px "DM Mono", monospace; }
+.first-visit section > .first-visit-note { font-size: 12px; }
+.first-visit-actions { display: flex; gap: 11px; align-items: center; margin-top: 25px; }
+.first-visit .primary { background: #20272e; box-shadow: none; }
+.first-visit .secondary { min-height: 50px; padding: 12px 19px; }
 .home-nav {
   max-width: none;
   padding-inline: max(28px, calc((100vw - 1124px) / 2));
@@ -60,19 +82,6 @@
 .hero-proof span:last-child { border: 0; }
 .hero-proof strong { color: #20272e; font: 500 16px "DM Mono", monospace; }
 
-.hero-preview {
-  max-width: 500px;
-  margin-top: 45px;
-  padding: 16px 19px;
-  border: 1px solid #dfe3e8;
-  border-radius: 11px;
-  background: #fff;
-}
-.hero-preview > span { color: #59636f; font: 700 11px "DM Mono", monospace; letter-spacing: .1em; }
-.hero-preview p { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 8px 0 0; color: #39434e; font-size: 13px; }
-.hero-preview b { color: #59636f; font: 700 11px "DM Mono", monospace; }
-.hero-preview i { color: #9ca4ad; font-style: normal; }
-
 .next-step-card {
   padding: clamp(25px, 3vw, 36px);
   border: 1px solid #dfe3e8;
@@ -96,20 +105,6 @@
 .home-progress strong { color: #20272e; font: 600 20px "DM Mono", monospace; }
 .home-progress span { color: #59636f; font-size: 12px; }
 .home-progress button { margin-left: auto; padding: 7px 0; border: 0; background: transparent; color: #303740; font-size: 12px; font-weight: 700; }
-
-.intro-guide {
-  max-width: 1124px;
-  margin: 22px auto 0;
-  padding: 17px 23px;
-  border-color: #dfe3e8;
-  background: #fff;
-}
-.intro-guide summary { color: #303a45; font-size: 14px; }
-.intro-guide h2 { margin: 19px 0 10px; font-size: 17px; }
-.intro-guide ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0; padding: 0; list-style-position: inside; }
-.intro-guide li { padding: 12px; border: 1px solid #e2e5e9; border-radius: 8px; background: #fafbfc; font-size: 13px; }
-.intro-guide p { margin: 10px 0; color: #56616d; font-size: 13px; }
-.intro-guide .secondary { margin-top: 6px; padding: 10px 14px; font-size: 13px; }
 
 .journey-section { margin-top: 62px; }
 .journey-section .eyebrow, .mode-section .eyebrow, .category-section .eyebrow { color: #66717c; font-size: 11px; }
@@ -181,6 +176,16 @@
 }
 
 @media (max-width: 540px) {
+  .first-visit-header { padding: 19px 20px; }
+  .first-visit-header strong { font-size: 15px; }
+  .first-visit-header button { font-size: 11px; text-align: right; }
+  .first-visit-body { min-height: calc(100dvh - 70px); padding: 25px 20px 70px; }
+  .first-visit h1 { font-size: 36px; }
+  .first-visit section > p:not(.first-visit-kicker) { font-size: 14px; }
+  .first-visit-visual { gap: 8px; padding: 17px; }
+  .first-visit-visual span { font-size: 11px; }
+  .first-visit-visual b { margin-right: 3px; }
+  .first-visit-actions { flex-wrap: wrap; }
   .home-nav { padding-inline: 18px; }
   .home-nav .mobile-nav { order: -1; }
   .home-nav .brand { margin-left: auto; }
@@ -190,8 +195,6 @@
   .hero-proof { justify-content: flex-start; margin-top: 22px; font-size: 11px; }
   .hero-proof span { padding-inline: 11px; }
   .hero-proof strong { font-size: 13px; }
-  .hero-preview { margin-top: 19px; padding: 12px 14px; }
-  .hero-preview p { gap: 5px; font-size: 12px; }
   .next-step-card { padding: 21px; }
   .next-step-card .next-step-kicker { margin-top: 20px; }
   .next-step-card h2 { font-size: 24px; }
@@ -199,9 +202,6 @@
   .home-progress { flex-wrap: wrap; gap: 9px 17px; padding: 13px 16px; }
   .home-progress div { flex: 1 1 42%; }
   .home-progress button { margin-left: 0; }
-  .intro-guide { margin: 14px 18px 0; padding: 15px 17px; }
-  .intro-guide ol { grid-template-columns: 1fr; gap: 6px; }
-  .intro-guide li { padding: 8px 11px; }
   .journey-section { margin-top: 50px; }
   .journey-section .journey-hint { display: block; margin: 12px 0 0; color: #59636f; font-size: 12px; font-weight: 700; }
   .journey-scroll { overflow-x: auto; scroll-snap-type: x mandatory; }

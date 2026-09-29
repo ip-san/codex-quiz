@@ -13,7 +13,19 @@ const scan = async (page: Page) => {
 test.beforeEach(async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await page.evaluate(() => localStorage.clear());
+  await page.evaluate(() => {
+    localStorage.clear();
+    localStorage.setItem("codex-quiz-intro-seen", "1");
+  });
+  await page.reload();
+});
+
+test("first visit guide has no WCAG A or AA violations", async ({ page }) => {
+  await page.evaluate(() => localStorage.removeItem("codex-quiz-intro-seen"));
+  await page.reload();
+  await scan(page);
+  await page.getByRole("button", { name: "学び方を見る" }).click();
+  await scan(page);
 });
 
 test("home has no WCAG A or AA violations", async ({ page }) => {
