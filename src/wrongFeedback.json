@@ -135,9 +135,9 @@
     "3": "HTML serverの起動ではCodex taskをautomationへ組み込めません。`codex exec`でrunします。"
   },
   "basic-05": {
-    "1": "`codex rewind`では保存済みinteractive sessionを選択してcontextを継続できません。",
-    "2": "fileの再生では会話状態を復元できません。session IDまたは直近sessionを`codex resume`で選びます。",
-    "3": "Git状態の復元とCodex会話の再開は別です。対話contextを続ける時は`codex resume`を使います。"
+    "1": "`codex fork`は履歴を引き継ぐ別chatを作ります。昨日の同じchatを続けるなら`codex resume`です。",
+    "2": "`/new`は新しいchatを始めます。保存済み会話の調査内容を同じchatで継続するならresumeを選びます。",
+    "3": "Git branchはコードの履歴を分けますが、Codexの保存済みchatを再開しません。会話は`codex resume`で選びます。"
   },
   "config-01": {
     "1": ".git/configはGit remote等の設定で、repository固有のCodex layerとして読み込まれません。",
@@ -320,9 +320,9 @@
     "3": "単なるdiff表示では専用reviewerの優先度付き指摘を得られません。"
   },
   "basic-07": {
-    "1": "file分割では会話contextを引き継ぐ別chatを作れません。`codex fork`を使います。",
-    "2": "model複製はsession分岐ではありません。元 transcriptを残して新chatへforkします。",
-    "3": "Git branchと会話の分岐は別です。session contextの分岐には`codex fork`を使います。"
+    "1": "`codex resume`は元のchatを続ける操作です。元を残して別案を新chatで試すなら`codex fork`です。",
+    "2": "`/new`は新chatですが、保存済みsessionの調査履歴を引き継ぎません。履歴から分けるならforkします。",
+    "3": "Git branchはコードの分岐で、会話履歴は分岐しません。保存済みchatから新chatを作るには`codex fork`を使います。"
   },
   "basic-08": {
     "1": "`codex merge-cloud`は公式CLI commandではありません。cloud chatの最新diffは`codex apply`で適用します。",

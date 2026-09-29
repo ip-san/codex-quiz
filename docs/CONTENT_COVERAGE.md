@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-29 CLI会話の再開と分岐
+
+basic-05/07を公式[Developer commands](https://learn.chatgpt.com/docs/developer-commands)で再確認。`codex resume`は保存済みinteractive sessionを同じchatで続け、`codex fork`は履歴を引き継ぐ新chatへ分けて元のtranscriptを残す。旧設問の架空commandを誤答にした名称暗記から、resume・fork・新規chat・Git branchの違いを判断する場面へ変更。正解・全誤答feedbackと既存terminal図を照合し、図は現行記述と一致するため変更なし。ID・263問・図解数を維持し、旧回答の学習履歴は残る。
+
 ## 2026-09-29 個人指示とチームのレビュー規則
 
 再確認キュー上位のagents-13/14を公式[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)と[Customization](https://learn.chatgpt.com/docs/customization/overview)で照合。個人のglobal指示とrepositoryで共有するbuild手順の分離、および対象serviceに近いCode Review RulesとCI検査の組み合わせへ改善した。全選択肢と不正解別feedbackを更新。図解なし。IDと過去の学習履歴は維持し、263問全体の正確性を認定するものではない。
