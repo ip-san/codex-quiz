@@ -207,6 +207,22 @@ test("overview introduces all nine chapters in a short fixed path and resumes", 
   await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuenow", "2");
 });
 
+test("overview completion leads to chapter-level deep study", async ({ page }) => {
+  await page.getByRole("button", { name: /まず全体像を18問でつかむ/ }).click();
+  for (let chapter = 1; chapter <= 9; chapter++) {
+    await expect(page.getByText(`CHAPTER ${chapter} / 9`)).toBeVisible();
+    await page.getByRole("button", { name: /チャプターを始める/ }).click();
+    for (let question = 0; question < 2; question++) {
+      await page.locator("button.choice").first().click();
+      await page.getByRole("button", { name: question === 1 && chapter === 9 ? "結果を見る" : "次の問題へ" }).click();
+    }
+  }
+  await expect(page.getByRole("heading", { name: "次のおすすめ" })).toBeVisible();
+  await page.getByRole("button", { name: "9章の学習状況を見る" }).click();
+  await expect(page.getByRole("heading", { name: "チャプターの学習状況" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "この章を学ぶ" }).first()).toBeVisible();
+});
+
 test("answering announces feedback and moves focus", async ({ page }) => {
   await page.getByRole("button", { name: /ランダム10問を始める/ }).click();
   await page.locator("button.choice").first().click();

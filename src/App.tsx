@@ -664,23 +664,33 @@ function App() {
           <section className="learning-guide" aria-labelledby="next-step-heading">
             <h2 id="next-step-heading">次のおすすめ</h2>
             <p>
-              {weakQuestions.length > 0
-                ? "間違えた問題は、解説を確認してもう一度。正答率が低い問題もまとめて復習できます。"
-                : dueQuestions.length > 0
-                  ? "復習の時期が来た問題があります。短いチェックで記憶を確かめましょう。"
-                  : "今日はここで終えても大丈夫。進捗で学習の成果と、次に学ぶカテゴリを確認できます。"}
+              {quizMode === "overview"
+                ? "全体像をつかみました。9章の学習状況を見て、気になる分野の残りの問題へ進みましょう。"
+                : weakQuestions.length > 0
+                  ? "間違えた問題は、解説を確認してもう一度。正答率が低い問題もまとめて復習できます。"
+                  : dueQuestions.length > 0
+                    ? "復習の時期が来た問題があります。短いチェックで記憶を確かめましょう。"
+                    : "今日はここで終えても大丈夫。進捗で学習の成果と、次に学ぶカテゴリを確認できます。"}
             </p>
             <button
               className="secondary"
               onClick={
-                weakQuestions.length > 0 ? startWeak : dueQuestions.length > 0 ? startDue : () => setScreen("progress")
+                quizMode === "overview"
+                  ? () => setScreen("progress")
+                  : weakQuestions.length > 0
+                    ? startWeak
+                    : dueQuestions.length > 0
+                      ? startDue
+                      : () => setScreen("progress")
               }
             >
-              {weakQuestions.length > 0
-                ? "苦手問題を復習する"
-                : dueQuestions.length > 0
-                  ? "60秒チェックへ"
-                  : "学習の成果を見る"}
+              {quizMode === "overview"
+                ? "9章の学習状況を見る"
+                : weakQuestions.length > 0
+                  ? "苦手問題を復習する"
+                  : dueQuestions.length > 0
+                    ? "60秒チェックへ"
+                    : "学習の成果を見る"}
             </button>
           </section>
           <div className="result-actions">
