@@ -182,6 +182,8 @@
 
 @media (max-width: 540px) {
   .home-nav { padding-inline: 18px; }
+  .home-nav .mobile-nav { order: -1; }
+  .home-nav .brand { margin-left: auto; }
   .hero { grid-template-columns: 1fr; gap: 26px; padding: 40px 20px 38px; }
   .hero h1 { margin: 19px 0 13px; font-size: clamp(38px, 10vw, 49px); }
   .hero-copy > p { font-size: 14px; line-height: 1.75; }

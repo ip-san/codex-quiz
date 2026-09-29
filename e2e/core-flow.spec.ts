@@ -233,6 +233,12 @@ test("mobile drawer closes with Escape and backdrop", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   await page.reload();
   const menu = page.locator(".mobile-nav");
+  const menuBox = await menu.locator("summary").boundingBox();
+  const brandBox = await page.locator(".home-nav .brand").boundingBox();
+  expect(menuBox).not.toBeNull();
+  expect(brandBox).not.toBeNull();
+  if (!menuBox || !brandBox) return;
+  expect(menuBox.x + menuBox.width).toBeLessThan(brandBox.x);
   await menu.locator("summary").click();
   await expect(menu).toHaveAttribute("open", "");
   await page.keyboard.press("Escape");
