@@ -1085,16 +1085,53 @@ function App() {
         <summary>はじめての方へ・学び方ガイド</summary>
         <h2>最初は、覚えていなくても大丈夫</h2>
         <ol>
-          <li>「読んでから解く」で、解説を確認してから10問に挑戦。</li>
+          <li>まず18問の全体像パスで9章をひと通り見渡す。</li>
           <li>間違えたら、選んだ答えの解説を読み、理由を確かめる。</li>
-          <li>次回は「苦手問題」や、復習時期が来た問題の「60秒チェック」へ。</li>
+          <li>気になる章の残りの問題へ進み、後日「苦手問題」や「60秒チェック」で復習する。</li>
         </ol>
         <p>操作例は一部の問題の解説で確認できます。ターミナル表示は学習用で、実際のコマンドは実行しません。</p>
         <p>進捗はこのブラウザに保存されます。別の端末へ移すときは、進捗画面のデータ入出力を使ってください。</p>
-        <button className="secondary" onClick={() => startMode("study")}>
-          解説を読んで10問に挑戦
+        <button className="secondary" onClick={() => startMode("overview")}>
+          18問で全体像を学ぶ
         </button>
       </details>
+      <section className="journey-section" aria-labelledby="journey-heading">
+        <p className="eyebrow">THE BIG PICTURE</p>
+        <h2 id="journey-heading">Codexで仕事を進める5つの段階</h2>
+        <p>まず流れをつかみ、必要な分野だけ深掘りできます。</p>
+        <ol className="journey-map">
+          <li>
+            <span>01</span>
+            <h3>依頼する</h3>
+            <p>目的・文脈・完了条件を伝える</p>
+            <small>基本操作・プロンプト</small>
+          </li>
+          <li>
+            <span>02</span>
+            <h3>境界を決める</h3>
+            <p>チームの指示と権限を確認する</p>
+            <small>AGENTS.md・権限・設定</small>
+          </li>
+          <li>
+            <span>03</span>
+            <h3>作業する</h3>
+            <p>環境と必要な連携を選ぶ</p>
+            <small>利用環境・拡張</small>
+          </li>
+          <li>
+            <span>04</span>
+            <h3>確かめる</h3>
+            <p>テストと差分レビューで検証する</p>
+            <small>実務フロー</small>
+          </li>
+          <li>
+            <span>05</span>
+            <h3>続ける</h3>
+            <p>会話を再開し、学びを次に生かす</p>
+            <small>セッション</small>
+          </li>
+        </ol>
+      </section>
       <section className="mode-section" aria-labelledby="scenario-heading">
         <h2 id="scenario-heading">実践シナリオ</h2>
         <p>各3問。実務の順序で判断を練習します。実際のコード操作は行いません。</p>

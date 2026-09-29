@@ -137,20 +137,20 @@ test("reader filters weak questions and resets empty filters", async ({ page }) 
   expect(await page.locator(".reader-card").count()).toBeGreaterThan(1);
 });
 
-test("beginner guide starts study mode and remains available after learning", async ({ page }) => {
+test("beginner guide starts the overview and remains available after learning", async ({ page }) => {
   await page.reload();
   const guide = page.locator("details.learning-guide");
   await expect(guide).toHaveAttribute("open", "");
-  await page.getByRole("button", { name: "解説を読んで10問に挑戦" }).click();
+  await page.getByRole("button", { name: "18問で全体像を学ぶ" }).click();
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-session") ?? "null"));
-  expect(saved.mode).toBe("study");
-  expect(saved.ids).toHaveLength(10);
+  expect(saved.mode).toBe("overview");
+  expect(saved.ids).toHaveLength(18);
   await page.goto("/?q=basic-01");
   await page.getByRole("button", { name: /Codex CLI/ }).click();
   await page.goto("/");
   await expect(guide).not.toHaveAttribute("open");
   await guide.locator("summary").click();
-  await expect(page.getByRole("button", { name: "解説を読んで10問に挑戦" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "18問で全体像を学ぶ" })).toBeVisible();
 });
 
 test("result recommends weak review after a wrong answer", async ({ page }) => {
