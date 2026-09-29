@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-29 個人指示とチームのレビュー規則
+
+再確認キュー上位のagents-13/14を公式[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)と[Customization](https://learn.chatgpt.com/docs/customization/overview)で照合。個人のglobal指示とrepositoryで共有するbuild手順の分離、および対象serviceに近いCode Review RulesとCI検査の組み合わせへ改善した。全選択肢と不正解別feedbackを更新。図解なし。IDと過去の学習履歴は維持し、263問全体の正確性を認定するものではない。
+
 ## 2026-09-29 実務問題の再確認キュー
 
 `npm run content:queue`で最終確認日が古い実務問題20件を抽出する。日付順は誤答・重要度の確定順位ではなく、人手監査の入口。basic-20は公式[環境変数](https://learn.chatgpt.com/docs/config-file/environment-variables#authentication-and-network)で`CODEX_API_KEY`の非対話実行とrepository-controlled codeがある場合のinline指定を再確認し、正解・3つの誤答解説を照合。図解なし。参照先・確認日・説明の過度な「専用」表現を更新した。263問全体の鮮度確認は未完了。

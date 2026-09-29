@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-09-29 AGENTS.mdの適用範囲を測る2問
+
+agents-13/14は正解の方向性こそ妥当だが、旧誤答に「ブラウザ履歴」「レビュー無効化」があり判断を測りにくかった。公式[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)のglobal・repository・近いdirectoryの適用範囲とCode Review Rules、[Customization](https://learn.chatgpt.com/docs/customization/overview)のCIによる機械的検査を照合。個人設定をチームへ強制しない判断と、service固有の反復指摘を指示とCIへ残す判断に書き直し、全誤答feedbackを更新した。図解なし。既存IDの履歴には旧問題の成績も含まれる。
+
 ## 2026-09-29 再監査候補の抽出とCI secretの1問
 
 実務問題を最終確認日順に20件表示する`npm run content:queue`を追加。確認日の古さだけでは誤りと認定しない。最古群のbasic-20を公式[Environment variables](https://learn.chatgpt.com/docs/config-file/environment-variables#authentication-and-network)で再検証し、正解と全誤答解説は維持できると判断。旧参照先と「exec専用」という説明を現行の正確な範囲へ修正した。図解なし。これは1問の監査であり、全263問の最新仕様確認ではない。

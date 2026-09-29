@@ -255,14 +255,14 @@
     "3": "空なら飛ばしますが、非空ファイル同士の長さで優先順位を決めません。"
   },
   "agents-13": {
-    "1": "package-lock.jsonは依存versionの固定用で、個人styleやteamのagent instructionを置く場所ではありません。",
-    "2": "個人だけの回答styleをrepositoryへ強制するとteam全員へ不要な指示が適用されます。global scopeへ分離します。",
-    "3": "browser履歴はversion管理も自動instruction読込もできません。共有build手順はrepositoryのAGENTS.mdへ置きます。"
+    "1": "global AGENTS.mdはあなたのCodex homeにある個人設定です。チームのbuild手順はrepositoryへ置かないと共有されません。",
+    "2": "repositoryのAGENTS.mdはチームに共有されます。個人だけの回答スタイルまで全員に適用せず、global側へ分けます。",
+    "3": "毎回のpromptならその場では伝わりますが、次の作業へ自動で引き継ぐ指示にはなりません。継続する規則は適切なAGENTS.mdへ置きます。"
   },
   "agents-14": {
-    "1": "口頭だけでは新しいsessionや別のcontributorへ規則が残りません。近いAGENTS.mdへ再利用可能な形で記録します。",
-    "2": "reviewを無効化すると同じ問題を検出する機会を失います。instructionと機械検査で発生自体を減らします。",
-    "3": "問題fileを無視すると不具合が残ります。判断規則はAGENTS.md、判定可能な条件はlintやtestで強制します。"
+    "1": "個人のglobal AGENTS.mdだけでは他のcontributorやreviewerへ同じ規則を共有できません。対象serviceに近いrepository内の指示へ置きます。",
+    "2": "review promptへ毎回貼る方法は繰り返す負担が残ります。対象コードに近いAGENTS.mdなら将来の作業でも読み込めます。",
+    "3": "AGENTS.mdはCodexへの指示ですが、人による変更を機械的には止めません。判定可能な条件はCIのlintやtestでも検査します。"
   },
   "session-06": {
     "1": "`/init`はAGENTS.mdのstarterを作る操作で、現在のchat IDやcontext残量を表示しません。",
