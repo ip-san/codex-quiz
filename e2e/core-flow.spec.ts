@@ -217,14 +217,14 @@ test("mobile menu reaches home sections and expands scenarios", async ({ page })
   await expect(page.getByRole("button", { name: `${lastScenario.title}を始める` })).toBeHidden();
   await page.getByRole("button", { name: new RegExp(`すべてのシナリオを見る`) }).click();
   await expect(page.getByRole("button", { name: `${lastScenario.title}を始める` })).toBeVisible();
-  await page.getByText("メニュー", { exact: false }).click();
+  await page.locator(".mobile-nav summary").click();
   await page.getByRole("button", { name: "カテゴリ", exact: true }).click();
   await expect(page).toHaveURL(/#categories$/);
   await expect(page.getByRole("heading", { name: "カテゴリから学ぶ" })).toBeInViewport();
   await expect(page.locator(".category-card").last()).toBeHidden();
   await page.getByRole("button", { name: /すべてのカテゴリを見る/ }).click();
   await expect(page.locator(".category-card").last()).toBeVisible();
-  await page.getByText("メニュー", { exact: false }).click();
+  await page.locator(".mobile-nav summary").click();
   await page.getByRole("button", { name: "進捗を見る" }).click();
   await expect(page.getByRole("heading", { name: "学習の現在地" })).toBeVisible();
 });

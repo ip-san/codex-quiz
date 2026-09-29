@@ -744,7 +744,7 @@ function App() {
           </button>
         </header>
         <section className="reader-intro">
-          <p className="eyebrow">EXPLANATION READER</p>
+          <p className="eyebrow">解説リーダー</p>
           <h1>知識を探して、読み返す。</h1>
           <p>全{quizzes.length}問の答えと解説を、キーワードやカテゴリから横断検索できます。</p>
         </section>
@@ -871,7 +871,7 @@ function App() {
         <section className="dashboard-wrap">
           <div className="dashboard-title">
             <div>
-              <p className="eyebrow">YOUR PROGRESS</p>
+              <p className="eyebrow">学習の記録</p>
               <h1>学習の現在地</h1>
               <p>積み重ねた回答から、得意と次に学ぶ分野を確認できます。</p>
             </div>
@@ -887,22 +887,18 @@ function App() {
             <div>
               <span>総回答数</span>
               <strong>{progress.answered}</strong>
-              <small>answers</small>
             </div>
             <div>
               <span>通算正答率</span>
               <strong>{accuracy}%</strong>
-              <small>accuracy</small>
             </div>
             <div>
               <span>完了セッション</span>
               <strong>{progress.history.length}</strong>
-              <small>sessions</small>
             </div>
             <div>
               <span>ベストスコア</span>
               <strong>{bestScore}%</strong>
-              <small>personal best</small>
             </div>
           </div>
           <div className="dashboard-grid">
@@ -932,7 +928,7 @@ function App() {
             <section className="mastery-panel">
               <div className="panel-title">
                 <div>
-                  <p className="eyebrow">MASTERY</p>
+                  <p className="eyebrow">習熟度</p>
                   <h2>カテゴリ別の正答率</h2>
                 </div>
                 <small>全回答から集計</small>
@@ -955,7 +951,7 @@ function App() {
             <section className="history-panel">
               <div className="panel-title">
                 <div>
-                  <p className="eyebrow">RECENT SESSIONS</p>
+                  <p className="eyebrow">学習履歴</p>
                   <h2>最近の学習</h2>
                 </div>
               </div>
@@ -994,7 +990,7 @@ function App() {
           </div>
           <section className="data-panel">
             <div>
-              <p className="eyebrow">DATA PORTABILITY</p>
+              <p className="eyebrow">データ管理</p>
               <h2>学習データの管理</h2>
               <p>SRS、ブックマーク、回答履歴をJSONファイルでバックアップできます。</p>
             </div>
@@ -1037,7 +1033,7 @@ function App() {
             解説を読む {progress.bookmarks.length > 0 && <span>{progress.bookmarks.length}</span>}
           </button>
           <div className="nav-badge">
-            <span className="status-dot" /> {quizzes.length} questions
+            <span className="status-dot" /> {quizzes.length}問を収録
           </div>
         </div>
         <details className="mobile-nav">
@@ -1097,7 +1093,7 @@ function App() {
             <span>登録不要</span>
           </div>
           <section className="hero-preview" aria-label="クイズの学び方">
-            <span>HOW IT WORKS</span>
+            <span>学習の流れ</span>
             <p>
               <b>01</b> 状況を読む <i>→</i> <b>02</b> 判断する <i>→</i> <b>03</b> 理由を確かめる
             </p>
@@ -1112,7 +1108,7 @@ function App() {
           </div>
           {resumableSession ? (
             <>
-              <p className="next-step-kicker">CONTINUE LEARNING</p>
+              <p className="next-step-kicker">途中から再開</p>
               <h2>前回の続きから</h2>
               <p>
                 {resumableSession.label} · {resumableSession.index + 1}/{resumableSession.ids.length}問目
@@ -1126,7 +1122,7 @@ function App() {
             </>
           ) : dueQuestions.length > 0 ? (
             <>
-              <p className="next-step-kicker">REVIEW · {dueQuestions.length}問が復習時期</p>
+              <p className="next-step-kicker">復習のタイミング · {dueQuestions.length}問</p>
               <h2>3問だけ、思い出す。</h2>
               <p>前に解いた知識を、短い復習で確かめましょう。</p>
               <button className="primary" onClick={startDue}>
@@ -1135,7 +1131,7 @@ function App() {
             </>
           ) : weakQuestions.length > 0 ? (
             <>
-              <p className="next-step-kicker">REVIEW · {weakQuestions.length}問</p>
+              <p className="next-step-kicker">苦手を復習 · {weakQuestions.length}問</p>
               <h2>迷った問題から、もう一度。</h2>
               <p>間違えた理由を見直して、次の判断につなげます。</p>
               <button className="primary" onClick={startWeak}>
@@ -1144,7 +1140,7 @@ function App() {
             </>
           ) : progress.answered > 0 ? (
             <>
-              <p className="next-step-kicker">PRACTICE</p>
+              <p className="next-step-kicker">今日の練習</p>
               <h2>次の10問に進もう。</h2>
               <p>分野を横断して、実務の判断を少しずつ磨きます。</p>
               <button className="primary" onClick={() => start()}>
@@ -1153,7 +1149,7 @@ function App() {
             </>
           ) : (
             <>
-              <p className="next-step-kicker">START HERE · 約18問</p>
+              <p className="next-step-kicker">はじめての方へ · 18問</p>
               <h2>最初は、全体の地図から。</h2>
               <p>9分野から2問ずつ。解きながらCodexの使いどころをつかめます。</p>
               <button className="primary" onClick={() => startMode("overview")}>
@@ -1202,7 +1198,7 @@ function App() {
       <section className="mode-section" id="learning-modes">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">LEARNING MODES</p>
+            <p className="eyebrow">学習メニュー</p>
             <h2>目的に合わせて学ぶ</h2>
           </div>
           <p>基礎からの学習、知識を先に読む練習、本番形式の確認。</p>
@@ -1212,7 +1208,7 @@ function App() {
             <span>01</span>
             <div>
               <small>
-                {CATEGORY_COUNT} CHAPTERS · {overviewQuestionIds.length} QUESTIONS
+                {CATEGORY_COUNT}分野 · {overviewQuestionIds.length}問
               </small>
               <h3>全体像モード</h3>
               <p>9分野から各2問。まず全体の地図をつかみ、気になる章を深掘りする。</p>
@@ -1222,7 +1218,7 @@ function App() {
           <button className="mode-card" onClick={() => startMode("study")}>
             <span>02</span>
             <div>
-              <small>READ FIRST</small>
+              <small>解説を先に読む</small>
               <h3>読んでから解く</h3>
               <p>解説と正解を理解してから、同じ知識を思い出す。</p>
             </div>
@@ -1231,7 +1227,7 @@ function App() {
           <button className="mode-card" onClick={() => startMode("exam")}>
             <span>03</span>
             <div>
-              <small>100 QUESTIONS</small>
+              <small>100問</small>
               <h3>実力テスト</h3>
               <p>{CATEGORY_COUNT}カテゴリからバランスよく100問。途中で正解を表示せず実力を確認。</p>
             </div>
@@ -1254,7 +1250,7 @@ function App() {
         </div>
       </section>
       <section className="journey-section" aria-labelledby="journey-heading">
-        <p className="eyebrow">THE BIG PICTURE</p>
+        <p className="eyebrow">全体像</p>
         <h2 id="journey-heading">Codexで仕事を進める5つの段階</h2>
         <p>まず流れをつかみ、必要な分野だけ深掘りできます。</p>
         <p className="journey-hint">横にスワイプして5段階を見る →</p>
@@ -1324,7 +1320,7 @@ function App() {
       <section className="category-section" id="categories">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">CHOOSE A TOPIC</p>
+            <p className="eyebrow">分野から選ぶ</p>
             <h2>カテゴリから学ぶ</h2>
           </div>
           <p>気になる分野を選んで、カテゴリ単位で集中トレーニング。</p>

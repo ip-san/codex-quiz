@@ -24,7 +24,7 @@ test("home has no WCAG A or AA violations", async ({ page }) => {
 test("open mobile menu has no WCAG A or AA violations", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   await page.reload();
-  await page.getByText("メニュー", { exact: false }).click();
+  await page.locator(".mobile-nav summary").click();
   await expect(page.getByRole("button", { name: "進捗を見る" })).toBeVisible();
   await scan(page);
 });
