@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 test("production worker preserves other caches and supports offline study", async ({ page, context }) => {
   await page.goto("/");
   await page.evaluate(async () => {
+    localStorage.setItem("codex-quiz-intro-seen", "1");
     await navigator.serviceWorker.ready;
     await caches.open("other-app-test");
     await caches.open("codex-quiz-obsolete");
