@@ -430,9 +430,9 @@
     "3": "Hookは検査を追加できますが、承認prompt categoryのallow/rejectを直接表す設定ではありません。"
   },
   "safe-33": {
-    "1": "auto-reviewはsandbox内の通常操作すべてを二重reviewする仕組みではありません。",
-    "2": "auto-reviewはinteractive approvalが発生する構成で機能します。`never`ではreviewへ回すprompt自体がありません。",
-    "3": "reviewerは承認判断を補助しますが、sandboxの技術境界を置き換えません。"
+    "1": "Auto-reviewは既存の承認要求を審査し、許可済みの通常操作すべてを監視しません。対象commandへprompt ruleを追加します。",
+    "2": "`approval_policy = \"never\"`では審査に回す承認要求が発生しません。重要操作を審査するにはinteractiveな承認経路が必要です。",
+    "3": "許可先を増やしても審査要求は増えません。allowlist内の重要操作には明示的なprompt ruleを設定します。"
   },
   "safe-34": {
     "1": "critical-risk actionはreviewer policyでdenyされます。自動承認を前提にしません。",

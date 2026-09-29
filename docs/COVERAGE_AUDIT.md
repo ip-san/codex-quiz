@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-09-29 Auto-reviewの審査漏れ
+
+safe-33を「何が対象か」の名称確認から、許可済み操作が審査されない失敗診断へ置換。公式[Auto-review](https://learn.chatgpt.com/docs/sandboxing/auto-review)で許可済みnetwork宛先は審査要求にならず、重要commandへのprompt ruleまたはMCP toolへのapproval mode指定が必要と確認した。正解・全誤答解説・検証日を更新。IDと過去履歴を維持し、図解はない。Auto-reviewの実環境policy試験や全43権限問題の監査完了ではない。
+
 ## 2026-09-29 独自権限profileの基準保護
 
 safe-02の自明な名称選択を、独自permission profileを作る際の保護継承へ置換。公式[Permissions](https://learn.chatgpt.com/docs/permissions)で`:workspace`のextends、`.codex`のread-only保護、空filesystem tableの制限と警告、`:danger-full-access`の継承禁止を確認した。正解・全誤答解説・検証日を更新。IDを維持するため旧問題の成績は残る。図解なし。権限カテゴリ全43問の監査完了ではない。

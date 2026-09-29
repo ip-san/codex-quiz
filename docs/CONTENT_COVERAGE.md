@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-09-29 Auto-review対象外操作の診断
+
+safe-33を公式[Auto-review](https://learn.chatgpt.com/docs/sandboxing/auto-review)へ照合し、許可済みnetwork先への重要commandが審査されない場合の判断へ変更。Auto-reviewは承認要求がある操作だけを審査し、sandbox内の通常操作を自動で追加検査しない。対象commandには`decision = "prompt"`、機密性の高いMCP toolには`approval_mode = "prompt"`を設定する選択を説明した。全誤答解説・検証日を更新。図解なし、263問・15コースを維持する。
+
 ## 2026-09-29 権限profileの保護継承
 
 safe-02を公式[Permissions](https://learn.chatgpt.com/docs/permissions)へ照合し、`:workspace`を継承して既定の`.codex`保護を維持しつつdenyを追加する実務判断へ置換した。空のfilesystem ruleは保護の継承を意味せず、`:danger-full-access`は継承元にできない。全誤答解説と検証日を更新。図解なし。263問・15コースを維持する。
