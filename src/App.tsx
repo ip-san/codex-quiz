@@ -143,6 +143,7 @@ function App() {
   const [studyPhase, setStudyPhase] = useState(false);
   const [showChapterIntro, setShowChapterIntro] = useState(false);
   const [showAllScenarios, setShowAllScenarios] = useState(false);
+  const [showAllCategories, setShowAllCategories] = useState(false);
   const [, setFeedbackRevision] = useState(0);
   const feedbackRef = useRef<HTMLDivElement>(null);
 
@@ -1075,16 +1076,16 @@ function App() {
       </nav>
       <section className="hero">
         <div className="hero-copy">
-          <div className="pill">LEARN CODEX, ONE QUESTION AT A TIME</div>
+          <div className="pill">CODEX LEARNING STUDIO · 9 CATEGORIES</div>
           <h1>
-            Codexを、
+            知っている、から
             <br />
-            <em>使える知識</em>に。
+            <em>使いこなせる</em>へ。
           </h1>
           <p>
-            公式ドキュメントに基づく短いクイズで、
+            公式ドキュメントを、実務で迷わない判断力に。
             <br className="desktop" />
-            AIコーディングの基本と実践を身につけよう。
+            1問ずつ試して、理由まで身につけよう。
           </p>
           <div className="hero-actions">
             <button className="primary" onClick={() => startMode("overview")}>
@@ -1094,29 +1095,41 @@ function App() {
               ランダム10問を始める
             </button>
           </div>
+          <div className="hero-proof">
+            <span>
+              <strong>{quizzes.length}</strong> 問
+            </span>
+            <span>
+              <strong>{scenarios.length}</strong> 実践シナリオ
+            </span>
+            <span>登録不要</span>
+          </div>
         </div>
-        <div className="terminal-card" aria-hidden="true">
+        <div
+          className="terminal-card"
+          role="img"
+          aria-label="状況を読み、次の一手を選び、解説と根拠を確かめる学習の流れ"
+        >
           <div className="terminal-top">
             <span />
             <span />
             <span />
-            <small>codex — quiz</small>
+            <small>codex / learning path</small>
           </div>
           <div className="terminal-body">
+            <p className="terminal-comment">現場で使う知識を、順番に。</p>
             <p>
-              <i>›</i> codex
+              <i>01</i> 状況を読む
             </p>
-            <p className="muted">╭─────────────────────────────╮</p>
-            <p className="muted">
-              │ <b>Codex</b> coding agent ready&nbsp;&nbsp; │
+            <p>
+              <i>02</i> 次の一手を選ぶ
             </p>
-            <p className="muted">╰─────────────────────────────╯</p>
-            <p className="prompt">
-              <i>›</i> 今日のクイズを始めよう
+            <p>
+              <i>03</i> 解説と根拠を確かめる
             </p>
-            <p className="typing">
-              問題を準備しています<span>▋</span>
-            </p>
+            <div className="terminal-result">
+              <span aria-hidden="true">●</span> 学んだことが、次の仕事につながる
+            </div>
           </div>
         </div>
       </section>
@@ -1137,102 +1150,19 @@ function App() {
           </div>
         </section>
       )}
-      <details className="learning-guide" open={progress.answered === 0 ? true : undefined}>
-        <summary>はじめての方へ・学び方ガイド</summary>
-        <h2>最初は、覚えていなくても大丈夫</h2>
+      <details className="learning-guide intro-guide" open={progress.answered === 0 ? true : undefined}>
+        <summary>はじめての方へ · 3ステップの学び方</summary>
+        <h2>迷ったら、まず全体像から</h2>
         <ol>
-          <li>まず18問の全体像パスで9章をひと通り見渡す。</li>
-          <li>間違えたら、選んだ答えの解説を読み、理由を確かめる。</li>
-          <li>気になる章の残りの問題へ進み、後日「苦手問題」や「60秒チェック」で復習する。</li>
+          <li>18問で9分野を見渡す</li>
+          <li>解説で判断の理由を確かめる</li>
+          <li>苦手な分野を後日もう一度</li>
         </ol>
-        <p>操作例は一部の問題の解説で確認できます。ターミナル表示は学習用で、実際のコマンドは実行しません。</p>
-        <p>進捗はこのブラウザに保存されます。別の端末へ移すときは、進捗画面のデータ入出力を使ってください。</p>
+        <p>クイズ内のターミナルは学習用の表示で、コマンドは実行されません。進捗はこのブラウザに保存されます。</p>
         <button className="secondary" onClick={() => startMode("overview")}>
           18問で全体像を学ぶ
         </button>
       </details>
-      <section className="journey-section" aria-labelledby="journey-heading">
-        <p className="eyebrow">THE BIG PICTURE</p>
-        <h2 id="journey-heading">Codexで仕事を進める5つの段階</h2>
-        <p>まず流れをつかみ、必要な分野だけ深掘りできます。</p>
-        <ol className="journey-map">
-          <li>
-            <span>01</span>
-            <h3>依頼する</h3>
-            <p>目的・文脈・完了条件を伝える</p>
-            <small>基本操作・プロンプト</small>
-          </li>
-          <li>
-            <span>02</span>
-            <h3>境界を決める</h3>
-            <p>チームの指示と権限を確認する</p>
-            <small>AGENTS.md・権限・設定</small>
-          </li>
-          <li>
-            <span>03</span>
-            <h3>作業する</h3>
-            <p>環境と必要な連携を選ぶ</p>
-            <small>利用環境・拡張</small>
-          </li>
-          <li>
-            <span>04</span>
-            <h3>確かめる</h3>
-            <p>テストと差分レビューで検証する</p>
-            <small>実務フロー</small>
-          </li>
-          <li>
-            <span>05</span>
-            <h3>続ける</h3>
-            <p>会話を再開し、学びを次に生かす</p>
-            <small>セッション</small>
-          </li>
-        </ol>
-      </section>
-      <section className="mode-section" aria-labelledby="scenario-heading">
-        <h2 id="scenario-heading">実践シナリオ</h2>
-        <p>各3問。実務の順序で判断を練習します。実際のコード操作は行いません。</p>
-        <div className={`mode-grid scenario-grid${showAllScenarios ? " is-expanded" : ""}`}>
-          {scenarios.map((scenario) => (
-            <div className="learning-guide" key={scenario.id}>
-              <h3>{scenario.title}</h3>
-              <p>{scenario.description}</p>
-              <ol>
-                {scenario.steps.map((step) => (
-                  <li key={step}>{step}</li>
-                ))}
-              </ol>
-              <button className="secondary" onClick={() => startScenario(scenario)}>
-                {scenario.title}を始める
-              </button>
-            </div>
-          ))}
-        </div>
-        <button
-          className="scenario-more"
-          onClick={() => setShowAllScenarios((value) => !value)}
-          aria-expanded={showAllScenarios}
-        >
-          {showAllScenarios ? "シナリオを閉じる" : `残り${scenarios.length - 3}件のシナリオを見る`}
-        </button>
-      </section>
-      <section className="stats">
-        <div>
-          <strong>{quizzes.length}</strong>
-          <span>公式準拠の問題</span>
-        </div>
-        <div>
-          <strong>{CATEGORY_COUNT}</strong>
-          <span>学習カテゴリ</span>
-        </div>
-        <div>
-          <strong>{progress.answered}</strong>
-          <span>これまでの回答</span>
-        </div>
-        <div>
-          <strong>{accuracy}%</strong>
-          <span>通算正答率</span>
-        </div>
-      </section>
       <section className="mode-section" id="learning-modes">
         <div className="section-heading">
           <div>
@@ -1287,6 +1217,92 @@ function App() {
           </div>
         </div>
       </section>
+      <section className="journey-section" aria-labelledby="journey-heading">
+        <p className="eyebrow">THE BIG PICTURE</p>
+        <h2 id="journey-heading">Codexで仕事を進める5つの段階</h2>
+        <p>まず流れをつかみ、必要な分野だけ深掘りできます。</p>
+        <p className="journey-hint">横にスワイプして5段階を見る →</p>
+        {/* biome-ignore lint/a11y/noNoninteractiveTabindex: 横スクロール領域をキーボードでも操作できるようにする */}
+        <section className="journey-scroll" tabIndex={0} aria-label="Codexで仕事を進める5つの段階">
+          <ol className="journey-map">
+            <li>
+              <span>01</span>
+              <h3>依頼する</h3>
+              <p>目的・文脈・完了条件を伝える</p>
+              <small>基本操作・プロンプト</small>
+            </li>
+            <li>
+              <span>02</span>
+              <h3>境界を決める</h3>
+              <p>チームの指示と権限を確認する</p>
+              <small>AGENTS.md・権限・設定</small>
+            </li>
+            <li>
+              <span>03</span>
+              <h3>作業する</h3>
+              <p>環境と必要な連携を選ぶ</p>
+              <small>利用環境・拡張</small>
+            </li>
+            <li>
+              <span>04</span>
+              <h3>確かめる</h3>
+              <p>テストと差分レビューで検証する</p>
+              <small>実務フロー</small>
+            </li>
+            <li>
+              <span>05</span>
+              <h3>続ける</h3>
+              <p>会話を再開し、学びを次に生かす</p>
+              <small>セッション</small>
+            </li>
+          </ol>
+        </section>
+      </section>
+      <section className="mode-section" aria-labelledby="scenario-heading">
+        <h2 id="scenario-heading">実践シナリオ</h2>
+        <p>各3問。実務の順序で判断を練習します。実際のコード操作は行いません。</p>
+        <div className={`mode-grid scenario-grid${showAllScenarios ? " is-expanded" : ""}`}>
+          {scenarios.map((scenario) => (
+            <div className="learning-guide" key={scenario.id}>
+              <h3>{scenario.title}</h3>
+              <p>{scenario.description}</p>
+              <ol>
+                {scenario.steps.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ol>
+              <button className="secondary" onClick={() => startScenario(scenario)}>
+                {scenario.title}を始める
+              </button>
+            </div>
+          ))}
+        </div>
+        <button
+          className="scenario-more"
+          onClick={() => setShowAllScenarios((value) => !value)}
+          aria-expanded={showAllScenarios}
+        >
+          {showAllScenarios ? "シナリオを閉じる" : `すべてのシナリオを見る（全${scenarios.length}件）`}
+        </button>
+      </section>
+      <section className="stats">
+        <div>
+          <strong>{quizzes.length}</strong>
+          <span>公式準拠の問題</span>
+        </div>
+        <div>
+          <strong>{CATEGORY_COUNT}</strong>
+          <span>学習カテゴリ</span>
+        </div>
+        <div>
+          <strong>{progress.answered}</strong>
+          <span>これまでの回答</span>
+        </div>
+        <div>
+          <strong>{accuracy}%</strong>
+          <span>通算正答率</span>
+        </div>
+      </section>
       {dueQuestions.length > 0 && (
         <section className="due-banner">
           <div className="due-clock">↻</div>
@@ -1326,7 +1342,7 @@ function App() {
           </div>
           <p>気になる分野を選んで、カテゴリ単位で集中トレーニング。</p>
         </div>
-        <div className="category-grid">
+        <div className={`category-grid${showAllCategories ? " is-expanded" : ""}`}>
           {categoryCounts.map(({ key, count, completed }) => (
             <button className="category-card" key={key} onClick={() => start(key)}>
               <span className="category-icon">{categories[key].icon}</span>
@@ -1343,6 +1359,13 @@ function App() {
             </button>
           ))}
         </div>
+        <button
+          className="category-more"
+          onClick={() => setShowAllCategories((value) => !value)}
+          aria-expanded={showAllCategories}
+        >
+          {showAllCategories ? "カテゴリを閉じる" : `すべてのカテゴリを見る（全${CATEGORY_COUNT}分野）`}
+        </button>
       </section>
       <footer>
         <div className="brand">

@@ -11,7 +11,9 @@ test.beforeEach(async ({ page }) => {
 for (const scenario of scenarios) {
 test(`scenario ${scenario.id} keeps its order through resume, completion and retry`, async ({ page }) => {
   await page.reload();
-  await page.getByRole("button", { name: `${scenario.title}を始める` }).click();
+  const start = page.getByRole("button", { name: `${scenario.title}を始める` });
+  if (!(await start.isVisible())) await page.getByRole("button", { name: /すべてのシナリオを見る/ }).click();
+  await start.click();
   const savedIds = [...scenario.ids];
   await page.locator("button.choice").first().click();
   await page.getByRole("button", { name: /次の問題へ/ }).click();
@@ -32,7 +34,7 @@ test("malformed progress does not crash and is backed up before new answers", as
   const raw = JSON.stringify({ answered: 3, correct: 1, questions: {}, bookmarks: {}, history: "broken" });
   await page.evaluate((value) => localStorage.setItem("codex-quiz-progress", value), raw);
   await page.reload();
-  await expect(page.getByRole("heading", { name: /Codexを/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /使いこなせる/ })).toBeVisible();
   expect(await page.evaluate(() => localStorage.getItem("codex-quiz-progress"))).toBe(raw);
   expect(await page.evaluate(() => localStorage.getItem("codex-quiz-progress-recovery"))).toBe(raw);
   await page.goto("/?q=basic-01");
@@ -75,7 +77,7 @@ test("invalid saved session is ignored without deleting the original", async ({ 
   const invalid = { ids: ["basic-01"], index: "0", score: 0, label: "broken", category: null, selected: null };
   await page.evaluate((value) => localStorage.setItem("codex-quiz-session", JSON.stringify(value)), invalid);
   await page.reload();
-  await expect(page.getByRole("heading", { name: /Codexを/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /使いこなせる/ })).toBeVisible();
   await expect(page.getByRole("button", { name: /再開する/ })).toHaveCount(0);
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-session") ?? "null"))).toEqual(invalid);
 });
@@ -176,7 +178,7 @@ test("result allows a learner with no pending review to finish", async ({ page }
 test("home exposes navigation and starts a quiz", async ({ page }) => {
   await page.reload();
   await expect(page.getByRole("navigation", { name: "メインナビゲーション" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Codexを/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /使いこなせる/ })).toBeVisible();
 
   await expect(page.getByRole("button", { name: /まず全体像を18問でつかむ/ })).toBeVisible();
 
@@ -193,12 +195,15 @@ test("mobile menu reaches home sections and expands scenarios", async ({ page })
   expect(lastScenario).toBeDefined();
   if (!lastScenario) return;
   await expect(page.getByRole("button", { name: `${lastScenario.title}を始める` })).toBeHidden();
-  await page.getByRole("button", { name: new RegExp(`残り${scenarios.length - 3}件のシナリオを見る`) }).click();
+  await page.getByRole("button", { name: new RegExp(`すべてのシナリオを見る`) }).click();
   await expect(page.getByRole("button", { name: `${lastScenario.title}を始める` })).toBeVisible();
   await page.getByText("メニュー", { exact: false }).click();
   await page.getByRole("button", { name: "カテゴリ", exact: true }).click();
   await expect(page).toHaveURL(/#categories$/);
   await expect(page.getByRole("heading", { name: "カテゴリから学ぶ" })).toBeInViewport();
+  await expect(page.locator(".category-card").last()).toBeHidden();
+  await page.getByRole("button", { name: /すべてのカテゴリを見る/ }).click();
+  await expect(page.locator(".category-card").last()).toBeVisible();
   await page.getByText("メニュー", { exact: false }).click();
   await page.getByRole("button", { name: "進捗を見る" }).click();
   await expect(page.getByRole("heading", { name: "学習の現在地" })).toBeVisible();
