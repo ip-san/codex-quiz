@@ -1,5 +1,11 @@
 # 学習目標・網羅性監査
 
+## 2026-09-29 全体像を先に示す構成へ
+
+ホームの主導線も短い全体像パスへ変更し、ランダム10問は残した。
+
+「263問ある」ことと「最初に仕事の流れを理解できる」ことを分離した。従来の全体像モードは全263問を章順に出しており、短い導入には不適切だった。既存の実務問題を9カテゴリ各2問、計18問へ固定し、問題追加なしで短い横断パスにした。選択は公式[Prompting](https://learn.chatgpt.com/docs/prompting)の依頼・検証、[Permissions](https://learn.chatgpt.com/docs/permissions)の境界、[Code review](https://learn.chatgpt.com/docs/code-review)のレビューと照らした学習構成上の判断。カテゴリ内の残りはカテゴリ別学習へ誘導する。選ばれた18問の全選択肢・図解を今回再監査したわけではなく、全263問の網羅性認定でもない。
+
 ## 2026-09-29 Auto-reviewの審査漏れ
 
 safe-33を「何が対象か」の名称確認から、許可済み操作が審査されない失敗診断へ置換。公式[Auto-review](https://learn.chatgpt.com/docs/sandboxing/auto-review)で許可済みnetwork宛先は審査要求にならず、重要commandへのprompt ruleまたはMCP toolへのapproval mode指定が必要と確認した。正解・全誤答解説・検証日を更新。IDと過去履歴を維持し、図解はない。Auto-reviewの実環境policy試験や全43権限問題の監査完了ではない。

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { categories, categoryLearning, hydrateWrongFeedback, quizzes, type Category, type Quiz } from "./data";
 import { orderChoices } from "./domain/choiceOrder";
 import { selectBalancedExam } from "./domain/examSelection";
+import { overviewQuestionIds, selectOverviewQuestions } from "./domain/overviewPath";
 import { scenarios } from "./domain/scenarios";
 import { DiagramRenderer } from "./components/DiagramRenderer";
 import { quizDiagrams } from "./diagrams";
@@ -298,11 +299,11 @@ function App() {
   const startMode = (mode: "study" | "exam" | "overview") => {
     const nextSession =
       mode === "overview"
-        ? [...quizzes].sort((a, b) => categoryLearning[a.category].chapter - categoryLearning[b.category].chapter)
+        ? selectOverviewQuestions()
         : mode === "exam"
           ? selectBalancedExam(quizzes)
           : shuffle(quizzes).slice(0, 10);
-    const label = mode === "overview" ? "全体像学習パス" : mode === "study" ? "読んでから解く" : "実力テスト";
+    const label = mode === "overview" ? "全体像をつかむ18問" : mode === "study" ? "読んでから解く" : "実力テスト";
     beginSession(nextSession, label, mode);
   };
 
@@ -1020,10 +1021,12 @@ function App() {
             AIコーディングの基本と実践を身につけよう。
           </p>
           <div className="hero-actions">
-            <button className="primary" onClick={() => start()}>
-              ランダム10問を始める <span>→</span>
+            <button className="primary" onClick={() => startMode("overview")}>
+              まず全体像を18問でつかむ <span>→</span>
             </button>
-            <a href="#categories">カテゴリから選ぶ</a>
+            <button className="quiet-action" onClick={() => start()}>
+              ランダム10問を始める
+            </button>
           </div>
         </div>
         <div className="terminal-card" aria-hidden="true">
@@ -1132,9 +1135,11 @@ function App() {
           <button className="mode-card featured" onClick={() => startMode("overview")}>
             <span>01</span>
             <div>
-              <small>{CATEGORY_COUNT} CHAPTERS</small>
+              <small>
+                {CATEGORY_COUNT} CHAPTERS · {overviewQuestionIds.length} QUESTIONS
+              </small>
               <h3>全体像モード</h3>
-              <p>基本から拡張まで、順番にCodexの全体像をつかむ。</p>
+              <p>9分野から各2問。まず全体の地図をつかみ、気になる章を深掘りする。</p>
             </div>
             <b>→</b>
           </button>

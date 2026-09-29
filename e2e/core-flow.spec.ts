@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { scenarios } from "../src/domain/scenarios";
+import { overviewQuestionIds } from "../src/domain/overviewPath";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
@@ -176,6 +177,8 @@ test("home exposes navigation and starts a quiz", async ({ page }) => {
   await expect(page.getByRole("navigation", { name: "メインナビゲーション" })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Codexを/ })).toBeVisible();
 
+  await expect(page.getByRole("button", { name: /まず全体像を18問でつかむ/ })).toBeVisible();
+
   await page.getByRole("button", { name: /ランダム10問を始める/ }).click();
   await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "10");
   await expect(page.locator("fieldset.choices")).toBeVisible();
@@ -187,6 +190,21 @@ test("exam starts a balanced 100-question session", async ({ page }) => {
   const savedIds = await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-session") ?? "null").ids);
   expect(savedIds).toHaveLength(100);
   expect(new Set(savedIds).size).toBe(100);
+});
+
+test("overview introduces all nine chapters in a short fixed path and resumes", async ({ page }) => {
+  await page.getByRole("button", { name: /全体像モード/ }).click();
+  await expect(page.getByText("CHAPTER 1 / 9")).toBeVisible();
+  await expect(page.getByText("2問で学びます。")).toBeVisible();
+  const savedIds = await page.evaluate(() => JSON.parse(localStorage.getItem("codex-quiz-session") ?? "null").ids);
+  expect(savedIds).toEqual([...overviewQuestionIds]);
+  await page.getByRole("button", { name: /チャプターを始める/ }).click();
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "18");
+  await page.locator("button.choice").first().click();
+  await page.getByRole("button", { name: /次の問題へ/ }).click();
+  await page.reload();
+  await page.getByRole("button", { name: /再開する/ }).click();
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuenow", "2");
 });
 
 test("answering announces feedback and moves focus", async ({ page }) => {
