@@ -74,7 +74,7 @@ export default function ReaderScreen({ state, onChange, progress, onBookmark, on
         <p>全{quizzes.length}問の答えと解説を、キーワードやカテゴリから横断検索できます。</p>
       </section>
       <section className="reader-controls">
-        <label className="search-box">
+        <div className="search-box">
           <span>⌕</span>
           <input
             value={state.query}
@@ -87,7 +87,7 @@ export default function ReaderScreen({ state, onChange, progress, onBookmark, on
               ×
             </button>
           )}
-        </label>
+        </div>
         <select
           value={state.category}
           onChange={(event) => changeFilter({ category: event.target.value as Category | "all" })}

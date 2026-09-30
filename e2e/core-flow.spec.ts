@@ -197,6 +197,9 @@ test("reader reveals one explanation at a time and loads results in batches", as
   await expect(page.locator(".reader-card")).toHaveCount(40);
   await page.getByRole("textbox", { name: "問題を検索" }).fill("AGENTS.md");
   expect(await page.locator(".reader-card").count()).toBeLessThanOrEqual(20);
+  await page.getByRole("button", { name: "検索をクリア" }).click();
+  await expect(page.getByRole("textbox", { name: "問題を検索" })).toHaveValue("");
+  await expect(page.locator(".reader-card")).toHaveCount(20);
 });
 
 test("reader preserves filters when returning from the home screen", async ({ page }) => {
