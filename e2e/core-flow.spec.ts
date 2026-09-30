@@ -199,6 +199,15 @@ test("reader reveals one explanation at a time and loads results in batches", as
   expect(await page.locator(".reader-card").count()).toBeLessThanOrEqual(20);
 });
 
+test("reader preserves filters when returning from the home screen", async ({ page }) => {
+  await page.goto("/?view=reader");
+  await page.getByRole("textbox", { name: "問題を検索" }).fill("AGENTS.md");
+  await page.getByRole("button", { name: "閉じる ×" }).click();
+  await page.getByRole("button", { name: /解説を読む/ }).click();
+  await expect(page.getByRole("textbox", { name: "問題を検索" })).toHaveValue("AGENTS.md");
+  await expect(page.getByRole("status")).toContainText("件を表示");
+});
+
 test("progress keeps data management available without crowding the learning summary", async ({ page }) => {
   await page.goto("/?view=progress");
   const management = page.locator(".data-panel");
