@@ -41,7 +41,7 @@
 .mobile-nav-header strong, .mobile-nav-header small { display: block; }
 .mobile-nav-header strong { color: #20272e; font-size: 19px; letter-spacing: -.04em; }
 .mobile-nav-header small { margin-top: 5px; color: #66717c; font-size: 11px; }
-.mobile-nav-header button { width: 36px; height: 36px; padding: 0; border: 1px solid #e1e4e8; border-radius: 9px; background: #f7f8fa; color: #303a45; font-size: 23px; line-height: 1; }
+.mobile-nav-header button { display: grid; place-items: center; flex: none; width: 36px; height: 36px; padding: 0; border: 1px solid #e1e4e8; border-radius: 9px; background: #f7f8fa; color: #303a45; text-align: center; font-size: 23px; line-height: 1; }
 .mobile-nav-section { margin: 24px 22px 7px; color: #59636f; font: 700 10px "DM Mono", monospace; letter-spacing: .13em; }
 .mobile-nav-panel > button:not(.mobile-nav-header button) { position: relative; display: block; width: auto; margin: 2px 10px; padding: 13px 32px 13px 14px; border: 0; border-radius: 9px; background: transparent; color: #20272e; text-align: left; font-size: 14px; font-weight: 700; }
 .mobile-nav-panel > button:not(.mobile-nav-header button)::after { content: '›'; position: absolute; right: 15px; top: 17px; color: #8d97a1; font-size: 19px; font-weight: 400; }

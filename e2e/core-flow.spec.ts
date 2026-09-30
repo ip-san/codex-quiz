@@ -315,6 +315,14 @@ test("mobile drawer closes with Escape and backdrop", async ({ page }) => {
   expect(menuBox.x + menuBox.width).toBeLessThan(brandBox.x);
   await menu.locator("summary").click();
   await expect(menu).toHaveAttribute("open", "");
+  const closeAlignment = await menu.locator(".mobile-nav-header button").evaluate((button) => {
+    const box = button.getBoundingClientRect();
+    const range = document.createRange();
+    range.selectNodeContents(button);
+    const glyph = range.getBoundingClientRect();
+    return Math.abs(box.left + box.width / 2 - (glyph.left + glyph.width / 2));
+  });
+  expect(closeAlignment).toBeLessThan(2);
   await page.keyboard.press("Escape");
   await expect(menu).not.toHaveAttribute("open");
   await expect(menu.locator("summary")).toBeFocused();
