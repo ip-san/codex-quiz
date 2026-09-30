@@ -6,6 +6,16 @@ export type DiagramData =
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "extend-47": [
+    {
+      type: "comparison",
+      label: "Site toolsとMCP serverの利用範囲",
+      columns: [
+        { heading: "Site tools", items: ["開いたページが操作を提供", "ページの表示・ログイン状態と一緒に使う"] },
+        { heading: "MCP server", items: ["別途接続する外部tool", "対応するページを開いていなくても利用できる"] },
+      ],
+    },
+  ],
   "agents-01": [
     {
       type: "hierarchy",

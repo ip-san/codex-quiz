@@ -417,6 +417,19 @@ test("a wrong answer loads its choice-specific feedback", async ({ page }) => {
   await expect(feedback).toContainText("Codex CLI");
 });
 
+test("site tools question distinguishes page actions from MCP connections", async ({ page }) => {
+  await page.goto("/?q=extend-47");
+  await page.getByRole("button", { name: "別のMCP serverを必ずインストールする" }).click();
+  await expect(page.getByRole("status")).toContainText("別のMCP serverを必ず追加する必要はありません");
+  const comparison = page.getByRole("figure", { name: "Site toolsとMCP serverの利用範囲" });
+  await expect(comparison).toContainText("開いたページが操作を提供");
+  await expect(comparison).toContainText("別途接続する外部tool");
+  await expect(page.getByRole("link", { name: "公式資料を読む（別タブ）" })).toHaveAttribute(
+    "href",
+    "https://learn.chatgpt.com/docs/webmcp",
+  );
+});
+
 test("terminal operation examples can be replayed and copied", async ({ page }) => {
   await page.goto("/?q=basic-11");
   await page.getByRole("button", { name: /--ephemeral/ }).click();

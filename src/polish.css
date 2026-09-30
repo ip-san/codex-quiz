@@ -34,6 +34,8 @@ button { transition: background-color .18s ease, border-color .18s ease, box-sha
 .quiz-shell .choice.correct { background: #edf7e9; border-color: #6fa277; }
 .quiz-shell .choice.wrong { background: #fff2ed; border-color: #da8065; }
 .quiz-shell .feedback:not(.is-wrong):not(.is-exam) { background: #e9f4e6; border-color: #5b9465; }
+.feedback-source-link { display: inline-block; margin: 8px 0 0 12px; color: #293f52; font-size: 12px; font-weight: 700; text-underline-offset: 3px; }
+.feedback-source-link:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
 .quiz-shell .primary { background: #20272e; box-shadow: none; }
 .quiz-shell .primary:hover { background: #303a45; }
 

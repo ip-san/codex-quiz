@@ -685,6 +685,16 @@ function App() {
                       <DiagramRenderer diagrams={quizDiagrams[question.id] ?? []} />
                       <span className="review-schedule">↻ {getReviewLabel(progress.questions[question.id])}</span>
                       <small>出典: OpenAI公式 — {question.source}</small>
+                      {question.referenceUrl && (
+                        <a
+                          className="feedback-source-link"
+                          href={question.referenceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          公式資料を読む（別タブ）
+                        </a>
+                      )}
                     </>
                   )}
                   <button className="primary next-button" onClick={next}>
