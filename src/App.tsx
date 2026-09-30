@@ -24,9 +24,10 @@ import {
 import { getReviewLabel, isReviewDue, scheduleReview, type QuestionProgress } from "./domain/spacedRepetition";
 import { removeStoredItem, writeStoredJson } from "./domain/storage";
 
-type Screen = "home" | "quiz" | "result" | "reader" | "progress";
+type Screen = "home" | "quiz" | "result" | "reader" | "progress" | "studyPath";
 const MobileMenu = lazy(() => import("./components/MobileMenu"));
 const FirstVisitGuide = lazy(() => import("./components/FirstVisitGuide"));
+const StudyPath = lazy(() => import("./components/StudyPath"));
 const shouldShowFirstVisitGuide = () => {
   try {
     return !localStorage.getItem("codex-quiz-intro-seen") && readProgress().answered === 0 && !readResumeSession();
@@ -34,7 +35,7 @@ const shouldShowFirstVisitGuide = () => {
     return false;
   }
 };
-type QuizMode = "normal" | "study" | "exam" | "overview" | "scenario";
+type QuizMode = "normal" | "study" | "studyPath" | "exam" | "overview" | "scenario";
 const CATEGORY_COUNT = Object.keys(categories).length;
 const difficultyOptions: Array<{ key: Difficulty; label: string; description: string }> = [
   { key: "beginner", label: "入門", description: "基本を確認" },
@@ -67,7 +68,10 @@ const readResumeSession = (): ResumeSession | null => {
       return null;
     if (typeof value.label !== "string" || !value.label.trim()) return null;
     if (value.category !== null && !Object.hasOwn(categories, value.category)) return null;
-    if (value.mode !== undefined && !["normal", "study", "exam", "overview", "scenario"].includes(value.mode))
+    if (
+      value.mode !== undefined &&
+      !["normal", "study", "studyPath", "exam", "overview", "scenario"].includes(value.mode)
+    )
       return null;
     if (value.selected !== null && (!Number.isInteger(value.selected) || value.selected < 0 || value.selected > 3))
       return null;
@@ -142,6 +146,8 @@ function App() {
   const [readerCategory, setReaderCategory] = useState<Category | "all">("all");
   const [bookmarksOnly, setBookmarksOnly] = useState(false);
   const [readerReview, setReaderReview] = useState<"all" | "weak" | "due">("all");
+  const [readerVisibleCount, setReaderVisibleCount] = useState(20);
+  const [expandedReaderId, setExpandedReaderId] = useState<string | null>(null);
   const [sessionLabel, setSessionLabel] = useState("ランダム10問");
   const [sessionCategory, setSessionCategory] = useState<Category | null>(null);
   const [shareMessage, setShareMessage] = useState("");
@@ -251,6 +257,8 @@ function App() {
       (readerReview === "weak" ? weakQuestions : dueQuestions).some((item) => item.id === quiz.id);
     return matchesQuery && matchesCategory && matchesBookmark && matchesReview;
   });
+  const visibleReaderQuestions = readerQuestions.slice(0, readerVisibleCount);
+
   const streak = calculateStreak(progress.history);
   const categoryStats = Object.keys(categories).map((key) => {
     const category = key as Category;
@@ -335,19 +343,19 @@ function App() {
     beginSession(nextSession, scenario.title, "scenario");
   };
 
-  const startMode = (mode: "study" | "exam" | "overview") => {
-    const nextSession =
-      mode === "overview"
-        ? selectOverviewQuestions()
-        : mode === "exam"
-          ? selectBalancedExam(quizzes)
-          : shuffle(quizzes).slice(0, 10);
-    const label = mode === "overview" ? "全体像をつかむ18問" : mode === "study" ? "読んでから解く" : "実力テスト";
+  const startMode = (mode: "exam" | "overview") => {
+    const nextSession = mode === "overview" ? selectOverviewQuestions() : selectBalancedExam(quizzes);
+    const label = mode === "overview" ? "全体像をつかむ18問" : "実力テスト";
     beginSession(nextSession, label, mode);
   };
 
+  const startStudyPath = (category: Category, questions: Quiz[]) => {
+    beginSession(questions, `読んでから解く · ${categories[category].label}`, "studyPath");
+  };
+
   const restartSession = () => {
-    const nextSession = quizMode === "overview" || quizMode === "scenario" ? session : shuffle(session);
+    const nextSession =
+      quizMode === "overview" || quizMode === "scenario" || quizMode === "studyPath" ? session : shuffle(session);
     beginSession(nextSession, sessionLabel, quizMode, sessionCategory);
   };
 
@@ -525,6 +533,14 @@ function App() {
     return (
       <Suspense fallback={<main className="first-visit-loading">Codex Quiz</main>}>
         <FirstVisitGuide onComplete={finishFirstVisitGuide} />
+      </Suspense>
+    );
+  }
+
+  if (screen === "studyPath") {
+    return (
+      <Suspense fallback={<main className="first-visit-loading">学習パスを準備中</main>}>
+        <StudyPath onBack={() => setScreen("home")} onStart={startStudyPath} />
       </Suspense>
     );
   }
@@ -780,19 +796,34 @@ function App() {
             <span>⌕</span>
             <input
               value={readerQuery}
-              onChange={(event) => setReaderQuery(event.target.value)}
+              onChange={(event) => {
+                setReaderQuery(event.target.value);
+                setReaderVisibleCount(20);
+                setExpandedReaderId(null);
+              }}
               placeholder="例: AGENTS.md, MCP, sandbox"
               aria-label="問題を検索"
             />
             {readerQuery && (
-              <button onClick={() => setReaderQuery("")} aria-label="検索をクリア">
+              <button
+                onClick={() => {
+                  setReaderQuery("");
+                  setReaderVisibleCount(20);
+                  setExpandedReaderId(null);
+                }}
+                aria-label="検索をクリア"
+              >
                 ×
               </button>
             )}
           </label>
           <select
             value={readerCategory}
-            onChange={(event) => setReaderCategory(event.target.value as Category | "all")}
+            onChange={(event) => {
+              setReaderCategory(event.target.value as Category | "all");
+              setReaderVisibleCount(20);
+              setExpandedReaderId(null);
+            }}
             aria-label="カテゴリで絞り込み"
           >
             <option value="all">すべてのカテゴリ</option>
@@ -805,14 +836,22 @@ function App() {
           <button
             className={`filter-button ${bookmarksOnly ? "active" : ""}`}
             aria-pressed={bookmarksOnly}
-            onClick={() => setBookmarksOnly((value) => !value)}
+            onClick={() => {
+              setBookmarksOnly((value) => !value);
+              setReaderVisibleCount(20);
+              setExpandedReaderId(null);
+            }}
           >
             ★ 保存済み {progress.bookmarks.length}
           </button>
           <select
             aria-label="復習対象で絞り込み"
             value={readerReview}
-            onChange={(event) => setReaderReview(event.target.value as "all" | "weak" | "due")}
+            onChange={(event) => {
+              setReaderReview(event.target.value as "all" | "weak" | "due");
+              setReaderVisibleCount(20);
+              setExpandedReaderId(null);
+            }}
           >
             <option value="all">すべての学習状態</option>
             <option value="weak">苦手問題（{weakQuestions.length}問）</option>
@@ -821,10 +860,10 @@ function App() {
         </section>
         <section className="reader-results">
           <p className="reader-count" role="status">
-            {readerQuestions.length}件を表示
+            {visibleReaderQuestions.length} / {readerQuestions.length}件を表示
           </p>
           <div className="reader-list">
-            {readerQuestions.map((quiz) => (
+            {visibleReaderQuestions.map((quiz) => (
               <article className="reader-card" key={quiz.id}>
                 <div className="reader-card-top">
                   <span className="reader-category">
@@ -839,24 +878,41 @@ function App() {
                   </button>
                 </div>
                 <h2>{quiz.question}</h2>
-                <div className="reader-answer">
-                  <small>正解</small>
-                  <strong>{quiz.choices[quiz.answer]}</strong>
-                </div>
-                <p>{quiz.explanation}</p>
-                <DiagramRenderer diagrams={quizDiagrams[quiz.id] ?? []} />
-                <div className="reader-source">OpenAI公式 — {quiz.source}</div>
-                <div className="reader-card-actions">
-                  <a href={`?q=${encodeURIComponent(quiz.id)}`}>この問題を解く →</a>
-                  {quiz.referenceUrl && (
-                    <a href={quiz.referenceUrl} target="_blank" rel="noopener noreferrer">
-                      公式資料を読む（別タブ）
-                    </a>
-                  )}
-                </div>
+                <button
+                  className="reader-expand"
+                  aria-expanded={expandedReaderId === quiz.id}
+                  onClick={() => setExpandedReaderId((current) => (current === quiz.id ? null : quiz.id))}
+                >
+                  {expandedReaderId === quiz.id ? "解説を閉じる" : "解説を見る"}{" "}
+                  <span aria-hidden="true">{expandedReaderId === quiz.id ? "−" : "+"}</span>
+                </button>
+                {expandedReaderId === quiz.id && (
+                  <div className="reader-detail">
+                    <div className="reader-answer">
+                      <small>正解</small>
+                      <strong>{quiz.choices[quiz.answer]}</strong>
+                    </div>
+                    <p>{quiz.explanation}</p>
+                    <DiagramRenderer diagrams={quizDiagrams[quiz.id] ?? []} />
+                    <div className="reader-source">OpenAI公式 — {quiz.source}</div>
+                    <div className="reader-card-actions">
+                      <a href={`?q=${encodeURIComponent(quiz.id)}`}>この問題を解く →</a>
+                      {quiz.referenceUrl && (
+                        <a href={quiz.referenceUrl} target="_blank" rel="noopener noreferrer">
+                          公式資料を読む（別タブ）
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                )}
               </article>
             ))}
           </div>
+          {readerVisibleCount < readerQuestions.length && (
+            <button className="reader-more secondary" onClick={() => setReaderVisibleCount((count) => count + 20)}>
+              さらに20件を見る
+            </button>
+          )}
           {readerQuestions.length === 0 && (
             <div className="empty-reader">
               <strong>該当する解説がありません</strong>
@@ -868,6 +924,8 @@ function App() {
                   setReaderCategory("all");
                   setBookmarksOnly(false);
                   setReaderReview("all");
+                  setReaderVisibleCount(20);
+                  setExpandedReaderId(null);
                 }}
               >
                 絞り込みをすべて解除
@@ -1015,12 +1073,15 @@ function App() {
               )}
             </section>
           </div>
-          <section className="data-panel">
-            <div>
-              <p className="eyebrow">データ管理</p>
-              <h2>学習データの管理</h2>
-              <p>SRS、ブックマーク、回答履歴をJSONファイルでバックアップできます。</p>
-            </div>
+          <details className="data-panel">
+            <summary>
+              <span>
+                <b>学習データの管理</b>
+                <small>バックアップと復元</small>
+              </span>
+              <i aria-hidden="true">⌄</i>
+            </summary>
+            <p>SRS、ブックマーク、回答履歴をJSONファイルでバックアップできます。</p>
             <div className="data-actions">
               <button className="secondary" onClick={exportProgress}>
                 ↓ エクスポート
@@ -1040,7 +1101,7 @@ function App() {
                 {dataMessage}
               </p>
             )}
-          </section>
+          </details>
         </section>
       </main>
     );
@@ -1194,12 +1255,12 @@ function App() {
             </div>
             <b>→</b>
           </button>
-          <button className="mode-card" onClick={() => startMode("study")}>
+          <button className="mode-card" onClick={() => setScreen("studyPath")}>
             <span>02</span>
             <div>
-              <small>解説を先に読む</small>
+              <small>分野を選ぶ · 5問</small>
               <h3>読んでから解く</h3>
-              <p>解説と正解を理解してから、同じ知識を思い出す。</p>
+              <p>一つの分野の判断理由を読んでから、同じ5問で理解を確かめる。</p>
             </div>
             <b>→</b>
           </button>

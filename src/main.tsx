@@ -4,6 +4,7 @@ import App from "./App";
 import "./styles.css";
 import "./home.css";
 import "./polish.css";
+import "./study.css";
 
 const rootElement = document.getElementById("root");
 

@@ -28,6 +28,13 @@ test("first visit guide has no WCAG A or AA violations", async ({ page }) => {
   await scan(page);
 });
 
+test("study-first chapter and reading screens have no WCAG A or AA violations", async ({ page }) => {
+  await page.getByRole("button", { name: /読んでから解く/ }).click();
+  await scan(page);
+  await page.getByRole("button", { name: /基本操作/ }).click();
+  await scan(page);
+});
+
 test("home has no WCAG A or AA violations", async ({ page }) => {
   await page.reload();
   await scan(page);

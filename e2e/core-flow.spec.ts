@@ -25,6 +25,26 @@ test("first visit guide introduces learning before the menu", async ({ page }) =
   await expect(page.getByRole("heading", { name: /判断できる力/ })).toBeVisible();
 });
 
+test("study-first path separates chapter reading from its five-question check", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.getByRole("button", { name: /読んでから解く/ }).click();
+  await expect(page.getByRole("heading", { name: "一つの分野を読んでから、解く。" })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  await page.getByRole("button", { name: /基本操作/ }).click();
+  await expect(page.getByRole("progressbar", { name: "読む進捗" })).toHaveAttribute("aria-valuenow", "1");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  for (let step = 1; step < 5; step++) {
+    await page.getByRole("button", { name: /次の要点/ }).click();
+  }
+  await expect(page.getByRole("progressbar", { name: "読む進捗" })).toHaveAttribute("aria-valuenow", "5");
+  await page.getByRole("button", { name: /同じ5問で確かめる/ }).click();
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "5");
+  await expect(page.locator(".study-first")).toHaveCount(0);
+  await page.reload();
+  await page.getByRole("button", { name: /再開する/ }).click();
+  await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "5");
+});
+
 test("home recommends the next action from saved learning state", async ({ page }) => {
   await page.reload();
   await expect(page.getByRole("heading", { name: "最初は、全体の地図から。" })).toBeVisible();
@@ -151,6 +171,7 @@ test("chapter progress survives reload and starts category practice", async ({ p
 test("reader links a specific quiz and its official reference", async ({ page }) => {
   await page.goto("/?view=reader");
   const card = page.locator(".reader-card").first();
+  await card.getByRole("button", { name: "解説を見る" }).click();
   const quizLink = card.getByRole("link", { name: "この問題を解く" });
   const destination = await quizLink.getAttribute("href");
   const reference = card.getByRole("link", { name: "公式資料を読む（別タブ）" });
@@ -160,6 +181,30 @@ test("reader links a specific quiz and its official reference", async ({ page })
   expect(new URL(page.url()).search).toBe(destination);
   await expect(page.getByRole("progressbar", { name: "クイズの進捗" })).toHaveAttribute("aria-valuemax", "1");
   await expect(page.locator("button.choice")).toHaveCount(4);
+});
+
+test("reader reveals one explanation at a time and loads results in batches", async ({ page }) => {
+  await page.goto("/?view=reader");
+  await expect(page.locator(".reader-card")).toHaveCount(20);
+  const first = page.locator(".reader-card").first();
+  const second = page.locator(".reader-card").nth(1);
+  await expect(first.locator(".reader-answer")).toBeHidden();
+  await first.getByRole("button", { name: "解説を見る" }).click();
+  await expect(first.locator(".reader-answer")).toBeVisible();
+  await second.getByRole("button", { name: "解説を見る" }).click();
+  await expect(first.locator(".reader-answer")).toBeHidden();
+  await page.getByRole("button", { name: "さらに20件を見る" }).click();
+  await expect(page.locator(".reader-card")).toHaveCount(40);
+  await page.getByRole("textbox", { name: "問題を検索" }).fill("AGENTS.md");
+  expect(await page.locator(".reader-card").count()).toBeLessThanOrEqual(20);
+});
+
+test("progress keeps data management available without crowding the learning summary", async ({ page }) => {
+  await page.goto("/?view=progress");
+  const management = page.locator(".data-panel");
+  await expect(management).not.toHaveAttribute("open");
+  await management.locator("summary").click();
+  await expect(management.getByRole("button", { name: /エクスポート/ })).toBeVisible();
 });
 
 test("reader filters weak questions and resets empty filters", async ({ page }) => {

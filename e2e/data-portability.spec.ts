@@ -19,6 +19,7 @@ test.beforeEach(async ({ page }) => {
     localStorage.setItem("codex-quiz-progress", JSON.stringify(data));
   }, progress);
   await page.goto("/?view=progress");
+  await page.locator(".data-panel summary").click();
 });
 
 test("downloaded backup restores all learning data after reload", async ({ page }) => {
@@ -31,6 +32,7 @@ test("downloaded backup restores all learning data after reload", async ({ page 
   expect(JSON.parse(raw).data).toEqual(progress);
   await page.evaluate(() => localStorage.removeItem("codex-quiz-progress"));
   await page.reload();
+  await page.locator(".data-panel summary").click();
   page.once("dialog", (dialog) => dialog.accept());
   await page.locator('input[type="file"]').setInputFiles({ name: "backup.json", mimeType: "application/json", buffer: Buffer.from(raw) });
   await expect(page.getByRole("status")).toHaveText("学習データを読み込みました");
@@ -57,6 +59,7 @@ test("failed import storage write keeps the existing learning data", async ({ pa
     };
   });
   await page.reload();
+  await page.locator(".data-panel summary").click();
   page.once("dialog", (dialog) => dialog.accept());
   await page.locator('input[type="file"]').setInputFiles(file({ ...progress, bookmarks: [] }));
   await expect(page.getByRole("status")).toContainText("端末に保存できませんでした");

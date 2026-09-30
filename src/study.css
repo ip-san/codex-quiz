@@ -1,0 +1,40 @@
+.study-path-page { min-height: 100dvh; background: #f7f8fa; color: #20272e; }
+.study-path-header { display: flex; align-items: center; justify-content: space-between; max-width: 1040px; margin: auto; padding: 24px 28px; border-bottom: 1px solid #e1e4e8; }
+.study-path-header button { padding: 8px 0; border: 0; background: transparent; color: #39434e; font-size: 13px; font-weight: 700; }
+.study-path-header strong { font-size: 16px; letter-spacing: -.04em; }
+.study-path-wrap { max-width: 850px; margin: auto; padding: 65px 28px 100px; }
+.study-path-wrap > .eyebrow { color: #a94727; font-size: 11px; letter-spacing: .1em; }
+.study-path-wrap > h1 { max-width: 690px; margin: 15px 0 17px; font-size: clamp(30px, 4.4vw, 47px); line-height: 1.35; letter-spacing: -.05em; }
+.study-path-lead { max-width: 620px; color: #59636f; font-size: 15px; line-height: 1.8; }
+.study-path-categories { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; margin-top: 34px; }
+.study-path-categories button { position: relative; min-height: 112px; padding: 20px 42px 19px 20px; border: 1px solid #dfe3e8; border-radius: 12px; background: #fff; color: #20272e; text-align: left; }
+.study-path-categories button:hover { border-color: #8c98a2; box-shadow: 0 8px 24px #20272e12; transform: translateY(-2px); }
+.study-path-categories span { display: inline-block; margin-right: 10px; color: #a94727; font: 700 11px "DM Mono", monospace; }
+.study-path-categories strong { font-size: 16px; }
+.study-path-categories small { display: block; margin-top: 8px; color: #59636f; font-size: 11px; line-height: 1.55; }
+.study-path-categories b { position: absolute; top: 20px; right: 18px; font-size: 17px; }
+.study-path-progress { height: 5px; margin: 30px 0; overflow: hidden; border-radius: 5px; background: #dfe3e8; }
+.study-path-progress span { display: block; height: 100%; background: #303740; }
+.study-path-card { padding: clamp(22px, 4vw, 38px); border: 1px solid #dfe3e8; border-radius: 16px; background: #fff; box-shadow: 0 15px 38px #20272e0a; }
+.study-path-card > small { color: #a94727; font-size: 11px; font-weight: 700; }
+.study-path-card h2 { margin: 12px 0 25px; font-size: clamp(18px, 2.5vw, 25px); line-height: 1.55; }
+.study-path-answer { display: grid; gap: 7px; padding: 17px 19px; border-left: 3px solid #303740; background: #f3f5f6; }
+.study-path-answer span { color: #59636f; font-size: 11px; }
+.study-path-answer strong { font-size: 15px; line-height: 1.6; }
+.study-path-card > p { margin: 23px 0; color: #39434e; font-size: 14px; line-height: 1.85; white-space: pre-line; }
+.study-path-card > a { display: inline-block; margin-top: 16px; color: #315070; font-size: 12px; font-weight: 700; text-underline-offset: 4px; }
+.study-path-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 23px; }
+.study-path-actions .primary { background: #20272e; box-shadow: none; }
+
+@media (max-width: 540px) {
+  .study-path-header { padding: 17px 20px; }
+  .study-path-wrap { padding: 40px 20px 75px; }
+  .study-path-categories { grid-template-columns: 1fr; gap: 9px; }
+  .study-path-categories button { min-height: 95px; padding: 15px 40px 15px 16px; }
+  .study-path-card > p { font-size: 13px; }
+  .study-path-actions { flex-wrap: wrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .study-path-categories button:hover { transform: none; }
+}
