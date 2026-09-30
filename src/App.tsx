@@ -970,28 +970,6 @@ function App() {
         </Suspense>
       </nav>
       <section className="hero">
-        <div className="hero-copy">
-          <div className="pill">OPENAI公式資料にもとづく · 実務のためのクイズ</div>
-          <h1>
-            Codexを、
-            <br />
-            <em>判断できる力</em>に。
-          </h1>
-          <p>
-            覚えるだけで終わらない。実際の仕事に近い場面で選び、
-            <br className="desktop" />
-            解説と公式資料で「なぜ」を確かめる学習アプリ。
-          </p>
-          <div className="hero-proof">
-            <span>
-              <strong>{quizzes.length}</strong> 問
-            </span>
-            <span>
-              <strong>{scenarios.length}</strong> 実践シナリオ
-            </span>
-            <span>登録不要</span>
-          </div>
-        </div>
         <div className="next-step-card">
           <div className="next-step-heading">
             <span className="next-step-icon" aria-hidden="true">
@@ -1002,7 +980,7 @@ function App() {
           {resumableSession ? (
             <>
               <p className="next-step-kicker">途中から再開</p>
-              <h2>前回の続きから</h2>
+              <h1>前回の続きから</h1>
               <p>
                 {resumableSession.label} · {resumableSession.index + 1}/{resumableSession.ids.length}問目
               </p>
@@ -1016,7 +994,7 @@ function App() {
           ) : dueQuestions.length > 0 ? (
             <>
               <p className="next-step-kicker">復習のタイミング · {dueQuestions.length}問</p>
-              <h2>3問だけ、思い出す。</h2>
+              <h1>3問だけ、思い出す。</h1>
               <p>前に解いた知識を、短い復習で確かめましょう。</p>
               <button className="primary" onClick={startDue}>
                 60秒チェック <span>→</span>
@@ -1025,7 +1003,7 @@ function App() {
           ) : weakQuestions.length > 0 ? (
             <>
               <p className="next-step-kicker">苦手を復習 · {weakQuestions.length}問</p>
-              <h2>迷った問題から、もう一度。</h2>
+              <h1>迷った問題から、もう一度。</h1>
               <p>間違えた理由を見直して、次の判断につなげます。</p>
               <button className="primary" onClick={startWeak}>
                 苦手問題を復習 <span>→</span>
@@ -1034,7 +1012,7 @@ function App() {
           ) : progress.answered > 0 ? (
             <>
               <p className="next-step-kicker">今日の練習</p>
-              <h2>次の10問に進もう。</h2>
+              <h1>次の10問に進もう。</h1>
               <p>分野を横断して、実務の判断を少しずつ磨きます。</p>
               <button className="primary" onClick={() => start()}>
                 10問の練習を始める <span>→</span>
@@ -1043,7 +1021,7 @@ function App() {
           ) : (
             <>
               <p className="next-step-kicker">はじめての方へ · 18問</p>
-              <h2>最初は、全体の地図から。</h2>
+              <h1>最初は、全体の地図から。</h1>
               <p>9分野から2問ずつ。解きながらCodexの使いどころをつかめます。</p>
               <button className="primary" onClick={() => startMode("overview")}>
                 まず全体像を18問でつかむ <span>→</span>

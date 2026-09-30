@@ -51,38 +51,17 @@
 @keyframes menu-enter { from { transform: translateX(-20px); opacity: .7; } to { transform: translateX(0); opacity: 1; } }
 
 .hero {
-  min-height: 480px;
-  padding-block: 64px;
-  gap: clamp(38px, 6vw, 84px);
+  display: block;
+  min-height: 0;
+  padding: 36px max(28px, calc((100vw - 1124px) / 2));
   background: #f7f8fa;
   color: #20272e;
   border: 0;
 }
 
-.hero .pill {
-  border-color: #d9dde2;
-  background: #fff;
-  color: #48535f;
-  letter-spacing: .04em;
-}
-
-.hero h1 {
-  max-width: 680px;
-  margin: 28px 0 18px;
-  font-size: clamp(45px, 5.8vw, 72px);
-  line-height: 1.18;
-  letter-spacing: -.065em;
-}
-
-.hero h1 em { color: #20272e; }
-.hero-copy > p { max-width: 540px; color: #56616d; font-size: 16px; line-height: 1.85; }
-.hero-proof { display: flex; flex-wrap: wrap; gap: 0; margin-top: 33px; color: #5d6874; font-size: 12px; }
-.hero-proof span { padding: 0 16px; border-right: 1px solid #d9dde2; }
-.hero-proof span:first-child { padding-left: 0; }
-.hero-proof span:last-child { border: 0; }
-.hero-proof strong { color: #20272e; font: 500 16px "DM Mono", monospace; }
-
 .next-step-card {
+  max-width: 680px;
+  margin-inline: auto;
   padding: clamp(25px, 3vw, 36px);
   border: 1px solid #dfe3e8;
   border-radius: 19px;
@@ -92,7 +71,7 @@
 .next-step-heading { display: flex; align-items: center; gap: 10px; color: #303a45; font-size: 14px; font-weight: 700; }
 .next-step-icon { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; background: #eef0f2; color: #303740; font-size: 18px; }
 .next-step-card .next-step-kicker { margin: 30px 0 9px; color: #59636f; font: 700 11px "DM Mono", monospace; letter-spacing: .06em; }
-.next-step-card h2 { margin: 0 0 11px; color: #20272e; font-size: clamp(24px, 2.5vw, 32px); line-height: 1.35; }
+.next-step-card h1 { margin: 0 0 11px; color: #20272e; font-size: clamp(24px, 2.5vw, 32px); line-height: 1.35; }
 .next-step-card p:not(.next-step-kicker) { min-height: 48px; margin: 0 0 24px; color: #56616d; font-size: 14px; line-height: 1.7; }
 .next-step-card .primary { width: 100%; min-height: 54px; justify-content: space-between; background: #20272e; color: #fff; box-shadow: none; font-size: 14px; }
 .next-step-card .primary:hover { background: #303a45; }
@@ -169,7 +148,7 @@
 .category-more { display: none; }
 
 @media (max-width: 800px) {
-  .hero { min-height: 0; grid-template-columns: 1fr 1fr; gap: 28px; padding-block: 58px; }
+  .hero { padding-block: 32px; }
   .next-step-card { padding: 23px; }
   .home-progress { margin-inline: 18px; }
   .scenario-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -189,15 +168,10 @@
   .home-nav { padding-inline: 18px; }
   .home-nav .mobile-nav { order: -1; }
   .home-nav .brand { margin-left: auto; }
-  .hero { grid-template-columns: 1fr; gap: 26px; padding: 40px 20px 38px; }
-  .hero h1 { margin: 19px 0 13px; font-size: clamp(38px, 10vw, 49px); }
-  .hero-copy > p { font-size: 14px; line-height: 1.75; }
-  .hero-proof { justify-content: flex-start; margin-top: 22px; font-size: 11px; }
-  .hero-proof span { padding-inline: 11px; }
-  .hero-proof strong { font-size: 13px; }
+  .hero { padding: 22px 20px 28px; }
   .next-step-card { padding: 21px; }
   .next-step-card .next-step-kicker { margin-top: 20px; }
-  .next-step-card h2 { font-size: 24px; }
+  .next-step-card h1 { font-size: 24px; }
   .next-step-card p:not(.next-step-kicker) { min-height: 0; margin-bottom: 18px; }
   .home-progress { flex-wrap: wrap; gap: 9px 17px; padding: 13px 16px; }
   .home-progress div { flex: 1 1 42%; }
