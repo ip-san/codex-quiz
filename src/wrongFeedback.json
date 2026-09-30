@@ -25,9 +25,9 @@
     "3": "Git情報は関連contextになり得ますが、目標・制約・完了条件がなければ作業範囲を判断できません。"
   },
   "prompt-02": {
-    "1": "手順を過度に固定すると、目的に合う安全で簡潔な方法をCodexが選ぶ余地まで失われます。",
-    "2": "背景だけでは成功状態を判断できません。まず欲しい結果を示し、必要なcontextを続けます。",
-    "3": "曖昧な代名詞は対象の取り違えを招きます。変更対象や期待結果を具体的に示します。"
+    "1": "技術の指定だけでは、利用者に何ができる状態を目指すかが分かりません。成果と制約を先に示します。",
+    "2": "内部手順を固定しても、期待結果の確認を省けば改善の成否を判断できません。",
+    "3": "画像は見た目の参考になりますが、操作後の状態や守るべき動作も言葉で伝えます。"
   },
   "prompt-03": {
     "0": "リポジトリ全体の貼り付けは重要情報を埋もれさせます。関連fileやerrorへ範囲を絞ります。",
@@ -65,9 +65,9 @@
     "3": "承認設定を外すのは拒否への対処ではなく制約の回避です。理由を確認して相談します。"
   },
   "workflow-01": {
-    "1": "remote画像は現在の作業treeのcode差分ではありません。commit前はuncommitted changesを選びます。",
-    "2": "保存sessionの削除は差分reviewにならず、継続中のcontextを失う可能性があります。",
-    "3": "model catalogの確認ではstaged・unstaged・untrackedの変更内容を検査できません。"
+    "1": "base branchとの差分は別のreview範囲です。未追跡fileも含む現在の作業treeならuncommittedを選びます。",
+    "2": "特定commitのreviewは、そのcommitへ含める前の未追跡fileまで確認する選択ではありません。",
+    "3": "Last turnは直近のCodex作業に焦点を当てます。作業tree全体には自分の変更も含まれ得ます。"
   },
   "agents-01": {
     "1": "package-lock.jsonは依存versionの固定用で、Codexへbuild規則や完了条件を伝える場所ではありません。",
@@ -80,9 +80,9 @@
     "3": "file sizeは優先順位と無関係です。対象fileに近い階層のinstructionを確認します。"
   },
   "agents-03": {
-    "1": "`/reset`はAGENTS.mdの雛形を作るquick-startではありません。current repositoryでは`/init`を使います。",
-    "2": "deploy操作ではrepository固有のbuild・test・review規則を記したAGENTS.mdは生成されません。",
-    "3": "exportは既存dataを外へ出す操作を示す名称で、repository instructionの初期化には使いません。"
+    "1": "`/init`の生成物は叩き台です。実際のrepositoryと違う手順をそのまま配ると誤作業を招きます。",
+    "2": "認証情報を共有指示へ書いてcommitすると漏えいします。AGENTS.mdには作業規則を記します。",
+    "3": "指示は判断を助けますが、testやlintなど機械的な検査の代わりにはなりません。"
   },
   "agents-04": {
     "1": "保存のたびに指示chainが再構築される前提ではありません。変更後は新しいsessionで確認します。",
@@ -120,9 +120,9 @@
     "3": "repositoryの再作成は差分reviewに不要で、作業contextを失う危険があります。"
   },
   "basic-01": {
-    "1": "Responses APIはapplicationへモデル機能を組み込むAPIです。terminalでrepositoryを扱うclientはCodex CLIです。",
-    "2": "Canvasはterminal上でlocal repositoryを調査・編集・検証するCodex clientではありません。",
-    "3": "DALL·Eは画像生成の選択肢で、terminalからcoding workflowを実行する製品ではありません。"
+    "1": "Cloudは別の実行場所です。手元の未commit変更が無条件に同期される前提で選ばないでください。",
+    "2": "Responses APIは統合用のAPIで、呼ぶだけで手元のrepositoryを自動編集するclientではありません。",
+    "3": "GitHub上のreviewは手元のcheckoutを直接修正する操作ではありません。localの作業にはCLIを使います。"
   },
   "basic-02": {
     "0": "要件が曖昧なまま全fileを書き換えるとscope外変更が増えます。Planでcontextと成功条件を整理します。",
@@ -145,9 +145,9 @@
     "3": "Git branchはコードの履歴を分けますが、Codexの保存済みchatを再開しません。会話は`codex resume`で選びます。"
   },
   "config-01": {
-    "1": ".git/configはGit remote等の設定で、repository固有のCodex layerとして読み込まれません。",
-    "2": "applicationのTypeScript設定はCodex clientのsandbox・model・MCP既定値を制御しません。",
-    "3": "README.lockはCodex project configの正式な探索場所ではありません。`.codex/config.toml`を使います。"
+    "1": "`.git/config`はGitの設定です。Codexのproject layerが読まれない原因を解決しません。",
+    "2": "同じkeyなら作業directoryに近いproject設定が優先されます。探索経路とtrust状態を確認します。",
+    "3": "project設定には上書きできない認証・通知関連keyがあります。警告を確認し、個人設定へ分けます。"
   },
   "config-02": {
     "1": "各repositoryのindex.htmlへ個人設定を書くとCodex clientは読み込まず、project codeも汚します。",
@@ -170,9 +170,9 @@
     "3": "Git branch名はCodexの設定layerを選択しません。旧tableを`~/.codex/deep-review.config.toml`へ移行します。"
   },
   "session-01": {
-    "1": "repository削除はcontext整理ではなく作業dataの損失につながります。`/compact`で会話を要約してtokenを空けます。",
-    "2": "同じraw logの再投入はcontext消費を増やします。重要な決定と結果をcompactした要約へ残します。",
-    "3": "権限拡大はcontext windowを空けません。sandboxとapprovalは必要最小限のまま会話だけをcompactします。"
+    "1": "新しい会話へは以前の判断が無条件に引き継がれません。同じ作業のcontext整理にはcompactを使います。",
+    "2": "長いlogを再投入するとcontextをさらに消費します。必要な決定と残作業を短く残します。",
+    "3": "権限設定はcontext容量を変えません。作業境界を維持して会話だけを要約します。"
   },
   "session-02": {
     "1": "背景を省いた新規chatでは以前の判断や制約を失います。同じ作業なら保存済みsessionをresumeします。",
@@ -210,9 +210,9 @@
     "3": "履歴の再入力ではcodeとchatを一体で移せず、判断contextも欠落します。既存chatをHandoffします。"
   },
   "surfaces-01": {
-    "1": "Cloudだけでは手元の未commit working treeをそのまま直接扱えません。現在のcheckoutを使うLocalが適します。",
-    "2": "Plugin Marketplaceは拡張機能を探す場所で、local差分を編集・検証する実行環境ではありません。",
-    "3": "archive環境は現在のworking treeで短い修正を続ける場所ではありません。Local projectを開きます。"
+    "1": "Cloudは別の実行環境です。localの未commit変更が常時自動同期される前提ではありません。",
+    "2": "worktreeは分離したcheckoutです。開始状態を選べても、元checkoutとその後の変更は常時同期されません。",
+    "3": "Web chatだけではPCのfolderを直接編集できません。現在のcheckoutを使うLocalを選びます。"
   },
   "surfaces-02": {
     "1": "Localだけでは処理をPCから切り離せません。remote containerで実行するCloud environmentを選びます。",
@@ -235,9 +235,9 @@
     "3": "Plugin marketplace CLIは拡張を探す用途です。editor contextを直接渡す作業にはIDE extensionを使います。"
   },
   "safe-11": {
-    "1": "danger-full-accessはfilesystem境界まで外すため、package取得だけという目的より権限が広すぎます。",
-    "2": "approvalとsandboxの同時無効化は不要な書込みと外部操作まで許します。workspace-writeのnetworkだけを有効にします。",
-    "3": "writable rootをOS全体へ広げてもnetwork許可の代わりにはならず、誤書込みの影響範囲だけが増えます。"
+    "1": "full accessはfilesystemの保護まで外します。通信のためだけに選ぶには範囲が広すぎます。",
+    "2": "network.enabledがfalseならdomain ruleを記載しても通信は許可されません。許可とfilterを分けます。",
+    "3": "writable rootはファイルの書込み範囲です。広げてもnetwork許可にはならず影響範囲が増えます。"
   },
   "safe-13": {
     "1": "read-only hintが併記されてもdestructive annotationは打ち消されません。副作用を確認する承認が必要です。",
@@ -320,9 +320,9 @@
     "3": "履歴を隠すと失敗原因を改善できません。まずregular chatで結果を確認し、安定したpromptだけをscheduleします。"
   },
   "basic-06": {
-    "1": "CSS検査ではGit差分のbugや回帰をreviewできません。対象を指定して`codex review`を使います。",
-    "2": "disk監査は未commit変更やbase branchとの差分reviewとは別の作業です。",
-    "3": "単なるdiff表示では専用reviewerの優先度付き指摘を得られません。"
+    "1": "通常の実装依頼と専用reviewerは用途が異なります。CIのreviewには`codex review`を使います。",
+    "2": "`--base`はbase branchとの差分を選びます。未commit変更を直接指定するなら`--uncommitted`です。",
+    "3": "差分の表示は人が内容を読む助けになりますが、専用reviewerの指摘とは別です。"
   },
   "basic-07": {
     "1": "`codex resume`は元のchatを続ける操作です。元を残して別案を新chatで試すなら`codex fork`です。",
@@ -1140,9 +1140,9 @@
     "3": "株価確認はlive data connector等の役割です。Hookはcommandやfile editの検査・強制に適します。"
   },
   "extend-01": {
-    "1": "Cookieはbrowser stateの保存手段で、手順・reference・scriptを再利用するCodex workflowではありません。",
-    "2": "Viewportは表示領域を表すUI用語で、繰り返す作業手順をpackageして選択する仕組みではありません。",
-    "3": "Commit hashはGitの特定状態を識別しますが、実行手順や支援resourceをまとめません。"
+    "1": "AGENTS.mdは共通指示に向きます。特定作業の長い手順はSkillへ分けると必要時に読み込めます。",
+    "2": "MCPはtoolや外部データを接続します。繰り返す判断手順を自動で定義するものではありません。",
+    "3": "chatの複製はその時点の履歴です。手順の更新と再利用にはSkillを管理します。"
   },
   "extend-02": {
     "1": "AGENTS.mdは作業上の指示を伝えますが、外部サービスの最新データを取得する接続そのものは作りません。",

@@ -1,5 +1,24 @@
 # 学習目標・網羅性監査
 
+## 2026-09-30 横断改善ループ 10回
+
+最終確認日の古さと誤答の質を入口に、各回で公式資料、既存との重複、正解・誤答別説明・図解を確認した。新しい問題を増やすより、既存IDの実務判断を強める価値が高い10件だった。ID維持により過去の回答履歴には旧設問の成績も含まれる。
+
+| 回 | 対象 | 学習目標・判断 | 根拠 |
+|---:|---|---|---|
+| 1 | basic-01 | local checkoutを直接扱うCLIとCloud・APIを区別 | [Quickstart](https://learn.chatgpt.com/docs/quickstart) |
+| 2 | prompt-02 | 成果と制約を先に伝える依頼へ直す | [Prompting](https://learn.chatgpt.com/docs/prompting) |
+| 3 | agents-03 | `/init`の雛形を実態に合わせて検証・共有 | [Developer commands](https://learn.chatgpt.com/docs/developer-commands) |
+| 4 | config-01 | project設定のtrust・探索順・禁止keyを診断 | [Advanced Configuration](https://learn.chatgpt.com/docs/config-file/config-advanced#project-config-files-codexconfigtoml) |
+| 5 | extend-01 | 反復手順をSkillへ分け、必要時に読み込む | [Build skills](https://learn.chatgpt.com/docs/build-skills) |
+| 6 | basic-06 | CIの非対話reviewで未commit範囲を選ぶ | [Developer commands](https://learn.chatgpt.com/docs/developer-commands#cli-codex-review) |
+| 7 | session-01 | 同じ会話の決定を残しcontextを圧縮 | [Developer commands](https://learn.chatgpt.com/docs/developer-commands) |
+| 8 | workflow-01 | `/review`で未追跡fileも含む範囲を選ぶ | [Code review](https://learn.chatgpt.com/docs/code-review) |
+| 9 | surfaces-01 | 手元の未commit変更を直接扱うLocalを選ぶ | [Environments](https://learn.chatgpt.com/docs/environments/modes) |
+| 10 | safe-11 | 現行permission profileでfilesystemとnetworkを分離 | [Permissions](https://learn.chatgpt.com/docs/permissions#network-permissions) |
+
+basic-06はCLIで非対話reviewを起動する判断、workflow-01は対話画面でreview対象を選ぶ判断として分けた。既存のterminal図はagents-03、basic-06、session-01、workflow-01について本文と照合した。今回の10件は全264問の最新仕様監査でも完全網羅の証明でもない。今後は古い認証・設定・拡張分野を優先して監査する。
+
 ## 2026-09-30 問題数と新規の学習目標
 
 Claude版の収録数との差を、Codexの機能差や不足問数とみなさない。Codex版は263問で9領域の入口と15の実務コースを扱うが、全問の最新仕様再照合は未完了であり完全網羅とは主張できない。現在の公式資料との照合で、組み込みブラウザの[Site tools（WebMCP）](https://learn.chatgpt.com/docs/webmcp)と独立したMCP serverの使い分けが未出題と分かった。ページと同じログイン状態を使う操作、ページ離脱時の利用範囲、サイト由来の指示を信頼しない判断を1問の実務scenarioへまとめ、比較図と誤答別feedbackを追加。重複を増やさず264問へ。次の重点は、古い実務問題の公式資料再確認と、利用者が実際に迷う失敗から不足目標を抽出すること。今回の1件で全資料の網羅性を認定しない。

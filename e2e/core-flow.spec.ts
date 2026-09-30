@@ -464,7 +464,7 @@ test("question share URL opens a one-question session", async ({ page }) => {
   await page.goto("/?q=basic-01");
   const progress = page.getByRole("progressbar", { name: "クイズの進捗" });
   await expect(progress).toHaveAttribute("aria-valuemax", "1");
-  await expect(page.getByRole("heading", { name: /ローカルのrepository/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /手元のrepository/ })).toBeVisible();
   await expect(page).toHaveURL(/\?q=basic-01$/);
 });
 
