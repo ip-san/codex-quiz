@@ -312,8 +312,15 @@ test("mobile drawer closes with Escape and backdrop", async ({ page }) => {
   await expect(menu).toHaveAttribute("open", "");
   await page.keyboard.press("Escape");
   await expect(menu).not.toHaveAttribute("open");
+  await expect(menu.locator("summary")).toBeFocused();
   await menu.locator("summary").click();
   await page.locator(".mobile-nav-backdrop").click({ position: { x: 300, y: 300 } });
+  await expect(menu).not.toHaveAttribute("open");
+  await expect(menu.locator("summary")).toBeFocused();
+  await menu.locator("summary").click();
+  await page.getByRole("button", { name: "はじめての方へ" }).click();
+  await expect(page.getByRole("heading", { name: "Codexを、使える知識に。" })).toBeVisible();
+  await page.getByRole("button", { name: "スキップしてメニューへ" }).click();
   await expect(menu).not.toHaveAttribute("open");
 });
 

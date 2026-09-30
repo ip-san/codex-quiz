@@ -1,10 +1,14 @@
 type Props = { onNavigate: (screen: "reader" | "progress") => void; onIntro: () => void };
 
 export default function MobileMenu({ onNavigate, onIntro }: Props) {
-  const close = (target: HTMLElement) => target.closest("details")?.removeAttribute("open");
+  const close = (target: HTMLElement, restoreFocus = true) => {
+    const menu = target.closest("details");
+    menu?.removeAttribute("open");
+    if (restoreFocus) menu?.querySelector("summary")?.focus();
+  };
   const jump = (target: HTMLElement, hash: string) => {
     window.location.hash = hash;
-    close(target);
+    close(target, false);
   };
 
   return (
@@ -13,7 +17,6 @@ export default function MobileMenu({ onNavigate, onIntro }: Props) {
       onKeyDown={(event) => {
         if (event.key === "Escape") {
           close(event.currentTarget);
-          event.currentTarget.querySelector("summary")?.focus();
         }
       }}
     >
@@ -41,7 +44,13 @@ export default function MobileMenu({ onNavigate, onIntro }: Props) {
           </button>
         </div>
         <p className="mobile-nav-section">学ぶ</p>
-        <button aria-label="はじめての方へ" onClick={onIntro}>
+        <button
+          aria-label="はじめての方へ"
+          onClick={(event) => {
+            close(event.currentTarget, false);
+            onIntro();
+          }}
+        >
           はじめての方へ <small>学び方を短く確認する</small>
         </button>
         <button aria-label="実践シナリオ" onClick={(event) => jump(event.currentTarget, "scenario-heading")}>
