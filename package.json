@@ -20,11 +20,14 @@
     "docs:check": "node scripts/validate-doc-links.mjs",
     "content:queue": "node scripts/content-inventory.mjs --priority",
     "content:links": "node scripts/check-content-links.mjs",
+    "content:overlap": "node scripts/content-overlap.mjs",
+    "content:distractors": "node scripts/content-distractors.mjs",
+    "content:tools:check": "node --check scripts/check-content-links.mjs && node --check scripts/content-overlap.mjs && node --check scripts/content-distractors.mjs",
     "pwa:check": "node scripts/validate-pwa.mjs && node scripts/validate-service-worker.mjs",
     "bundle:check": "node scripts/check-bundle-size.mjs",
     "lighthouse:check": "node scripts/check-lighthouse.mjs",
     "type-coverage": "type-coverage --at-least 95 --strict",
-    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run docs:check && npm run pwa:check && npm run type-coverage && npm run build && npm run bundle:check"
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run content:tools:check && npm run test && npm run docs:check && npm run pwa:check && npm run type-coverage && npm run build && npm run bundle:check"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^6.0.2",
