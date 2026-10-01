@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-10-01 初回18問の解説を読みやすく調整
+
+全体像モードの18問について、正解後の説明を短い文へ整理し、選んだ不正解への説明も選択肢に即して見直した。「何を選ぶか」「なぜか」「どんなときに使うか」が一度で分かることを優先した。safe-09は不正解別feedbackが実際の選択肢と対応していなかったため修正。basic-02/03の無効になった公式参照先を現行の[Prompting](https://learn.chatgpt.com/docs/prompting)へ、surfaces-02の参照先を現行の[Cloud environments](https://learn.chatgpt.com/docs/environments/cloud-environments)へ更新した。問題数・正解・学習目標は変えていない。残り246問の文章が同じ水準へ改稿済みという意味ではない。
+
 ## 2026-09-30 10回の横断監査
 
 9カテゴリにまたがる古い設問を10件選び、現在の公式資料と照合した。新規学習目標よりも、架空command・無関係な選択肢・旧式のnetwork設定による誤学習の解消が優先と判断し、増問せず264問を維持した。各回の選定理由と対象は[学習目標・網羅性監査](COVERAGE_AUDIT.md)に記録した。問題文、正解、全誤答別feedbackを更新し、既存のterminal図4件を再照合した。特にsafe-11は旧`sandbox_workspace_write.network_access`の暗記から、現行permission profileでfilesystem境界とnetwork許可を分離する判断へ変更した。全264問の再確認やCodex全機能の完全網羅は未達である。
