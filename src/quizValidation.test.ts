@@ -126,4 +126,59 @@ describe("Codex quiz quality gate", () => {
     expect(terminalDiagrams).toHaveLength(31);
     expect(terminalDiagrams.every((diagram) => diagram.lines.some((line) => line.kind === "command"))).toBe(true);
   });
+
+  it("keeps diagram labels and learning steps complete", () => {
+    const issues: string[] = [];
+    const requiredText = (id: string, path: string, value: string) => {
+      if (!value.trim()) issues.push(`${id} ${path}: empty text`);
+      if (/…|\.\.\./.test(value)) issues.push(`${id} ${path}: possible truncated text`);
+    };
+
+    for (const [id, diagrams] of Object.entries(quizDiagrams)) {
+      if (diagrams.length === 0) issues.push(`${id}: empty diagram list`);
+      for (const [diagramIndex, diagram] of diagrams.entries()) {
+        const path = `diagram[${diagramIndex}]`;
+        requiredText(id, `${path}.label`, diagram.label);
+        switch (diagram.type) {
+          case "flow":
+            if (diagram.steps.length < 2) issues.push(`${id} ${path}: flow needs at least two steps`);
+            diagram.steps.forEach((step, index) => {
+              requiredText(id, `${path}.steps[${index}].text`, step.text);
+              if (step.sub !== undefined) requiredText(id, `${path}.steps[${index}].sub`, step.sub);
+            });
+            break;
+          case "hierarchy":
+            if (diagram.items.length < 2) issues.push(`${id} ${path}: hierarchy needs at least two items`);
+            diagram.items.forEach((item, index) => {
+              requiredText(id, `${path}.items[${index}].text`, item.text);
+              requiredText(id, `${path}.items[${index}].sub`, item.sub);
+            });
+            break;
+          case "comparison":
+            if (diagram.columns.length < 2) issues.push(`${id} ${path}: comparison needs at least two columns`);
+            diagram.columns.forEach((column, index) => {
+              requiredText(id, `${path}.columns[${index}].heading`, column.heading);
+              if (column.items.length === 0) issues.push(`${id} ${path}.columns[${index}]: empty items`);
+              column.items.forEach((item, itemIndex) => {
+                requiredText(id, `${path}.columns[${index}].items[${itemIndex}]`, item);
+              });
+            });
+            break;
+          case "terminal":
+            if (diagram.lines.length === 0) issues.push(`${id} ${path}: empty terminal`);
+            diagram.lines.forEach((line, index) => {
+              if (!line.text.trim()) issues.push(`${id} ${path}.lines[${index}]: empty terminal line`);
+            });
+            break;
+          case "config":
+            requiredText(id, `${path}.filepath`, diagram.filepath);
+            if (diagram.lines.length === 0) issues.push(`${id} ${path}: empty config`);
+            // Empty config lines may intentionally represent blank lines in an example.
+            break;
+        }
+      }
+    }
+
+    expect(issues).toEqual([]);
+  });
 });

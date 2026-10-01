@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-10-01 公式出典と図解の検査を強化
+
+Claude版の品質検査を比較し、Codex版で不足していた図解の空欄・手順不足・途中切れの検査を通常のテストへ追加。公式出典の到達確認はネットワークを使う任意の`npm run content:links`として追加し、56種類のURLを検査した。見つかった404の2件（surfaces-14、safe-29）は現行の[Windows app](https://learn.chatgpt.com/docs/windows/windows-app)と[Codex Security scans](https://learn.chatgpt.com/docs/security/plugin/scans)へ更新し、正解と誤答の説明も公式資料で再確認した。これはリンク先の存在と対象2問の確認であり、全264問の事実監査や節アンカーの検証を完了した意味ではない。問題数・正解は変更していない。
+
 ## 2026-10-01 初回18問の解説を読みやすく調整
 
 全体像モードの18問について、正解後の説明を短い文へ整理し、選んだ不正解への説明も選択肢に即して見直した。「何を選ぶか」「なぜか」「どんなときに使うか」が一度で分かることを優先した。safe-09は不正解別feedbackが実際の選択肢と対応していなかったため修正。basic-02/03の無効になった公式参照先を現行の[Prompting](https://learn.chatgpt.com/docs/prompting)へ、surfaces-02の参照先を現行の[Cloud environments](https://learn.chatgpt.com/docs/environments/cloud-environments)へ更新した。問題数・正解・学習目標は変えていない。残り246問の文章が同じ水準へ改稿済みという意味ではない。
