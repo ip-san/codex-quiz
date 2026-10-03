@@ -66,9 +66,9 @@ export const scenarios = [
   {
     id: "cloud-recovery",
     title: "Cloud環境の設定と依存関係を切り分ける",
-    description: "Cloudでテストが動きません。消えた環境変数、秘密情報の利用範囲、古い依存関係を順に調べます。",
+    description: "Cloudでテストが動きません。準備するtool、私設サービスの認証、更新後の確認場所を順に調べます。",
     ids: ["surfaces-18", "surfaces-03", "surfaces-19"],
-    steps: ["環境変数の引き継ぎを確認する", "秘密情報を使える段階を確認する", "キャッシュした依存関係を更新する"],
+    steps: ["不足するtoolを準備する", "認証情報を安全に渡す", "新しいタスクで更新を確かめる"],
   },
   {
     id: "mcp-recovery",

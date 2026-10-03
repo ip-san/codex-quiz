@@ -220,14 +220,14 @@
     "3": "シェル補完はコマンド入力を助けます。遠隔環境で作業を始める機能ではありません。"
   },
   "surfaces-03": {
-    "1": "secretをagent phaseへ平文で残すとrepository codeやtoolから漏れるriskがあります。Cloud secretはsetupだけで使います。",
-    "2": "public repositoryでもsecretの扱いは緩和されません。setup終了時に除かれ、agent phaseへ渡りません。",
-    "3": "model設定はCloud secretの公開範囲を変更しません。必要な認証処理はsetup phase内で完了させます。"
+    "1": "通常の環境変数は、プログラムが値を直接読む必要がある場合に使います。特定のHTTPS宛先へ送るだけならNetwork secretの方が生の値をプロセスへ渡さずに済みます。",
+    "2": "認証情報をリポジトリに保存すると、意図せず共有・公開されるおそれがあります。環境のNetwork secretとして登録します。",
+    "3": "個人用の値も、環境が必要なkeyと送信先を設定して初めてタスクで使えます。保存しただけでは接続先の許可を省けません。"
   },
   "surfaces-04": {
-    "1": "agent phaseの無制限networkは既定ではありません。外部接続が必要な時だけ環境単位で最小範囲を許可します。",
-    "2": "setup phaseは依存導入のためnetworkを利用できます。offlineが既定なのはその後のagent phaseです。",
-    "3": "GitHubだけが常に許可される前提ではありません。agent networkは環境設定のallowlistまたはunrestrictedで決めます。"
+    "1": "接続先を許可しても、サービスの認証や権限は別です。ホストと認証情報を分けて確認します。",
+    "2": "認証情報があっても、接続先が許可されていなければ通信できません。実際に使うホスト名を確認します。",
+    "3": "無制限に広げる前に、必要なホストと認証を確認できます。設定後はsetupと新しいタスクで接続を試します。"
   },
   "surfaces-05": {
     "1": "Cloud環境設定ページはremote runtimeを構成する場所で、編集中のselectionとdiffに密着した対話surfaceではありません。",
@@ -1055,19 +1055,19 @@
     "3": "MCP OAuth callbackはserver認証用です。開発中Web appの表示・click・screenshot検証には使いません。"
   },
   "surfaces-18": {
-    "1": "secretだけが原因ではありません。通常の`export`もsetupとagentが別shellなのでそのまま継承されません。",
-    "2": "Git checkoutはsetup shellのprocess environmentをagent shellへ移す仕組みではありません。",
-    "3": "MCP OAuthはCloud container内の一般環境変数を上書きしません。永続設定へ明示的に保存します。"
+    "1": "今のタスクの変更は、そのタスクの保存状態です。再利用する環境の準備手順を更新し、公開後の新しいタスクで確かめます。",
+    "2": "tool本体を無条件でソース管理に入れる必要はありません。まず環境のsetupで導入とテストを確認します。",
+    "3": "必要なtoolの検査を省くと、次のタスクでも失敗します。準備中に原因を直してから公開します。"
   },
   "surfaces-19": {
-    "1": "AGENTS.override.md削除はcached dependencyを更新しません。再開時のmaintenance scriptを使います。",
-    "2": "browser cacheはCloud container cacheと別物で、repository dependencyの更新には影響しません。",
-    "3": "GitHub review commentはcode review用です。cached environmentのmaintenance処理は実行しません。"
+    "1": "既存タスクは自分の作業状態を保持します。再公開した準備状態の確認には、新しいタスクを始めます。",
+    "2": "browser cacheとCloudタスクの保存状態は別です。新しいタスクで環境の更新を確かめます。",
+    "3": "設定が保存されても依存やtoolが動くとは限りません。再公開後の新しいタスクでテストします。"
   },
   "surfaces-20": {
-    "1": "変更後も古いcacheを永久利用する仕様ではありません。setup・maintenance・variable・secret変更でinvalidateされます。",
-    "2": "cache invalidationはcontainer再構築に関する処理で、repositoryのmain branchを削除しません。",
-    "3": "Cloud cacheがLocal worktreeへ変換されることはありません。Cloud environment内で再作成されます。"
+    "1": "repository refreshは背景で行われ、installや起動commandは毎回再実行されません。まず使える状態か確かめます。",
+    "2": "既存タスクの保存状態には未commit変更も含まれます。repository refreshだけで消えるとは限りません。",
+    "3": "browser cacheを消してもCloud環境の依存は更新されません。タスク内で不足するtoolを調べます。"
   },
   "surfaces-21": {
     "1": "Appshot hotkeyは画面context添付用で、新規worktreeのdependency installを自動実行しません。",

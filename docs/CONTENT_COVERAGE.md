@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-10-03 Cloudの旧仕様を現行環境へ更新
+
+旧[Codex Cloud (Legacy)](https://learn.chatgpt.com/docs/environments/cloud-environment)に依存していたsurfaces-03/04/18/19/20を、現行の[Cloud environments](https://learn.chatgpt.com/docs/environments/cloud-environments)に照合して改稿。setup限定secret、agent phaseの既定network、maintenance script、cache無効化を一般的な現行仕様として教えるのをやめた。代わりにNetwork secretと通常の環境変数の使い分け、接続先と認証の切り分け、toolの準備と再公開、既存タスクと新しいタスクの状態差、repository refreshを問う。各問の選択肢・誤答別説明とCloudシナリオ・図解を合わせて変更。既存IDを使うため過去の回答履歴は旧内容を含む。264問・15コースを維持し、Cloudの全機能を網羅したとは主張しない。
+
 ## 2026-10-01 重複と選択肢の見た目を確認する一覧
 
 Claude版の編集者向け検査を参考に、日本語の問題文と正解の類似候補を示す`content:overlap`、正解だけが長い・コード書式になっている候補を示す`content:distractors`を追加。初回実行では類似候補3組、選択肢候補81件を出した。3組は別の判断を問うと見られ、機械的な削除はしていない。81件も誤りの確定数ではない。問題・正解・出典・264問の総数は変更せず、今後の個別監査の入口とする。

@@ -430,11 +430,11 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
   "surfaces-18": [
     {
       type: "flow",
-      label: "Cloud environmentのphase",
+      label: "Cloud環境の更新と確認",
       steps: [
-        { text: "Setup shell", sub: "依存導入・secret利用" },
-        { text: "Cache", sub: "準備済みcontainer" },
-        { text: "Agent shell", sub: "別sessionで変更・検証" },
+        { text: "Setup", sub: "toolを導入・テスト" },
+        { text: "Publish", sub: "準備した環境を公開" },
+        { text: "New task", sub: "更新を使って確認" },
       ],
     },
   ],
