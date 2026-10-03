@@ -10,7 +10,7 @@ export default defineConfig({
     trace: "on-first-retry",
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
-  webServer: {
+  webServer: process.env.PLAYWRIGHT_EXTERNAL_SERVER ? undefined : {
     command: "node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 4173",
     url: "http://127.0.0.1:4173",
     reuseExistingServer: !process.env.CI,

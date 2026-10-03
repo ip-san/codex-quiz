@@ -29,7 +29,7 @@ npm ci
 npm run dev
 ```
 
-変更後の検査は `npm run check` を使います。公式出典リンクの到達確認や問題内容の確認候補は、[品質運用](docs/QUALITY_OPERATIONS.md)にまとめています。環境構築・テスト・公開手順は[開発ガイド](docs/DEVELOPMENT.md)、問題の出典と品質基準は[ドキュメント一覧](docs/README.md)を参照してください。変更履歴は[開発履歴](docs/DEVELOPMENT_HISTORY.md)へ分けています。
+変更後の検査は `npm run check` を使います。画面の作業中は短いブラウザ検査も使えます。公式出典リンクの到達確認や問題内容の確認候補は、[品質運用](docs/QUALITY_OPERATIONS.md)にまとめています。環境構築・テスト・公開手順は[開発ガイド](docs/DEVELOPMENT.md)、問題の出典と品質基準は[ドキュメント一覧](docs/README.md)を参照してください。変更履歴は[開発履歴](docs/DEVELOPMENT_HISTORY.md)へ分けています。
 
 Codexは更新されるため、問題の内容は公式資料との継続的な再確認が必要です。このアプリはOpenAIの公式製品ではありません。
 

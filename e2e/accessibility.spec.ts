@@ -35,7 +35,7 @@ test("study-first chapter and reading screens have no WCAG A or AA violations", 
   await scan(page);
 });
 
-test("home has no WCAG A or AA violations", async ({ page }) => {
+test("home has no WCAG A or AA violations", { tag: "@smoke" }, async ({ page }) => {
   await page.reload();
   await scan(page);
 });

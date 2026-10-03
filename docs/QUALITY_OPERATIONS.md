@@ -37,6 +37,8 @@ flowchart LR
 
 GitHub ActionsではPull Requestを共通のQuality Gate workflowで検査します。`main` pushと手動公開時はPages workflowが同じQuality Gateを呼び、通常検査・ブラウザE2EとPWA・Lighthouseの全jobが成功した時だけ本番ビルドとデプロイを開始します。どれかが失敗またはskipされた場合は後続jobも進みません。
 
+開発中の反復だけは`npm run test:e2e:smoke`で主要6件を先に確認できます。これは全73件やPWA検査の代わりではありません。WindowsでPlaywrightが起動したViteサーバーの終了待ちが残る問題を避けるため、ローカルの通常E2EとPWA検査は`run-e2e.mjs`がViteを直接開閉します。CIでは従来どおりPlaywrightのwebServerを使い、全件を実行します。
+
 ## コンテンツ監査
 
 ### 問題追加時

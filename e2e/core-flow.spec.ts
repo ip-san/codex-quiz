@@ -12,7 +12,7 @@ test.beforeEach(async ({ page }) => {
   await page.reload();
 });
 
-test("first visit guide introduces learning before the menu", async ({ page }) => {
+test("first visit guide introduces learning before the menu", { tag: "@smoke" }, async ({ page }) => {
   await page.evaluate(() => localStorage.removeItem("codex-quiz-intro-seen"));
   await page.reload();
   await expect(page.getByRole("heading", { name: "Codexを、使える知識に。" })).toBeVisible();
@@ -269,7 +269,7 @@ test("result allows a learner with no pending review to finish", async ({ page }
   await expect(page.getByRole("heading", { name: "学習の現在地" })).toBeVisible();
 });
 
-test("home exposes navigation and starts a quiz", async ({ page }) => {
+test("home exposes navigation and starts a quiz", { tag: "@smoke" }, async ({ page }) => {
   await page.reload();
   await expect(page.getByRole("navigation", { name: "メインナビゲーション" })).toBeVisible();
   await expect(page.locator(".next-step-card h1")).toBeVisible();
@@ -281,7 +281,7 @@ test("home exposes navigation and starts a quiz", async ({ page }) => {
   await expect(page.locator("fieldset.choices")).toBeVisible();
 });
 
-test("mobile menu reaches home sections and expands scenarios", async ({ page }) => {
+test("mobile menu reaches home sections and expands scenarios", { tag: "@smoke" }, async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   await page.reload();
   await expect(page.getByRole("button", { name: "まず全体像を18問でつかむ" })).toBeVisible();
@@ -398,7 +398,7 @@ test("answering announces feedback and moves focus", async ({ page }) => {
   await expect(feedback).toBeFocused();
 });
 
-test("correct-answer action stays inside feedback on mobile", async ({ page }) => {
+test("correct-answer action stays inside feedback on mobile", { tag: "@smoke" }, async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 700 });
   await page.goto("/?q=basic-01");
   await page.getByRole("button", { name: /Codex CLI/ }).click();
@@ -416,7 +416,7 @@ test("correct-answer action stays inside feedback on mobile", async ({ page }) =
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
 });
 
-test("a wrong answer loads its choice-specific feedback", async ({ page }) => {
+test("a wrong answer loads its choice-specific feedback", { tag: "@smoke" }, async ({ page }) => {
   await page.goto("/?q=basic-01");
   await page.getByRole("button", { name: /Responses API/ }).click();
 
