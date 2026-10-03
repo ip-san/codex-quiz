@@ -33,6 +33,7 @@ npm run dev
 | `npm run test:pwa` | 本番ビルドのPWA動作を検査 |
 | `npm run lighthouse:check` | 表示品質スコアを検査 |
 | `npm run content:queue` | 確認日の古い実務問題の再監査候補を表示 |
+| `npm run content:sources` | 公式資料の変更を調べ、影響しそうな問題を表示（ネット接続が必要） |
 | `npm run build` | `dist/`へ本番ビルド |
 | `npm run preview` | 本番ビルドをローカル表示 |
 

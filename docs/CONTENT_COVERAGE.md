@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-10-03 公式資料の変更から再確認候補を絞る
+
+全264問が参照する公式資料55ページのMarkdown本文の指紋を初期保存し、`content:sources`で変化したページに紐づく問題だけを表示できるようにした。実務問題と確認日の古い問題を先に示す。URLの節アンカーは同じページへまとめるが、CLI/IDEなどqueryで変わる本文は別に扱う。初回取得でprompt-12の旧資料URLが404と分かったため、正解と誤答説明を現行の[Customization](https://learn.chatgpt.com/docs/customization/overview)で照合して参照先と確認日を更新した。本文の指紋は正しさの証拠ではなく、節単位の影響や全問題の事実確認は人が行う。問題数は264問のまま。
+
 ## 2026-10-03 選択肢だけで答えが分かる2問を改善
 
 `content:distractors`の上位候補からagents-10とsafe-24を選んだ。正解だけが長く、他の選択肢が無関係だったため、同じ場面で実際に迷い得る判断へ修正。前者は対象subdirectoryを作業場所にした指示読み込み元の確認を[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)、後者はCodex Security Cloudの将来のスキャンへ効くThreat model更新を[公式資料](https://learn.chatgpt.com/docs/security/threat-model)で再確認した。正解・誤答別説明を合わせて更新し、agents-10の既存terminal図も照合した。IDと問題数は維持するため、過去の回答履歴には旧設問の成績が含まれる。残る選択肢候補の監査は未完了。

@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-10-03T11:45:33.929Z",
+  "sources": [
+    {
+      "url": "https://developers.openai.com/codex/guides/agents-md",
+      "sha256": "9d1f87a2d1cb55b4782b95abe710692b35b9659789c2db31a22c7074a3383e8e"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/agent-approvals-security",
+      "sha256": "bb78bd122fc94a9871630e39d74d38fc3aa204deddbc3ead74da9b76f99e2afb"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
+      "sha256": "9d1f87a2d1cb55b4782b95abe710692b35b9659789c2db31a22c7074a3383e8e"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/rules",
+      "sha256": "4ecdfe26ece03895220808a7aa4f05c91d837492300262baf5a5df35c3f44ce7"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+      "sha256": "c5ef4eda3d9f876c8f35c697e720a3e7c760b5cf8c4943c97e82d1d8fe1b0054"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/app-server",
+      "sha256": "14c29f997cffff66125e710c1746425c53262eb4e636eb0bbcd5c8b4ec7e4464"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/appshots",
+      "sha256": "a541048923cd2daf6e785d418d92dfed2d5cfabdc9f35910c7dce602bac4319e"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/auth",
+      "sha256": "3d2f0ed91fa09de11cabe38cb37a76e0833f71205cae6589c46c7f5ae9ad62f0"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/automations",
+      "sha256": "1c64c21ee76020153dc2ec69aaab1f8fda39d2426e9f63732b8e9577d691f968"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/browser",
+      "sha256": "fc5a994cde07ec7b9c6cf9c8f66b51f25114353a14f4eae0874fefcef598090b"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/build-plugins",
+      "sha256": "207cc4ea0da78e02ea090abcbd32dba488063d06bc55f2f290128515ef37a486"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/build-skills",
+      "sha256": "d15791562748e64a53dfec534b8558aa522e732cec0fdedcf7257fa4ef486a20"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/code-review",
+      "sha256": "c18b2fe184104facf5d044631ee151b2394baab1c44218be8b9d60c7dbd33020"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/code-review?surface=app",
+      "sha256": "3fc361b337960af030fcb76c8387d91efee2b68c7b3cc2e3d4a98b2e4c3c4c01"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/codex-sdk",
+      "sha256": "d4007b53f6a4303b1d5f2f8a760f67ef57c5ec37f041a6a6df1357610fca97dc"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/codex/ide",
+      "sha256": "bbecaad17ae60f9e3ca79ef1e1323da89b71d9f46150aeba25fb0fb84ca5fa63"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/computer-use",
+      "sha256": "c0e4f883aa2abc1198ee40e5ce59cea130b055b97c48e9abf7a0e8d75277c819"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/config-file/config-advanced",
+      "sha256": "12845880f119c64470d41ace86ded50cd397f9b4647339ba3c5a5c27bc211659"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/config-file/config-basic",
+      "sha256": "646d73b80ffe78962c9526e5960f0cbdb39953db26fe5422241f7cfd3ba6d10c"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+      "sha256": "73242945d7891bc09bf95a39d83117025abd8eca61ae5707db38fda40db16d62"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/config-file/environment-variables",
+      "sha256": "af767b8d7892d11d0554d9ea5c0d60d7bb463cb64b2a3a51e2ba0efadbc86ba8"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/customization/memories",
+      "sha256": "7dd55f174448e6092c33e0d5532ebc11abf45abd305e74cbb1407ab8fe958217"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/customization/overview",
+      "sha256": "e4f466bb13521bc8d4e193962192c45319d5abc0cb58875d4a7eed2a9f9a20d6"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/developer-commands",
+      "sha256": "f6c6838212b1856da0facfe5d17a04fa6d1f0b7a37c2de1fcd49ec93d4ff83bd"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/developer-commands?surface=cli",
+      "sha256": "6dec20e0f916ad689f9fe6dde8f259835725ca5e3fd07c8bf6222b9bc5659ef7"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/developer-commands?surface=ide",
+      "sha256": "e462f3c7246edfcb6a8a23116cb2e2e56e5741d985010aed7afb6617c516fe24"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/developer-settings?surface=ide",
+      "sha256": "a4c52f032ce8de051ef4b40d8d8fc0f29da1a9d457732f59052ddcdfeb2fa2ef"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/enterprise/managed-configuration",
+      "sha256": "7af4d6e961d34486abed562e8418471133c68fa6de86c5ed0ef1d5856f310912"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/environments/cloud-environments",
+      "sha256": "341b6a58e1f459e2499e3e747602536f6658c720d0425d98d4a214b9fc81d84a"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/environments/git-worktrees",
+      "sha256": "d163fcbf82ca40859a5d317060f302cb4c45c57e12aba8a2bce75d85de4b5c6c"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/environments/local-environment",
+      "sha256": "be1d914a3e59fb5a17f8b2c8247ff864236d12dc2c50b2b4cc58137a636b6e29"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/environments/modes",
+      "sha256": "64d4650883e84046be1dd727c0af6605be3dc9391006ce920114f68d15e470a8"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/extend/mcp",
+      "sha256": "431c87bd0e5971e9f0dd8b2d16a828d573657764c44911f808919c43b33bf533"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/github-action",
+      "sha256": "3c3a244ef87fffb064114e388f4c7827b3ddc55b712f5aec50f2719a3cf1bc6a"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/hooks",
+      "sha256": "724881d81f1a9fdb35ea42d4851a11b1f6606bbc6e9d2d05c1e8c466fc25c630"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/image-inputs",
+      "sha256": "252e1571e2cb0f933d04846f52023861bd6d6168a7ab279a421787db287bd3d3"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/import",
+      "sha256": "34893c4daf7be033d4313dc188b3b0e5b89c11f2899d5a3e3cdbe8108f31fac7"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/integrated-terminal",
+      "sha256": "3cc29632b2e735164939f14a834a2aea6a1fd249ce33dab738246b2d108b1f81"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/long-running-work",
+      "sha256": "14bba6e57c9bae8bf37b289ef369a4c59863c07f95037fe3d37143b14057246b"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/non-interactive-mode",
+      "sha256": "c83fe9259825a206d1d4f7a0ac669e5697d270ce2bebd28c5d36ad829c9a2a08"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/permission-modes",
+      "sha256": "569d287a163eaf664b60802451e05a082d2843cc3c405af9cfb0782e63181530"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/permissions",
+      "sha256": "efd27769ace3daafef5be62e1f3d605fd918baeafe0fa0e77466a619c206250f"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/prompting",
+      "sha256": "a139e2b119c9f6e2adb44ed6e854dd1cb2c48b1109b70812f3d5b4e597a86e14"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/quickstart",
+      "sha256": "3c8dd42ab655bec9e68e6ca3919e9d5c18bfeb526024d531262bfc459dcba237"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/remote-connections",
+      "sha256": "5a99a5e15046393b3406fca22efa17d554e21ea8e8c445f52c7ce16a6fc01cd1"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/sandboxing",
+      "sha256": "2cb4a84956c5b8fd5c2e1068d1f15faa44e7ec083a5d69974f81146917ed15af"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/sandboxing/auto-review",
+      "sha256": "3a6de6d1e8efcab25176e5d575dae8b66ec6d13e6c26bc534a1f625592e4e6d9"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/security",
+      "sha256": "596829d894747309849445c1246febc12c4096c37b4d41aa9ca17318b5b5a292"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/security/plugin/scans",
+      "sha256": "e920e756fb1a2f42c98636de195bc5c320a3c58b7de695dde782eb3d279cc1b3"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/security/threat-model",
+      "sha256": "7df40b8a786d4297a4c2446b9202a11bae9effab73a8033e02405b37b4ca4464"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/third-party/github",
+      "sha256": "716a6dc89cf52853894defcc3d95497dc3736000cb70542086f810d2a2ca8a86"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/third-party/linear",
+      "sha256": "a8c693a1f59d65737b2a32437d8c5227488fe57843ee76dc41a18e02a058dda1"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/third-party/slack",
+      "sha256": "ba61aa94fe5a68eddc8518b0d542c936a72ffda5a4bb629353224b47bd553dea"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/webmcp",
+      "sha256": "88c15d3fe55658f3ec291b80880e919ccdba0045fd9147c68087e855546b32f8"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/windows/windows-app",
+      "sha256": "5bbae21f535849b2ab51ec9472d43e2f1ade4f954b3d5241bcec4674e7761ad7"
+    }
+  ]
+}
