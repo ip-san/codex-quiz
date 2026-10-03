@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-10-03 正解の見た目から推測できる問題の改善
+
+agents-10はnested指示の適用確認、safe-24は継続スキャンの認証境界見落としという既存の学習目標を維持した。どちらも正解だけが長く、誤答が明白に無関係で判断力を測りにくかったため、同じ作業で起こる誤解へ置き換えた。現行の[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)と[Codex Security threat model](https://learn.chatgpt.com/docs/security/threat-model)で根拠を確認。2問以外の選択肢候補、全問題の正答率・識別力の実測は未確認。
+
 ## 2026-10-03 Cloud旧仕様の誤学習を優先解消
 
 選択肢の見た目を調べる中でsurfaces-03の正解そのものがLegacy Cloud前提だと判明。関連するsurfaces-04/18/19/20も現行Cloud環境の説明として不適切だったため、単なる選択肢短縮より優先した。5問を新規追加せず現行の異なる判断へ置換し、Cloud診断コースと図解も更新。根拠は[現行Cloud environments](https://learn.chatgpt.com/docs/environments/cloud-environments)の設定、更新、秘密情報、通信トラブル対応。旧IDの成績には旧設問が混ざるため習熟判定の解釈には注意が必要。残りの選択肢候補とLegacy参照の全面監査は未完了。

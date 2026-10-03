@@ -45,9 +45,9 @@
     "3": "無関係なfileの変更はreview範囲と回帰riskを増やします。必要な変更と検証結果で完了を定義します。"
   },
   "agents-10": {
-    "1": "OSの再installでは、対象subdirectoryからどのinstruction fileが探索されるかを検証できません。",
-    "2": "Git履歴の削除は作業を失う危険があり、activeなinstruction chainの確認には不要です。",
-    "3": "画像はproject instructionとして探索されません。対象directoryでCodexを起動し、active sourceを確認します。"
+    "1": "rootで起動した確認だけでは、payments内の指示まで探したか分かりません。対象の場所から起動します。",
+    "2": "指示の優先順は更新日時では決まりません。作業場所までの探索順とoverrideの有無を確認します。",
+    "3": "ファイル一覧だけでは、Codexがどの指示を読んだか分かりません。読み込み元を実際に示させます。"
   },
   "safe-08": {
     "1": "read-onlyはfilesystem書込みを制限する設定で、network accessを必ず開放するものではありません。",
@@ -370,9 +370,9 @@
     "3": "CSS設定ではlocal open-source model backendを選べません。"
   },
   "safe-24": {
-    "1": "severity表示だけを変えてもarchitectureやtrust boundaryの誤解は残ります。threat modelを修正します。",
-    "2": "同じscanの反復より、entry pointやassetを正しく記述したcontext改善が先です。",
-    "3": "sandboxを緩めてもsecurity scanの優先順位contextは改善せず、riskだけが増えます。"
+    "1": "今回の表示を直しても、次回のスキャンが使う認証の前提は変わりません。Threat modelを更新します。",
+    "2": "同じ説明で回数を増やしても、見落とした認証境界は伝わりません。入口と境界を明記します。",
+    "3": "認証コードを除外すると重要な場所を調べられません。まずThreat modelで優先すべき境界を伝えます。"
   },
   "safe-25": {
     "1": "modelが疑った段階は候補であり、clean sandboxでの再現evidenceを持つvalidated findingとは異なります。",
