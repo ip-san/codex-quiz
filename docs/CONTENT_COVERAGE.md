@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-10-03 認証の4問を現行仕様へ再確認
+
+basic-15/16/17/18を現行の[Authentication](https://learn.chatgpt.com/docs/auth)へ照合。ChatGPT利用枠とPlatform従量課金、認証状態の確認、headless環境でのdevice code認証、`keyring`・`auto`・`file`・`ephemeral`の違いを、実務で選ぶ場面へ改稿した。誤答別説明と既存の比較・terminal図も更新。特に、device codeが使えない場合は自分の認証キャッシュの安全な転送やSSH転送も公式の代替策であり、従来の図の「コピーしない」は不正確だったため訂正した。問題数は264問のまま。旧IDの過去成績は改稿前の設問を含む。残る旧認証問題の全面監査は未完了。
+
 ## 2026-10-03 古いCLI基本操作の3問を再確認
 
 確認日の古い実務問題からbasic-08/10/11を選び、現行の[Developer commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)と[Non-interactive mode](https://learn.chatgpt.com/docs/non-interactive-mode)へ照合。`codex apply`、`codex doctor`、`codex exec --ephemeral`の正解は維持し、架空commandの消去法ではなく、実在するCloud閲覧・認証状態確認・設定検査・出力形式・権限設定との使い分けを問うようにした。全誤答別説明を更新し、既存のterminal図3件も内容を照合して維持した。問題IDと264問の総数は変更せず、旧設問の成績は過去履歴に残る。残る確認日が古い設問の監査は未完了。

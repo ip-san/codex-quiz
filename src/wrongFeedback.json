@@ -520,19 +520,19 @@
     "3": "server全体を無効化せず、read/write metadataに応じたapproval modeを設定します。"
   },
   "basic-16": {
-    "1": "`codex doctor`は広い環境診断には使えますが、現在の認証方式だけならlogin statusが直接的です。",
-    "2": "`/mcp`は外部MCP接続の状態で、Codex本体のChatGPT/API key認証とは別です。",
-    "3": "Git statusはrepository状態だけを示し、Codex credentialを確認しません。"
+    "1": "`codex logout`は保存済み認証を消します。方法を調べるだけなら`codex login status`です。",
+    "2": "`codex login`はサインインを始める操作です。今使っている方式は`codex login status`で確認できます。",
+    "3": "`codex mcp list`は外部MCP serverの一覧です。Codex本体の認証方式は表示しません。"
   },
   "basic-17": {
-    "1": "他人のauth.jsonをcopyするとcredential共有・account混同・漏えいにつながります。device authを使います。",
-    "2": "API keyをGitへcommitしてはいけません。必要ならsecret storeからrun単位で渡します。",
-    "3": "sandboxはcommand権限の境界で、browser callbackを受けられない認証問題の解決策ではありません。"
+    "1": "localhost callbackが届かないまま通常のブラウザ認証を繰り返しても解決しません。まずdevice code認証を試します。",
+    "2": "自分のauth.jsonを移す方法は代替策ですが、公開リポジトリに置いてはいけません。access tokenを含むため、パスワード同様に安全に転送します。",
+    "3": "API key認証はPlatformの従量課金と組織設定に従います。ChatGPT workspaceの利用枠を使う目的なら、まずdevice code認証を試します。"
   },
   "basic-18": {
-    "1": "sandbox_modeはfilesystem・network権限の設定で、credential保存先ではありません。",
-    "2": "web_search設定は検索挙動を制御し、token storageとは関係しません。",
-    "3": "approval_policyは確認promptの条件です。credentialはkeyringまたは適切に保護したfileへ保存します。"
+    "1": "`auto`はOSの保存先が使えないとauth.jsonへフォールバックします。必ずOSへ保存する条件なら`keyring`です。",
+    "2": "`file`はCODEX_HOMEのauth.jsonに保存します。OSのcredential storeを必須にはできません。",
+    "3": "`ephemeral`は現在のプロセス中だけメモリに保持します。OSのcredential storeには永続保存しません。"
   },
   "extend-23": {
     "1": "CSSはUI表現で、MCP tool横断の動作制約をagentへ伝えません。",
@@ -935,9 +935,9 @@
     "3": "Ruleをallowへ変換して読むことはありません。未信頼project由来のrulesはskipされます。"
   },
   "basic-15": {
-    "1": "API key利用はPlatformの従量課金とorganization policyに従い、ChatGPT利用枠とは別です。",
-    "2": "GitHub deploy keyはrepository access用で、CodexのOpenAI認証には使用しません。",
-    "3": "MCP bearer tokenは個別MCP serverの認証用で、Codex本体へのsign-inではありません。"
+    "1": "PlatformのAPI keyは従量課金で、API組織の設定に従います。ChatGPTの利用枠とworkspace権限を使うならChatGPTでサインインします。",
+    "2": "API keyで認証した実行はChatGPT利用枠へ切り替わりません。認証方式そのものをChatGPTにする必要があります。",
+    "3": "MCP serverの接続は外部ツールの認証です。Codex本体のChatGPTサインインを代用できません。"
   },
   "extend-27": {
     "1": "browser historyは個人端末の閲覧記録であり、teamがreview・version管理できるSkill配布場所ではありません。",

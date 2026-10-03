@@ -627,7 +627,7 @@ export const quizDiagrams: Record<string, DiagramData[]> = {
       lines: [
         { kind: "command", text: "codex login --device-auth" },
         { kind: "output", text: "Open the verification URL and enter the code" },
-        { kind: "info", text: "credential fileを別端末からcopyしない" },
+        { kind: "info", text: "使えない場合は自分の認証cacheを安全に転送できる" },
       ],
     },
   ],
