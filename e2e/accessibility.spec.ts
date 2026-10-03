@@ -93,7 +93,7 @@ test("correct feedback and replaying a flow have no WCAG A or AA violations", as
 
 test("wrong feedback and terminal diagram have no WCAG A or AA violations", async ({ page }) => {
   await page.goto("/?q=basic-11");
-  const wrongChoice = page.locator("button.choice").filter({ hasText: /--resume/ });
+  const wrongChoice = page.locator("button.choice").filter({ hasText: /--json/ });
   await wrongChoice.click();
   await expect(page.getByRole("status")).toContainText("この選択肢が違う理由");
   await expect(page.getByRole("button", { name: "操作例を再生" })).toBeVisible();

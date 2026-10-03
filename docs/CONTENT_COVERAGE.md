@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-10-03 古いCLI基本操作の3問を再確認
+
+確認日の古い実務問題からbasic-08/10/11を選び、現行の[Developer commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)と[Non-interactive mode](https://learn.chatgpt.com/docs/non-interactive-mode)へ照合。`codex apply`、`codex doctor`、`codex exec --ephemeral`の正解は維持し、架空commandの消去法ではなく、実在するCloud閲覧・認証状態確認・設定検査・出力形式・権限設定との使い分けを問うようにした。全誤答別説明を更新し、既存のterminal図3件も内容を照合して維持した。問題IDと264問の総数は変更せず、旧設問の成績は過去履歴に残る。残る確認日が古い設問の監査は未完了。
+
 ## 2026-10-03 公式資料の変更から再確認候補を絞る
 
 全264問が参照する公式資料55ページのMarkdown本文の指紋を初期保存し、`content:sources`で変化したページに紐づく問題だけを表示できるようにした。実務問題と確認日の古い問題を先に示す。URLの節アンカーは同じページへまとめるが、CLI/IDEなどqueryで変わる本文は別に扱う。初回取得でprompt-12の旧資料URLが404と分かったため、正解と誤答説明を現行の[Customization](https://learn.chatgpt.com/docs/customization/overview)で照合して参照先と確認日を更新した。本文の指紋は正しさの証拠ではなく、節単位の影響や全問題の事実確認は人が行う。問題数は264問のまま。

@@ -330,9 +330,9 @@
     "3": "Git branchはコードの分岐で、会話履歴は分岐しません。保存済みchatから新chatを作るには`codex fork`を使います。"
   },
   "basic-08": {
-    "1": "`codex merge-cloud`は公式CLI commandではありません。cloud chatの最新diffは`codex apply`で適用します。",
-    "2": "code downloadだけではlocal working treeへpatchを適用するworkflowになりません。",
-    "3": "全同期では対象chatの最新diffを限定して適用できません。chat IDを確認してapplyします。"
+    "1": "`codex cloud`はCloud chatを扱う入口ですが、開くだけで手元のworking treeへdiffは適用されません。対象chatには`codex apply`を使います。",
+    "2": "説明文のcopyだけではコードのdiffは反映されません。適用したファイルを確認し、テストも実行します。",
+    "3": "手元の変更を捨てる必要はありません。まず状態を確認し、対象chatの最新diffだけを適用します。"
   },
   "basic-09": {
     "1": "UIのautocomplete設定ではshell用completion scriptを生成できません。",
@@ -340,9 +340,9 @@
     "3": "hint表示ではTab補完をshellへ登録できません。生成scriptをshell設定へ読み込みます。"
   },
   "basic-10": {
-    "1": "自動修復より先に診断reportで設定・認証・runtime・Git等の状態を確認します。",
-    "2": "CSSのhealth checkではCodex local環境を横断診断できません。",
-    "3": "Gitだけの診断では認証やterminal、app-server等の原因を見落とします。"
+    "1": "認証状態だけでは設定や実行環境、Gitなどの原因は分かりません。横断的な診断には`codex doctor`を使います。",
+    "2": "`--strict-config`は設定の未知項目を検出するためのものです。Gitやterminalまで確認する診断reportとは別です。",
+    "3": "報告前に`codex doctor`で原因の範囲を絞ると、問題を説明する材料が得られます。"
   },
   "config-06": {
     "1": "CSS engine指定では今回のrunだけmodelを上書きできません。`--model`を使います。",
@@ -825,9 +825,9 @@
     "3": "git credentialはGit remote認証用で、Codexが保存するMCP OAuth flowを開始しません。"
   },
   "basic-11": {
-    "1": "`--resume`は既存sessionの再開用で、rollout fileの保存を止めません。一回限りなら`--ephemeral`を使います。",
-    "2": "profileは設定一式の選択用です。session履歴をdiskへ残すかどうかは`--ephemeral`で指定します。",
-    "3": "`--remote`は一時session保存を制御するoptionではありません。非対話実行へ`--ephemeral`を付けます。"
+    "1": "`--json`は進行状況を機械処理しやすい形式で出します。session fileを残さない指定は`--ephemeral`です。",
+    "2": "個人設定を読まないことと、session fileを保存しないことは別です。保存を避けるには`--ephemeral`を使います。",
+    "3": "read-onlyは作業中の書込み権限を制限します。session rollout fileの保存を避けるには`--ephemeral`を使います。"
   },
   "basic-12": {
     "1": "screenshotでは途中のtool eventや失敗をpipelineが構造化して逐次処理できません。`--json`のJSONLを使います。",
