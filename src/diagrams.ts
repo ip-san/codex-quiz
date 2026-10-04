@@ -6,6 +6,16 @@ export type DiagramData =
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "config-13": [
+    {
+      type: "comparison",
+      label: "projectを信頼するかで変わる読み込み範囲",
+      columns: [
+        { heading: "trusted", items: ["projectのconfig・hooks・rulesが読み込み対象", "user・system設定も読む"] },
+        { heading: "untrusted", items: ["projectのconfig・hooks・rulesを読み飛ばす", "user・system設定は残る"] },
+      ],
+    },
+  ],
   "extend-47": [
     {
       type: "comparison",

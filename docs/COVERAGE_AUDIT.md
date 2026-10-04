@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-10-04 設定が効かない理由の切り分け
+
+config-11はCLIで指定したmodelが通常のproject・profile・user設定に勝つ判断、config-12はtrusted monorepo内で近いproject設定が勝つ判断、config-13はuntrusted project由来のconfig・hooks・rulesを読まずuser・system設定は残す判断を測る。従来の無関係な選択肢を、現場で混同しやすい設定layerへ置き換え、[現行Config basics](https://learn.chatgpt.com/docs/config-file/config-basic)で正解と誤答を確認した。問題追加より既存の識別力改善を優先した。
+
 ## 2026-10-04 設定の一時変更と検証の境界
 
 config-04は専用flagのないkeyの一時上書きを`-c`で行う判断、config-06は利用可能なmodelを今回だけ選ぶ`--model`とprofile・local providerの区別、config-07は未知fieldを起動時エラーにする`--strict-config`と診断reportの区別。3問の正解・誤答を[現行CLI資料](https://learn.chatgpt.com/docs/developer-commands?surface=cli)で確認した。増問せず、架空flagを消去法で選ぶ旧問題を改善した。

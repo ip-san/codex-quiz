@@ -885,19 +885,19 @@
     "3": "test削除によるgreen化は不具合を隠します。既存の期待を保った修正後にtestを通します。"
   },
   "config-11": {
-    "1": "user configは個人既定ですが、一回の起動で明示したCLI flagより優先されません。",
-    "2": "system configはuser・profile・project・CLIより下位です。管理制約とは区別して考えます。",
-    "3": "built-in defaultは設定layerの最下位です。明示した`--model`が今回の値になります。"
+    "1": "project設定はprofileやuser設定より優先されますが、今回のCLIで明示した`--model`には負けます。",
+    "2": "profile fileはuser設定に重なりますが、project設定やCLI flagより下位です。今回は`--model`が優先です。",
+    "3": "user configは個人の既定値です。今回だけ指定した`--model`を上書きしません。"
   },
   "config-12": {
-    "1": "root configは共有の基準ですが、current directoryへ近いproject layerが同じkeyを上書きします。",
-    "2": "file sizeはprecedenceに影響しません。rootからcurrent directoryへの階層で決まります。",
-    "3": "更新日時はprecedence条件ではありません。trusted project内でdirectoryの近さを使います。"
+    "1": "root側は共有の基準です。同じkeyをpackage側でも設定した場合は、作業directoryに近いpackage側が勝ちます。",
+    "2": "user configよりtrusted projectの設定が優先されます。project内では作業directoryに近い方を使います。",
+    "3": "profile fileよりtrusted projectの設定が優先されます。rootとpackageが同じkeyならpackage側が勝ちます。"
   },
   "config-13": {
-    "1": "untrusted判定でuser configまで削除・無効化はされません。project scoped layerだけをskipします。",
-    "2": "untrusted projectが自動でfull accessになるのは安全設計と逆です。repository由来設定を読みません。",
-    "3": "`.codex/`をremote MCPへuploadする動作ではありません。localのconfig・hooks・rulesをskipします。"
+    "1": "未信頼projectではconfigだけでなくproject-localのhooksとrulesも読み込みません。",
+    "2": "hooksだけでなくproject-localのconfigとrulesも読み込みません。user側の設定は別です。",
+    "3": "projectが未信頼でもuser・system設定は残ります。無視するのはproject由来の`.codex/` layerです。"
   },
   "config-14": {
     "1": "`/theme`は見た目を変える操作です。設定がどこから読み込まれたかは分かりません。",

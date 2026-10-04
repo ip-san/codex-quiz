@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-10-04 設定の優先順位と未信頼projectを再確認
+
+config-11/12/13を現行の[Config basics](https://learn.chatgpt.com/docs/config-file/config-basic)と[Advanced Configuration](https://learn.chatgpt.com/docs/config-file/config-advanced#project-config-files-codexconfigtoml)に照合。CLI flag、project、profile、userの衝突、trusted monorepoの近いdirectory、untrusted projectでskipするconfig・hooks・rulesを、実際の状況から選ぶ問題へ改稿。全誤答別feedbackとuntrustedの比較図を追加した。既存IDと264問は維持。管理者のrequirementsによる制約は通常の設定値の優先順位とは別であり、この3問だけで全条件を網羅しない。
+
 ## 2026-10-04 一時設定と未知field検出の3問を再確認
 
 config-04/06/07を現行の[Advanced Configuration](https://learn.chatgpt.com/docs/config-file/config-advanced#one-off-overrides-from-the-cli)と[Developer commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)へ照合。任意keyの一時上書き、model専用flag、未知fieldの起動時エラーを、実際に混同しやすいprofile・model・search・診断reportと区別する問題へ改稿し、全誤答別説明も対応させた。図解はない。既存IDと264問を維持し、旧回答履歴に改稿前の成績が残る。
