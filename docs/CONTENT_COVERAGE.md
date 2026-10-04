@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-10-04 対話ログとOTel送信の境界を再確認
+
+config-15/20を現行の[Environment variables](https://learn.chatgpt.com/docs/config-file/environment-variables#diagnostics)と[Observability and telemetry](https://learn.chatgpt.com/docs/config-file/config-advanced#observability-and-telemetry)に照合。`RUST_LOG`と明示的な`log_dir`で取得するplaintext TUI log、OTel exporterと`log_user_prompt`の使い分けを、実在する設定同士の判断へ改稿した。全誤答別feedbackを対応させ、既存terminal図を再照合し、OTelとの比較図を追加。`log_user_prompt = false`はprompt本文だけの制御であり、tool結果の抜粋など送信event全体の安全を保証しない点も説明した。264問の総数は維持。
+
 ## 2026-10-04 作業directoryとlocal providerのCLI判断
 
 config-08/10を現行の[Developer commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)と[AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)へ照合。作業開始地点を決める`--cd`と書き込み範囲を足す`--add-dir`、local実行を選ぶ`--oss`と今回のproviderを決める`--local-provider`を区別する問題へ改稿した。誤答別feedbackとterminal図2件を追加。既存ID・264問を維持し、旧回答の成績には旧文面が混在する。

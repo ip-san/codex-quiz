@@ -495,9 +495,9 @@
     "3": "repository fileへの保存は漏えいriskを増やします。単一runへinlineで渡します。"
   },
   "config-20": {
-    "1": "OTel exportは既定でdisabledです。利用時はexporterを明示します。",
-    "2": "user promptは既定でredactされます。収集には明示的なprivacy判断が必要です。",
-    "3": "RUST_LOGはlocal diagnosticsで、OTel collectorへの構造化export設定とは別です。"
+    "1": "`exporter = \"none\"`ではOTel eventをcollectorへ送れません。送信するexporterを明示します。",
+    "2": "`log_user_prompt = true`はuser prompt本文の送信を許します。本文を送らない要件ならfalseを保ちます。",
+    "3": "`RUST_LOG`は診断logの詳細度です。OTel collectorへ送るにはOTel exporterを設定します。"
   },
   "config-21": {
     "1": "`codex-tui.log`は対話画面の診断用です。直接実行した`codex login`の失敗は専用の`codex-login.log`を先に確認します。",
@@ -905,9 +905,9 @@
     "3": "`/completion`はコマンド入力の補完に関する操作です。設定の診断には使いません。"
   },
   "config-15": {
-    "1": "danger-full-accessと`--yolo`は権限を広げるだけで、plaintext diagnostic logを有効にしません。",
-    "2": "削除やlogoutでは問題の詳細を保存できません。debug levelと明示したlog directoryを使います。",
-    "3": "MCP OAuthとworktreeは接続・作業分離の機能で、TUI内部logの取得設定ではありません。"
+    "1": "`RUST_LOG=debug`だけではplaintextのTUI logは有効になりません。`log_dir`も明示します。",
+    "2": "`log_dir`を明示するとTUI logは作れますが、詳細度を上げたいなら`RUST_LOG=debug`も指定します。",
+    "3": "OTel exporterは構造化eventの外部送信です。手元の`codex-tui.log`を詳しく取得する設定とは別です。"
   },
   "safe-19": {
     "1": "記述順でallowを勝たせると狭い禁止を迂回できます。複数一致時は最も制限的なdecisionが勝ちます。",

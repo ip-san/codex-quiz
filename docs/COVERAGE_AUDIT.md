@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-10-04 記録の目的と送信先を区別する
+
+config-15は対話CLIの詳細なplaintext logを得るために`log_dir`のopt-inと`RUST_LOG`の詳細度を組み合わせる判断。config-20はOTel collectorへ構造化eventを送る際にexporterを選び、user prompt本文の送信を抑える判断。両者は同じ「log」でも保存先と制御が違うため、[現行診断資料](https://learn.chatgpt.com/docs/config-file/environment-variables#diagnostics)と[OTel資料](https://learn.chatgpt.com/docs/config-file/config-advanced#observability-and-telemetry)で照合した。prompt本文を抑えても他のevent内容は確認が必要。新規問題より旧問の選択肢と注意点の改善を優先した。
+
 ## 2026-10-04 CLIの開始場所とlocal実行の選択
 
 config-08はmonorepoの対象directoryを開始地点にして近い指示・設定を適用する判断、config-10はOllamaを保存済み設定任せにせず明示する判断を測る。旧問はいずれも架空flagが多く、正解の名称を知るだけで解けた。現行の[CLI資料](https://learn.chatgpt.com/docs/developer-commands?surface=cli)と[AGENTS.md資料](https://learn.chatgpt.com/docs/agent-configuration/agents-md)で実在する他の選択肢との違いを確認した。問題を増やさずterminal図で操作像を補った。

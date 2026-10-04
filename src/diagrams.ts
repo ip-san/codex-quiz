@@ -6,6 +6,19 @@ export type DiagramData =
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "config-20": [
+    {
+      type: "comparison",
+      label: "手元の診断logとOTel外部送信",
+      columns: [
+        { heading: "CLI診断", items: ["log_dirでplaintext TUI logを有効化", "RUST_LOGで詳細度を調整"] },
+        {
+          heading: "OTel log export",
+          items: ["exporterを明示してcollectorへ送信", "log_user_prompt=falseならprompt本文を送らない"],
+        },
+      ],
+    },
+  ],
   "config-08": [
     {
       type: "terminal",
