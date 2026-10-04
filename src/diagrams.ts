@@ -6,6 +6,28 @@ export type DiagramData =
   | { type: "config"; label: string; filepath: string; lines: Array<{ text: string; highlight?: boolean }> };
 
 export const quizDiagrams: Record<string, DiagramData[]> = {
+  "config-08": [
+    {
+      type: "terminal",
+      label: "paymentsを作業開始地点にする",
+      lines: [
+        { kind: "command", text: "codex --cd services/payments" },
+        { kind: "info", text: "rootからpaymentsまでの指示とtrusted project設定を確認" },
+        { kind: "info", text: "--add-dirは追加の書き込み範囲で、開始地点は変えない" },
+      ],
+    },
+  ],
+  "config-10": [
+    {
+      type: "terminal",
+      label: "Ollamaを明示してローカル実行",
+      lines: [
+        { kind: "command", text: "codex --oss --local-provider ollama" },
+        { kind: "info", text: "--ossでlocal実行、--local-providerでOllamaを選択" },
+        { kind: "info", text: "利用前にOllamaと対応modelを用意する" },
+      ],
+    },
+  ],
   "config-13": [
     {
       type: "comparison",

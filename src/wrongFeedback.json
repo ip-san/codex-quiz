@@ -355,9 +355,9 @@
     "3": "`codex doctor`は環境の診断reportを作れますが、起動時に未知fieldで失敗させるflagは`--strict-config`です。"
   },
   "config-08": {
-    "1": "非公式なcwd optionではなく、agent開始前のworking directoryは`--cd`または`-C`で指定します。",
-    "2": "Git root固定ではsubdirectory固有の設定や指示を対象にできません。",
-    "3": "folder UIを開く操作ではCLI agentの開始directoryを明示できません。"
+    "1": "`--add-dir`は追加directoryへの書き込みを許します。作業開始地点は変えないため、近い指示を選ぶ目的には`--cd`を使います。",
+    "2": "`--profile`は保存済みの名前付き設定を重ねます。作業directory自体の指定は`--cd`です。",
+    "3": "`--sandbox`はコマンドの権限範囲を選びます。paymentsを作業開始地点にする操作ではありません。"
   },
   "config-09": {
     "1": "install操作では今回のrunだけfeature flagを有効化するoverrideになりません。",
@@ -365,9 +365,9 @@
     "3": "fileへ永続書込みせず一時的に試すため、CLI overrideの`--enable`を使います。"
   },
   "config-10": {
-    "1": "model pathだけではLM StudioかOllamaかを選択できません。`--oss`とproviderを指定します。",
-    "2": "任意vendor名ではなく、文書化されたlocal providerから選びます。",
-    "3": "CSS設定ではlocal open-source model backendを選べません。"
+    "1": "`--oss`だけでは保存済みproviderを使うか選択画面に進み、今回Ollamaを明示できません。`--local-provider ollama`を添えます。",
+    "2": "`--local-provider`は`--oss`で使うproviderの指定です。local実行を選ぶ`--oss`と組み合わせます。",
+    "3": "`--model`はmodel名を選ぶflagで、Ollamaというproviderを指定するflagではありません。"
   },
   "safe-24": {
     "1": "今回の表示を直しても、次回のスキャンが使う認証の前提は変わりません。Threat modelを更新します。",

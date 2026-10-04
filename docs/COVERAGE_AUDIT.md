@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-10-04 CLIの開始場所とlocal実行の選択
+
+config-08はmonorepoの対象directoryを開始地点にして近い指示・設定を適用する判断、config-10はOllamaを保存済み設定任せにせず明示する判断を測る。旧問はいずれも架空flagが多く、正解の名称を知るだけで解けた。現行の[CLI資料](https://learn.chatgpt.com/docs/developer-commands?surface=cli)と[AGENTS.md資料](https://learn.chatgpt.com/docs/agent-configuration/agents-md)で実在する他の選択肢との違いを確認した。問題を増やさずterminal図で操作像を補った。
+
 ## 2026-10-04 設定が効かない理由の切り分け
 
 config-11はCLIで指定したmodelが通常のproject・profile・user設定に勝つ判断、config-12はtrusted monorepo内で近いproject設定が勝つ判断、config-13はuntrusted project由来のconfig・hooks・rulesを読まずuser・system設定は残す判断を測る。従来の無関係な選択肢を、現場で混同しやすい設定layerへ置き換え、[現行Config basics](https://learn.chatgpt.com/docs/config-file/config-basic)で正解と誤答を確認した。問題追加より既存の識別力改善を優先した。
