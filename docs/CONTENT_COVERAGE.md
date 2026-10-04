@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-10-04 通信許可と保護対象への書き込みを分離
+
+config-19を現行の[Agent approvals & security](https://learn.chatgpt.com/docs/agent-approvals-security#protected-paths-in-writable-roots)に照合。通信は成功しても`.git`への書き込みが拒否される実務場面に改稿し、通信許可・保護path・承認ポリシーの役割を区別した。全誤答別feedbackと検証日を更新。図解はなく、264問の総数は維持する。
+
 ## 2026-10-04 対話ログとOTel送信の境界を再確認
 
 config-15/20を現行の[Environment variables](https://learn.chatgpt.com/docs/config-file/environment-variables#diagnostics)と[Observability and telemetry](https://learn.chatgpt.com/docs/config-file/config-advanced#observability-and-telemetry)に照合。`RUST_LOG`と明示的な`log_dir`で取得するplaintext TUI log、OTel exporterと`log_user_prompt`の使い分けを、実在する設定同士の判断へ改稿した。全誤答別feedbackを対応させ、既存terminal図を再照合し、OTelとの比較図を追加。`log_user_prompt = false`はprompt本文だけの制御であり、tool結果の抜粋など送信event全体の安全を保証しない点も説明した。264問の総数は維持。

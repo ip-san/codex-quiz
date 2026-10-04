@@ -465,9 +465,9 @@
     "3": "再installではなく、requirements.tomlの制約とadmin方針を確認します。"
   },
   "config-19": {
-    "1": "networkを有効化しても`.git`や`.codex`の保護は別のfilesystem policyとして残ります。",
-    "2": "approval policyはprompt条件であり、network capabilityそのものを付与しません。",
-    "3": "MCP追加はshell commandのnetwork access設定とは別です。"
+    "1": "network設定を再度有効にしても、`.git`への書き込み制限は変わりません。通信とファイル保護は別の制御です。",
+    "2": "`never`は承認を求めない設定で、sandboxの保護を解除しません。必要な操作が拒否されるままになる可能性があります。",
+    "3": "MCPの接続やtool追加は、local commandが書けるファイルの範囲を広げません。"
   },
   "safe-36": {
     "1": "network_accessを切ると必要なAPI接続も止まります。通信を許しつつ宛先を絞るにはproxyの有効化を確認します。",

@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-10-04 通信できても`.git`へ書けない理由
+
+config-19は単純な可否確認から、依存取得後に保護pathへの書き込みが拒否される場面の原因判断へ変更した。[現行公式資料](https://learn.chatgpt.com/docs/agent-approvals-security#protected-paths-in-writable-roots)で、`workspace-write`のnetwork許可と`.git`・ディレクトリの`.agents`/`.codex`の保護、`never`でもsandboxが残る点を照合した。新規設問は重複するため増やさず、図解も不要と判断。過去の同じIDの成績は旧文面を含む。全権限問題の監査完了ではない。
+
 ## 2026-10-04 記録の目的と送信先を区別する
 
 config-15は対話CLIの詳細なplaintext logを得るために`log_dir`のopt-inと`RUST_LOG`の詳細度を組み合わせる判断。config-20はOTel collectorへ構造化eventを送る際にexporterを選び、user prompt本文の送信を抑える判断。両者は同じ「log」でも保存先と制御が違うため、[現行診断資料](https://learn.chatgpt.com/docs/config-file/environment-variables#diagnostics)と[OTel資料](https://learn.chatgpt.com/docs/config-file/config-advanced#observability-and-telemetry)で照合した。prompt本文を抑えても他のevent内容は確認が必要。新規問題より旧問の選択肢と注意点の改善を優先した。
