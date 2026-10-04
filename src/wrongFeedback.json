@@ -485,9 +485,9 @@
     "3": "sandbox全面解除ではなく、必要なlocalhost targetだけを正確に許可します。"
   },
   "basic-19": {
-    "1": "TLS verificationを無効化すると中間者攻撃へ弱くなります。組織CA bundleを指定します。",
-    "2": "API keyを変えてもcertificate trust errorは解決しません。",
-    "3": "sandboxを解除せず、HTTPS clientが信頼するCAを正しく設定します。"
+    "1": "device code認証もTLS接続を使います。証明書の信頼エラーは認証画面の変更ではなく組織CAの設定で直します。",
+    "2": "API keyを再発行しても証明書の信頼先は変わりません。先に組織のPEM CA bundleを指定します。",
+    "3": "sandboxの権限とTLS証明書の検証は別です。権限を広げず、信頼するCAを設定します。"
   },
   "basic-20": {
     "1": "job全体へexportするとrepository-controlledな後続processにもsecretが残り得ます。",
@@ -500,14 +500,14 @@
     "3": "RUST_LOGはlocal diagnosticsで、OTel collectorへの構造化export設定とは別です。"
   },
   "config-21": {
-    "1": "通常のTUI logよりlogin専用logを先に確認すると認証flowを切り分けやすくなります。",
-    "2": "auth.jsonを共有するとcredentialを漏らす危険があります。",
-    "3": "sandbox解除はOAuth callbackやdevice-code failureの原因診断ではありません。"
+    "1": "`codex-tui.log`は対話画面の診断用です。直接実行した`codex login`の失敗は専用の`codex-login.log`を先に確認します。",
+    "2": "`codex exec`の標準出力は非対話タスクの記録です。直接実行したloginの失敗原因は専用logで切り分けます。",
+    "3": "`auth.json`にはaccess tokenが含まれます。内容を共有せず、login専用logを確認します。"
   },
   "config-22": {
-    "1": "`codex exec`はmessageをinlineへ出すため、TUI用log fileだけを待っても情報を得られません。",
-    "2": "interactive UIを起動するとCIの非対話性を失います。stderr/stdoutを収集します。",
-    "3": "traceを無条件共有するとsecretが含まれ得ます。必要なfilterとredactionを使います。"
+    "1": "`codex-login.log`は直接実行した認証の診断用です。CIの非対話実行結果は標準出力・標準エラーを確認します。",
+    "2": "対話TUIを起動してもCIの`codex exec`の出力先は変わりません。非対話実行の出力を保存します。",
+    "3": "OTel exporterがなくても`codex exec`はメッセージをinlineへ出します。まず標準出力・標準エラーを保存します。"
   },
   "extend-45": {
     "1": "base URLだけではCodexが付けるserver固有callback IDを欠き、redirect URI mismatchになり得ます。",

@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-10-04 TLSとログ診断の3問を再確認
+
+basic-19、config-21、config-22を現行の[Authentication](https://learn.chatgpt.com/docs/auth)と[Environment variables](https://learn.chatgpt.com/docs/config-file/environment-variables#diagnostics)に照合。企業TLS proxyでのCA bundle指定、直接実行したlogin専用log、非対話`codex exec`のinline出力を、症状から選ぶ問題へ改稿した。既存の誤答別feedbackはconfig-21/22で選択肢と説明がずれていたため全件修正。3問に図解はない。264問の総数は維持し、未確認の古い設問は残る。
+
 ## 2026-10-03 認証の4問を現行仕様へ再確認
 
 basic-15/16/17/18を現行の[Authentication](https://learn.chatgpt.com/docs/auth)へ照合。ChatGPT利用枠とPlatform従量課金、認証状態の確認、headless環境でのdevice code認証、`keyring`・`auto`・`file`・`ephemeral`の違いを、実務で選ぶ場面へ改稿した。誤答別説明と既存の比較・terminal図も更新。特に、device codeが使えない場合は自分の認証キャッシュの安全な転送やSSH転送も公式の代替策であり、従来の図の「コピーしない」は不正確だったため訂正した。問題数は264問のまま。旧IDの過去成績は改稿前の設問を含む。残る旧認証問題の全面監査は未完了。

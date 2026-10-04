@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-10-04 接続失敗を権限・認証・記録先から切り分ける
+
+basic-19は企業CAを信頼させる判断とdevice code・API key・sandbox変更の違いを問う。config-21は直接実行したlogin失敗をlogin専用logへ、config-22はCIの非対話実行を標準出力・標準エラーへ辿る判断を問う。いずれも現行[認証資料](https://learn.chatgpt.com/docs/auth#login-diagnostics)と[診断用環境変数](https://learn.chatgpt.com/docs/config-file/environment-variables#diagnostics)で再確認。新規問題を増やすより、誤答解説の選択肢との不一致を直す価値が高いと判断した。旧IDの過去成績には旧文面が混在する。
+
 ## 2026-10-03 認証トラブルと保存先の判断
 
 basic-15はworkspace権限・ChatGPT利用枠とPlatform API keyの課金・ポリシーを選び分ける。basic-16は認証状態の確認とログアウト・再ログイン・MCP接続を分ける。basic-17はheadlessでdevice codeを最初に試し、使えない場合の安全な代替策も知る。basic-18はOS保存必須なら`keyring`を選び、`auto`のファイルfallbackを見落とさない。すべて[現行Authentication資料](https://learn.chatgpt.com/docs/auth)で正解・誤答・図を再確認した。新しい学習目標の不足ではなく旧問の誤学習と弱い選択肢を優先したため、増問していない。
