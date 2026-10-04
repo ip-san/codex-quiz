@@ -1,5 +1,9 @@
 # 公式ドキュメント・カバレッジ
 
+## 2026-10-04 一時設定と未知field検出の3問を再確認
+
+config-04/06/07を現行の[Advanced Configuration](https://learn.chatgpt.com/docs/config-file/config-advanced#one-off-overrides-from-the-cli)と[Developer commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)へ照合。任意keyの一時上書き、model専用flag、未知fieldの起動時エラーを、実際に混同しやすいprofile・model・search・診断reportと区別する問題へ改稿し、全誤答別説明も対応させた。図解はない。既存IDと264問を維持し、旧回答履歴に改稿前の成績が残る。
+
 ## 2026-10-04 TLSとログ診断の3問を再確認
 
 basic-19、config-21、config-22を現行の[Authentication](https://learn.chatgpt.com/docs/auth)と[Environment variables](https://learn.chatgpt.com/docs/config-file/environment-variables#diagnostics)に照合。企業TLS proxyでのCA bundle指定、直接実行したlogin専用log、非対話`codex exec`のinline出力を、症状から選ぶ問題へ改稿した。既存の誤答別feedbackはconfig-21/22で選択肢と説明がずれていたため全件修正。3問に図解はない。264問の総数は維持し、未確認の古い設問は残る。

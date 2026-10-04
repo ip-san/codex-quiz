@@ -160,9 +160,9 @@
     "3": "Full accessはアクセス範囲を広げる設定であり、プロファイル移行の不備を直す手段ではありません。"
   },
   "config-04": {
-    "1": "Git commit作成はrepository操作です。`-c`は一回のCodex runへconfig値を重ねるために使います。",
-    "2": "設定fileを削除せず、保存済み既定値を残したままその呼び出しだけ上書きできます。",
-    "3": "CSS変数ではなくTOMLとして解釈されるCodex設定keyとvalueを渡します。"
+    "1": "`--profile`は保存済みの名前付き設定を選びます。任意のkey=valueをその場で渡す用途は`-c`です。",
+    "2": "`--model`はmodel専用です。専用flagのない設定keyの一時変更には`-c`を使います。",
+    "3": "設定ファイルを編集すると次回以降にも影響します。今回だけなら`-c`で上書きします。"
   },
   "config-05": {
     "1": "Codex 0.134.0以降、`--profile`は旧`[profiles.name]`を読みません。起動順ではなく、独立したprofile fileへ移します。",
@@ -345,14 +345,14 @@
     "3": "報告前に`codex doctor`で原因の範囲を絞ると、問題を説明する材料が得られます。"
   },
   "config-06": {
-    "1": "CSS engine指定では今回のrunだけmodelを上書きできません。`--model`を使います。",
-    "2": "agent名はmodel選択とは別です。保存設定を変えず一時変更する時は`--model`です。",
-    "3": "非公式なruntime optionではなく、文書化された`--model`または`-m`を使います。"
+    "1": "`--profile`は保存済みのprofile名を選びます。今回使うmodel名を直接指定するなら`--model`です。",
+    "2": "`--oss`はlocalのopen-source providerを選ぶためのflagです。利用可能なOpenAI modelを指定するのは`--model`です。",
+    "3": "`--search`はlive web検索の切り替えです。modelの選択は`--model`で行います。"
   },
   "config-07": {
-    "1": "CSS failure optionでは未知のconfig keyを検出できません。`--strict-config`を使います。",
-    "2": "Git検証とconfig schema検証は別です。未知fieldをerrorにするflagを選びます。",
-    "3": "read-onlyはsandbox設定です。config typoのfail-fastには`--strict-config`を使います。"
+    "1": "`--config`は設定値の上書きです。それだけではconfig.toml中の未知fieldをエラーにしません。",
+    "2": "`--profile`は保存済みの設定layerを選びます。未知fieldの検出には`--strict-config`が必要です。",
+    "3": "`codex doctor`は環境の診断reportを作れますが、起動時に未知fieldで失敗させるflagは`--strict-config`です。"
   },
   "config-08": {
     "1": "非公式なcwd optionではなく、agent開始前のworking directoryは`--cd`または`-C`で指定します。",

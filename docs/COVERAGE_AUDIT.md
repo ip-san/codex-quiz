@@ -1,5 +1,9 @@
 # 学習目標・網羅性監査
 
+## 2026-10-04 設定の一時変更と検証の境界
+
+config-04は専用flagのないkeyの一時上書きを`-c`で行う判断、config-06は利用可能なmodelを今回だけ選ぶ`--model`とprofile・local providerの区別、config-07は未知fieldを起動時エラーにする`--strict-config`と診断reportの区別。3問の正解・誤答を[現行CLI資料](https://learn.chatgpt.com/docs/developer-commands?surface=cli)で確認した。増問せず、架空flagを消去法で選ぶ旧問題を改善した。
+
 ## 2026-10-04 接続失敗を権限・認証・記録先から切り分ける
 
 basic-19は企業CAを信頼させる判断とdevice code・API key・sandbox変更の違いを問う。config-21は直接実行したlogin失敗をlogin専用logへ、config-22はCIの非対話実行を標準出力・標準エラーへ辿る判断を問う。いずれも現行[認証資料](https://learn.chatgpt.com/docs/auth#login-diagnostics)と[診断用環境変数](https://learn.chatgpt.com/docs/config-file/environment-variables#diagnostics)で再確認。新規問題を増やすより、誤答解説の選択肢との不一致を直す価値が高いと判断した。旧IDの過去成績には旧文面が混在する。
